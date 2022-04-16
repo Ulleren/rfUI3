@@ -65,7 +65,7 @@ public class loginController implements Initializable {
             String adminuser = "admin";
             String adminpass = "admin";
 
-            Path path = Paths.get("/home/ulle/dtu/62514_Objektorienteret/rfUI/src/main/resources/com/example/rfui/test.txt");
+            Path path = Paths.get("/home/jin/projects/intellij/rfUI3/src/main/resources/com/example/rfui/test.txt");
             long count = Files.lines(path).count();
 
             for(int i = 0; i<count; i++){
