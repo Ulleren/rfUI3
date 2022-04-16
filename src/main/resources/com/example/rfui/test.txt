@@ -1,0 +1,9 @@
+fdfdfd,343,fdfd,fdffddffd,fdfd,null
+rerere,232322,rere,rererer,rererere,null
+rerer,r232,ererer,rererere,rererererere,null
+fdfd,d232,ewew,fdfdfd,fdfdf22,null
+Rasmus,20292929,kodeord,rasmus@mail.dk,vej 78,Admin
+Ulriks Mor,29291010,kode,ulriksmor@o.dk,vejen 22,Admin
+Bente Brednums,20201919,kode,bente@klam.dk,En vej 34,Ansvarlig
+frivillig,28384938,kode,fri@villig.dk,frivej 3,Frivillig
+urur,82828282,kode,kdk@fm.dk,kk8,Admin

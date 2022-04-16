@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="adminscenePane" prefHeight="650.0" prefWidth="889.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rfui.adminScreenController">
+   <children>
+      <Label layoutX="75.0" layoutY="39.0" />
+      <Button fx:id="adminlogoutButton" layoutX="47.0" layoutY="60.0" mnemonicParsing="false" onAction="#adminlogout" prefHeight="26.0" prefWidth="66.0" style="-fx-background-color: #FFFFFF;" text="Logout" textFill="#e95814">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="630.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@rf_logo_trans.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="adminnameLabel" layoutX="58.0" layoutY="14.0" text="Logged ind som:" textFill="#e95814" />
+      <Label fx:id="rightsLabel" layoutX="58.0" layoutY="39.0" text="Administrator" textFill="#e95814" />
+      <ImageView fx:id="checkIn" fitHeight="397.0" fitWidth="780.0" layoutX="58.0" layoutY="170.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@checkin.jpg" />
+         </image>
+      </ImageView>
+      <Button fx:id="AnsBtn" layoutX="113.0" layoutY="182.0" mnemonicParsing="false" onAction="#opretAns" prefHeight="40.0" prefWidth="143.0" style="-fx-background-color: #000000;" text="Opret Bruger" textFill="#e95814">
+         <font>
+            <Font name="Arial Bold" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="FriBtn" layoutX="337.0" layoutY="182.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="143.0" style="-fx-background-color: #000000;" text="Opret Bod" textFill="#e95814">
+         <font>
+            <Font name="Arial Bold" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="SearcBtn" layoutX="551.0" layoutY="182.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="143.0" style="-fx-background-color: #000000;" text="Søg database" textFill="#e95814">
+         <font>
+            <Font name="Arial Bold" size="16.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
