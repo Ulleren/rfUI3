@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -22,7 +23,7 @@
             <Image url="@frivilligRFCup.jpg" />
          </image>
       </ImageView>
-      <ImageView fitHeight="45.0" fitWidth="79.0" layoutX="215.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="45.0" fitWidth="79.0" layoutX="200.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@orangetent.png" />
          </image>
@@ -32,57 +33,65 @@
             <Font name="Arial Bold" size="13.0" />
          </font>
       </Button>
-      <ComboBox fx:id="bodBox" layoutX="194.0" layoutY="459.0" onAction="#bodBoxen" prefHeight="26.0" prefWidth="181.0" promptText="Vælg bod" />
-      <TextField fx:id="phoneTextfield" layoutX="194.0" layoutY="145.0" prefHeight="26.0" prefWidth="181.0" promptText="+45">
+      <ComboBox fx:id="bodBox" layoutX="186.0" layoutY="523.0" prefHeight="26.0" prefWidth="181.0" promptText="Vælg bod" />
+      <TextField fx:id="phoneTextfield" layoutX="187.0" layoutY="167.0" prefHeight="26.0" prefWidth="181.0" promptText="+45">
          <font>
             <Font name="Arial" size="13.0" />
          </font></TextField>
-      <TextField fx:id="emailTextfield" layoutX="194.0" layoutY="195.0" prefHeight="26.0" prefWidth="181.0" promptText="anders@andersen.dk" />
-      <TextField fx:id="addressTextfield" layoutX="194.0" layoutY="248.0" prefHeight="26.0" prefWidth="181.0" promptText="Andersens Vej 666" />
-      <TextField fx:id="passwordTextfield" layoutX="194.0" layoutY="303.0" prefHeight="26.0" prefWidth="181.0" promptText="kodeord" />
-      <Label fx:id="nameLabel" layoutX="105.0" layoutY="99.0" text="Navn:" textFill="#e95814" />
-      <Label fx:id="phoneLabel" layoutX="105.0" layoutY="149.0" text="Telefon:" textFill="#e95814" />
-      <Label fx:id="mailLabel" layoutX="105.0" layoutY="199.0" text="Mail:" textFill="#e95814" />
-      <Label fx:id="addressLabel" layoutX="104.0" layoutY="252.0" text="Adresse:" textFill="#e95814" />
-      <TextField fx:id="password2Textfield" layoutX="194.0" layoutY="358.0" prefHeight="26.0" prefWidth="181.0" promptText="Gentag kodeord" />
-      <CheckBox fx:id="checkBox1" layoutX="194.0" layoutY="514.0" mnemonicParsing="false" text="Lør. 25/6" textFill="#e95814" />
-      <CheckBox fx:id="checkBox2" layoutX="194.0" layoutY="538.0" mnemonicParsing="false" text="Søn. 26/6" textFill="#e95814" />
-      <TextField fx:id="nameTextfield" layoutX="194.0" layoutY="95.0" prefHeight="26.0" prefWidth="181.0" promptText="Anders Andersen">
+      <TextField fx:id="emailTextfield" layoutX="187.0" layoutY="217.0" prefHeight="26.0" prefWidth="181.0" promptText="anders@andersen.dk" />
+      <TextField fx:id="addressTextfield" layoutX="187.0" layoutY="270.0" prefHeight="26.0" prefWidth="181.0" promptText="Andersens Vej 666" />
+      <TextField fx:id="passwordTextfield" layoutX="187.0" layoutY="325.0" prefHeight="26.0" prefWidth="181.0" promptText="kodeord" />
+      <Label fx:id="nameLabel" layoutX="98.0" layoutY="121.0" text="Navn:" textFill="#e95814" />
+      <Label fx:id="phoneLabel" layoutX="98.0" layoutY="171.0" text="Telefon:" textFill="#e95814" />
+      <Label fx:id="mailLabel" layoutX="98.0" layoutY="221.0" text="Mail:" textFill="#e95814" />
+      <Label fx:id="addressLabel" layoutX="97.0" layoutY="274.0" text="Adresse:" textFill="#e95814" />
+      <TextField fx:id="password2Textfield" layoutX="187.0" layoutY="380.0" prefHeight="26.0" prefWidth="181.0" promptText="Gentag kodeord" />
+      <TextField fx:id="nameTextfield" layoutX="187.0" layoutY="117.0" prefHeight="26.0" prefWidth="181.0" promptText="Anders Andersen">
          <font>
             <Font name="Arial" size="13.0" />
          </font>
       </TextField>
-      <Label fx:id="pass1Label" layoutX="104.0" layoutY="307.0" text="Kodeord:" textFill="#e95814" />
-      <Label fx:id="pass2Label" layoutX="104.0" layoutY="362.0" text="Kodeord:" textFill="#e95814" />
-      <Label fx:id="bodLabel" layoutX="104.0" layoutY="463.0" text="Ansvarlig for:" textFill="#e95814" />
-      <CheckBox fx:id="checkBox5" layoutX="295.0" layoutY="514.0" mnemonicParsing="false" text="Ons. 29/6" textFill="#e95814" />
-      <CheckBox fx:id="checkBox7" layoutX="295.0" layoutY="562.0" mnemonicParsing="false" text="Fre. 1/6" textFill="#e95814" />
-      <CheckBox fx:id="checkBox8" layoutX="295.0" layoutY="587.0" mnemonicParsing="false" text="Lør. 2/6" textFill="#e95814" />
-      <CheckBox fx:id="checkBox3" layoutX="194.0" layoutY="562.0" mnemonicParsing="false" text="Man. 27/6" textFill="#e95814" />
-      <CheckBox fx:id="checkBox4" layoutX="194.0" layoutY="587.0" mnemonicParsing="false" text="Tirs. 28/6" textFill="#e95814" />
-      <CheckBox fx:id="checkBox6" layoutX="295.0" layoutY="538.0" mnemonicParsing="false" text="Tors. 30/6" textFill="#e95814" />
-      <Label fx:id="shiftLabel" layoutX="104.0" layoutY="514.0" text="Vagter:" textFill="#e95814" />
-      <Button fx:id="resetBtn" layoutX="186.0" layoutY="612.0" mnemonicParsing="false" onAction="#clearText" prefHeight="26.0" prefWidth="66.0" style="-fx-background-color: #FFFFFF;" text="Nulstil" textFill="#e95814">
+      <Label fx:id="pass1Label" layoutX="97.0" layoutY="329.0" text="Kodeord:" textFill="#e95814" />
+      <Label fx:id="pass2Label" layoutX="97.0" layoutY="384.0" text="Kodeord:" textFill="#e95814" />
+      <Label fx:id="bodLabel" layoutX="92.0" layoutY="523.0" text="Ansvarlig for:" textFill="#e95814" />
+      <Button fx:id="resetBtn" layoutX="187.0" layoutY="574.0" mnemonicParsing="false" onAction="#clearText" prefHeight="26.0" prefWidth="66.0" style="-fx-background-color: #FFFFFF;" text="Nulstil" textFill="#e95814">
          <font>
             <Font name="Arial Bold" size="13.0" />
          </font>
       </Button>
-      <Button fx:id="saveBtn" layoutX="310.0" layoutY="612.0" mnemonicParsing="false" onAction="#saveFile" prefHeight="26.0" prefWidth="66.0" style="-fx-background-color: #FFFFFF;" text="Gem" textFill="#e95814">
+      <Button fx:id="saveBtn" layoutX="311.0" layoutY="574.0" mnemonicParsing="false" onAction="#opretAnsvarlig" prefHeight="26.0" prefWidth="66.0" style="-fx-background-color: #FFFFFF;" text="Gem" textFill="#e95814">
          <font>
             <Font name="Arial Bold" size="13.0" />
          </font>
       </Button>
-      <Label layoutX="192.0" layoutY="60.0" text="OPRET ANSVARLIG" textFill="#e95814">
+      <Label layoutX="192.0" layoutY="60.0" text="OPRET BRUGER" textFill="#e95814">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <Label fx:id="nameErrorLabel" layoutX="193.0" layoutY="121.0" prefHeight="18.0" prefWidth="181.0" textFill="#e95814" />
-      <Label fx:id="phoneErrorLabel" layoutX="193.0" layoutY="171.0" prefHeight="18.0" prefWidth="181.0" textFill="#e95814" />
-      <Label fx:id="passwordErrorLabel" layoutX="193.0" layoutY="384.0" prefHeight="18.0" prefWidth="181.0" textFill="#e95814" />
-      <CheckBox fx:id="adminCheckbox" layoutX="193.0" layoutY="402.0" mnemonicParsing="false" text="Admin" textFill="#e95814" />
-      <CheckBox fx:id="frivilligCheckbox" layoutX="296.0" layoutY="402.0" mnemonicParsing="false" text="Frivillig" textFill="#e95814" />
-      <Label fx:id="pass2Label1" layoutX="106.0" layoutY="402.0" text="Rolle:" textFill="#e95814" />
-      <CheckBox fx:id="ansCheckbox" layoutX="193.0" layoutY="429.0" mnemonicParsing="false" text="Bodansvarlig" textFill="#e95814" />
+      <Label fx:id="nameErrorLabel" layoutX="186.0" layoutY="143.0" prefHeight="18.0" prefWidth="181.0" textFill="#e95814" />
+      <Label fx:id="phoneErrorLabel" layoutX="186.0" layoutY="193.0" prefHeight="18.0" prefWidth="181.0" textFill="#e95814" />
+      <Label fx:id="passwordErrorLabel" layoutX="186.0" layoutY="406.0" prefHeight="18.0" prefWidth="181.0" textFill="#e95814" />
+      <Label fx:id="pass2Label1" layoutX="99.0" layoutY="424.0" text="Rolle:" textFill="#e95814" />
+      <RadioButton fx:id="BodRadioBtn" layoutX="187.0" layoutY="424.0" mnemonicParsing="false" text="Bod-ansvarlig" textFill="#e95814">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+         <toggleGroup>
+            <ToggleGroup fx:id="radioGroup" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="friRadioBtn" layoutX="187.0" layoutY="454.0" mnemonicParsing="false" text="Frivillig" textFill="#e95814" toggleGroup="$radioGroup">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </RadioButton>
+      <RadioButton fx:id="adminRadioBtn" layoutX="187.0" layoutY="483.0" mnemonicParsing="false" text="Administrator" textFill="#e95814" toggleGroup="$radioGroup">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </RadioButton>
+      <Label fx:id="emailErrorLabel" layoutX="187.0" layoutY="243.0" prefHeight="18.0" prefWidth="181.0" textFill="#e95814" />
+      <Label fx:id="addressErrorLabel" layoutX="187.0" layoutY="296.0" prefHeight="18.0" prefWidth="181.0" textFill="#e95814" />
    </children>
 </AnchorPane>

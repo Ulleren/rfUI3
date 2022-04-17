@@ -7,3 +7,8 @@ Ulriks Mor,29291010,kode,ulriksmor@o.dk,vejen 22,Admin
 Bente Brednums,20201919,kode,bente@klam.dk,En vej 34,Ansvarlig
 frivillig,28384938,kode,fri@villig.dk,frivej 3,Frivillig
 urur,82828282,kode,kdk@fm.dk,kk8,Admin
+rerere,2222,kode,rere@fdf.dk,fdfdf 22,Admin
+Lise Flise,23122312,kode,lise@flise.com,flisen 23,Admin
+Anders Ansvarlig,99887766,kode,ans@ans.dk,ansvarliggade 22,Ansvarlig,Mocktail Bar
+rer,222,ew,ewew,ewew,Ansvarlig,null
+rasser,28282727j,kode,ras@ras.dk,kd2,Frivillig,Tuborg Orange

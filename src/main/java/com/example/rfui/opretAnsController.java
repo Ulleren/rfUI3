@@ -55,28 +55,17 @@ public class opretAnsController implements Initializable {
     private TextField passwordTextfield;
     @FXML
     private TextField password2Textfield;
-    @FXML
-    private CheckBox checkBox1;
-    @FXML
-    private CheckBox checkBox2;
-    @FXML
-    private CheckBox checkBox3;
-    @FXML
-    private CheckBox checkBox4;
-    @FXML
-    private CheckBox checkBox5;
-    @FXML
-    private CheckBox checkBox6;
-    @FXML
-    private CheckBox checkBox7;
-    @FXML
-    private CheckBox checkBox8;
+
     @FXML
     private Label nameErrorLabel;
     @FXML
     private Label phoneErrorLabel;
     @FXML
     private Label passwordErrorLabel;
+    @FXML
+    private Label addressErrorLabel;
+    @FXML
+    private Label emailErrorLabel;
     @FXML
     private Label adminnameLabel;
     @FXML
@@ -85,14 +74,20 @@ public class opretAnsController implements Initializable {
     private CheckBox frivilligCheckbox;
     @FXML
     private CheckBox ansCheckbox;
+    @FXML
+    private RadioButton BodRadioBtn;
+    @FXML
+    private RadioButton friRadioBtn;
+    @FXML
+    private RadioButton adminRadioBtn;
+    @FXML
+    ToggleGroup radioGroup;
 
 
-
-
-    public void bodBoxen(){
-        bodBox = new ComboBox<>();
-        bodBox.getItems().addAll("SNAIL 'N CHIPS","Mocktail Bar","Tuborg Orange","Meyers Køkken","Bus-Boden","Ski-Burger");
-    }
+//    public void bodBoxen(){
+//        bodBox = new ComboBox<>();
+//        bodBox.getItems().addAll("SNAIL 'N CHIPS","Mocktail Bar","Tuborg Orange","Meyers Køkken","Bus-Boden","Ski-Burger");
+//    }
     public void backBtn(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("adminScreen.fxml"));
         root = loader.load();
@@ -110,16 +105,9 @@ public class opretAnsController implements Initializable {
         addressTextfield.setText("");
         passwordTextfield.setText("");
         password2Textfield.setText("");
-        checkBox1.setSelected(false);
-        checkBox2.setSelected(false);
-        checkBox3.setSelected(false);
-        checkBox4.setSelected(false);
-        checkBox5.setSelected(false);
-        checkBox6.setSelected(false);
-        checkBox7.setSelected(false);
-        checkBox8.setSelected(false);
+
         bodBox.getSelectionModel().clearSelection();
-        //bodBox.setValue(null);
+        bodBox.setValue(null);
         nameErrorLabel.setText("");
         phoneErrorLabel.setText("");
         passwordErrorLabel.setText("");
@@ -131,59 +119,67 @@ public class opretAnsController implements Initializable {
         if(!nameTextfield.getText().matches("[aA-zZ ]+$")){
             nameErrorLabel.setText("Indtast et gyldigt navn");
         }
-        else{
-            saveFile(event);
+        else if(nameTextfield.getText().isBlank()){
+            nameErrorLabel.setText("Indtast et navn");
         }
-//        if(!phoneTextfield.getText().matches("[1-9]\\d")){
-//            phoneErrorLabel.setText("Indtast et gyldigt telefonnummer");
-//        }
-//        else{
-//            saveFile(password);
-        //}
-//        if(passwordTextfield.getText() != password2Textfield.getText()) {
-//            passwordErrorLabel.setText("Kodeord er ikke ens");
-//        }
-//        else{
-//            saveFile(password);
-//        }
+
+        if(!phoneTextfield.getText().matches("^\\d{8}$")){
+            phoneErrorLabel.setText("Indtast gyldigt telefonnummer");
+        }
+        else if(phoneTextfield.getText().isBlank()){
+            phoneErrorLabel.setText("Indtast et telefonnummer");
+        }
+
+        if(!emailTextfield.getText().matches("^(.+)@(.+)$")){
+            emailErrorLabel.setText("indtast gyldig emailadresse");
+        }
+        else if(emailTextfield.getText().isBlank()){
+            emailErrorLabel.setText("indtast en emailadresse");
+        }
+
+        if(addressTextfield.getText().isBlank()){
+            addressErrorLabel.setText("Indtast en adresse");
+        }
+
+        if(!passwordTextfield.getText().matches(password2Textfield.getText())) {
+            passwordErrorLabel.setText("Kodeord er ikke ens");
+        }
+        else if(passwordTextfield.getText().isBlank() || password2Textfield.getText().isBlank()){
+            passwordErrorLabel.setText("Gentag kodeord");
+        }
+
     }
     public void saveFile(ActionEvent event){
-        String check1, check2, check3, check4,check5,check6,check7,check8,roleCheck;
-//        if(checkBox1.isSelected()){
-//            check1 = "mandag";
-//        }
-        if(adminCheckbox.isSelected()){
-            roleCheck = "Admin";
-        }
-        else if(ansCheckbox.isSelected()){
+
+        String roleCheck;
+        String frivilligBod = bodBox.getValue();
+        if(BodRadioBtn.isSelected()){
             roleCheck = "Ansvarlig";
         }
-        else{
+        else if(friRadioBtn.isSelected()){
             roleCheck = "Frivillig";
         }
+        else{
+            roleCheck = "Admin";
+        }
         String line = nameTextfield.getText()+","+phoneTextfield.getText()+","+passwordTextfield.getText()+","+emailTextfield.getText()+","+addressTextfield.getText()
-                +","+roleCheck;
-
+                +","+roleCheck+","+frivilligBod;
 
         FileWriter filewriter;
 
         try{
-            //File file = new File("/home/jin/projects/intellij/rfUI/src/main/resources/com/example/rfui/test.txt");
-            filewriter = new FileWriter("/home/jin/projects/intellij/rfUI/src/main/resources/com/example/rfui/test.txt",true);
+            filewriter = new FileWriter("/home/jin/projects/intellij/rfUI3/src/main/resources/com/example/rfui/test.txt",true);
             BufferedWriter bw = new BufferedWriter(filewriter);
-
             bw.write(line+"\n");
             bw.flush();
             bw.close();
             filewriter.close();
             System.out.println(line);
-
             clearText(event);
 
         }catch(IOException e){
             System.out.println("add line failed"+e);
         }
-
 
     }
     public void displayAdminName(String username){
@@ -207,6 +203,10 @@ public class opretAnsController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         bodBox.getItems().removeAll(bodBox.getItems());
         bodBox.getItems().addAll("SNAIL 'N CHIPS","Mocktail Bar","Tuborg Orange","Meyers Køkken","Bus-Boden","Ski-Burger");
-
+        final ToggleGroup radioGroup = new ToggleGroup();
+        BodRadioBtn.setToggleGroup(radioGroup);
+        BodRadioBtn.setSelected(true);
+        friRadioBtn.setToggleGroup(radioGroup);
+        adminRadioBtn.setToggleGroup(radioGroup);
     }
 }

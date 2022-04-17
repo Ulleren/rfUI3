@@ -59,15 +59,9 @@ public class loginController implements Initializable {
     }
     public void validateLogin(ActionEvent event){
         try{
-            String username = usernameTextfield.getText();
-            String username1 ="UlriksMor";
-            String password1="kodeord123";
-            String adminuser = "admin";
-            String adminpass = "admin";
-
             Path path = Paths.get("/home/jin/projects/intellij/rfUI3/src/main/resources/com/example/rfui/test.txt");
-            long count = Files.lines(path).count();
 
+            long count = Files.lines(path).count();
             for(int i = 0; i<count; i++){
                 String line = Files.readAllLines(path).get(i);
                 if(!line.trim().equals("")){
@@ -78,18 +72,26 @@ public class loginController implements Initializable {
                     String email = profil[3];
                     String address = profil[4];
                     String role = profil[5];
+                    //String bod = profil[6];
 
                     if(email.trim().equals(usernameTextfield.getText())){
                         if(password.trim().equals(passwordTextfield.getText())){
-                            System.out.println("bruger fundet");
-                            FXMLLoader loader = new FXMLLoader(getClass().getResource("adminScreen.fxml"));
-                            root = loader.load();
-                            adminScreenController adminController = loader.getController();
-                            adminController.displayAdminName(name);
-                            stage =(Stage)((Node)event.getSource()).getScene().getWindow();
-                            scene = new Scene(root);
-                            stage.setScene(scene);
-                            stage.show();
+                            switch (role) {
+                                case "Admin" -> {
+                                    System.out.println("bruger fundet");
+                                    FXMLLoader loader = new FXMLLoader(getClass().getResource("adminScreen.fxml"));
+                                    root = loader.load();
+                                    adminScreenController adminController = loader.getController();
+                                    adminController.displayAdminName(name);
+                                    stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                                    scene = new Scene(root);
+                                    stage.setScene(scene);
+                                    stage.show();
+                                }
+                                case "Frivilllig" -> System.out.println("Frivillig scene");
+                                case "Ansvarlig" -> System.out.println("Ansvarlig scene");
+                            }
+
 
                         }
                         else{
