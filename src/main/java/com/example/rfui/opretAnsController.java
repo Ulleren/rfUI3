@@ -10,6 +10,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Border;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.BufferedWriter;
@@ -84,10 +86,7 @@ public class opretAnsController implements Initializable {
     ToggleGroup radioGroup;
 
 
-//    public void bodBoxen(){
-//        bodBox = new ComboBox<>();
-//        bodBox.getItems().addAll("SNAIL 'N CHIPS","Mocktail Bar","Tuborg Orange","Meyers Køkken","Bus-Boden","Ski-Burger");
-//    }
+
     public void backBtn(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("adminScreen.fxml"));
         root = loader.load();
@@ -113,41 +112,60 @@ public class opretAnsController implements Initializable {
         passwordErrorLabel.setText("");
     }
     public void opretAnsvarlig(ActionEvent event){
+        if(!textFieldIsValid()){
+            System.out.println("not valid");
+        }
+        else{
+            saveFile(event);
+        }
+    }
+    private boolean textFieldIsValid(){
         String password = passwordTextfield.getText();
         String password2= password2Textfield.getText();
+        boolean validTextFields = true;
 
         if(!nameTextfield.getText().matches("[aA-zZ ]+$")){
             nameErrorLabel.setText("Indtast et gyldigt navn");
+            validTextFields = false;
+
         }
         else if(nameTextfield.getText().isBlank()){
             nameErrorLabel.setText("Indtast et navn");
+            validTextFields = false;
         }
 
         if(!phoneTextfield.getText().matches("^\\d{8}$")){
             phoneErrorLabel.setText("Indtast gyldigt telefonnummer");
+            validTextFields = false;
         }
         else if(phoneTextfield.getText().isBlank()){
             phoneErrorLabel.setText("Indtast et telefonnummer");
+            validTextFields = false;
         }
 
         if(!emailTextfield.getText().matches("^(.+)@(.+)$")){
             emailErrorLabel.setText("indtast gyldig emailadresse");
+            validTextFields = false;
         }
         else if(emailTextfield.getText().isBlank()){
             emailErrorLabel.setText("indtast en emailadresse");
+            validTextFields = false;
         }
 
         if(addressTextfield.getText().isBlank()){
             addressErrorLabel.setText("Indtast en adresse");
+            validTextFields = false;
         }
 
         if(!passwordTextfield.getText().matches(password2Textfield.getText())) {
             passwordErrorLabel.setText("Kodeord er ikke ens");
+            validTextFields = false;
         }
         else if(passwordTextfield.getText().isBlank() || password2Textfield.getText().isBlank()){
             passwordErrorLabel.setText("Gentag kodeord");
+            validTextFields = false;
         }
-
+        return validTextFields;
     }
     public void saveFile(ActionEvent event){
 
