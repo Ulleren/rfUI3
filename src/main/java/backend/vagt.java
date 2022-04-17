@@ -3,12 +3,19 @@ package backend;
 import java.util.ArrayList;
 
 public class vagt {
-    Ansvarlig ansvarlig;
     ArrayList<Frivillig> frivillige;
     int maxFrivillige;
+    int antalTimer;
+    String dag;
+    int startTid;
+    int slutTid;
 
-    public vagt(int maxFrivillige) {
+    public vagt(ArrayList<Frivillig> frivillige, int maxFrivillige, int antalTimer, String dag, int startTid, int slutTid) {
         this.maxFrivillige = maxFrivillige;
+        this.antalTimer = antalTimer;
+        this.dag = dag;
+        this.startTid = startTid;
+        this.slutTid = slutTid;
     }
 
 
@@ -20,11 +27,7 @@ public class vagt {
         } else return false;
     }
 
-    public Ansvarlig getAnsvarlig() {
-        return ansvarlig;
-    }
-
-    public ArrayList<Frivillig> getFrivillige() {
+      public ArrayList<Frivillig> getFrivillige() {
         return frivillige;
     }
 
@@ -32,15 +35,43 @@ public class vagt {
         return maxFrivillige;
     }
 
-    public void setAnsvarlig(Ansvarlig ansvarlig) {
-        this.ansvarlig = ansvarlig;
-    }
-
-    public void setFrivillige(ArrayList<Frivillig> frivillige) {
+   public void setFrivillige(ArrayList<Frivillig> frivillige) {
         this.frivillige = frivillige;
     }
 
     public void setMaxFrivillige(int maxFrivillige) {
         this.maxFrivillige = maxFrivillige;
+    }
+
+    public int getAntalTimer() {
+        return antalTimer;
+    }
+
+    public void setAntalTimer(int antalTimer) {
+        this.antalTimer = antalTimer;
+    }
+
+    public String getDag() {
+        return dag;
+    }
+
+    public void setDag(String dag) {
+        this.dag = dag;
+    }
+
+    public int getStartTid() {
+        return startTid;
+    }
+
+    public void setStartTid(int startTid) {
+        this.startTid = startTid;
+    }
+
+    public int getSlutTid() {
+        return slutTid;
+    }
+
+    public void setSlutTid(int slutTid) {
+        this.slutTid = slutTid;
     }
 }
