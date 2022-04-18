@@ -19,6 +19,10 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 
@@ -85,13 +89,11 @@ public class opretAnsController implements Initializable {
     @FXML
     ToggleGroup radioGroup;
 
-
-
     public void backBtn(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("adminScreen.fxml"));
         root = loader.load();
         adminScreenController adminController = loader.getController();
-        //adminController.displayAdminName(name);
+        //adminController.displayAdminName();
         stage =(Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -110,13 +112,20 @@ public class opretAnsController implements Initializable {
         nameErrorLabel.setText("");
         phoneErrorLabel.setText("");
         passwordErrorLabel.setText("");
+        emailErrorLabel.setText("");
     }
-    public void opretAnsvarlig(ActionEvent event){
+    public void opretAnsvarlig(ActionEvent event) throws IOException {
         if(!textFieldIsValid()){
             System.out.println("not valid");
         }
         else{
-            saveFile(event);
+            if(!emailExists()){
+                System.out.println("email exists");
+            }
+            else{
+                saveFile(event);
+            }
+
         }
     }
     private boolean textFieldIsValid(){
@@ -167,10 +176,60 @@ public class opretAnsController implements Initializable {
         }
         return validTextFields;
     }
-    public void saveFile(ActionEvent event){
+    public boolean emailExists(){
+        boolean emailCheck = true;
+        try {
+            Path path = Paths.get("/home/jin/projects/intellij/rfUI3/src/main/resources/com/example/rfui/test.txt");
+
+            long count = Files.lines(path).count();
+            for (int i = 0; i < count; i++) {
+                String line = Files.readAllLines(path).get(i);
+                if (!line.trim().equals("")) {
+                    String[] profil = line.split(",");
+                    String name = profil[0];
+                    String phone = profil[1];
+                    String password = profil[2];
+                    String email = profil[3];
+                    String address = profil[4];
+                    String role = profil[5];
+                    //String bod = profil[6];
+
+                    if(email.trim().equals(emailTextfield.getText())){
+                        emailErrorLabel.setText("Email findes allerede");
+                        emailCheck = false;
+                    }
+                }
+
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return emailCheck;
+    }
+    public void saveFile(ActionEvent event) throws IOException {
 
         String roleCheck;
-        String frivilligBod = bodBox.getValue();
+        String frivilligBod;
+        if(bodBox.getValue()==null && !adminRadioBtn.isSelected()){
+            Alert bodboks = new Alert(Alert.AlertType.CONFIRMATION);
+            bodboks.setTitle("Advarsel");
+            bodboks.setHeaderText("Der er ikke valgt en bod!");
+            bodboks.setContentText("Opret bruger på kontor og tildel administrator rettigheder?");
+
+            if(bodboks.showAndWait().get()== ButtonType.OK){
+                opAnsStage = (Stage) opAnsPane.getScene().getWindow();
+                frivilligBod = "Kontor";
+                adminRadioBtn.setSelected(true);
+            }
+            else{
+                bodboks.close();
+                return;
+            }
+        }
+        else{
+            frivilligBod = bodBox.getValue();
+        }
+
         if(BodRadioBtn.isSelected()){
             roleCheck = "Ansvarlig";
         }
@@ -179,6 +238,7 @@ public class opretAnsController implements Initializable {
         }
         else{
             roleCheck = "Admin";
+            frivilligBod = "Kontor";
         }
         String line = nameTextfield.getText()+","+phoneTextfield.getText()+","+passwordTextfield.getText()+","+emailTextfield.getText()+","+addressTextfield.getText()
                 +","+roleCheck+","+frivilligBod;
@@ -226,5 +286,8 @@ public class opretAnsController implements Initializable {
         BodRadioBtn.setSelected(true);
         friRadioBtn.setToggleGroup(radioGroup);
         adminRadioBtn.setToggleGroup(radioGroup);
+
+        String[]choiceSearch = new String[]{"Navn", "Telefon","Email"};
+
     }
 }

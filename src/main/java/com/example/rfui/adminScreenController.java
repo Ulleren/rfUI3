@@ -9,6 +9,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -20,6 +22,7 @@ public class adminScreenController {
     private Button adminlogoutButton;
     private Button AnsBtn;
     private Button FriBtn;
+    @FXML
     private Button SearchBtn;
     @FXML
     private AnchorPane adminscenePane;
@@ -41,12 +44,19 @@ public class adminScreenController {
         scene = new Scene(root);
         adminstage.setScene(scene);
         adminstage.show();
-
-
-
-
     }
-    public void opretFri(ActionEvent event) throws IOException {
+    public void adminSearch(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("adminSearch.fxml"));
+        root = loader.load();
+        AdminSearchController admSearch = loader.getController();
+
+        adminstage =(Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        adminstage.setScene(scene);
+        adminstage.show();
+    }
+
+    public void opretBod(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("opretAns.fxml"));
         root = loader.load();
         opretAnsController ansController = loader.getController();

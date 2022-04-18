@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="opAnsPane" prefHeight="650.0" prefWidth="889.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rfui.opretAnsController">
+   <children>
+      <Button fx:id="adminlogoutButton" layoutX="403.0" layoutY="43.0" mnemonicParsing="false" onAction="#adminlogout" prefHeight="26.0" prefWidth="66.0" style="-fx-background-color: #FFFFFF;" text="Logout" textFill="#e95814">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font>
+      </Button>
+      <ImageView fx:id="imageCup" fitHeight="652.0" fitWidth="415.0" layoutX="479.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@frivilligRFCup.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="45.0" fitWidth="79.0" layoutX="200.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@orangetent.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="backBtn" layoutX="403.0" layoutY="17.0" mnemonicParsing="false" onAction="#backBtn" prefHeight="26.0" prefWidth="66.0" style="-fx-background-color: #FFFFFF;" text="Tilbage" textFill="#e95814">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font>
+      </Button>
+      <ComboBox fx:id="bodBox" layoutX="186.0" layoutY="523.0" prefHeight="26.0" prefWidth="181.0" promptText="Vælg bod" />
+      <TextField fx:id="phoneTextfield" layoutX="187.0" layoutY="167.0" prefHeight="26.0" prefWidth="181.0" promptText="+45">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font></TextField>
+      <TextField fx:id="emailTextfield" layoutX="187.0" layoutY="217.0" prefHeight="26.0" prefWidth="181.0" promptText="anders@andersen.dk" />
+      <TextField fx:id="addressTextfield" layoutX="187.0" layoutY="270.0" prefHeight="26.0" prefWidth="181.0" promptText="Andersens Vej 666" />
+      <TextField fx:id="passwordTextfield" layoutX="187.0" layoutY="325.0" prefHeight="26.0" prefWidth="181.0" promptText="kodeord" />
+      <Label fx:id="nameLabel" layoutX="98.0" layoutY="121.0" text="Navn:" textFill="#e95814" />
+      <Label fx:id="phoneLabel" layoutX="98.0" layoutY="171.0" text="Telefon:" textFill="#e95814" />
+      <Label fx:id="mailLabel" layoutX="98.0" layoutY="221.0" text="Mail:" textFill="#e95814" />
+      <Label fx:id="addressLabel" layoutX="97.0" layoutY="274.0" text="Adresse:" textFill="#e95814" />
+      <TextField fx:id="password2Textfield" layoutX="187.0" layoutY="380.0" prefHeight="26.0" prefWidth="181.0" promptText="Gentag kodeord" />
+      <TextField fx:id="nameTextfield" layoutX="187.0" layoutY="117.0" prefHeight="26.0" prefWidth="181.0" promptText="Anders Andersen">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </TextField>
+      <Label fx:id="pass1Label" layoutX="97.0" layoutY="329.0" text="Kodeord:" textFill="#e95814" />
+      <Label fx:id="pass2Label" layoutX="97.0" layoutY="384.0" text="Kodeord:" textFill="#e95814" />
+      <Label fx:id="bodLabel" layoutX="92.0" layoutY="523.0" text="Ansvarlig for:" textFill="#e95814" />
+      <Button fx:id="resetBtn" layoutX="187.0" layoutY="574.0" mnemonicParsing="false" onAction="#clearText" prefHeight="26.0" prefWidth="66.0" style="-fx-background-color: #FFFFFF;" text="Nulstil" textFill="#e95814">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font>
+      </Button>
+      <Button fx:id="saveBtn" layoutX="311.0" layoutY="574.0" mnemonicParsing="false" onAction="#opretAnsvarlig" prefHeight="26.0" prefWidth="66.0" style="-fx-background-color: #FFFFFF;" text="Gem" textFill="#e95814">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font>
+      </Button>
+      <Label layoutX="192.0" layoutY="60.0" text="OPRET BRUGER" textFill="#e95814">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="nameErrorLabel" layoutX="186.0" layoutY="143.0" prefHeight="18.0" prefWidth="181.0" textFill="#e95814" />
+      <Label fx:id="phoneErrorLabel" layoutX="186.0" layoutY="193.0" prefHeight="18.0" prefWidth="181.0" textFill="#e95814" />
+      <Label fx:id="passwordErrorLabel" layoutX="186.0" layoutY="406.0" prefHeight="18.0" prefWidth="181.0" textFill="#e95814" />
+      <Label fx:id="pass2Label1" layoutX="99.0" layoutY="424.0" text="Rolle:" textFill="#e95814" />
+      <RadioButton fx:id="BodRadioBtn" layoutX="187.0" layoutY="424.0" mnemonicParsing="false" text="Bod-ansvarlig" textFill="#e95814">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+         <toggleGroup>
+            <ToggleGroup fx:id="radioGroup" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="friRadioBtn" layoutX="187.0" layoutY="454.0" mnemonicParsing="false" text="Frivillig" textFill="#e95814" toggleGroup="$radioGroup">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </RadioButton>
+      <RadioButton fx:id="adminRadioBtn" layoutX="187.0" layoutY="483.0" mnemonicParsing="false" text="Administrator" textFill="#e95814" toggleGroup="$radioGroup">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </RadioButton>
+      <Label fx:id="emailErrorLabel" layoutX="187.0" layoutY="243.0" prefHeight="18.0" prefWidth="181.0" textFill="#e95814" />
+      <Label fx:id="addressErrorLabel" layoutX="187.0" layoutY="296.0" prefHeight="18.0" prefWidth="181.0" textFill="#e95814" />
+   </children>
+</AnchorPane>

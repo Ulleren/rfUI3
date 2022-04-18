@@ -20,7 +20,7 @@ import java.nio.file.Paths;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class loginController implements Initializable {
+public class loginController  {
     @FXML
     private Button cancelBtn;
     @FXML
@@ -39,10 +39,7 @@ public class loginController implements Initializable {
    private String username1;
     @FXML
     private ComboBox<String> bodBox;
-   @Override
-   public void initialize(URL url, ResourceBundle resourceBundle){
 
-    }
 
     public void loginButtonAction(ActionEvent event){
 
@@ -78,7 +75,7 @@ public class loginController implements Initializable {
                         if(password.trim().equals(passwordTextfield.getText())){
                             switch (role) {
                                 case "Admin" -> {
-                                    System.out.println("bruger fundet");
+                                    System.out.println("Admin bruger fundet");
                                     FXMLLoader loader = new FXMLLoader(getClass().getResource("adminScreen.fxml"));
                                     root = loader.load();
                                     adminScreenController adminController = loader.getController();
@@ -88,8 +85,20 @@ public class loginController implements Initializable {
                                     stage.setScene(scene);
                                     stage.show();
                                 }
-                                case "Frivilllig" -> System.out.println("Frivillig scene");
-                                case "Ansvarlig" -> System.out.println("Ansvarlig scene");
+                                case "Frivilllig" -> {
+                                    System.out.println("Frivillig bruger fundet");
+                                }
+                                case "Ansvarlig" -> {
+                                    System.out.println("Ansvarlig bruger fundet");
+                                    FXMLLoader loader = new FXMLLoader(getClass().getResource("ansvarlig.fxml"));
+                                    root = loader.load();
+                                    ansvarligController ansvarlig = loader.getController();
+                                    ansvarlig.displayAdminName(name);
+                                    stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                                    scene = new Scene(root);
+                                    stage.setScene(scene);
+                                    stage.show();
+                                }
                             }
 
 
@@ -104,46 +113,6 @@ public class loginController implements Initializable {
                 }
             }
 
-
-
-
-//            if(!Objects.equals(usernameTextfield.getText(), username1) && !Objects.equals(passwordTextfield.getText(), password1)){
-//                loginMessageLabel.setText("Wrong username");
-//            }
-//            if(Objects.equals(usernameTextfield.getText(), adminuser) && Objects.equals(passwordTextfield.getText(), adminpass)){
-//                FXMLLoader loader = new FXMLLoader(getClass().getResource("adminScreen.fxml"));
-//                root = loader.load();
-//                adminScreenController adminController = loader.getController();
-//                adminController.displayAdminName(adminuser);
-//                stage =(Stage)((Node)event.getSource()).getScene().getWindow();
-//                scene = new Scene(root);
-//                stage.setScene(scene);
-//                stage.show();
-//            }
-//            else if(Objects.equals(usernameTextfield.getText(), username1) && Objects.equals(passwordTextfield.getText(), password1)){
-//                FXMLLoader loader = new FXMLLoader(getClass().getResource("loggedIn.fxml"));
-//                root = loader.load();
-//
-//
-//                loggedInController scene2Controller = loader.getController();
-//                scene2Controller.displayName(username);
-//                stage =(Stage)((Node)event.getSource()).getScene().getWindow();
-//                scene = new Scene(root);
-//                stage.setScene(scene);
-//                stage.show();
-//            }
-//            else{
-//                FXMLLoader loader = new FXMLLoader(getClass().getResource("loggedIn.fxml"));
-//                root = loader.load();
-//
-//
-//                loggedInController scene2Controller = loader.getController();
-//                scene2Controller.displayName(username);
-//                stage =(Stage)((Node)event.getSource()).getScene().getWindow();
-//                scene = new Scene(root);
-//                stage.setScene(scene);
-//                stage.show();
-//            }
         }catch(Exception e){
             e.printStackTrace();
         }
