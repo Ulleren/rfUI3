@@ -3,6 +3,8 @@ package com.example.rfui;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -55,9 +57,9 @@ public class AdminSearchController implements Initializable {
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
-        searchChoiceBox.getItems().addAll("Navn","Telefon","Email","Bod","Bod-Ansvarlige","Frivillige","Alle");
-        searchChoiceBox.setPromptText("Vælg kriterie");
-        searchChoiceBox.setStyle("-fx-font: 13px \"Arial\";");
+//        searchChoiceBox.getItems().addAll("Navn","Telefon","Email","Bod","Bod-Ansvarlige","Frivillige","Alle");
+//        searchChoiceBox.setPromptText("Vælg kriterie");
+//        searchChoiceBox.setStyle("-fx-font: 13px \"Arial\";");
         initiateCols();
         adminSearch();
 
@@ -120,25 +122,43 @@ public class AdminSearchController implements Initializable {
             e.printStackTrace();
         }
         resultTableView.getItems().addAll(list);
+
+        FilteredList<results>filteredData = new FilteredList<>(list, b->true);
+        adminSearchTextField.textProperty().addListener((observable,oldValue,newValue)->{
+            filteredData.setPredicate(results -> {
+                if(newValue.isEmpty() || newValue.isBlank() || newValue == null){
+                    return true;
+                }
+                String searchKey =newValue.toLowerCase();
+                if(results.getNam().toLowerCase().contains(searchKey)){
+                    return true;
+                }
+                else if(results.getPhn().toString().contains(searchKey)){
+                    return true;
+                }
+                else if(results.getAds().toLowerCase().contains(searchKey)){
+                    return true;
+                }
+                else if(results.getMail().toLowerCase().contains(searchKey)){
+                    return true;
+                }
+                else if(results.getAds().toLowerCase().contains(searchKey)){
+                    return true;
+                }
+                else if(results.getStand().toLowerCase().contains(searchKey)){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            });
+        });
+        SortedList<results>sortedData =new SortedList<>(filteredData);
+        sortedData.comparatorProperty().bind(resultTableView.comparatorProperty());
+        resultTableView.setItems(sortedData);
     }
     public void deleteUser(ActionEvent event){
         resultTableView.getItems().removeAll(resultTableView.getSelectionModel().getSelectedItem());
-    }
-    public void textfieldPrompt(ActionEvent event){
-        switch(searchChoiceBox.getValue()){
-            case "Navn", "Bod-Ansvarlige", "Frivillige", "Alle" -> {
-                adminSearchTextField.setPromptText("Indtast navn");
-            }
-            case "Telefon" -> {
-                adminSearchTextField.setPromptText("Indtast nummer");
-            }
-            case "Email" -> {
-                adminSearchTextField.setPromptText("Indtast mailadresse");
-            }
-            case "Bod" -> {
-                adminSearchTextField.setPromptText("Indtast et bod navn");
-            }
-        }
     }
 
     public void adminlogout(ActionEvent event) throws IOException {
