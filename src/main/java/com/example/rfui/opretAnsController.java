@@ -199,7 +199,7 @@ public class opretAnsController implements Initializable {
                     String email = profil[3];
                     String address = profil[4];
                     String role = profil[5];
-                    //String bod = profil[6];
+                    String bod = profil[6];
 
                     if(email.trim().equals(emailTextfield.getText())){
                         emailErrorLabel.setText("Email findes allerede");
@@ -253,7 +253,7 @@ public class opretAnsController implements Initializable {
         FileWriter filewriter;
 
         try{
-            filewriter = new FileWriter("/home/ulle/dtu/62514_Objektorienteret/rfUI/src/main/resources/com/example/rfui/test.txt",true);
+            filewriter = new FileWriter("/home/jin/projects/intellij/rfUI3/src/main/resources/com/example/rfui/test.txt",true);
             BufferedWriter bw = new BufferedWriter(filewriter);
             bw.write(line+"\n");
             bw.flush();

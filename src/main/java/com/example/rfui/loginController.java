@@ -42,22 +42,23 @@ public class loginController {
 
     public class User {
         private String name;
+        private String bod;
 
         public User() {
         }
-
         public User(String name) {
             this.name = name;
+            this.bod = bod;
         }
-
         public String getName() {
             return name;
         }
-
         public void setName(String name) {
             this.name = name;
         }
+
     }
+
 
     public void loginButtonAction(ActionEvent event) {
 
@@ -92,7 +93,7 @@ public class loginController {
                                     root = loader.load();
                                     adminScreenController adminController = loader.getController();
                                     adminController.setUser(new User(name));
-                                    //adminController.displayAdminName(name);
+
                                     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                                     scene = new Scene(root);
                                     stage.setScene(scene);
