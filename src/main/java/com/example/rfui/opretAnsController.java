@@ -88,12 +88,19 @@ public class opretAnsController implements Initializable {
     private RadioButton adminRadioBtn;
     @FXML
     ToggleGroup radioGroup;
-
+    private loginController.User user;
+    public loginController.User getUser(){
+        return user;
+    }
+    public void setUser(loginController.User user){
+        this.user = user;
+        //displayAdminName(user.getName());
+    }
     public void backBtn(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("adminScreen.fxml"));
         root = loader.load();
         adminScreenController adminController = loader.getController();
-        //adminController.displayAdminName();
+        adminController.setUser(user);
         stage =(Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

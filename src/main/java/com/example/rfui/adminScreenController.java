@@ -12,34 +12,43 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
+import javafx.fxml.Initializable;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class adminScreenController {
-    @FXML
-    Label adminnameLabel;
-    @FXML
-    private Button adminlogoutButton;
-    private Button AnsBtn;
-    private Button FriBtn;
-    @FXML
-    private Button SearchBtn;
-    @FXML
-    private AnchorPane adminscenePane;
-    @FXML
-    private ImageView checkIn;
-    @FXML
-    Label rightsLabel;
-    @FXML
-    private Parent root;
+public class adminScreenController implements Initializable{
+    @FXML Label adminnameLabel;
+    @FXML private Button adminlogoutButton;
+    @FXML private Button AnsBtn;
+    @FXML private Button FriBtn;
+    @FXML private Button SearchBtn;
+    @FXML private AnchorPane adminscenePane;
+    @FXML private ImageView checkIn;
+    @FXML Label rightsLabel;
+    @FXML private Parent root;
     private  Scene scene;
 
     Stage adminstage;
+
+    private loginController.User user;
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle){
+
+    }
+    public loginController.User getUser(){
+        return user;
+    }
+    public void setUser(loginController.User user){
+        this.user = user;
+        displayAdminName(user.getName());
+    }
     public void opretAns(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("opretAns.fxml"));
         root = loader.load();
         opretAnsController ansController = loader.getController();
-
+        ansController.setUser(user);
         adminstage =(Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         adminstage.setScene(scene);
@@ -49,7 +58,7 @@ public class adminScreenController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("adminSearch.fxml"));
         root = loader.load();
         AdminSearchController admSearch = loader.getController();
-
+        admSearch.setUser(user);
         adminstage =(Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         adminstage.setScene(scene);

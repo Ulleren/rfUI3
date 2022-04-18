@@ -19,7 +19,7 @@
          </font></Label>
       <Label fx:id="rightsLabel" layoutX="68.0" layoutY="49.0" text="Administrator" textFill="#e95814" />
       <Label fx:id="rightsLabel1" layoutX="68.0" layoutY="49.0" text="Administrator" textFill="WHITE" />
-      <Button fx:id="adminlogoutButton" layoutX="57.0" layoutY="70.0" mnemonicParsing="false" onAction="#adminlogout" prefHeight="26.0" prefWidth="66.0" style="-fx-background-color: #e95814;" text="Logout" textFill="WHITE">
+      <Button fx:id="adminlogoutButton" layoutX="57.0" layoutY="93.0" mnemonicParsing="false" onAction="#adminlogout" prefHeight="26.0" prefWidth="66.0" style="-fx-background-color: #e95814;" text="Logout" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="13.0" />
          </font>
@@ -47,6 +47,11 @@
         </columns>
       </TableView>
       <Button fx:id="deleteRowBtn" layoutX="63.0" layoutY="598.0" mnemonicParsing="false" onAction="#deleteUser" prefHeight="26.0" prefWidth="147.0" style="-fx-background-color: #ffffff;" text="Slet Bruger" textFill="#e95814">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font>
+      </Button>
+      <Button fx:id="backBtn" layoutX="57.0" layoutY="67.0" mnemonicParsing="false" onAction="#backBtn" prefHeight="26.0" prefWidth="66.0" style="-fx-background-color: #e95814;" text="Tilbage" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="13.0" />
          </font>

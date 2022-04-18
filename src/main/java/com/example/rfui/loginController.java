@@ -40,7 +40,20 @@ public class loginController  {
     @FXML
     private ComboBox<String> bodBox;
 
-
+    public class User{
+        private String name;
+        public User(){
+        }
+        public User(String name){
+            this.name = name;
+        }
+        public String getName(){
+            return name;
+        }
+        public void setName(String name){
+            this.name = name;
+        }
+    }
     public void loginButtonAction(ActionEvent event){
 
         if(!usernameTextfield.getText().isBlank() && !passwordTextfield.getText().isBlank()){
@@ -79,7 +92,8 @@ public class loginController  {
                                     FXMLLoader loader = new FXMLLoader(getClass().getResource("adminScreen.fxml"));
                                     root = loader.load();
                                     adminScreenController adminController = loader.getController();
-                                    adminController.displayAdminName(name);
+                                    adminController.setUser(new User(name));
+                                    //adminController.displayAdminName(name);
                                     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                                     scene = new Scene(root);
                                     stage.setScene(scene);
