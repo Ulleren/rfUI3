@@ -3,7 +3,10 @@ package backend;
 public class Ansvarlig extends Person{
     Bod bod;
     //vagtsted
-    public Ansvarlig(String name, String dateOfBirth, int postal, String address, int phonenumber){
+
+    public Ansvarlig(){
+    }
+    public Ansvarlig(String name, String dateOfBirth, int postal, String address, String phonenumber){
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.postalCode = postal;

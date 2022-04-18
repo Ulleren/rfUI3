@@ -34,3 +34,4 @@ Lasse Bak,28282726,kode,las@bak.dk,Posens Gade 33,Frivillig,Tuborg Orange
 Kim Hansen,38432327,kode,kh@kims.com,Nørrebrogade 100 5. mf,Frivillig,Meyers Køkken
 Kim Hasse,38436323,kode,kh@kims.com,Nørrebrogade 130 5. th,Frivillig,Meyers Køkken
 Kim Jespersen,44432323,kode,kj@hule.com,Amagerbrogade 377 5. th,Frivillig,Meyers Køkken
+Ulrik,22222222,2,2@2.2,d,Admin,Kontor

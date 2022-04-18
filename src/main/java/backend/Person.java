@@ -5,15 +5,51 @@ public abstract class Person {
     String dateOfBirth;
     int postalCode;
     String address;
-    int phonenumber;
+    String phonenumber;
 
-    public String getName(){
+    String password;
+
+    String email;
+
+    String role;
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhonenumber() {
+        return phonenumber;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getName() {
         return this.name;
     }
-    public String getDateOfBirth(){
+
+    public String getDateOfBirth() {
         return this.dateOfBirth;
     }
-    public int getPostalCode(){
+
+    public int getPostalCode() {
         return this.postalCode;
     }
 
@@ -37,7 +73,7 @@ public abstract class Person {
         this.address = address;
     }
 
-    public void setPhonenumber(int phonenumber) {
+    public void setPhonenumber(String phonenumber) {
         this.phonenumber = phonenumber;
     }
 }

@@ -20,73 +20,72 @@ import java.nio.file.Paths;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class loginController  {
+public class loginController {
     @FXML
     private Button cancelBtn;
     @FXML
     public Label loginMessageLabel;
-   @FXML
+    @FXML
     private ImageView brandingImageView;
-   @FXML
-   private TextField usernameTextfield;
-   @FXML
-   private PasswordField passwordTextfield;
+    @FXML
+    private TextField usernameTextfield;
+    @FXML
+    private PasswordField passwordTextfield;
 
-   @FXML
-   private Stage stage;
-   private Scene scene;
-   private Parent root;
-   private String username1;
+    @FXML
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
+    private String username1;
     @FXML
     private ComboBox<String> bodBox;
 
-    public class User{
+    public class User {
         private String name;
-        public User(){
+
+        public User() {
         }
-        public User(String name){
+
+        public User(String name) {
             this.name = name;
         }
-        public String getName(){
+
+        public String getName() {
             return name;
         }
-        public void setName(String name){
+
+        public void setName(String name) {
             this.name = name;
         }
     }
-    public void loginButtonAction(ActionEvent event){
 
-        if(!usernameTextfield.getText().isBlank() && !passwordTextfield.getText().isBlank()){
+    public void loginButtonAction(ActionEvent event) {
+
+        if (!usernameTextfield.getText().isBlank() && !passwordTextfield.getText().isBlank()) {
             validateLogin(event);
-        }else{
+        } else {
             loginMessageLabel.setText("Enter username and password");
 
         }
     }
+
     public void cancelButtonAction(ActionEvent event) {
         Stage stage = (Stage) cancelBtn.getScene().getWindow();
         stage.close();
     }
-    public void validateLogin(ActionEvent event){
-        try{
-            Path path = Paths.get("/home/jin/projects/intellij/rfUI3/src/main/resources/com/example/rfui/test.txt");
 
-            long count = Files.lines(path).count();
-            for(int i = 0; i<count; i++){
-                String line = Files.readAllLines(path).get(i);
-                if(!line.trim().equals("")){
-                    String[]profil=line.split(",");
-                    String name = profil[0];
-                    String phone = profil[1];
-                    String password = profil[2];
-                    String email = profil[3];
-                    String address = profil[4];
-                    String role = profil[5];
-                    //String bod = profil[6];
-
-                    if(email.trim().equals(usernameTextfield.getText())){
-                        if(password.trim().equals(passwordTextfield.getText())){
-                            switch (role) {
+    public void validateLogin(ActionEvent event) {
+        int login = -1;
+        try {
+            String inputEmail = usernameTextfield.getText();
+            String inputPass = passwordTextfield.getText();
+            if (Main.getHashPersonList().getEmailHash().containsKey(inputEmail)) {
+                String name = Main.getHashPersonList().getEmailHash().get(inputEmail);
+                for (int i = 0; i < Main.getHashPersonList().getPersons().get(name).size(); i++) {
+                    if (Main.getHashPersonList().getPersons().get(name).get(i).getEmail().equals(inputEmail)) {
+                        if (Main.getHashPersonList().getPersons().get(name).get(i).getPassword().equals(inputPass)) {
+                            login = i;
+                            switch (Main.getHashPersonList().getPersons().get(name).get(i).getRole()) {
                                 case "Admin" -> {
                                     System.out.println("Admin bruger fundet");
                                     FXMLLoader loader = new FXMLLoader(getClass().getResource("adminScreen.fxml"));
@@ -114,20 +113,17 @@ public class loginController  {
                                     stage.show();
                                 }
                             }
-
-
                         }
-                        else{
-                            loginMessageLabel.setText("kodeord forkert");
-                        }
-                    }
-                    else{
-                        loginMessageLabel.setText("Brugernavn eksisterer ikke");
                     }
                 }
+                if (login == -1) {
+                    loginMessageLabel.setText("kodeord forkert");
+                }
+            } else {
+                loginMessageLabel.setText("Brugernavn eksisterer ikke");
             }
 
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

@@ -186,7 +186,7 @@ public class opretAnsController implements Initializable {
     public boolean emailExists(){
         boolean emailCheck = true;
         try {
-            Path path = Paths.get("/home/jin/projects/intellij/rfUI3/src/main/resources/com/example/rfui/test.txt");
+            Path path = Paths.get("/home/ulle/dtu/62514_Objektorienteret/rfUI/src/main/resources/com/example/rfui/test.txt");
 
             long count = Files.lines(path).count();
             for (int i = 0; i < count; i++) {
@@ -253,7 +253,7 @@ public class opretAnsController implements Initializable {
         FileWriter filewriter;
 
         try{
-            filewriter = new FileWriter("/home/jin/projects/intellij/rfUI3/src/main/resources/com/example/rfui/test.txt",true);
+            filewriter = new FileWriter("/home/ulle/dtu/62514_Objektorienteret/rfUI/src/main/resources/com/example/rfui/test.txt",true);
             BufferedWriter bw = new BufferedWriter(filewriter);
             bw.write(line+"\n");
             bw.flush();

@@ -1,9 +1,12 @@
 package backend;
 
-public class Admin extends Ansvarlig{
+public class Admin extends Ansvarlig {
 
-    public Admin(String navn, String dateO, int post, String addr, int phone){
+    public Admin() {
+        super();
+    }
 
-        super(navn, dateO,post, addr, phone);
+    public Admin(String navn, String dateO, int post, String addr, String phone) {
+        super(navn, dateO, post, addr, phone);
     }
 }
