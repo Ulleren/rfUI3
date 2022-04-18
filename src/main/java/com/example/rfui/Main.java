@@ -20,7 +20,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class Main extends Application {
-    static backend.hashPersons hashPersonList = new hashPersons();
+    static backend.hashPersons hashList = new hashPersons();
 
     @Override
     public void start(Stage primaryStage) throws IOException {
@@ -67,35 +67,34 @@ public class Main extends Application {
                 String line = Files.readAllLines(path).get(i);
                 String[] profil = line.split(",");
                 if (!line.trim().equals("")) {
-                    if (!hashPersonList.getPersons().containsKey(profil[0])) {
-                        hashPersonList.getPersons().put(profil[0], new ArrayList<>());
-                        hashPersonList.getEmailHash().put(profil[3], profil[0]);
+                    if (!hashList.getPersons().containsKey(profil[0])) {
+                        hashList.getPersons().put(profil[0], new ArrayList<>());
+                        hashList.getEmailHash().put(profil[3], profil[0]);
                     }
                     switch (profil[5]) {
-                        case "Admin" -> hashPersonList.getPersons().get(profil[0]).add(new Admin());
-                        case "Ansvarlig" -> hashPersonList.getPersons().get(profil[0]).add(new Ansvarlig());
-                        case "Frivillig" -> hashPersonList.getPersons().get(profil[0]).add(new Frivillig());
+                        case "Admin" -> hashList.getPersons().get(profil[0]).add(new Admin());
+                        case "Ansvarlig" -> hashList.getPersons().get(profil[0]).add(new Ansvarlig());
+                        case "Frivillig" -> hashList.getPersons().get(profil[0]).add(new Frivillig());
                     }
-                    int index = hashPersonList.searchName(profil[0]).size() - 1;
-                    hashPersonList.searchName(profil[0]).get(index).setPhonenumber(profil[1]);
-                    hashPersonList.searchName(profil[0]).get(index).setPassword(profil[2]);
-                    hashPersonList.searchName(profil[0]).get(index).setEmail(profil[3]);
-                    hashPersonList.searchName(profil[0]).get(index).setAddress(profil[4]);
-                    hashPersonList.searchName(profil[0]).get(index).setRole(profil[5]);
+                    int index = hashList.searchName(profil[0]).size() - 1;
+                    hashList.searchName(profil[0]).get(index).setPhonenumber(profil[1]);
+                    hashList.searchName(profil[0]).get(index).setPassword(profil[2]);
+                    hashList.searchName(profil[0]).get(index).setEmail(profil[3]);
+                    hashList.searchName(profil[0]).get(index).setAddress(profil[4]);
+                    hashList.searchName(profil[0]).get(index).setRole(profil[5]);
                 }
-
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public static hashPersons getHashPersonList() {
-        return hashPersonList;
+    public static hashPersons getHashList() {
+        return hashList;
     }
 
-    public static void setHashPersonList(hashPersons hashPersonList) {
-        Main.hashPersonList = hashPersonList;
+    public static void setHashList(hashPersons hashList) {
+        Main.hashList = hashList;
     }
 
     public static void main(String[] args) {

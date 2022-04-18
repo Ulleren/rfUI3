@@ -15,12 +15,15 @@ public class Frivillig extends Person{
         this.phonenumber = phonenumber;
     }
 
+    public void setVagter(ArrayList<vagt> vagter) {
+        this.vagter = vagter;
+    }
+
     public void addVagt(vagt vagt){
         this.vagter.add(vagt);
     }
-    public void seSkema(){
-        //Ting sker her?
-     }
+    public ArrayList<vagt> getVagter(){ return this.vagter;}
+
 
 
 }

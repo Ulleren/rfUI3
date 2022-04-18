@@ -7,7 +7,16 @@ public class hashPersons {
 
     HashMap<String, ArrayList<Person>> persons = new HashMap<>();
     HashMap<String, String> emailHash = new HashMap<>();
+    HashMap<String, ArrayList<vagt>> vagtHash = new HashMap<>();
     public hashPersons() {
+    }
+
+    public HashMap<String, ArrayList<vagt>> getVagtHash() {
+        return vagtHash;
+    }
+
+    public void setVagtHash(HashMap<String, ArrayList<vagt>> vagtHash) {
+        this.vagtHash = vagtHash;
     }
 
     public HashMap<String, String> getEmailHash() {

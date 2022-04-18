@@ -2,23 +2,13 @@ package com.example.rfui;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
-
-import java.io.File;
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Objects;
-import java.util.ResourceBundle;
 
 public class loginController {
     @FXML
@@ -42,6 +32,15 @@ public class loginController {
 
     public class User {
         private String name;
+        private String bod;
+
+        public String getBod() {
+            return bod;
+        }
+
+        public void setBod(String bod) {
+            this.bod = bod;
+        }
 
         public User() {
         }
@@ -50,6 +49,10 @@ public class loginController {
             this.name = name;
         }
 
+        public User(String name, String bod){
+            this.name = name;
+            this.bod = bod;
+        }
         public String getName() {
             return name;
         }
@@ -79,13 +82,13 @@ public class loginController {
         try {
             String inputEmail = usernameTextfield.getText();
             String inputPass = passwordTextfield.getText();
-            if (Main.getHashPersonList().getEmailHash().containsKey(inputEmail)) {
-                String name = Main.getHashPersonList().getEmailHash().get(inputEmail);
-                for (int i = 0; i < Main.getHashPersonList().getPersons().get(name).size(); i++) {
-                    if (Main.getHashPersonList().getPersons().get(name).get(i).getEmail().equals(inputEmail)) {
-                        if (Main.getHashPersonList().getPersons().get(name).get(i).getPassword().equals(inputPass)) {
+            if (Main.getHashList().getEmailHash().containsKey(inputEmail)) {
+                String name = Main.getHashList().getEmailHash().get(inputEmail);
+                for (int i = 0; i < Main.getHashList().getPersons().get(name).size(); i++) {
+                    if (Main.getHashList().getPersons().get(name).get(i).getEmail().equals(inputEmail)) {
+                        if (Main.getHashList().getPersons().get(name).get(i).getPassword().equals(inputPass)) {
                             login = i;
-                            switch (Main.getHashPersonList().getPersons().get(name).get(i).getRole()) {
+                            switch (Main.getHashList().getPersons().get(name).get(i).getRole()) {
                                 case "Admin" -> {
                                     System.out.println("Admin bruger fundet");
                                     FXMLLoader loader = new FXMLLoader(getClass().getResource("adminScreen.fxml"));
@@ -107,6 +110,7 @@ public class loginController {
                                     root = loader.load();
                                     ansvarligController ansvarlig = loader.getController();
                                     ansvarlig.displayAdminName(name);
+                                    //ansvarligController.setUser(new User(name,bod));
                                     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                                     scene = new Scene(root);
                                     stage.setScene(scene);

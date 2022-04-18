@@ -2,7 +2,6 @@ package backend;
 
 public class Ansvarlig extends Person{
     Bod bod;
-    //vagtsted
 
     public Ansvarlig(){
     }
