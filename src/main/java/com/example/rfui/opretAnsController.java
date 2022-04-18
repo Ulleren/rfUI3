@@ -186,27 +186,9 @@ public class opretAnsController implements Initializable {
     public boolean emailExists(){
         boolean emailCheck = true;
         try {
-            Path path = Paths.get("/home/ulle/dtu/62514_Objektorienteret/rfUI/src/main/resources/com/example/rfui/test.txt");
-
-            long count = Files.lines(path).count();
-            for (int i = 0; i < count; i++) {
-                String line = Files.readAllLines(path).get(i);
-                if (!line.trim().equals("")) {
-                    String[] profil = line.split(",");
-                    String name = profil[0];
-                    String phone = profil[1];
-                    String password = profil[2];
-                    String email = profil[3];
-                    String address = profil[4];
-                    String role = profil[5];
-                    String bod = profil[6];
-
-                    if(email.trim().equals(emailTextfield.getText())){
-                        emailErrorLabel.setText("Email findes allerede");
-                        emailCheck = false;
-                    }
-                }
-
+            if(Main.getHashList().getEmailHash().containsKey(emailTextfield.getText())){
+                emailErrorLabel.setText("Email findes allerede");
+                emailCheck = false;
             }
         }catch(Exception e){
             e.printStackTrace();
@@ -253,7 +235,8 @@ public class opretAnsController implements Initializable {
         FileWriter filewriter;
 
         try{
-            filewriter = new FileWriter("/home/jin/projects/intellij/rfUI3/src/main/resources/com/example/rfui/test.txt",true);
+            String filePath = new File("").getAbsolutePath();
+            filewriter = new FileWriter(filePath.concat("/src/main/resources/com/example/rfui/test.txt"),true);
             BufferedWriter bw = new BufferedWriter(filewriter);
             bw.write(line+"\n");
             bw.flush();

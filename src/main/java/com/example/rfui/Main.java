@@ -13,6 +13,7 @@ import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -29,6 +30,8 @@ public class Main extends Application {
             Parent root = loader.load();
             //Scene scene = new Scene(root);
             //ImageView rf_vector = new ImageView("2_lines_Black.png");
+            String filePath = new File("").getAbsolutePath();
+            System.out.println(filePath.concat("/src/main/resources/com/example/rfui/test.txt"));
 
             primaryStage.initStyle(StageStyle.UNDECORATED);
             primaryStage.setScene(new Scene(root, 520, 400));
@@ -61,7 +64,8 @@ public class Main extends Application {
 
     public void loadPersonNames() {
         try {
-            Path path = Paths.get("/home/jin/projects/intellij/rfUI3/src/main/resources/com/example/rfui/test.txt");
+            String filePath = new File("").getAbsolutePath();
+            Path path = Paths.get(filePath.concat("/src/main/resources/com/example/rfui/test.txt"));
             long count = Files.lines(path).count();
             for (int i = 0; i < count; i++) {
                 String line = Files.readAllLines(path).get(i);
