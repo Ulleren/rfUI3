@@ -86,8 +86,7 @@ public class opretAnsController implements Initializable {
     private RadioButton friRadioBtn;
     @FXML
     private RadioButton adminRadioBtn;
-    @FXML
-    ToggleGroup radioGroup;
+    @FXML ToggleGroup radioGroup;
     private loginController.User user;
     public loginController.User getUser(){
         return user;

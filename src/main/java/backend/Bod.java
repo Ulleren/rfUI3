@@ -4,15 +4,17 @@ import java.util.ArrayList;
 
 public class Bod {
     String navn;
+
     String lokation;
     int antalFrivillige = 3;
-    Ansvarlig ansvarlig;
+    String ansvarlig;
     ArrayList<vagt> vagtPlan;
 
     //for(int i = 0; i < )
-    public Bod(String navn, String lokation) {
+    public Bod(String navn, String lokation,String ansvarlig) {
         this.navn = navn;
         this.lokation = lokation;
+        this.ansvarlig = ansvarlig;
         this.vagtPlan = new ArrayList<>();
         for (int i = 8; i < 21; i += 6) {
             if(i+6 < 25){
@@ -90,11 +92,11 @@ public class Bod {
         this.antalFrivillige = antalFrivillige;
     }
 
-    public Ansvarlig getAnsvarlig() {
+    public String getAnsvarlig() {
         return ansvarlig;
     }
 
-    public void setAnsvarlig(Ansvarlig ansvarlig) {
+    public void setAnsvarlig(String ansvarlig) {
         this.ansvarlig = ansvarlig;
     }
 
