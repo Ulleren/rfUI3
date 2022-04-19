@@ -1,14 +1,127 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.rfui.OpretBod"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane fx:id="opretBodPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="889.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rfui.opretBodContoller">
+   <children>
+      <ImageView fx:id="frikadillerImageView" fitHeight="671.0" fitWidth="898.0" layoutX="-4.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@frikadiller.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="26.0" fitWidth="47.0" layoutX="163.0" layoutY="412.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@orangetent.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="182.0" layoutY="20.0" />
+      <Label fx:id="rightsLabel" layoutX="14.0" layoutY="396.0" text="Administrator" textFill="#e95814">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="adminNameLabel" layoutX="14.0" layoutY="374.0" text="Logged ind som:" textFill="#e95814">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </Label>
+      <Button fx:id="adminlogoutButton" layoutX="809.0" layoutY="391.0" mnemonicParsing="false" onAction="#adminlogout" prefHeight="26.0" prefWidth="66.0" style="-fx-background-color: transparent;" text="Log af" textFill="#e95814">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font>
+      </Button>
+      <Button fx:id="backBtn" layoutX="809.0" layoutY="369.0" mnemonicParsing="false" onAction="#backBtn" prefHeight="26.0" prefWidth="66.0" style="-fx-background-color: transparent;" text="Tilbage" textFill="#e95814">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font>
+      </Button>
+      <TextField fx:id="bodName" layoutX="147.0" layoutY="451.0" promptText="&quot;Mors deller&quot;" />
+      <TextField fx:id="ansName" layoutX="447.0" layoutY="451.0" promptText="Anders Andersen" />
+      <TextField fx:id="ansPhone" layoutX="447.0" layoutY="500.0" promptText="11223344" />
+      <TextField fx:id="ansMail" layoutX="447.0" layoutY="548.0" promptText="anders@andersen.dk" />
+      <TextField fx:id="ansPass2" layoutX="713.0" layoutY="548.0" promptText="Gentag Kodeord" />
+      <ComboBox fx:id="locationCombo" layoutX="147.0" layoutY="500.0" prefHeight="26.0" prefWidth="162.0" promptText="Vælg lokation" />
+      <ImageView fitHeight="26.0" fitWidth="47.0" layoutX="580.0" layoutY="412.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@orangetent.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="213.0" layoutY="418.0" text="Opret bod" textFill="#e95814">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="632.0" layoutY="417.0" text="Opret ansvarlig" textFill="#e95814">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </Label>
+      <TextField fx:id="ansAddress" layoutX="713.0" layoutY="451.0" promptText="Andersens Vej 666" />
+      <TextField fx:id="ansPass1" layoutX="713.0" layoutY="500.0" promptText=" Kodeord" />
+      <Label fx:id="rightsLabel1" layoutX="14.0" layoutY="456.0" text="Navn på bod:" textFill="#e95814">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="rightsLabel2" layoutX="14.0" layoutY="505.0" text="Lokation:" textFill="#e95814">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="rightsLabel3" layoutX="334.0" layoutY="456.0" text="Navn:" textFill="#e95814">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="rightsLabel4" layoutX="334.0" layoutY="505.0" text="Telefon:" textFill="#e95814">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="rightsLabel5" layoutX="335.0" layoutY="553.0" text="Mail:" textFill="#e95814">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="rightsLabel6" layoutX="622.0" layoutY="456.0" text="Adresse" textFill="#e95814">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="rightsLabel7" layoutX="622.0" layoutY="505.0" text="Kodeord:" textFill="#e95814">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="rightsLabel8" layoutX="622.0" layoutY="553.0" text="Kodeord (igen):" textFill="#e95814">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </Label>
+      <Button fx:id="resetBtn" layoutX="195.0" layoutY="603.0" mnemonicParsing="false" onAction="#clearText" prefHeight="26.0" prefWidth="66.0" style="-fx-background-color: #FFFFFF;" text="Nulstil" textFill="#e95814">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font>
+      </Button>
+      <Button fx:id="saveBodBtn" layoutX="495.0" layoutY="603.0" mnemonicParsing="false" onAction="#saveAnsvarlig" prefHeight="26.0" prefWidth="66.0" style="-fx-background-color: #FFFFFF;" text="Gem" textFill="#e95814">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font>
+      </Button>
+      <Label fx:id="nameErrorLabel" layoutX="445.0" layoutY="477.0" prefHeight="18.0" prefWidth="162.0" textFill="#e95814" />
+      <Label fx:id="phoneErrorLabel" layoutX="445.0" layoutY="526.0" prefHeight="18.0" prefWidth="162.0" textFill="#e95814" />
+      <Label fx:id="mailErrorLabel" layoutX="447.0" layoutY="574.0" prefHeight="18.0" prefWidth="162.0" textFill="#e95814" />
+      <Label fx:id="addressErrorLabel" layoutX="712.0" layoutY="477.0" prefHeight="18.0" prefWidth="162.0" textFill="#e95814" />
+      <Label fx:id="passwordErrorLabel" layoutX="712.0" layoutY="574.0" prefHeight="18.0" prefWidth="162.0" textFill="#e95814" />
+      <Label fx:id="bodErrorLabel" layoutX="147.0" layoutY="477.0" prefHeight="18.0" prefWidth="162.0" textFill="#e95814" />
+      <Label fx:id="locationErrorLabel" layoutX="147.0" layoutY="526.0" prefHeight="18.0" prefWidth="162.0" textFill="#e95814" />
+   </children>
 </AnchorPane>

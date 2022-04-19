@@ -38,3 +38,5 @@ Ulrik,22222222,2,2@2.2,d,Admin,Kontor
 Kim Snor,44432323,kode,ks@snor.com,Amagerbrogade 377 5. th,Frivillig,null
 Lasse Bak,28282726,kode,la@bak.dk,Posens Gade 33,Frivillig,null
 hej,44444444,kode,4@4.4,hej,Admin,Kontor
+Lars Kuhle,34543423,kode,lk@testikel_te.dk,Bollernes Alle,Ansvarlig,Testikel-Te
+Spejder Hans,22557799,kode,hans@frikadiller.dk,Herman Bangs Alle 34 3.tv,Ansvarlig,Frikadiller

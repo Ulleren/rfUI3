@@ -68,10 +68,10 @@ public class adminScreenController implements Initializable{
     }
 
     public void opretBod(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("opretAns.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("opretBod.fxml"));
         root = loader.load();
-        opretAnsController ansController = loader.getController();
-
+        opretBodContoller opretBodcontroller = loader.getController();
+        opretBodcontroller.setUser(user);
         adminstage =(Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         adminstage.setScene(scene);

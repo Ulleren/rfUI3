@@ -27,65 +27,35 @@ import java.util.ResourceBundle;
 
 
 public class opretAnsController implements Initializable {
-    @FXML
-    private Button logoutBtn;
-    @FXML
-    private Button backBtn;
-    @FXML
-    private Button saveBtn;
-    @FXML
-    private Button resetBtn;
-    @FXML
-    private Stage opAnsStage;
-    @FXML
-    private AnchorPane opAnsPane;
-    @FXML
-    private ImageView imageCup;
-    @FXML
-    private Parent root;
-    @FXML
-    private Stage stage;
-    @FXML
-    private Scene scene;
-    @FXML
-    private ComboBox<String> bodBox;
-    @FXML
-    private TextField nameTextfield;
-    @FXML
-    private TextField phoneTextfield;
-    @FXML
-    private TextField emailTextfield;
-    @FXML
-    private TextField addressTextfield;
-    @FXML
-    private TextField passwordTextfield;
-    @FXML
-    private TextField password2Textfield;
-
-    @FXML
-    private Label nameErrorLabel;
-    @FXML
-    private Label phoneErrorLabel;
-    @FXML
-    private Label passwordErrorLabel;
-    @FXML
-    private Label addressErrorLabel;
-    @FXML
-    private Label emailErrorLabel;
-    @FXML
-    private Label adminnameLabel;
-    @FXML
-    private CheckBox adminCheckbox;
-    @FXML
-    private CheckBox frivilligCheckbox;
-    @FXML
-    private CheckBox ansCheckbox;
-    @FXML
-    private RadioButton BodRadioBtn;
-    @FXML
-    private RadioButton friRadioBtn;
-    @FXML
-    private RadioButton adminRadioBtn;
+    @FXML private Button logoutBtn;
+    @FXML private Button backBtn;
+    @FXML private Button saveBtn;
+    @FXML private Button resetBtn;
+    @FXML private Stage opAnsStage;
+    @FXML private AnchorPane opAnsPane;
+    @FXML private ImageView imageCup;
+    @FXML private Parent root;
+    @FXML private Stage stage;
+    @FXML private Scene scene;
+    @FXML private ComboBox<String> bodBox;
+    @FXML private TextField nameTextfield;
+    @FXML private TextField phoneTextfield;
+    @FXML private TextField emailTextfield;
+    @FXML private TextField addressTextfield;
+    @FXML private TextField passwordTextfield;
+    @FXML private TextField password2Textfield;
+    @FXML private Label nameErrorLabel;
+    @FXML private Label phoneErrorLabel;
+    @FXML private Label passwordErrorLabel;
+    @FXML private Label addressErrorLabel;
+    @FXML private Label emailErrorLabel;
+    @FXML private Label adminnameLabel;
+    @FXML private CheckBox adminCheckbox;
+    @FXML private CheckBox frivilligCheckbox;
+    @FXML private CheckBox ansCheckbox;
+    @FXML private RadioButton BodRadioBtn;
+    @FXML private RadioButton friRadioBtn;
+    @FXML private RadioButton adminRadioBtn;
     @FXML ToggleGroup radioGroup;
     private loginController.User user;
     public loginController.User getUser(){

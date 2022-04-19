@@ -1,1 +1,6 @@
-SNAIL 'N CHIPS,Mocktail Bar,Tuborg Orange,Meyers Køkken,Bus-Boden,Ski-Burger
+SNAIL 'N CHIPS,Festival Plads
+Mocktail Bar,Festival Plads
+Tuborg Orange,Festival Plads
+Meyers Køkken,Festival Plads
+Bus-Boden,Festival Plads
+Ski-Burger,Festival Plads
