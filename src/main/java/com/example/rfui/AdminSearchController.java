@@ -172,9 +172,19 @@ public class AdminSearchController implements Initializable {
         alert.setContentText("Do you want to save before exiting?: ");
 
         if(alert.showAndWait().get()== ButtonType.OK){
-            adminstage = (Stage) adSearchPane.getScene().getWindow();
-            System.out.println("You successfully logged out!");
-            adminstage.close();
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
+                Parent root = loader.load();
+                String filePath = new File("").getAbsolutePath();
+                loginController login = loader.getController();
+                adminstage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                adminstage.setScene(scene);
+                adminstage.show();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
     public void displayAdminName(String username){

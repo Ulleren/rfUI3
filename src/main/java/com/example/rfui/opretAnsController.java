@@ -261,9 +261,19 @@ public class opretAnsController implements Initializable {
         alert.setContentText("Vil du gemme ændringerne inden: ");
 
         if(alert.showAndWait().get()== ButtonType.OK){
-            opAnsStage = (Stage) opAnsPane.getScene().getWindow();
-            System.out.println("You successfully logged out!");
-            opAnsStage.close();
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
+                Parent root = loader.load();
+                String filePath = new File("").getAbsolutePath();
+                loginController login = loader.getController();
+                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 

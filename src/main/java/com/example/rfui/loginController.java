@@ -26,7 +26,7 @@ public class loginController {
     private Stage stage;
     private Scene scene;
     private Parent root;
-    private String username1;
+
     @FXML
     private ComboBox<String> bodBox;
 
@@ -45,10 +45,6 @@ public class loginController {
         public User() {
         }
 
-        public User(String name) {
-            this.name = name;
-        }
-
         public User(String name, String bod){
             this.name = name;
             this.bod = bod;
@@ -60,6 +56,7 @@ public class loginController {
         public void setName(String name) {
             this.name = name;
         }
+
     }
 
     public void loginButtonAction(ActionEvent event) {
@@ -94,7 +91,7 @@ public class loginController {
                                     FXMLLoader loader = new FXMLLoader(getClass().getResource("adminScreen.fxml"));
                                     root = loader.load();
                                     adminScreenController adminController = loader.getController();
-                                    adminController.setUser(new User(name));
+                                    adminController.setUser(new User(name,"Kontor"));
                                     //adminController.displayAdminName(name);
                                     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                                     scene = new Scene(root);
@@ -109,8 +106,8 @@ public class loginController {
                                     FXMLLoader loader = new FXMLLoader(getClass().getResource("ansvarlig.fxml"));
                                     root = loader.load();
                                     ansvarligController ansvarlig = loader.getController();
-                                    ansvarlig.displayAdminName(name);
-                                    //ansvarligController.setUser(new User(name,bod));
+                                    //ansvarlig.displayAdminName(name,"bod");
+                                    ansvarlig.setUser(new User(name,"Meyers Køkken"));
                                     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                                     scene = new Scene(root);
                                     stage.setScene(scene);

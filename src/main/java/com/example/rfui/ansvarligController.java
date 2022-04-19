@@ -55,7 +55,9 @@ public class ansvarligController implements Initializable {
     }
     public void setUser(loginController.User user){
         this.user = user;
+
         displayAdminName(user.getName());
+        displayStandName(user.getBod());
     }
 
     @Override
@@ -117,9 +119,13 @@ public class ansvarligController implements Initializable {
                     String email = profil[3];
                     String address = profil[4];
                     String role = profil[5];
-                    String bod = profil[6];
+                    String stand = profil[6];
 
-                    list.add(new results(name,phone,email,address,role,bod));
+                    if (stand.equals("Meyers Køkken")){
+                        list.add(new results(name,phone,email,address,role,stand));
+                    }
+
+
                 }
             }
         }catch(Exception e){
@@ -130,7 +136,7 @@ public class ansvarligController implements Initializable {
         FilteredList<results>filteredData = new FilteredList<>(list, b->true);
         adminSearchTextField.textProperty().addListener((observable,oldValue,newValue)->{
             filteredData.setPredicate(results -> {
-                if(newValue.isEmpty() || newValue.isBlank() || newValue == null){
+                if(newValue.isEmpty() || newValue.isBlank()){
                     return true;
                 }
                 String searchKey =newValue.toLowerCase();
@@ -165,18 +171,28 @@ public class ansvarligController implements Initializable {
         resultTableView.getItems().removeAll(resultTableView.getSelectionModel().getSelectedItem());
     }
 
-    public void adminlogout(ActionEvent event) throws IOException {
-
+    public void anslogout(ActionEvent event) throws IOException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("logout");
         alert.setHeaderText("You're about to logout!");
         alert.setContentText("Do you want to save before exiting?: ");
 
         if(alert.showAndWait().get()== ButtonType.OK){
-            adminstage = (Stage) adSearchPane.getScene().getWindow();
-            System.out.println("You successfully logged out!");
-            adminstage.close();
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
+                Parent root = loader.load();
+                String filePath = new File("").getAbsolutePath();
+                loginController login = loader.getController();
+                adminstage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                adminstage.setScene(scene);
+                adminstage.show();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
+
     }
     public void displayAdminName(String username){
         adminnameLabel.setText("Logged ind som: " +username);
@@ -190,6 +206,16 @@ public class ansvarligController implements Initializable {
         root = loader.load();
         adminScreenController adminController = loader.getController();
         adminController.setUser(user);
+        adminstage =(Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        adminstage.setScene(scene);
+        adminstage.show();
+    }
+    public void vagtPlanBtn(ActionEvent event) throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("vagtPlan.fxml"));
+        root = loader.load();
+        vagtPlanController vagtController = loader.getController();
+        vagtController.setUser(user);
         adminstage =(Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         adminstage.setScene(scene);

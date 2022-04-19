@@ -14,6 +14,7 @@ import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.fxml.Initializable;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -42,6 +43,7 @@ public class adminScreenController implements Initializable{
     }
     public void setUser(loginController.User user){
         this.user = user;
+
         displayAdminName(user.getName());
     }
     public void opretAns(ActionEvent event) throws IOException {
@@ -86,9 +88,19 @@ public class adminScreenController implements Initializable{
         alert.setContentText("Do you want to save before exiting?: ");
 
         if(alert.showAndWait().get()== ButtonType.OK){
-            adminstage = (Stage) adminscenePane.getScene().getWindow();
-            System.out.println("You successfully logged out!");
-            adminstage.close();
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
+                Parent root = loader.load();
+                String filePath = new File("").getAbsolutePath();
+                loginController login = loader.getController();
+                adminstage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                adminstage.setScene(scene);
+                adminstage.show();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 }

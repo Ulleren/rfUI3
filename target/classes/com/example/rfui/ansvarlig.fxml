@@ -18,7 +18,7 @@
          </font></Label>
       <Label fx:id="rightsLabel" layoutX="68.0" layoutY="49.0" text="Administrator" textFill="#e95814" />
       <Label fx:id="rightsLabel1" layoutX="68.0" layoutY="49.0" text="Bod-Ansvarlig:" textFill="WHITE" />
-      <Button fx:id="adminlogoutButton" layoutX="57.0" layoutY="93.0" mnemonicParsing="false" onAction="#adminlogout" prefHeight="26.0" prefWidth="66.0" style="-fx-background-color: #e95814;" text="Logout" textFill="WHITE">
+      <Button fx:id="adminlogoutButton" layoutX="57.0" layoutY="93.0" mnemonicParsing="false" onAction="#anslogout" prefHeight="26.0" prefWidth="66.0" style="-fx-background-color: #e95814;" text="Log af" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="13.0" />
          </font>
@@ -31,12 +31,16 @@
       <TextField fx:id="adminSearchTextField" layoutX="245.0" layoutY="123.0" onAction="#adminSearch" prefHeight="26.0" prefWidth="402.0" promptText="Indtast søgeord" style="-fx-background-color: #FFFFFF;" />
       <TableView fx:id="resultTableView" layoutX="63.0" layoutY="164.0" prefHeight="414.0" prefWidth="763.0">
          <columns>
-            <TableColumn fx:id="nameTable" prefWidth="142.0" text="Navn" />
-            <TableColumn fx:id="phoneTable" prefWidth="112.0" text="Telefon" />
-            <TableColumn fx:id="emailTable" prefWidth="96.0" text="Email" />
-            <TableColumn fx:id="addressTable" prefWidth="126.0" text="Adresse" />
-            <TableColumn fx:id="bodTable" prefWidth="120.0" text="Bod" />
-            <TableColumn fx:id="roleTable" prefWidth="166.0" text="Rolle" />
+            <TableColumn prefWidth="75.0" text="Frivillige i boden">
+               <columns>
+                  <TableColumn fx:id="phoneTable" prefWidth="112.0" text="Telefon" />
+                  <TableColumn fx:id="nameTable" prefWidth="142.0" text="Navn" />
+                  <TableColumn fx:id="emailTable" prefWidth="96.0" text="Email" />
+                  <TableColumn fx:id="addressTable" prefWidth="126.0" text="Adresse" />
+                  <TableColumn fx:id="bodTable" prefWidth="120.0" text="Bod" />
+                  <TableColumn fx:id="roleTable" prefWidth="166.0" text="Rolle" />
+               </columns>
+            </TableColumn>
          </columns>
       </TableView>
       <Button fx:id="deleteRowBtn" layoutX="63.0" layoutY="598.0" mnemonicParsing="false" onAction="#deleteUser" prefHeight="26.0" prefWidth="147.0" style="-fx-background-color: #ffffff;" text="Slet Bruger" textFill="#e95814">
@@ -44,7 +48,7 @@
             <Font name="Arial Bold" size="13.0" />
          </font>
       </Button>
-      <Button fx:id="backBtn" layoutX="57.0" layoutY="67.0" mnemonicParsing="false" onAction="#backBtn" prefHeight="26.0" prefWidth="66.0" style="-fx-background-color: #e95814;" text="Tilbage" textFill="WHITE">
+      <Button fx:id="vagtBtn" layoutX="679.0" layoutY="598.0" mnemonicParsing="false" onAction="#vagtPlanBtn" prefHeight="26.0" prefWidth="147.0" style="-fx-background-color: #ffffff;" text="Se Vagtplan" textFill="#e95814">
          <font>
             <Font name="Arial Bold" size="13.0" />
          </font>
