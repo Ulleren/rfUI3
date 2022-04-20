@@ -115,7 +115,7 @@ public class opretBodContoller implements Initializable {
             bw.close();
             filewriter.close();
             System.out.println(bodSave);
-            clearText(event);
+            //clearText(event);
 
         } catch (IOException e) {
             System.out.println("add line failed" + e);
@@ -130,9 +130,8 @@ public class opretBodContoller implements Initializable {
                 System.out.println("email exists");
             } else {
                 saveBod(event);
-                //saveFile(event);
+                saveFile(event);
             }
-
         }
     }
 

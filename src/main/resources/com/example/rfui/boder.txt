@@ -7,3 +7,5 @@ Ski-Burger,Festival Plads,3,Lars Kuhle
 Frikadiller,Dream City,3,null
 Diller Drik,Silent & Clean,3,kjdsd
 Skyd en hippie,MC Camping,2,Claus ErIkkeTilMaend
+Tis-Is,Clean Out Loud,3,Wet Villy
+
