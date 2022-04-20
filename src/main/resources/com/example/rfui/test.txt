@@ -6,7 +6,7 @@ Lise Flise,23122312,kode,lise@flise.com,flisen 23,Admin,Kontor
 Anders Ansvarlig,99887766,kode,ans@ans.dk,ansvarliggade 22,Ansvarlig,Mocktail Bar
 rasser,282827272,kode,ras@ras.dk,kd2,Frivillig,Tuborg Orange
 ras,22222222,kode,ras@ras.dk,vej 44,Ansvarlig,Tuborg Orange
-Morten Liderkarl,29002200,kode,ml@ml.dk,alle 44,Frivillig
+Morten Liderkarl,29002200,kode,ml@ml.dk,alle 44,Frivillig,Meyers Køkken
 Kasper Kussesluger,88776699,kode,kk@kk.dk,kusvej 22,Ansvarlig,Meyers Køkken
 Kuno,77668877,kode,kuno@kk.dk,reee 8,Admin,Kontor
 Hanne,22998877,kode,hh@hh.dk,kino 44,Ansvarlig,Bus-Boden
@@ -34,8 +34,11 @@ Kim Hansen,38432327,kode,kh@kims.com,Nørrebrogade 100 5. mf,Frivillig,Meyers K�
 Kim Hasse,38436323,kode,kh@kims.com,Nørrebrogade 130 5. th,Frivillig,Meyers Køkken
 Kim Jespersen,44432323,kode,kj@hule.com,Amagerbrogade 377 5. th,Frivillig,Meyers Køkken
 Ulrik,22222222,2,2@2.2,d,Admin,Kontor
-Kim Snor,44432323,kode,ks@snor.com,Amagerbrogade 377 5. th,Frivillig,null
-Lasse Bak,28282726,kode,la@bak.dk,Posens Gade 33,Frivillig,null
+Kim Snor,44432323,kode,ks@snor.com,Amagerbrogade 377 5. th,Frivillig,Meyers Køkken
+Lasse Bak,28282726,kode,la@bak.dk,Posens Gade 33,Frivillig,Meyers Køkken
 hej,44444444,kode,4@4.4,hej,Admin,Kontor
-Lars Kuhle,34543423,kode,lk@testikel_te.dk,Bollernes Alle,Ansvarlig,Ski-Burgerode,fs@kdkd.dk,fdf 3,Ansvarlig,fdf
+Lars Kuhle,34543423,kode,lk@testikel_te.dk,Bollernes Alle,Ansvarlig,Ski-Burger
 Wet Villy,20992211,kode,ww@tis-is.dk,Pool alle 34,Ansvarlig,Tis-Is
+Enemanden,11111111,kode,en@en.dk,Ingenmandsland 2,Ansvarlig,Enmandsland
+Toeren,22222222,kode,to@to.dk,Oppeitoeren 2,Ansvarlig,tomandsland
+Toeren,22334455,kode,to@ento.dk,toerenanden 2,Ansvarlig,Den anden slags toer

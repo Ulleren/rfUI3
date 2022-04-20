@@ -239,13 +239,13 @@ public class opretAnsController implements Initializable {
         if (!hashList.getPersons().containsKey(profil[0])) {
             hashList.getPersons().put(profil[0], new ArrayList<>());
             hashList.getEmailHash().put(profil[3], profil[0]);
-            index = hashList.getPersons().get(profil[0]).size() - 1;
         }
         switch (profil[5]) {
             case "Admin" -> hashList.getPersons().get(profil[0]).add(new Admin());
             case "Ansvarlig" -> hashList.getPersons().get(profil[0]).add(new Ansvarlig());
             case "Frivillig" -> hashList.getPersons().get(profil[0]).add(new Frivillig());
         }
+        index = hashList.getPersons().get(profil[0]).size() - 1;
         hashList.searchName(profil[0]).get(index).setName(profil[0]);
         hashList.searchName(profil[0]).get(index).setPhonenumber(profil[1]);
         hashList.searchName(profil[0]).get(index).setPassword(profil[2]);
