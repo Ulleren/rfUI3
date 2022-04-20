@@ -8,7 +8,9 @@ public class Bod {
     String lokation;
     Integer antalFrivillige;
     String ansvarlig;
+    ArrayList<Frivillig> pendingFrivillige;
     ArrayList<vagt> vagtPlan;
+
 
     //for(int i = 0; i < )
     public Bod(){}
@@ -109,4 +111,16 @@ public class Bod {
     public void setVagtPlan(ArrayList<vagt> vagtPlan) {
         this.vagtPlan = vagtPlan;
     }
+    public void setAntalFrivillige(Integer antalFrivillige) {
+        this.antalFrivillige = antalFrivillige;
+    }
+
+    public ArrayList<Frivillig> getPendingFrivillige() {
+        return pendingFrivillige;
+    }
+
+    public void setPendingFrivillige(ArrayList<Frivillig> pendingFrivillige) {
+        this.pendingFrivillige = pendingFrivillige;
+    }
 }
+
