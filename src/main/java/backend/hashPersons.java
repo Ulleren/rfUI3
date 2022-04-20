@@ -7,16 +7,16 @@ public class hashPersons {
 
     HashMap<String, ArrayList<Person>> persons = new HashMap<>();
     HashMap<String, String> emailHash = new HashMap<>();
-    HashMap<String, ArrayList<vagt>> vagtHash = new HashMap<>();
+    HashMap<String, Bod> bodHash = new HashMap<>();
     public hashPersons() {
     }
 
-    public HashMap<String, ArrayList<vagt>> getVagtHash() {
-        return vagtHash;
+    public HashMap<String, Bod> getBodHash() {
+        return bodHash;
     }
 
-    public void setVagtHash(HashMap<String, ArrayList<vagt>> vagtHash) {
-        this.vagtHash = vagtHash;
+    public void setBodHash(HashMap<String, Bod> bodHash) {
+        this.bodHash = bodHash;
     }
 
     public HashMap<String, String> getEmailHash() {
@@ -31,6 +31,7 @@ public class hashPersons {
         return persons.get(key);
     }
 
+    public Bod searchBod(String key){ return bodHash.get(key);}
     public String searchEmail(String key){return emailHash.get(key);}
 
     public void entry(String personType, String name) {

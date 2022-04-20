@@ -1,16 +1,15 @@
 Rasmus,20292929,kodeord,rasmus@mail.dk,vej 78,Admin,Kontor
 Ulriks Mor,29291010,kode,ulriksmor@o.dk,vejen 22,Admin,Kontor
-Bente Brednums,20201919,kode,bente@klam.dk,En vej 34,Ansvarlig, Mocktail Bar
+Bente Brednums,20201919,kode,bente@klam.dk,En vej 34,Ansvarlig,SNAIL 'N CHIPS
 Frits Villig,28384938,kode,fri@villig.dk,frivej 3,Frivillig,Bus-Boden
 Lise Flise,23122312,kode,lise@flise.com,flisen 23,Admin,Kontor
 Anders Ansvarlig,99887766,kode,ans@ans.dk,ansvarliggade 22,Ansvarlig,Mocktail Bar
 rasser,282827272,kode,ras@ras.dk,kd2,Frivillig,Tuborg Orange
-ras,22222222,kode,ras@ras.dk,vej 44,Ansvarlig,Mocktail Bar
-Morten Liderkarl,29002200,kode,ml@ml.dk,alle 44,Frivillig,SNAIL 'N CHIPS
-Kasper Kussesluger,88776699,kode,kk@kk.dk,kusvej 22,Ansvarlig,Kontor
+ras,22222222,kode,ras@ras.dk,vej 44,Ansvarlig,Tuborg Orange
+Morten Liderkarl,29002200,kode,ml@ml.dk,alle 44,Frivillig
+Kasper Kussesluger,88776699,kode,kk@kk.dk,kusvej 22,Ansvarlig,Meyers Køkken
 Kuno,77668877,kode,kuno@kk.dk,reee 8,Admin,Kontor
 Hanne,22998877,kode,hh@hh.dk,kino 44,Ansvarlig,Bus-Boden
-rer,22332233,kode,rad@jfj.dk,k 88,Ansvarlig,SNAIL 'N CHIPS
 Hippe Henning,34251223,kode,henning@mail.dk,I Hegnet 247,Frivillig,Meyers Køkken
 Jens Kidman,88669900,kode,jens@rw.dk,Bajs Alle 24,Frivillig,Bus-Boden
 Johnny Rotten,33554422,kode,jr@sp.dk,Pistol gade 12,Frivillig,Ski-Burger
@@ -38,6 +37,5 @@ Ulrik,22222222,2,2@2.2,d,Admin,Kontor
 Kim Snor,44432323,kode,ks@snor.com,Amagerbrogade 377 5. th,Frivillig,null
 Lasse Bak,28282726,kode,la@bak.dk,Posens Gade 33,Frivillig,null
 hej,44444444,kode,4@4.4,hej,Admin,Kontor
-Lars Kuhle,34543423,kode,lk@testikel_te.dk,Bollernes Alle,Ansvarlig,Testikel-Te
-Spejder Hans,22557799,kode,hans@frikadiller.dk,Herman Bangs Alle 34 3.tv,Ansvarlig,Frikadiller
+Lars Kuhle,34543423,kode,lk@testikel_te.dk,Bollernes Alle,Ansvarlig,Ski-Burger
 test,22004455,kode,test@testersen.com,vej 34,Ansvarlig,test

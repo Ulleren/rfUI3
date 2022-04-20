@@ -6,7 +6,4 @@ public class Admin extends Ansvarlig {
         super();
     }
 
-    public Admin(String navn, String dateO, int post, String addr, String phone) {
-        super(navn, dateO, post, addr, phone);
-    }
 }

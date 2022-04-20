@@ -6,15 +6,17 @@ public class Bod {
     String navn;
 
     String lokation;
-    int antalFrivillige = 3;
+    Integer antalFrivillige;
     String ansvarlig;
     ArrayList<vagt> vagtPlan;
 
     //for(int i = 0; i < )
-    public Bod(String navn, String lokation,String ansvarlig) {
+    public Bod(){}
+    public Bod(String navn, String lokation, Integer maxFrivillige, String ansvarlig) {
         this.navn = navn;
         this.lokation = lokation;
         this.ansvarlig = ansvarlig;
+        this.antalFrivillige = maxFrivillige;
         this.vagtPlan = new ArrayList<>();
         for (int i = 8; i < 21; i += 6) {
             if(i+6 < 25){

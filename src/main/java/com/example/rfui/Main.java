@@ -1,9 +1,6 @@
 package com.example.rfui;
 
-import backend.Admin;
-import backend.Ansvarlig;
-import backend.Frivillig;
-import backend.hashPersons;
+import backend.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -37,6 +34,7 @@ public class Main extends Application {
             primaryStage.setScene(new Scene(root, 520, 400));
             primaryStage.show();
             loadPersonNames();
+            loadBoder();
             primaryStage.setOnCloseRequest(event -> {
                 event.consume();
                 logout(primaryStage);
@@ -87,6 +85,27 @@ public class Main extends Application {
                     hashList.searchName(profil[0]).get(index).setAddress(profil[4]);
                     hashList.searchName(profil[0]).get(index).setRole(profil[5]);
                 }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadBoder() {
+        try {
+            String filePath = new File("").getAbsolutePath();
+            Path path = Paths.get(filePath.concat("/src/main/resources/com/example/rfui/boder.txt"));
+            long count = Files.lines(path).count();
+            for (int i = 0; i < count; i++) {
+                String line = Files.readAllLines(path).get(i);
+                String[] bod = line.split(",");
+                if (!line.trim().equals("")) {
+                    hashList.getBodHash().put(bod[0], new Bod());
+                }
+                hashList.searchBod(bod[0]).setNavn(bod[0]);
+                hashList.searchBod(bod[0]).setLokation(bod[1]);
+                hashList.searchBod(bod[0]).setAntalFrivillige(Integer.parseInt(bod[2]));
+                hashList.searchBod(bod[0]).setAnsvarlig(bod[3]);
             }
         } catch (Exception e) {
             e.printStackTrace();

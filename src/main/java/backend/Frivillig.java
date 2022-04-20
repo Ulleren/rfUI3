@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Frivillig extends Person{
     //vagtskema ?
     ArrayList<vagt> vagter;
+    Integer antalVagter = 0;
     public Frivillig(){
     }
     public Frivillig(String name, String dateOfBirth, int postal, String address, String phonenumber){

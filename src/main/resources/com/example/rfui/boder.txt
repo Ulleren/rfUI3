@@ -1,8 +1,9 @@
-SNAIL 'N CHIPS,Festival Plads
-Mocktail Bar,Festival Plads
-Tuborg Orange,Festival Plads
-Meyers Køkken,Festival Plads
-Bus-Boden,Festival Plads
-Ski-Burger,Festival PladsHot mommas chili,null
-Frikadiller,Dream City
+SNAIL 'N CHIPS,Festival Plads,3,Bente Brednums
+Mocktail Bar,Festival Plads,3,Anders Ansvarlig
+Tuborg Orange,Festival Plads,3,ras
+Meyers Køkken,Festival Plads,3,Kasper Kussesluger
+Bus-Boden,Festival Plads,3,Hanne
+Ski-Burger,Festival Plads,3,Lars Kuhle
+Frikadiller,Dream City,3,null
 Diller Drik,Silent & Clean,3,kjdsd
+Skyd en hippie,MC Camping,2,Claus ErIkkeTilMaend

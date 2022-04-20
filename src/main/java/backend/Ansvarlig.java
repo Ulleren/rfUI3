@@ -5,12 +5,16 @@ public class Ansvarlig extends Person{
 
     public Ansvarlig(){
     }
-    public Ansvarlig(String name, String dateOfBirth, int postal, String address, String phonenumber){
+    public Ansvarlig(String name, String phonenumber, String kodeord,
+                     String email, String address, Bod bod){
         this.name = name;
-        this.dateOfBirth = dateOfBirth;
-        this.postalCode = postal;
+        this.email = email;
+        //this.dateOfBirth = dateOfBirth;
+        //this.postalCode = postal;
         this.address = address;
         this.phonenumber = phonenumber;
+        this.role = "Ansvarlig";
+        this.bod = bod;
     }
 
     public void placeFrivillig(Frivillig name, int index){
