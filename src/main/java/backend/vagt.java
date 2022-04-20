@@ -16,18 +16,19 @@ public class vagt {
         this.dag = dag;
         this.startTid = startTid;
         this.slutTid = slutTid;
+        this.frivillige = new ArrayList<>();
     }
 
 
     //skal måske være i vagt controller??
-    public boolean addFrivillig(Frivillig frivillig){
-        if(frivillige.size() < maxFrivillige) {
+    public boolean addFrivillig(Frivillig frivillig) {
+        if (frivillige.size() < maxFrivillige) {
             this.frivillige.add(frivillig);
             return true;
         } else return false;
     }
 
-      public ArrayList<Frivillig> getFrivillige() {
+    public ArrayList<Frivillig> getFrivillige() {
         return frivillige;
     }
 
@@ -35,7 +36,7 @@ public class vagt {
         return maxFrivillige;
     }
 
-   public void setFrivillige(ArrayList<Frivillig> frivillige) {
+    public void setFrivillige(ArrayList<Frivillig> frivillige) {
         this.frivillige = frivillige;
     }
 

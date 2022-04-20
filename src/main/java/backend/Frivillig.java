@@ -7,6 +7,7 @@ public class Frivillig extends Person{
     ArrayList<vagt> vagter;
     Integer antalVagter = 0;
     public Frivillig(){
+        this.vagter = new ArrayList<>();
     }
     public Frivillig(String name, String dateOfBirth, int postal, String address, String phonenumber){
         this.name = name;
@@ -14,6 +15,7 @@ public class Frivillig extends Person{
         this.postalCode = postal;
         this.address = address;
         this.phonenumber = phonenumber;
+        this.vagter = new ArrayList<>();
     }
 
     public void setVagter(ArrayList<vagt> vagter) {

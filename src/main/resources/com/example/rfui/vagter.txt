@@ -1,1 +1,10 @@
-Tuborg Orange,rasser,null,null,rasser,null,null,rasser,null,null
+Tuborg Orange,rasser,null,null,rasser,null,null,rasser,null,null,rasser,null,null,rasser,null,null,rasser,null,null,rasser,null,null
+SNAIL 'N CHIPS,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null
+Mocktail Bar,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null
+Meyers Køkken,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null
+Bus-Boden,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null
+Ski-Burger,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null
+Frikadiller,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null
+Diller Drik,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null
+Skyd en hippie,null,null,null,null,null,null,null,null,null,null,null,null,null,null
+Tis-Is,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null

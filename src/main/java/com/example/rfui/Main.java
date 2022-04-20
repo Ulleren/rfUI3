@@ -35,6 +35,7 @@ public class Main extends Application {
             primaryStage.show();
             loadPersonNames();
             loadBoder();
+            loadVagter();
             primaryStage.setOnCloseRequest(event -> {
                 event.consume();
                 logout(primaryStage);
@@ -100,12 +101,47 @@ public class Main extends Application {
                 String line = Files.readAllLines(path).get(i);
                 String[] bod = line.split(",");
                 if (!line.trim().equals("")) {
-                    hashList.getBodHash().put(bod[0], new Bod());
+                    hashList.getBodHash().put(bod[0], new Bod(bod[0], bod[1], Integer.parseInt(bod[2]), bod[3]));
                 }
-                hashList.searchBod(bod[0]).setNavn(bod[0]);
-                hashList.searchBod(bod[0]).setLokation(bod[1]);
-                hashList.searchBod(bod[0]).setAntalFrivillige(Integer.parseInt(bod[2]));
-                hashList.searchBod(bod[0]).setAnsvarlig(bod[3]);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadVagter() {
+        try {
+            String filePath = new File("").getAbsolutePath();
+            Path path = Paths.get(filePath.concat("/src/main/resources/com/example/rfui/vagter.txt"));
+            long count = Files.lines(path).count();
+            int maxFri;
+            for (int i = 0; i < count; i++) {
+                String line = Files.readAllLines(path).get(i);
+                String[] frivillige = line.split(",");
+                maxFri = hashList.getBodHash().get(frivillige[0]).getAntalFrivillige();
+                int antalFrivilligeBrugt = 1;
+                String ptFrivillig;
+                int antalFrivillige;
+                Frivillig person;
+                for (int j = 0; j < frivillige.length / maxFri; j++) {
+                    for (int u = 0; u < maxFri; u++) {
+                        if (!line.trim().equals("")) {
+                            ptFrivillig = frivillige[antalFrivilligeBrugt++];
+                            if (hashList.getPersons().containsKey(ptFrivillig)) {
+                                antalFrivillige = hashList.getPersons().get(ptFrivillig).size();
+                                for (int k = 0; k < antalFrivillige; k++) {
+                                    person = (Frivillig) hashList.getPersons().get(ptFrivillig).get(k);
+                                    if (person.getVagter().contains(hashList.getBodHash().get(frivillige[0]).getVagtPlan().get(j))) {
+                                        hashList.getBodHash().get(frivillige[0]).getVagtPlan().get(j).getFrivillige().add((Frivillig) hashList.getPersons().get(ptFrivillig).get(k));
+                                    }
+                                }
+                            } else {
+                                hashList.getBodHash().get(frivillige[0]).getVagtPlan().get(j).getFrivillige().add(null);
+
+                            }
+                        }
+                    }
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
