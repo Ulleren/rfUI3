@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane fx:id="vagtPane" prefHeight="650.0" prefWidth="889.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rfui.vagtPlanController">
+   <children>
+      <ImageView fx:id="bodImageView" fitHeight="650.0" fitWidth="924.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@bod.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="blackLogoImageView" fitHeight="95.0" fitWidth="97.0" layoutX="778.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@2_lines_Black.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="AnsNameLabel" layoutX="572.0" layoutY="14.0" text="Logged ind som:">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="rightsLabel" layoutX="572.0" layoutY="37.0" text="Bod-Ansvarlig:" />
+      <Button fx:id="backBtn" layoutX="563.0" layoutY="61.0" mnemonicParsing="false" onAction="#backBtn" style="-fx-background-color: transparent;" text="Tilbage">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font>
+      </Button>
+      <Button fx:id="logout" layoutX="563.0" layoutY="85.0" mnemonicParsing="false" onAction="#anslogout" style="-fx-background-color: transparent;" text="Log af">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
