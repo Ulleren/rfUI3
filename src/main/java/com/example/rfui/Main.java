@@ -80,6 +80,7 @@ public class Main extends Application {
                         case "Frivillig" -> hashList.getPersons().get(profil[0]).add(new Frivillig());
                     }
                     int index = hashList.searchName(profil[0]).size() - 1;
+                    hashList.searchName(profil[0]).get(index).setName(profil[0]);
                     hashList.searchName(profil[0]).get(index).setPhonenumber(profil[1]);
                     hashList.searchName(profil[0]).get(index).setPassword(profil[2]);
                     hashList.searchName(profil[0]).get(index).setEmail(profil[3]);
@@ -133,6 +134,7 @@ public class Main extends Application {
                                     person = (Frivillig) hashList.getPersons().get(ptFrivillig).get(k);
                                     if (person.getVagter().contains(hashList.getBodHash().get(frivillige[0]).getVagtPlan().get(j))) {
                                         hashList.getBodHash().get(frivillige[0]).getVagtPlan().get(j).getFrivillige().add((Frivillig) hashList.getPersons().get(ptFrivillig).get(k));
+
                                     }
                                 }
                             } else {

@@ -11,8 +11,6 @@ public class Bod {
     ArrayList<Frivillig> pendingFrivillige;
     ArrayList<vagt> vagtPlan;
 
-
-    //for(int i = 0; i < )
     public Bod(){}
     public Bod(String navn, String lokation, Integer maxFrivillige, String ansvarlig) {
         this.navn = navn;
