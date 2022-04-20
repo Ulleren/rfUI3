@@ -76,7 +76,7 @@ public class opretBodContoller implements Initializable {
 
         try{
             String filePath = new File("").getAbsolutePath();
-            filewriter = new FileWriter(filePath.concat("src/main/resources/com/example/rfui/bod.txt"),true);
+            filewriter = new FileWriter(filePath.concat("/src/main/resources/com/example/rfui/boder.txt"),true);
             BufferedWriter bw = new BufferedWriter(filewriter);
             bw.write(bodSave+"\n");
             bw.flush();
