@@ -37,6 +37,7 @@ public class opretBodContoller implements Initializable {
     @FXML private TextField ansPass1;
     @FXML private TextField ansPass2;
     @FXML private ComboBox<String>locationCombo;
+    @FXML private ComboBox<Integer>maxFrivilligCombo;
     @FXML private Button resetBtn;
     @FXML private Button saveBodBtn;
     @FXML private Label bodErrorLabel;
@@ -56,7 +57,8 @@ public class opretBodContoller implements Initializable {
         //Bod bod = new Bod("spagetti bod", "camping", "Ulriks mor");
         locationCombo.getItems().removeAll(locationCombo.getItems());
         locationCombo.getItems().addAll("Festival Plads","Camping Område","Get-A-Place","Silent & Clean","Dream City","MC Camping","Settle 'N Share","Special Camping","Clean Out Loud");
-
+        maxFrivilligCombo.getItems().removeAll(maxFrivilligCombo.getItems());
+        maxFrivilligCombo.getItems().addAll(1,2,3);
     }
     public loginController.User getUser(){
         return user;
@@ -66,12 +68,16 @@ public class opretBodContoller implements Initializable {
 
         displayAdminName(user.getName());
     }
-    public void saveBod(ActionEvent event){
+    public void saveBod(ActionEvent event) {
         String location = locationCombo.getValue();
-        String bodSave = bodName.getText()+","+location;
+        Integer maxFrivillige = maxFrivilligCombo.getValue();
+        String bodSave = bodName.getText() + "," + location+","+maxFrivillige+","+ansName.getText();
+        // FIXME: 20/04/2022 @Ulleren
 //        if(!isBodNameValid()){
 //
 //        }
+        //else{
+    //}
         FileWriter filewriter;
 
         try{
