@@ -12,7 +12,9 @@ public abstract class Person {
     String email;
 
     String role;
-
+    String stand;
+    public String getStand(){ return stand;}
+    public void setStand(String stand){this.stand = stand;}
     public String getRole() {
         return role;
     }
@@ -76,4 +78,5 @@ public abstract class Person {
     public void setPhonenumber(String phonenumber) {
         this.phonenumber = phonenumber;
     }
+
 }

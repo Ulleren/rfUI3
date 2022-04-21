@@ -86,6 +86,9 @@ public class Main extends Application {
                     hashList.searchName(profil[0]).get(index).setEmail(profil[3]);
                     hashList.searchName(profil[0]).get(index).setAddress(profil[4]);
                     hashList.searchName(profil[0]).get(index).setRole(profil[5]);
+
+                    hashList.searchName(profil[0]).get(index).setStand(profil[6]);
+                    //hashList.searchName(profil[0]).get(index).setHasAccepted(Integer.parseInt(profil[7]));
                 }
             }
         } catch (Exception e) {

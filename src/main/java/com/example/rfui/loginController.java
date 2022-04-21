@@ -1,5 +1,6 @@
 package com.example.rfui;
 
+import backend.Bod;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -34,20 +35,24 @@ public class loginController {
         private String name;
         private String bod;
 
+        private String email;
+
         public String getBod() {
             return bod;
         }
 
-        public void setBod(String bod) {
-            this.bod = bod;
+        public void setBod(Bod bod) {
+            this.bod = String.valueOf(bod);
         }
 
-        public User() {
-        }
-
-        public User(String name, String bod){
+        public User(String name, String bod, String email) {
             this.name = name;
             this.bod = bod;
+            this.email=email;
+        }
+
+        public User(String name, Bod bod){
+
         }
         public String getName() {
             return name;
@@ -56,7 +61,10 @@ public class loginController {
         public void setName(String name) {
             this.name = name;
         }
-
+        public String getEmail(){ return email;}
+        public void setEmail(String email){
+            this.email=email;
+        }
     }
 
     public void loginButtonAction(ActionEvent event) {
@@ -65,15 +73,12 @@ public class loginController {
             validateLogin(event);
         } else {
             loginMessageLabel.setText("Enter username and password");
-
         }
     }
-
     public void cancelButtonAction(ActionEvent event) {
         Stage stage = (Stage) cancelBtn.getScene().getWindow();
         stage.close();
     }
-
     public void validateLogin(ActionEvent event) {
         int login = -1;
         try {
@@ -91,23 +96,40 @@ public class loginController {
                                     FXMLLoader loader = new FXMLLoader(getClass().getResource("adminScreen.fxml"));
                                     root = loader.load();
                                     adminScreenController adminController = loader.getController();
-                                    adminController.setUser(new User(name,"Kontor"));
-                                    //adminController.displayAdminName(name);
                                     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                                     scene = new Scene(root);
                                     stage.setScene(scene);
                                     stage.show();
                                 }
-                                case "Frivilllig" -> {
-                                    System.out.println("Frivillig bruger fundet");
+                                case "Frivillig" -> {
+                                    String boder = Main.getHashList().getPersons().get(name).get(i).getStand();
+
+                                        System.out.println("Frivillig not accepted");
+                                        FXMLLoader loader = new FXMLLoader(getClass().getResource("NyFrivillig.fxml"));
+                                        root = loader.load();
+                                        NyFrivilligController nyfrivillig = loader.getController();
+                                        //ansvarlig.displayAdminName(name,"bod");
+
+                                        nyfrivillig.setUser(new User(name, boder, inputEmail));
+                                        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                                        scene = new Scene(root);
+                                        stage.setScene(scene);
+                                        stage.show();
+
+
+
                                 }
                                 case "Ansvarlig" -> {
+
+                                    String boder = Main.getHashList().getPersons().get(name).get(i).getStand();
                                     System.out.println("Ansvarlig bruger fundet");
                                     FXMLLoader loader = new FXMLLoader(getClass().getResource("ansvarlig.fxml"));
+
                                     root = loader.load();
                                     ansvarligController ansvarlig = loader.getController();
-                                    //ansvarlig.displayAdminName(name,"bod");
-                                    ansvarlig.setUser(new User(name,"Meyers Køkken"));
+                                    ansvarlig.setUser(new User(name,boder, inputEmail));
+
+
                                     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                                     scene = new Scene(root);
                                     stage.setScene(scene);

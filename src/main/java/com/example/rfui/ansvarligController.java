@@ -1,5 +1,6 @@
 package com.example.rfui;
 
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,6 +24,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class ansvarligController implements Initializable {
@@ -55,18 +57,21 @@ public class ansvarligController implements Initializable {
     }
     public void setUser(loginController.User user){
         this.user = user;
-
         displayAdminName(user.getName());
         displayStandName(user.getBod());
+
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
-//        searchChoiceBox.getItems().addAll("Navn","Telefon","Email","Bod","Bod-Ansvarlige","Frivillige","Alle");
-//        searchChoiceBox.setPromptText("Vælg kriterie");
-//        searchChoiceBox.setStyle("-fx-font: 13px \"Arial\";");
-        initiateCols();
-        adminSearch();
+
+        Platform.runLater(() -> {
+
+            initiateCols();
+            adminSearch();
+
+        });
+
 
     }
     private void initiateCols(){
@@ -104,6 +109,8 @@ public class ansvarligController implements Initializable {
     }
     public void adminSearch(){
         list.removeAll(list);
+
+
         try {
             String filePath = new File("").getAbsolutePath();
             Path path = Paths.get(filePath.concat("/src/main/resources/com/example/rfui/test.txt"));
@@ -121,7 +128,8 @@ public class ansvarligController implements Initializable {
                     String role = profil[5];
                     String stand = profil[6];
 
-                    if (stand.equals("Meyers Køkken")){
+                    String boder=user.getBod();
+                    if (Objects.equals(stand, boder)){
                         list.add(new results(name,phone,email,address,role,stand));
                     }
 

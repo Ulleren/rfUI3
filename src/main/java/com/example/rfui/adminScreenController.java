@@ -43,7 +43,6 @@ public class adminScreenController implements Initializable{
     }
     public void setUser(loginController.User user){
         this.user = user;
-
         displayAdminName(user.getName());
     }
     public void opretAns(ActionEvent event) throws IOException {
