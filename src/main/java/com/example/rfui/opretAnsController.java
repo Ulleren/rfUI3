@@ -1,5 +1,8 @@
 package com.example.rfui;
 
+import backend.Admin;
+import backend.Ansvarlig;
+import backend.Frivillig;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,6 +27,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import static com.example.rfui.Main.hashList;
 
 
 public class opretAnsController implements Initializable {
@@ -200,6 +205,25 @@ public class opretAnsController implements Initializable {
         }
         String line = nameTextfield.getText()+","+phoneTextfield.getText()+","+passwordTextfield.getText()+","+emailTextfield.getText()+","+addressTextfield.getText()
                 +","+roleCheck+","+frivilligBod+"0";
+        String[] profil = line.split(",");
+        int index = 0;
+        if (!hashList.getPersons().containsKey(profil[0])) {
+            hashList.getPersons().put(profil[0], new ArrayList<>());
+            hashList.getEmailHash().put(profil[3], profil[0]);
+        }
+        switch (profil[5]) {
+            case "Admin" -> hashList.getPersons().get(profil[0]).add(new Admin());
+            case "Ansvarlig" -> hashList.getPersons().get(profil[0]).add(new Ansvarlig());
+            case "Frivillig" -> hashList.getPersons().get(profil[0]).add(new Frivillig());
+        }
+        index = hashList.getPersons().get(profil[0]).size() - 1;
+        hashList.searchName(profil[0]).get(index).setName(profil[0]);
+        hashList.searchName(profil[0]).get(index).setPhonenumber(profil[1]);
+        hashList.searchName(profil[0]).get(index).setPassword(profil[2]);
+        hashList.searchName(profil[0]).get(index).setEmail(profil[3]);
+        hashList.searchName(profil[0]).get(index).setAddress(profil[4]);
+        hashList.searchName(profil[0]).get(index).setRole(profil[5]);
+        hashList.searchName(profil[0]).get(index).setStand(profil[6]);
 
         FileWriter filewriter;
 
