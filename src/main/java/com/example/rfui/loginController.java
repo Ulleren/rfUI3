@@ -10,6 +10,15 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
+import java.io.FileNotFoundException;
+
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class loginController {
     @FXML
@@ -96,6 +105,7 @@ public class loginController {
                                     FXMLLoader loader = new FXMLLoader(getClass().getResource("adminScreen.fxml"));
                                     root = loader.load();
                                     adminScreenController adminController = loader.getController();
+                                    adminController.setUser(new User(name,"Kontor",inputEmail));
                                     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                                     scene = new Scene(root);
                                     stage.setScene(scene);
@@ -103,21 +113,28 @@ public class loginController {
                                 }
                                 case "Frivillig" -> {
                                     String boder = Main.getHashList().getPersons().get(name).get(i).getStand();
-
+                                    if(NotAccepted(inputEmail)){
                                         System.out.println("Frivillig not accepted");
                                         FXMLLoader loader = new FXMLLoader(getClass().getResource("NyFrivillig.fxml"));
                                         root = loader.load();
                                         NyFrivilligController nyfrivillig = loader.getController();
-                                        //ansvarlig.displayAdminName(name,"bod");
-
                                         nyfrivillig.setUser(new User(name, boder, inputEmail));
                                         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                                         scene = new Scene(root);
                                         stage.setScene(scene);
                                         stage.show();
-
-
-
+                                    }
+                                    else{
+                                        System.out.println("Frivillig accepted");
+                                        FXMLLoader loader = new FXMLLoader(getClass().getResource("Frivillig.fxml"));
+                                        root = loader.load();
+                                        FrivilligController frivilligcont = loader.getController();
+                                        frivilligcont.setUser(new User(name, boder, inputEmail));
+                                        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                                        scene = new Scene(root);
+                                        stage.setScene(scene);
+                                        stage.show();
+                                    }
                                 }
                                 case "Ansvarlig" -> {
 
@@ -148,6 +165,25 @@ public class loginController {
 
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+    public boolean NotAccepted(String inputEmail){
+        boolean notAccepted = false;
+        try {
+            String filePath = new File("").getAbsolutePath();
+            Path path = Paths.get(filePath.concat("/src/main/resources/com/example/rfui/notAccepted.txt"));
+            long count = Files.lines(path).count();
+            for (int j = 0; j < count; j++) {
+                String line = Files.readAllLines(path).get(j);
+                String[] temp = line.split("\n");
+                if(temp[0].equals(inputEmail)){
+                    notAccepted = true;
+                    return notAccepted;
+                }
+            }
+            return notAccepted;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 }

@@ -3,6 +3,8 @@ package com.example.rfui;
 import backend.Admin;
 import backend.Ansvarlig;
 import backend.Frivillig;
+import backend.Bod;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,6 +28,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 import static com.example.rfui.Main.hashList;
@@ -68,7 +71,7 @@ public class opretAnsController implements Initializable {
     }
     public void setUser(loginController.User user){
         this.user = user;
-        displayAdminName(user.getName());
+        //displayAdminName(user.getName());
     }
     public void backBtn(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("adminScreen.fxml"));
@@ -204,7 +207,7 @@ public class opretAnsController implements Initializable {
             frivilligBod = "Kontor";
         }
         String line = nameTextfield.getText()+","+phoneTextfield.getText()+","+passwordTextfield.getText()+","+emailTextfield.getText()+","+addressTextfield.getText()
-                +","+roleCheck+","+frivilligBod+"0";
+                +","+roleCheck+","+frivilligBod;
         String[] profil = line.split(",");
         int index = 0;
         if (!hashList.getPersons().containsKey(profil[0])) {
@@ -225,6 +228,7 @@ public class opretAnsController implements Initializable {
         hashList.searchName(profil[0]).get(index).setRole(profil[5]);
         hashList.searchName(profil[0]).get(index).setStand(profil[6]);
 
+
         FileWriter filewriter;
 
         try{
@@ -236,11 +240,30 @@ public class opretAnsController implements Initializable {
             bw.close();
             filewriter.close();
             System.out.println(line);
-            clearText(event);
+
 
         }catch(IOException e){
             System.out.println("add line failed"+e);
         }
+        if(roleCheck.equals("Frivillig")){
+            String acceptTerms = emailTextfield.getText();
+            try{
+                String filePath = new File("").getAbsolutePath();
+                filewriter = new FileWriter(filePath.concat("/src/main/resources/com/example/rfui/notAccepted.txt"),true);
+                BufferedWriter bw = new BufferedWriter(filewriter);
+                bw.write(acceptTerms+"\n");
+                bw.flush();
+                bw.close();
+                filewriter.close();
+                System.out.println(acceptTerms);
+                clearText(event);
+
+
+            }catch(IOException e){
+                System.out.println("add line failed"+e);
+            }
+        }
+
 
     }
     public void displayAdminName(String username){
@@ -272,15 +295,39 @@ public class opretAnsController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        bodBox.getItems().removeAll(bodBox.getItems());
-        bodBox.getItems().addAll("SNAIL 'N CHIPS","Mocktail Bar","Tuborg Orange","Meyers Køkken","Bus-Boden","Ski-Burger");
-        final ToggleGroup radioGroup = new ToggleGroup();
-        BodRadioBtn.setToggleGroup(radioGroup);
-        BodRadioBtn.setSelected(true);
-        friRadioBtn.setToggleGroup(radioGroup);
-        adminRadioBtn.setToggleGroup(radioGroup);
+        Platform.runLater(() -> {
+            bodBox.getItems().removeAll(bodBox.getItems());
+            comboBox();
 
-        String[]choiceSearch = new String[]{"Navn", "Telefon","Email"};
+            //bodBox.getItems().addAll("SNAIL 'N CHIPS","Mocktail Bar","Tuborg Orange","Meyers Køkken","Bus-Boden","Ski-Burger");
+            final ToggleGroup radioGroup = new ToggleGroup();
+            BodRadioBtn.setToggleGroup(radioGroup);
+            BodRadioBtn.setSelected(true);
+            friRadioBtn.setToggleGroup(radioGroup);
+            adminRadioBtn.setToggleGroup(radioGroup);
+        });
 
+    }
+    public void comboBox(){
+        try {
+            String filePath = new File("").getAbsolutePath();
+            Path path = Paths.get(filePath.concat("/src/main/resources/com/example/rfui/boder.txt"));
+
+            long count = Files.lines(path).count();
+            for (int i = 0; i < count; i++) {
+                String line = Files.readAllLines(path).get(i);
+                if (!line.trim().equals("")) {
+                    String[] profil = line.split(",");
+                    String name = profil[0];
+                    String location = profil[1];
+                    String maxFrivillig = profil[2];
+                    String ansvarlig = profil[3];
+
+                    bodBox.getItems().add(profil[0]);
+                }
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 }

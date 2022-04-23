@@ -16,11 +16,13 @@ import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 
@@ -32,6 +34,7 @@ public class NyFrivilligController implements Initializable {
     @FXML private Stage stage;
     @FXML private Scene scene;
     @FXML private Button logoutBtn;
+    @FXML private Button campFrivilligBtn;
 
 
 
@@ -49,14 +52,12 @@ public class NyFrivilligController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
 
-        Platform.runLater(() -> {
-            PopUp();
-        });
+        Platform.runLater(this::PopUp);
 
 
     }
     public void PopUp(){
-        boolean accepted = false;
+
         Alert betingelser = new Alert(Alert.AlertType.CONFIRMATION);
         betingelser.setTitle("Betingelser for Frivillige");
         betingelser.setHeaderText("Du accepterer følgende ved at trykke OK:");
@@ -74,7 +75,7 @@ public class NyFrivilligController implements Initializable {
 
         if (betingelser.showAndWait().get() == ButtonType.OK) {
             betingelser.close();
-            System.out.println(user.getEmail());
+            AcceptSave();
         }
         else{
             betingelser.close();
@@ -82,7 +83,42 @@ public class NyFrivilligController implements Initializable {
         }
     }
     public void AcceptSave(){
-
+        List<String> fileContents = new ArrayList<>();
+        FileWriter filewriter;
+        try {
+            String filePath = new File("").getAbsolutePath();
+            Path path = Paths.get(filePath.concat("/src/main/resources/com/example/rfui/notAccepted.txt"));
+            long count = Files.lines(path).count();
+            for (int j = 0; j < count; j++) {
+                String line = Files.readAllLines(path).get(j);
+                String[] temp = line.split("\n");
+                if (!temp[0].equals(user.getEmail())) {
+                    fileContents.add(temp[0]);
+                }
+            }
+            System.out.println(fileContents);
+            filewriter = new FileWriter(filePath.concat("/src/main/resources/com/example/rfui/notAccepted.txt"),false);
+            BufferedWriter bw = new BufferedWriter(filewriter);
+            for(String fileLine: fileContents){
+                bw.write(fileLine+System.lineSeparator());
+            }
+            bw.flush();
+            bw.close();
+            filewriter.close();
+        }catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void campFrivillig(ActionEvent event) throws IOException {
+        System.out.println("Frivillig accepted");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Frivillig.fxml"));
+        root = loader.load();
+        FrivilligController frivilligcont = loader.getController();
+        frivilligcont.setUser(user);
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
     public void displayName(String username){
         welcomeLabel.setText("VELKOMMEN " +username);
@@ -95,7 +131,7 @@ public class NyFrivilligController implements Initializable {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Log af systemet");
         alert.setHeaderText("Du er ved at logge af!");
-        alert.setContentText("Vil du gemme ændringerne inden: ");
+        alert.setContentText("Fortsæt?");
 
         if (alert.showAndWait().get() == ButtonType.OK) {
             try {

@@ -42,3 +42,5 @@ Wet Villy,20992211,kode,ww@tis-is.dk,Pool alle 34,Ansvarlig,Tis-Is
 Enemanden,11111111,kode,en@en.dk,Ingenmandsland 2,Ansvarlig,Enmandsland
 Toeren,22222222,kode,to@to.dk,Oppeitoeren 2,Ansvarlig,tomandsland
 Toeren,22334455,kode,to@ento.dk,toerenanden 2,Ansvarlig,Den anden slags toer
+Einar Ensten,99889911,kode,ee@juhuu.dk,Stenvejen 23,Frivillig,SNAIL 'N CHIPS
+Lars Lister,23772233,kode,ll@ll.dk,Listevej 77,Frivillig,SNAIL 'N CHIPS
