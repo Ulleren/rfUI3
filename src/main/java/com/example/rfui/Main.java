@@ -88,7 +88,6 @@ public class Main extends Application {
                     hashList.searchName(profil[0]).get(index).setRole(profil[5]);
 
                     hashList.searchName(profil[0]).get(index).setStand(profil[6]);
-                    //hashList.searchName(profil[0]).get(index).setHasAccepted(Integer.parseInt(profil[7]));
                 }
             }
         } catch (Exception e) {
@@ -108,6 +107,7 @@ public class Main extends Application {
                     hashList.getBodHash().put(bod[0], new Bod(bod[0], bod[1], Integer.parseInt(bod[2]), bod[3]));
                 }
             }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
