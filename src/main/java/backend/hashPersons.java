@@ -1,14 +1,43 @@
 package backend;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.function.BiConsumer;
 
 public class hashPersons {
 
     HashMap<String, ArrayList<Person>> persons = new HashMap<>();
     HashMap<String, String> emailHash = new HashMap<>();
     HashMap<String, Bod> bodHash = new HashMap<>();
+
     public hashPersons() {
+    }
+
+
+    public void saveToFileOnClose() {
+        try {
+            FileWriter filewriter;
+            String filePath = new File("").getAbsolutePath();
+            filewriter = new FileWriter(filePath.concat("/src/main/resources/com/example/rfui/test.txt"), false);
+            BufferedWriter bw = new BufferedWriter(filewriter);
+            for (Map.Entry<String, ArrayList<Person>> set : persons.entrySet()) {
+                for (int i = 0; i < set.getValue().size(); i++) {
+                    String line = set.getValue().get(i).name + "," + set.getValue().get(i).phonenumber + ","
+                            + set.getValue().get(i).password + "," + set.getValue().get(i).email + ","
+                            + set.getValue().get(i).address + "," + set.getValue().get(i).role + "," + set.getValue().get(i).stand + "\n";
+                    bw.write(line);
+                }
+            }
+            bw.close();
+            filewriter.close();
+        } catch (IOException e) {
+            System.out.println("add line failed" + e);
+        }
     }
 
     public HashMap<String, Bod> getBodHash() {
@@ -31,8 +60,13 @@ public class hashPersons {
         return persons.get(key);
     }
 
-    public Bod searchBod(String key){ return bodHash.get(key);}
-    public String searchEmail(String key){return emailHash.get(key);}
+    public Bod searchBod(String key) {
+        return bodHash.get(key);
+    }
+
+    public String searchEmail(String key) {
+        return emailHash.get(key);
+    }
 
     public void entry(String personType, String name) {
 

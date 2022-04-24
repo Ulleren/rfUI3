@@ -206,8 +206,9 @@ public class opretAnsController implements Initializable {
             roleCheck = "Admin";
             frivilligBod = "Kontor";
         }
-        String line = nameTextfield.getText()+","+phoneTextfield.getText()+","+passwordTextfield.getText()+","+emailTextfield.getText()+","+addressTextfield.getText()
-                +","+roleCheck+","+frivilligBod;
+        String line = nameTextfield.getText()+","+phoneTextfield.getText()+","
+                +passwordTextfield.getText()+","+emailTextfield.getText()+","
+                +addressTextfield.getText() +","+roleCheck+","+frivilligBod;
         String[] profil = line.split(",");
         int index = 0;
         if (!hashList.getPersons().containsKey(profil[0])) {
