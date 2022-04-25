@@ -131,6 +131,14 @@ public class FrivilligController implements Initializable{
             String timeLine = vagtComboBox.getValue();
             String ansLine = Main.hashList.getBodHash().get(bodBox.getValue()).getAnsvarlig();
 
+            String ansvarlig = Main.hashList.getBodHash().get(bodBox.getValue()).getAnsvarlig();
+            int antalMedNavn = Main.hashList.getPersons().get(ansvarlig).size();
+            for(int i = 0; i < antalMedNavn; i++){
+                if(Main.hashList.getPersons().get(Main.hashList.getBodHash().get(bodBox.getValue())).get(i).getRole().equals("Ansvarlig")){
+                    String ansPhone = Main.hashList.getPersons().get(Main.hashList.getBodHash().get(bodBox.getValue())).get(i).getPhonenumber();
+                }
+            }
+
 //            String ansP = Main.hashList.getPersons().get(ansLine).indexOf(ansLine;
 //            String ansPhoneL= Main.hashList.searchName(ansLine).get(Integer.parseInt(ansP)).getPhonenumber();
 

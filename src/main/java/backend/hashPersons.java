@@ -71,7 +71,7 @@ public class hashPersons {
                             line += "," + "null";
                         }
                     }
-                    bw.write(line);
+                    bw.write(line+"\n");
                 }
             }
             bw.flush();
