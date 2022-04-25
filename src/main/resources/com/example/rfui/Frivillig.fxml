@@ -77,9 +77,12 @@
             <Image url="@orangetent.png" />
          </image>
       </ImageView>
-      <AnchorPane fx:id="tablePane" layoutX="233.0" layoutY="66.0" prefHeight="282.0" prefWidth="711.0" style="-fx-background-color: #FFFFFF;">
+      <AnchorPane fx:id="tablePane" layoutX="233.0" layoutY="66.0" opacity="0.79" prefHeight="282.0" prefWidth="711.0" style="-fx-background-color: #FFFFFF;">
          <children>
-            <Button fx:id="setVagtBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#insertPendingVagt" style="-fx-background-color: #FFFFFF;" text="Indsæt vagt" />
+            <Button fx:id="setVagtBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#insertPendingVagt" style="-fx-background-color: #FFFFFF;" text="Indsæt vagt" textFill="#e95814">
+               <font>
+                  <Font name="Arial Bold" size="13.0" />
+               </font></Button>
             <ComboBox fx:id="bodBox" layoutX="160.0" layoutY="14.0" prefWidth="150.0" promptText="Vælg bod" style="-fx-background-color: #FFFFFF;" />
             <ComboBox fx:id="dayComboBox" layoutX="361.0" layoutY="14.0" prefWidth="150.0" promptText="Vælg dag" style="-fx-background-color: #FFFFFF;" />
             <ComboBox fx:id="vagtComboBox" layoutX="540.0" layoutY="14.0" prefWidth="150.0" promptText="Vælg vagt" style="-fx-background-color: #FFFFFF;" />
@@ -93,8 +96,8 @@
               </columns>
             </TableView>
             <Label fx:id="vagtListErrorLabel" layoutX="196.0" layoutY="233.0" prefHeight="18.0" prefWidth="343.0" text="Label" />
-            <Button fx:id="deleteVagtBtn" layoutX="14.0" layoutY="238.0" mnemonicParsing="false" onAction="#deleteVagt" prefHeight="26.0" prefWidth="111.0" text="Slet vagt" />
-            <Button fx:id="indsendVagtBtn" layoutX="590.0" layoutY="238.0" mnemonicParsing="false" onAction="#finalizeVagt" text="Ansøg vagter" />
+            <Button fx:id="deleteVagtBtn" layoutX="14.0" layoutY="238.0" mnemonicParsing="false" onAction="#deleteVagt" prefHeight="26.0" prefWidth="111.0" style="-fx-background-color: #FFFFFF;" text="Slet vagt" textFill="#e95814" />
+            <Button fx:id="indsendVagtBtn" layoutX="590.0" layoutY="238.0" mnemonicParsing="false" onAction="#finalizeVagt" style="-fx-background-color: #FFFFFF;" text="Ansøg vagter" textFill="#e95814" />
          </children>
       </AnchorPane>
    </children>

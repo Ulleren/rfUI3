@@ -1,0 +1,5 @@
+jr@sp.dk,33554422,Diller Drik,Lørdag d. 25/6,14:00-20:00
+jr@sp.dk,33554422,Tuborg Orange,Mandag d. 27/6,08:00-14:00
+jr@sp.dk,33554422,Ski-Burger,Torsdag d. 30/6,14:00-20:00
+jr@sp.dk,33554422,Meyers Køkken,Mandag d. 27/6,14:00-20:00
+jr@sp.dk,33554422,Tis-Is,Lørdag d. 2/7,08:00-14:00

@@ -77,7 +77,13 @@ public class FrivilligController implements Initializable{
         Platform.runLater(() -> {
             comboBox();
             initiateCols();
-            setVagtBtn.setBorder(Border.stroke(Color.BLACK));
+            setVagtBtn.setBorder(Border.stroke(Color.ORANGE));
+            deleteVagtBtn.setBorder(Border.stroke(Color.ORANGE));
+            indsendVagtBtn.setBorder(Border.stroke(Color.ORANGE));
+            indsendVagt.setBorder(Border.stroke(Color.ORANGE));
+            dayComboBox.setBorder(Border.stroke(Color.ORANGE));
+            bodBox.setBorder(Border.stroke(Color.ORANGE));
+            vagtComboBox.setBorder(Border.stroke(Color.ORANGE));
         });
 
     }
@@ -124,20 +130,19 @@ public class FrivilligController implements Initializable{
             String timeLine = vagtComboBox.getValue();
             String ansLine = Main.hashList.getBodHash().get(bodBox.getValue()).getAnsvarlig();
 
-
 //            String ansP = Main.hashList.getPersons().get(ansLine).indexOf(ansLine;
 //            String ansPhoneL= Main.hashList.searchName(ansLine).get(Integer.parseInt(ansP)).getPhonenumber();
 
             pendingVagt = dayLine+","+bodLine+","+locLine+","+timeLine+","+ansLine;
             submitVagt subVagt =new submitVagt(dayLine, bodLine,locLine,timeLine,ansLine);
 
-            for (int i = 0; i < tableContents.size(); i++) {
-                if(tableContents.get(i).contains(subVagt.getTimeslot()) && tableContents.get(i).contains(subVagt.getDay())){
+            for (String tableContent : tableContents) {
+                if (tableContent.contains(subVagt.getTimeslot()) && tableContent.contains(subVagt.getDay())) {
                     vagtListErrorLabel.setText("Du har allerede en vagt på dette tidspunkt");
                     return;
                 }
             }
-            tableContents.add(subVagt.getBodnam()+","+subVagt.getDay()+","+subVagt.getTimeslot());
+            tableContents.add(user.getEmail()+","+user.getPhone()+","+subVagt.getBodnam()+","+subVagt.getDay()+","+subVagt.getTimeslot());
             System.out.println(tableContents);
             vagtList.add(new submitVagt(dayLine,bodLine,locLine,timeLine,ansLine));
 
@@ -168,8 +173,37 @@ public class FrivilligController implements Initializable{
 
     }
    public void finalizeVagt(ActionEvent event){
+       List<String> fileContents = new ArrayList<>();
+       FileWriter filewriter;
+       try {
+           String filePath = new File("").getAbsolutePath();
+           Path path = Paths.get(filePath.concat("/src/main/resources/com/example/rfui/pendingVagter.txt"));
+           long count = Files.lines(path).count();
+           for (int j = 0; j < count; j++) {
+               String line = Files.readAllLines(path).get(j);
+               String[] temp = line.split("\n");
+               if (!temp[0].equals(user.getEmail())) {
+                   fileContents.add(temp[0]);
+               }
+           }
 
- }
+           System.out.println(tableContents);
+           filewriter = new FileWriter(filePath.concat("/src/main/resources/com/example/rfui/pendingVagter.txt"),true);
+           BufferedWriter bw = new BufferedWriter(filewriter);
+           for(String fileLine: tableContents){
+               bw.write(fileLine+System.lineSeparator());
+           }
+           bw.flush();
+           bw.close();
+           filewriter.close();
+       }catch (IOException e) {
+           throw new RuntimeException(e);
+       }
+       indsendVagt.getItems().clear();
+       clearCombo();
+       vagtListErrorLabel.setText("Dine vagter er registreret, du vil se godkendte vagter i skemaet nedenfor når de er godkendt");
+   }
+
     public void clearCombo(){
         dayComboBox.getSelectionModel().clearSelection();
         dayComboBox.setValue(null);
