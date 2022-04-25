@@ -36,7 +36,46 @@ public class hashPersons {
             bw.close();
             filewriter.close();
         } catch (IOException e) {
-            System.out.println("add line failed" + e);
+            System.out.println("Save person to file failed: " + e);
+        }
+        try {
+            FileWriter filewriter;
+            String filePath = new File("").getAbsolutePath();
+            filewriter = new FileWriter(filePath.concat("/src/main/resources/com/example/rfui/boder.txt"), false);
+            BufferedWriter bw = new BufferedWriter(filewriter);
+            for (Map.Entry<String, Bod> set : bodHash.entrySet()) {
+                String line = set.getValue().navn + "," + set.getValue().lokation + ","
+                        + set.getValue().antalFrivillige + "," + set.getValue().ansvarlig + "\n";
+                bw.write(line);
+
+            }
+            bw.close();
+            filewriter.close();
+        } catch (IOException e) {
+            System.out.println("Save bod to file failed: " + e);
+        }
+        try {
+            FileWriter filewriter;
+            String filePath = new File("").getAbsolutePath();
+            filewriter = new FileWriter(filePath.concat("/src/main/resources/com/example/rfui/vagter.txt"), false);
+            BufferedWriter bw = new BufferedWriter(filewriter);
+            for (Map.Entry<String, Bod> set : bodHash.entrySet()) {
+                for (int i = 0; i < set.getValue().vagtPlan.size(); i++) {
+                    String line = set.getValue().navn;
+                    for (int u = 0; u < set.getValue().antalFrivillige; u++) {
+                        if (set.getValue().vagtPlan.get(i).frivillige.get(u) != null) {
+                            line += "," + set.getValue().vagtPlan.get(i).frivillige.get(u);
+                        } else {
+                            line += "," + "null";
+                        }
+                    }
+                    bw.write(line);
+                }
+            }
+            bw.close();
+            filewriter.close();
+        } catch (IOException e) {
+            System.out.println("Save vagter to file failed: " + e);
         }
     }
 
