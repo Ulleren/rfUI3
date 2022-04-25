@@ -33,6 +33,7 @@ public class hashPersons {
                     bw.write(line);
                 }
             }
+            bw.flush();
             bw.close();
             filewriter.close();
         } catch (IOException e) {
@@ -49,6 +50,7 @@ public class hashPersons {
                 bw.write(line);
 
             }
+            bw.flush();
             bw.close();
             filewriter.close();
         } catch (IOException e) {
@@ -72,6 +74,7 @@ public class hashPersons {
                     bw.write(line);
                 }
             }
+            bw.flush();
             bw.close();
             filewriter.close();
         } catch (IOException e) {

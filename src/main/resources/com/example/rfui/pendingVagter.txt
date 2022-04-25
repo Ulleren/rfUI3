@@ -8,3 +8,8 @@ jr@sp.dk,33554422,SNAIL 'N CHIPS,Søndag d. 26/6,14:00-20:00
 jr@sp.dk,33554422,Meyers Køkken,Tirsdag d. 28/6,08:00-14:00
 jr@sp.dk,33554422,Frikadiller,Fredag d. 1/7,08:00-14:00
 jr@sp.dk,33554422,Frikadiller,Lørdag d. 2/7,08:00-14:00
+fri@villig.dk,28384938,Bus-Boden,Mandag d. 27/6,08:00-14:00
+fri@villig.dk,28384938,Bus-Boden,Onsdag d. 29/6,20:00-02:00
+fri@villig.dk,28384938,Bus-Boden,Torsdag d. 30/6,20:00-02:00
+fri@villig.dk,28384938,Bus-Boden,Tirsdag d. 28/6,14:00-20:00
+fri@villig.dk,28384938,Bus-Boden,Lørdag d. 2/7,14:00-20:00
