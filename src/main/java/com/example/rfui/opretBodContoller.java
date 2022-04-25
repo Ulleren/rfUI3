@@ -119,6 +119,20 @@ public class opretBodContoller implements Initializable {
         } catch (IOException e) {
             System.out.println("add line failed" + e);
         }
+        try {
+            filewriter = new FileWriter(Main.hashList.getPathToPendingBod().toString()+"/"+bodName.getText().replaceAll(
+                    "[^a-zA-Z0-9]", "")+".txt", true);
+            BufferedWriter bw = new BufferedWriter(filewriter);
+            bw.write(bodSave + "\n");
+            bw.flush();
+            bw.close();
+            filewriter.close();
+            System.out.println(bodSave);
+            //clearText(event);
+
+        } catch (IOException e) {
+            System.out.println("add line failed" + e);
+        }
     }
 
     public void saveAnsvarlig(ActionEvent event) {

@@ -45,3 +45,6 @@ Toeren,22334455,kode,to@ento.dk,toerenanden 2,Ansvarlig,Den anden slags toer
 Einar Ensten,99889911,kode,ee@juhuu.dk,Stenvejen 23,Frivillig,SNAIL 'N CHIPS
 Lars Lister,23772233,kode,ll@ll.dk,Listevej 77,Frivillig,SNAIL 'N CHIPS
 Ulle,23232323,u,u@u.dk,ulleren 2,Frivillig,tomandsland
+Ulleren,98989898,u,u@uu.u,uu,Frivillig,Ski-Burger
+Kebab Manden,23232323,kode,ke@bab.dk,Nørrebrogade,Ansvarlig,Kebabab
+Ke bab,34343434,kode,ke@bib.dk,dfd,Ansvarlig,Kebabistan

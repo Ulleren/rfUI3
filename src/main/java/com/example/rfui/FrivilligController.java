@@ -134,8 +134,8 @@ public class FrivilligController implements Initializable{
             String ansvarlig = Main.hashList.getBodHash().get(bodBox.getValue()).getAnsvarlig();
             int antalMedNavn = Main.hashList.getPersons().get(ansvarlig).size();
             for(int i = 0; i < antalMedNavn; i++){
-                if(Main.hashList.getPersons().get(Main.hashList.getBodHash().get(bodBox.getValue())).get(i).getRole().equals("Ansvarlig")){
-                    String ansPhone = Main.hashList.getPersons().get(Main.hashList.getBodHash().get(bodBox.getValue())).get(i).getPhonenumber();
+                if(Main.hashList.getPersons().get(Main.hashList.getBodHash().get(bodBox.getValue()).getAnsvarlig()).get(i).getRole().equals("Ansvarlig")){
+                    String ansPhone = Main.hashList.getPersons().get(Main.hashList.getBodHash().get(bodBox.getValue()).getAnsvarlig()).get(i).getPhonenumber();
                 }
             }
 
@@ -190,7 +190,9 @@ public class FrivilligController implements Initializable{
        FileWriter filewriter;
        try {
 
-           Path path = Main.hashList.getPathToPending();
+           Path path = Path.of(Main.hashList.getPathToPendingBod().toString() + "/" +
+                   bodBox.getValue().replaceAll("[^a-zA-Z0-9]", "") + ".txt");
+
            long count = Files.lines(path).count();
            for (int j = 0; j < count; j++) {
                String line = Files.readAllLines(path).get(j);
@@ -202,7 +204,7 @@ public class FrivilligController implements Initializable{
            fileContents.addAll(tableContents);
 
            System.out.println(tableContents);
-           filewriter = new FileWriter(Main.hashList.getPathToPending().toString(),false);
+           filewriter = new FileWriter(path.toString(),true);
            BufferedWriter bw = new BufferedWriter(filewriter);
            for(String fileLine: fileContents){
                bw.write(fileLine+System.lineSeparator());

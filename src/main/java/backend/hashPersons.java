@@ -23,9 +23,13 @@ public class hashPersons {
     final Path pathToVagter = Paths.get(filePath.concat("/src/main/resources/database/vagter.txt"));
     final Path pathToNotAccepted = Paths.get(filePath.concat("/src/main/resources/database/notAccepted.txt"));
     final Path pathToPending = Paths.get(filePath.concat("/src/main/resources/database/pendingVagter.txt"));
+    final Path pathToPendingBod = Paths.get(filePath.concat("/src/main/resources/database/boder"));
     public hashPersons() {
     }
 
+    public Path getPathToPendingBod() {
+        return pathToPendingBod;
+    }
 
     public void saveToFileOnClose() {
         try {
