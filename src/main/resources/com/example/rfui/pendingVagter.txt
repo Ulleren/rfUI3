@@ -1,5 +1,10 @@
-jr@sp.dk,33554422,Diller Drik,Lørdag d. 25/6,14:00-20:00
-jr@sp.dk,33554422,Tuborg Orange,Mandag d. 27/6,08:00-14:00
-jr@sp.dk,33554422,Ski-Burger,Torsdag d. 30/6,14:00-20:00
-jr@sp.dk,33554422,Meyers Køkken,Mandag d. 27/6,14:00-20:00
-jr@sp.dk,33554422,Tis-Is,Lørdag d. 2/7,08:00-14:00
+varg@burzum.no,66600666,Tuborg Orange,Lørdag d. 25/6,08:00-14:00
+varg@burzum.no,66600666,Mocktail Bar,Søndag d. 26/6,08:00-14:00
+varg@burzum.no,66600666,Tuborg Orange,Tirsdag d. 28/6,14:00-20:00
+varg@burzum.no,66600666,Ski-Burger,Torsdag d. 30/6,14:00-20:00
+varg@burzum.no,66600666,Frikadiller,Lørdag d. 2/7,08:00-14:00
+jr@sp.dk,33554422,Ski-Burger,Lørdag d. 25/6,14:00-20:00
+jr@sp.dk,33554422,SNAIL 'N CHIPS,Søndag d. 26/6,14:00-20:00
+jr@sp.dk,33554422,Meyers Køkken,Tirsdag d. 28/6,08:00-14:00
+jr@sp.dk,33554422,Frikadiller,Fredag d. 1/7,08:00-14:00
+jr@sp.dk,33554422,Frikadiller,Lørdag d. 2/7,08:00-14:00

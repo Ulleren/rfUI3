@@ -4,6 +4,7 @@ import backend.Person;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -137,9 +138,10 @@ public class FrivilligController implements Initializable{
             submitVagt subVagt =new submitVagt(dayLine, bodLine,locLine,timeLine,ansLine);
 
             for (String tableContent : tableContents) {
-                if (tableContent.contains(subVagt.getTimeslot()) && tableContent.contains(subVagt.getDay())) {
-                    vagtListErrorLabel.setText("Du har allerede en vagt på dette tidspunkt");
-                    return;
+
+                if(tableContent.contains(subVagt.getDay())){
+                     vagtListErrorLabel.setText("Du kan kun have 1 vagt om dagen");
+                     return;
                 }
             }
             tableContents.add(user.getEmail()+","+user.getPhone()+","+subVagt.getBodnam()+","+subVagt.getDay()+","+subVagt.getTimeslot());
@@ -167,12 +169,15 @@ public class FrivilligController implements Initializable{
         }
         else{
             vagtListErrorLabel.setText("Du har allerede 5 vagter, slet en vagt for at tilføje en ny");
-            System.out.println("row count works");
         }
 
 
     }
    public void finalizeVagt(ActionEvent event){
+        if(rowCount!=5){
+            vagtListErrorLabel.setText("du har ikke valgt 5 vagter");
+            return;
+        }
        List<String> fileContents = new ArrayList<>();
        FileWriter filewriter;
        try {
@@ -181,16 +186,17 @@ public class FrivilligController implements Initializable{
            long count = Files.lines(path).count();
            for (int j = 0; j < count; j++) {
                String line = Files.readAllLines(path).get(j);
-               String[] temp = line.split("\n");
-               if (!temp[0].equals(user.getEmail())) {
-                   fileContents.add(temp[0]);
+               if (!line.trim().equals("") && !line.contains(user.getEmail())) {
+                   fileContents.add(line);
                }
            }
 
+           fileContents.addAll(tableContents);
+
            System.out.println(tableContents);
-           filewriter = new FileWriter(filePath.concat("/src/main/resources/com/example/rfui/pendingVagter.txt"),true);
+           filewriter = new FileWriter(filePath.concat("/src/main/resources/com/example/rfui/pendingVagter.txt"),false);
            BufferedWriter bw = new BufferedWriter(filewriter);
-           for(String fileLine: tableContents){
+           for(String fileLine: fileContents){
                bw.write(fileLine+System.lineSeparator());
            }
            bw.flush();
@@ -215,11 +221,9 @@ public class FrivilligController implements Initializable{
     public void deleteVagt(ActionEvent event){
         if(indsendVagt.getSelectionModel().getSelectedItem()==null){
             vagtListErrorLabel.setText("Vælg en vagt der skal slettes");
+            return;
         }
-
         String contents = indsendVagt.getSelectionModel().getSelectedItem().getDay();
-        indsendVagt.getSelectionModel().clearSelection();
-
         switch(contents){
             case "Lørdag d. 25/6" -> {vagtBefore -=1; }
             case "Søndag d. 26/6" -> {vagtBefore -=1; }
@@ -230,9 +234,20 @@ public class FrivilligController implements Initializable{
             case "Fredag d. 1/7" -> {vagtAfter -=1; }
             case "Lørdag d. 2/7" -> {vagtAfter -=1; }
         }
+        for (int i = 0; i < tableContents.size(); i++) {
+            if(tableContents.get(i).contains(contents)){
+                tableContents.remove(tableContents.get(i));
+            }
+        }
+        vagtList.removeAll(indsendVagt.getSelectionModel().getSelectedItem());
+
         indsendVagt.getItems().removeAll(indsendVagt.getSelectionModel().getSelectedItem());
+        indsendVagt.getSelectionModel().clearSelection();
+
+
         vagtListErrorLabel.setText("");
         rowCount-=1;
+
 
     }
     public boolean verifyVagter(){
