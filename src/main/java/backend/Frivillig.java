@@ -1,10 +1,15 @@
 package backend;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class Frivillig extends Person{
     //vagtskema ?
     ArrayList<vagt> vagter;
+
+    LinkedList<vagt> pendingVagter;
+
+
     Integer antalVagter = 0;
     public Frivillig(){
         this.vagter = new ArrayList<>();

@@ -176,8 +176,8 @@ public class loginController {
     public boolean NotAccepted(String inputEmail){
         boolean notAccepted = false;
         try {
-            String filePath = new File("").getAbsolutePath();
-            Path path = Paths.get(filePath.concat("/src/main/resources/com/example/rfui/notAccepted.txt"));
+            Path path = Main.hashList.getPathToNotAccepted();
+
             long count = Files.lines(path).count();
             for (int j = 0; j < count; j++) {
                 String line = Files.readAllLines(path).get(j);

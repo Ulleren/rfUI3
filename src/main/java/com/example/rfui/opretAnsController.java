@@ -233,8 +233,7 @@ public class opretAnsController implements Initializable {
         FileWriter filewriter;
 
         try{
-            String filePath = new File("").getAbsolutePath();
-            filewriter = new FileWriter(filePath.concat("/src/main/resources/com/example/rfui/test.txt"),true);
+            filewriter = new FileWriter(hashList.getPathToPersons().toString(),true);
             BufferedWriter bw = new BufferedWriter(filewriter);
             bw.write(line+"\n");
             bw.flush();
@@ -249,8 +248,7 @@ public class opretAnsController implements Initializable {
         if(roleCheck.equals("Frivillig")){
             String acceptTerms = emailTextfield.getText();
             try{
-                String filePath = new File("").getAbsolutePath();
-                filewriter = new FileWriter(filePath.concat("/src/main/resources/com/example/rfui/notAccepted.txt"),true);
+                filewriter = new FileWriter(Main.hashList.getPathToNotAccepted().toString(),true);
                 BufferedWriter bw = new BufferedWriter(filewriter);
                 bw.write(acceptTerms+"\n");
                 bw.flush();
@@ -311,8 +309,7 @@ public class opretAnsController implements Initializable {
     }
     public void comboBox(){
         try {
-            String filePath = new File("").getAbsolutePath();
-            Path path = Paths.get(filePath.concat("/src/main/resources/com/example/rfui/boder.txt"));
+            Path path = hashList.getPathToBoder();
 
             long count = Files.lines(path).count();
             for (int i = 0; i < count; i++) {

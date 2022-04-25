@@ -107,8 +107,7 @@ public class opretBodContoller implements Initializable {
         FileWriter filewriter;
 
         try {
-            String filePath = new File("").getAbsolutePath();
-            filewriter = new FileWriter(filePath.concat("/src/main/resources/com/example/rfui/boder.txt"), true);
+            filewriter = new FileWriter(Main.hashList.getPathToBoder().toString(), true);
             BufferedWriter bw = new BufferedWriter(filewriter);
             bw.write(bodSave + "\n");
             bw.flush();
@@ -150,8 +149,7 @@ public class opretBodContoller implements Initializable {
         FileWriter filewriter;
 
         try {
-            String filePath = new File("").getAbsolutePath();
-            filewriter = new FileWriter(filePath.concat("/src/main/resources/com/example/rfui/test.txt"), true);
+            filewriter = new FileWriter(Main.hashList.getPathToPersons().toString(), true);
             BufferedWriter bw = new BufferedWriter(filewriter);
             bw.write(line + "\n");
             bw.flush();

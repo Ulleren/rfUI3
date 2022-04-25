@@ -189,8 +189,8 @@ public class FrivilligController implements Initializable{
        List<String> fileContents = new ArrayList<>();
        FileWriter filewriter;
        try {
-           String filePath = new File("").getAbsolutePath();
-           Path path = Paths.get(filePath.concat("/src/main/resources/com/example/rfui/pendingVagter.txt"));
+
+           Path path = Main.hashList.getPathToPending();
            long count = Files.lines(path).count();
            for (int j = 0; j < count; j++) {
                String line = Files.readAllLines(path).get(j);
@@ -202,7 +202,7 @@ public class FrivilligController implements Initializable{
            fileContents.addAll(tableContents);
 
            System.out.println(tableContents);
-           filewriter = new FileWriter(filePath.concat("/src/main/resources/com/example/rfui/pendingVagter.txt"),false);
+           filewriter = new FileWriter(Main.hashList.getPathToPending().toString(),false);
            BufferedWriter bw = new BufferedWriter(filewriter);
            for(String fileLine: fileContents){
                bw.write(fileLine+System.lineSeparator());
@@ -347,8 +347,7 @@ public class FrivilligController implements Initializable{
     }
     public void comboBox(){
         try {
-            String filePath = new File("").getAbsolutePath();
-            Path path = Paths.get(filePath.concat("/src/main/resources/com/example/rfui/boder.txt"));
+            Path path = Main.hashList.getPathToBoder();
 
             long count = Files.lines(path).count();
             for (int i = 0; i < count; i++) {

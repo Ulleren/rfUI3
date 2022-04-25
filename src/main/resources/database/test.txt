@@ -44,3 +44,4 @@ Toeren,22222222,kode,to@to.dk,Oppeitoeren 2,Ansvarlig,tomandsland
 Toeren,22334455,kode,to@ento.dk,toerenanden 2,Ansvarlig,Den anden slags toer
 Einar Ensten,99889911,kode,ee@juhuu.dk,Stenvejen 23,Frivillig,SNAIL 'N CHIPS
 Lars Lister,23772233,kode,ll@ll.dk,Listevej 77,Frivillig,SNAIL 'N CHIPS
+Ulle,23232323,u,u@u.dk,ulleren 2,Frivillig,tomandsland

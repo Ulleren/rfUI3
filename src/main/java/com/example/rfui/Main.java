@@ -27,9 +27,6 @@ public class Main extends Application {
             Parent root = loader.load();
             //Scene scene = new Scene(root);
             //ImageView rf_vector = new ImageView("2_lines_Black.png");
-            String filePath = new File("").getAbsolutePath();
-            System.out.println(filePath.concat("/src/main/resources/com/example/rfui/test.txt"));
-
             primaryStage.initStyle(StageStyle.UNDECORATED);
             primaryStage.setScene(new Scene(root, 520, 400));
             primaryStage.show();
@@ -63,8 +60,7 @@ public class Main extends Application {
 
     public void loadPersonNames() {
         try {
-            String filePath = new File("").getAbsolutePath();
-            Path path = Paths.get(filePath.concat("/src/main/resources/com/example/rfui/test.txt"));
+            Path path = hashList.getPathToPersons();
             long count = Files.lines(path).count();
             for (int i = 0; i < count; i++) {
                 String line = Files.readAllLines(path).get(i);
@@ -98,7 +94,8 @@ public class Main extends Application {
     public void loadBoder() {
         try {
             String filePath = new File("").getAbsolutePath();
-            Path path = Paths.get(filePath.concat("/src/main/resources/com/example/rfui/boder.txt"));
+            Path path = hashList.getPathToBoder();
+                    Paths.get(filePath.concat("/src/main/resources/com/example/rfui/boder.txt"));
             long count = Files.lines(path).count();
             for (int i = 0; i < count; i++) {
                 String line = Files.readAllLines(path).get(i);
@@ -115,8 +112,7 @@ public class Main extends Application {
 
     public void loadVagter() {
         try {
-            String filePath = new File("").getAbsolutePath();
-            Path path = Paths.get(filePath.concat("/src/main/resources/com/example/rfui/vagter.txt"));
+            Path path = hashList.getPathToVagter();
             long count = Files.lines(path).count();
             int maxFri;
             for (int i = 0; i < count; i++) {

@@ -102,8 +102,7 @@ public class AdminSearchController implements Initializable {
     public void adminSearch(){
         list.removeAll(list);
         try {
-            String filePath = new File("").getAbsolutePath();
-            Path path = Paths.get(filePath.concat("/src/main/resources/com/example/rfui/test.txt"));
+            Path path = Main.hashList.getPathToPersons();
 
             long count = Files.lines(path).count();
             for (int i = 0; i < count; i++) {

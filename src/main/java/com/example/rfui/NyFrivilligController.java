@@ -86,8 +86,8 @@ public class NyFrivilligController implements Initializable {
         List<String> fileContents = new ArrayList<>();
         FileWriter filewriter;
         try {
-            String filePath = new File("").getAbsolutePath();
-            Path path = Paths.get(filePath.concat("/src/main/resources/com/example/rfui/notAccepted.txt"));
+            Path path = Main.hashList.getPathToNotAccepted();
+
             long count = Files.lines(path).count();
             for (int j = 0; j < count; j++) {
                 String line = Files.readAllLines(path).get(j);
@@ -97,7 +97,7 @@ public class NyFrivilligController implements Initializable {
                 }
             }
             System.out.println(fileContents);
-            filewriter = new FileWriter(filePath.concat("/src/main/resources/com/example/rfui/notAccepted.txt"),false);
+            filewriter = new FileWriter(Main.hashList.getPathToNotAccepted().toString(),false);
             BufferedWriter bw = new BufferedWriter(filewriter);
             for(String fileLine: fileContents){
                 bw.write(fileLine+System.lineSeparator());
