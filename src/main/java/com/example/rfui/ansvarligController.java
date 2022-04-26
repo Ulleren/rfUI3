@@ -107,10 +107,9 @@ public class ansvarligController implements Initializable {
     }
     public void adminSearch(){
         list.removeAll(list);
-
-
         try {
-            Path path = Main.hashList.getPathToPending();
+            Path path = Path.of(Main.hashList.getPathToPendingBod()+ "/"+user.getBod().replaceAll(
+                    "[^a-zA-Z0-9]", "") + ".txt");
             long count = Files.lines(path).count();
             for (int i = 0; i < count; i++) {
                 String line = Files.readAllLines(path).get(i);

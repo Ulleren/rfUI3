@@ -143,8 +143,10 @@ public class FrivilligController implements Initializable{
                      vagtListErrorLabel.setText("Du kan kun have 1 vagt om dagen");
                      return;
                 }
+
             }
             tableContents.add(user.getEmail()+","+user.getPhone()+","+subVagt.getBodnam()+","+subVagt.getDay()+","+subVagt.getTimeslot());
+
             System.out.println(tableContents);
             vagtList.add(new submitVagt(dayLine,bodLine,locLine,timeLine,ansLine));
 
