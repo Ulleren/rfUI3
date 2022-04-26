@@ -67,38 +67,72 @@
             <Image url="@rf_logo_trans.png" />
          </image>
       </ImageView>
-      <Label layoutX="443.0" layoutY="32.0" text="Vælg en bod for at se og vælge vagter" textFill="#e95814">
-         <font>
-            <Font name="Arial Bold" size="16.0" />
-         </font>
-      </Label>
       <ImageView fitHeight="54.0" fitWidth="51.0" layoutX="79.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@orangetent.png" />
          </image>
       </ImageView>
-      <AnchorPane fx:id="tablePane" layoutX="233.0" layoutY="66.0" opacity="0.79" prefHeight="282.0" prefWidth="711.0" style="-fx-background-color: #FFFFFF;">
+      <AnchorPane fx:id="tablePane" layoutX="246.0" layoutY="96.0" opacity="0.79" prefHeight="307.0" prefWidth="711.0" style="-fx-background-color: #FFFFFF;">
          <children>
-            <Button fx:id="setVagtBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#insertPendingVagt" style="-fx-background-color: #FFFFFF;" text="Indsæt vagt" textFill="#e95814">
+            <Button fx:id="setVagtBtn" layoutX="18.0" layoutY="56.0" mnemonicParsing="false" onAction="#insertPendingVagt" style="-fx-background-color: #FFFFFF;" text="Indsæt vagt" textFill="#e95814">
                <font>
                   <Font name="Arial Bold" size="13.0" />
                </font></Button>
-            <ComboBox fx:id="bodBox" layoutX="160.0" layoutY="14.0" prefWidth="150.0" promptText="Vælg bod" style="-fx-background-color: #FFFFFF;" />
-            <ComboBox fx:id="dayComboBox" layoutX="361.0" layoutY="14.0" prefWidth="150.0" promptText="Vælg dag" style="-fx-background-color: #FFFFFF;" />
-            <ComboBox fx:id="vagtComboBox" layoutX="540.0" layoutY="14.0" prefWidth="150.0" promptText="Vælg vagt" style="-fx-background-color: #FFFFFF;" />
-            <TableView fx:id="indsendVagt" layoutX="14.0" layoutY="52.0" prefHeight="166.0" prefWidth="676.0">
+            <ComboBox fx:id="bodBox" layoutX="160.0" layoutY="55.0" prefWidth="150.0" promptText="Vælg bod" style="-fx-background-color: #FFFFFF;" />
+            <ComboBox fx:id="dayComboBox" layoutX="358.0" layoutY="55.0" prefWidth="150.0" promptText="Vælg dag" style="-fx-background-color: #FFFFFF;" />
+            <ComboBox fx:id="vagtComboBox" layoutX="544.0" layoutY="55.0" prefWidth="150.0" promptText="Vælg vagt" style="-fx-background-color: #FFFFFF;" />
+            <TableView fx:id="indsendVagt" layoutX="18.0" layoutY="91.0" prefHeight="166.0" prefWidth="676.0">
               <columns>
-                <TableColumn fx:id="dayCol" prefWidth="91.0" text="Dag" />
-                <TableColumn fx:id="bodCol" prefWidth="209.0" text="Bod" />
+                <TableColumn fx:id="dayCol" prefWidth="144.0" text="Dag" />
+                <TableColumn fx:id="bodCol" prefWidth="156.0" text="Bod" />
                   <TableColumn fx:id="locationCol" prefWidth="127.0" text="Lokation" />
                   <TableColumn fx:id="timeCol" prefWidth="120.0" text="Tidsrum" />
                   <TableColumn fx:id="ansvarCol" prefWidth="128.0" text="Vagtansvarlig" />
               </columns>
             </TableView>
-            <Label fx:id="vagtListErrorLabel" layoutX="196.0" layoutY="233.0" prefHeight="18.0" prefWidth="343.0" text="Label" />
-            <Button fx:id="deleteVagtBtn" layoutX="14.0" layoutY="238.0" mnemonicParsing="false" onAction="#deleteVagt" prefHeight="26.0" prefWidth="111.0" style="-fx-background-color: #FFFFFF;" text="Slet vagt" textFill="#e95814" />
-            <Button fx:id="indsendVagtBtn" layoutX="590.0" layoutY="238.0" mnemonicParsing="false" onAction="#finalizeVagt" style="-fx-background-color: #FFFFFF;" text="Ansøg vagter" textFill="#e95814" />
+            <Label fx:id="vagtListErrorLabel" layoutX="125.0" layoutY="268.0" prefHeight="18.0" prefWidth="465.0" text="Label" textFill="#da1717">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font></Label>
+            <Button fx:id="deleteVagtBtn" layoutX="14.0" layoutY="264.0" mnemonicParsing="false" onAction="#deleteVagt" prefHeight="26.0" prefWidth="111.0" style="-fx-background-color: #FFFFFF;" text="Slet vagt" textFill="#e95814" />
+            <Button fx:id="indsendVagtBtn" layoutX="590.0" layoutY="264.0" mnemonicParsing="false" onAction="#finalizeVagt" style="-fx-background-color: #FFFFFF;" text="Ansøg vagter" textFill="#e95814" />
+            <Label fx:id="welcomeLabel" layoutX="247.0" layoutY="14.0" text="Ansøg om specifikke vagter " textFill="#e95814">
+               <font>
+                  <Font name="Arial Bold" size="16.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
+      <AnchorPane fx:id="tablePane2" layoutX="246.0" layoutY="418.0" opacity="0.79" prefHeight="307.0" prefWidth="711.0" style="-fx-background-color: #FFFFFF;">
+         <children>
+            <ComboBox fx:id="bodBox2" layoutX="160.0" layoutY="55.0" prefWidth="150.0" promptText="Vælg bod" style="-fx-background-color: #FFFFFF;" />
+            <ComboBox fx:id="dayComboBox2" layoutX="358.0" layoutY="55.0" prefWidth="150.0" promptText="Vælg dag" style="-fx-background-color: #FFFFFF;" />
+            <TableView fx:id="chooseVagtTable" layoutX="18.0" layoutY="91.0" prefHeight="166.0" prefWidth="676.0">
+               <columns>
+                  <TableColumn fx:id="morningCol" prefWidth="144.0" text="08:00-14:00" />
+                  <TableColumn fx:id="frokostCol" prefWidth="156.0" text="14:00-20:00" />
+                  <TableColumn fx:id="eveningCol" prefWidth="127.0" text="20:00-02:00" />
+                  <TableColumn fx:id="locationCol2" prefWidth="120.0" text="Lokation" />
+                  <TableColumn fx:id="ansCol2" prefWidth="128.0" text="Vagtansvarlig" />
+               </columns>
+            </TableView>
+            <Label fx:id="vagtTabelLabel" layoutX="125.0" layoutY="268.0" prefHeight="18.0" prefWidth="465.0" text="Label" textFill="#da1717">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font>
+            </Label>
+            <Button fx:id="tagVagtBtn" layoutX="590.0" layoutY="264.0" mnemonicParsing="false" onAction="#finalizeVagt" style="-fx-background-color: #FFFFFF;" text="Tag vagt" textFill="#e95814" />
+            <Label fx:id="vagtTabelLabel" layoutX="203.0" layoutY="14.0" text="Vælg bod og dag, og tryk på &quot;Tag vagt&quot;:" textFill="#e95814">
+               <font>
+                  <Font name="Arial Bold" size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <Label fx:id="welcomeLabel2" layoutX="306.0" layoutY="32.0" text="Du kan enten ansøge om specifikke vagter, eller vælge ledige vagter fra listen" textFill="#e95814">
+         <font>
+            <Font name="Arial Bold" size="16.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

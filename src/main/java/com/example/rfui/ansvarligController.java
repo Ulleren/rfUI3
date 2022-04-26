@@ -24,6 +24,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -31,7 +32,7 @@ public class ansvarligController implements Initializable {
 
     @FXML private AnchorPane adSearchPane;
     @FXML private Button adminlogoutButton;
-    @FXML private Button deleteRowBtn;
+    @FXML private Button rejectFrivilligBtn;
     @FXML private Button backBtn;
     @FXML private Label rightsLabel1;
     @FXML private Label adminnameLabel;
@@ -49,7 +50,9 @@ public class ansvarligController implements Initializable {
     @FXML private TableView<results> resultTableView;
 
     ObservableList<results> list = FXCollections.observableArrayList();
-
+    FilteredList<results>filteredData = new FilteredList<>(list, b->true);
+    SortedList<results>sortedData =new SortedList<>(filteredData);
+    ArrayList<String>rejectedVagter = new ArrayList<>();
     Stage adminstage;
     private loginController.User user;
     public loginController.User getUser(){
@@ -62,15 +65,10 @@ public class ansvarligController implements Initializable {
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
-
         Platform.runLater(() -> {
-
             initiateCols();
             adminSearch();
-
         });
-
-
     }
     private void initiateCols(){
         nameTable.setCellValueFactory(new PropertyValueFactory<>("nam"));
@@ -135,7 +133,7 @@ public class ansvarligController implements Initializable {
         }
         resultTableView.getItems().addAll(list);
 
-        FilteredList<results>filteredData = new FilteredList<>(list, b->true);
+
         adminSearchTextField.textProperty().addListener((observable,oldValue,newValue)->{
             filteredData.setPredicate(results -> {
                 if(newValue.isEmpty() || newValue.isBlank()){
@@ -165,13 +163,22 @@ public class ansvarligController implements Initializable {
                 }
             });
         });
-        SortedList<results>sortedData =new SortedList<>(filteredData);
+
         sortedData.comparatorProperty().bind(resultTableView.comparatorProperty());
         resultTableView.setItems(sortedData);
     }
-    public void deleteUser(ActionEvent event){
-        resultTableView.getItems().removeAll(resultTableView.getSelectionModel().getSelectedItem());
+    public void rejectFrivillig(ActionEvent event){
+
+        String rejectedLine = resultTableView.getSelectionModel().getSelectedItem().getMail()+","+
+                resultTableView.getSelectionModel().getSelectedItem().getPhn()+","+
+                user.getBod()+","+
+                resultTableView.getSelectionModel().getSelectedItem().getDay()+","+
+                resultTableView.getSelectionModel().getSelectedItem().getVagt()+",";
+
+        filteredData.getSource().remove(resultTableView.getSelectionModel().getSelectedItem());
+        rejectedVagter.add(rejectedLine);
     }
+
 
     public void anslogout(ActionEvent event) throws IOException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);

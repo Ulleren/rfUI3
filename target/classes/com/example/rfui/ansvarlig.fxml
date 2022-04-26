@@ -17,7 +17,10 @@
             <Font name="Arial" size="13.0" />
          </font></Label>
       <Label fx:id="rightsLabel" layoutX="68.0" layoutY="49.0" text="Administrator" textFill="#e95814" />
-      <Label fx:id="rightsLabel1" layoutX="68.0" layoutY="49.0" text="Bod-Ansvarlig:" textFill="WHITE" />
+      <Label fx:id="rightsLabel1" layoutX="68.0" layoutY="49.0" text="Bod-Ansvarlig:" textFill="WHITE">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font></Label>
       <Button fx:id="adminlogoutButton" layoutX="760.0" layoutY="67.0" mnemonicParsing="false" onAction="#anslogout" prefHeight="26.0" prefWidth="66.0" style="-fx-background-color: #e95814;" text="Log af" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="13.0" />
@@ -28,13 +31,13 @@
             <Image url="@rf_white.png" />
          </image>
       </ImageView>
-      <TextField fx:id="adminSearchTextField" layoutX="244.0" layoutY="47.0" onAction="#adminSearch" prefHeight="26.0" prefWidth="402.0" promptText="Indtast søgeord" style="-fx-background-color: #FFFFFF;" />
+      <TextField fx:id="adminSearchTextField" layoutX="245.0" layoutY="80.0" onAction="#adminSearch" prefHeight="26.0" prefWidth="402.0" promptText="Indtast søgeord" style="-fx-background-color: #FFFFFF;" />
       <ImageView fitHeight="148.0" fitWidth="230.0" layoutX="324.0" layoutY="188.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@orangetent.png" />
          </image>
       </ImageView>
-      <TableView fx:id="resultTableView" layoutX="63.0" layoutY="93.0" opacity="0.67" prefHeight="242.0" prefWidth="763.0">
+      <TableView fx:id="resultTableView" layoutX="64.0" layoutY="119.0" opacity="0.67" prefHeight="242.0" prefWidth="763.0">
          <columns>
             <TableColumn prefWidth="75.0" text="Frivillige til godkendelse">
                <columns>
@@ -48,12 +51,18 @@
             </TableColumn>
          </columns>
       </TableView>
-      <Button fx:id="deleteRowBtn" layoutX="63.0" layoutY="598.0" mnemonicParsing="false" onAction="#deleteUser" prefHeight="26.0" prefWidth="147.0" style="-fx-background-color: #ffffff;" text="Slet Bruger" textFill="#e95814">
+      <Button fx:id="rejectFrivilligBtn" layoutX="64.0" layoutY="373.0" mnemonicParsing="false" onAction="#rejectFrivillig" prefHeight="26.0" prefWidth="147.0" style="-fx-background-color: #ffffff;" text="Afvis vagt" textFill="#e95814">
          <font>
             <Font name="Arial Bold" size="13.0" />
          </font>
       </Button>
       <Button fx:id="vagtBtn" layoutX="679.0" layoutY="598.0" mnemonicParsing="false" onAction="#vagtPlanBtn" prefHeight="26.0" prefWidth="147.0" style="-fx-background-color: #ffffff;" text="Se Vagtplan" textFill="#e95814">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font>
+      </Button>
+      <Label layoutX="144.0" layoutY="84.0" text="Søg i ansøgere:" textFill="WHITE" />
+      <Button fx:id="godkendFrivilligBtn" layoutX="679.0" layoutY="373.0" mnemonicParsing="false" onAction="#rejectFrivillig" prefHeight="26.0" prefWidth="147.0" style="-fx-background-color: #ffffff;" text="Godkend vagt" textFill="#e95814">
          <font>
             <Font name="Arial Bold" size="13.0" />
          </font>

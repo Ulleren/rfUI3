@@ -39,8 +39,10 @@ public class FrivilligController implements Initializable{
     @FXML
     private Label nameLabel;
     @FXML private Label showBodLabel;
+    @FXML private Label welcomeLabel;
     @FXML private AnchorPane friPane;
     @FXML private AnchorPane tablePane;
+
     @FXML private Parent root;
     @FXML private Stage stage;
     @FXML private Scene scene;
@@ -56,12 +58,24 @@ public class FrivilligController implements Initializable{
     @FXML private TableColumn<submitVagt, String>locationCol;
     @FXML private TableColumn<submitVagt, String>timeCol;
     @FXML private TableColumn<submitVagt, String>ansvarCol;
-    //@FXML private TableColumn<submitVagt, String>ansphoneCol;
+    @FXML private TableView<chooseVagt>chooseVagtTable;
+    @FXML private TableColumn<chooseVagt, String>morningCol;
+    @FXML private TableColumn<chooseVagt, String> frokostCol;
+    @FXML private TableColumn<chooseVagt, String> eveningCol;
+    @FXML private TableColumn<chooseVagt, String>locationCol2;
+    @FXML private TableColumn<chooseVagt, String>ansCol2;
+
+    @FXML private ComboBox<String> bodBox2;
+    @FXML private ComboBox<String> dayComboBox2;
+
     @FXML private Label vagtListErrorLabel;
+    @FXML private Label vagtTabelLabel;
+    @FXML private Button tagVagtBtn;
     private int rowCount = 0;
     private int vagtBefore = 0;
     private int vagtAfter=0;
     ObservableList<submitVagt> vagtList = FXCollections.observableArrayList();
+
     ArrayList<String> tableContents = new ArrayList<>();
     private loginController.User user;
     public loginController.User getUser(){
@@ -77,6 +91,7 @@ public class FrivilligController implements Initializable{
         Platform.runLater(() -> {
             comboBox();
             initiateCols();
+            initiateChooseVagtCols();
             setVagtBtn.setBorder(Border.stroke(Color.ORANGE));
             deleteVagtBtn.setBorder(Border.stroke(Color.ORANGE));
             indsendVagtBtn.setBorder(Border.stroke(Color.ORANGE));
@@ -84,6 +99,14 @@ public class FrivilligController implements Initializable{
             dayComboBox.setBorder(Border.stroke(Color.ORANGE));
             bodBox.setBorder(Border.stroke(Color.ORANGE));
             vagtComboBox.setBorder(Border.stroke(Color.ORANGE));
+            bodBox2.setBorder(Border.stroke(Color.ORANGE));
+            tagVagtBtn.setBorder(Border.stroke(Color.ORANGE));
+            dayComboBox2.setBorder(Border.stroke(Color.ORANGE));
+
+            if(checkRejections()){
+                welcomeLabel.setText("Der er "+(5+(rowCount-5)) +" vagter der ikke er godkendt");
+                indsendVagt.getItems().addAll(vagtList);
+            };
         });
 
     }
@@ -103,7 +126,6 @@ public class FrivilligController implements Initializable{
             //this.ansPhn=new SimpleStringProperty(ansPhn);
         }
         public submitVagt(){
-
         }
         public String getDay(){ return Day.get();}
         public String getBodnam(){ return bodnam.get();}
@@ -111,8 +133,71 @@ public class FrivilligController implements Initializable{
         public String getTimeslot(){return timeslot.get();}
         public String getAns(){ return ans.get();}
     }
+    public static class chooseVagt{
+        private SimpleStringProperty morning;
+        private SimpleStringProperty lunch;
+        private SimpleStringProperty evening;
+        private SimpleStringProperty loc2;
+        private SimpleStringProperty ans2;
+        public chooseVagt(String morning, String lunch, String evening, String loc2, String ans2){
+            this.morning=new SimpleStringProperty(morning);
+            this.lunch=new SimpleStringProperty(lunch);
+            this.evening=new SimpleStringProperty(evening);
+            this.loc2=new SimpleStringProperty(loc2);
+            this.ans2=new SimpleStringProperty(ans2);
+        }
+        public chooseVagt(){
+        }
+        public String getMorning(){ return morning.get();}
+        public String getLunch(){ return lunch.get();}
+        public String getEvening(){return evening.get();}
+        public String getLoc2(){return loc2.get();}
+        public String getAns2(){ return ans2.get();}
+
+    }
+    public boolean checkRejections(){
+        boolean rejected = false;
+        try {
+            Path path = Main.hashList.getPathToCheckRejected();
+            long count = Files.lines(path).count();
+            for (int i = 0; i < count; i++) {
+                String line = Files.readAllLines(path).get(i);
+                if (!line.trim().equals("")) {
+                    String[] profil = line.split(",");
+                    String mail = profil[0];
+                    String phone = profil[1];
+                    String bod = profil[2];
+                    String day = profil[3];
+                    String vagt = profil[4];
+                    String loc = Main.hashList.getBodHash().get(bod).getLokation();
+                    String ansName = Main.hashList.getBodHash().get(bod).getAnsvarlig();
+
+                    String friName=user.getEmail();
+                    if (Objects.equals(mail, friName)){
+                        switch(day){
+                            case "Lørdag d. 25/6" -> {vagtBefore +=1; }
+                            case "Søndag d. 26/6" -> {vagtBefore +=1; }
+                            case "Mandag d. 27/6" -> {vagtBefore +=1; }
+                            case "Tirsdag d. 28/6" -> {vagtBefore +=1; }
+                            case "Onsdag d. 29/6" -> {vagtAfter +=1; }
+                            case "Torsdag d. 30/6" -> {vagtAfter +=1; }
+                            case "Fredag d. 1/7" -> {vagtAfter +=1; }
+                            case "Lørdag d. 2/7" -> {vagtAfter +=1; }
+                        }
+                        vagtList.add(new submitVagt(day,bod,loc,vagt,ansName));
+                        rowCount+=1;
+                        rejected = true;
+                    }
+                }
+            }
+
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return rejected;
+    }
     public void insertPendingVagt(ActionEvent event){
-        String pendingVagt;
         vagtList.removeAll(vagtList);
         if(vagtComboBox.equals(null)){
             vagtListErrorLabel.setText("vælg et tidspunkt");
@@ -125,8 +210,7 @@ public class FrivilligController implements Initializable{
             String timeLine = vagtComboBox.getValue();
             String ansLine = Main.hashList.getBodHash().get(bodBox.getValue()).getAnsvarlig();
 
-//            String ansP = Main.hashList.getPersons().get(ansLine).indexOf(ansLine;
-//            String ansPhoneL= Main.hashList.searchName(ansLine).get(Integer.parseInt(ansP)).getPhonenumber();
+
             String ansvarlig = Main.hashList.getBodHash().get(bodBox.getValue()).getAnsvarlig();
             int antalMedNavn = Main.hashList.getPersons().get(ansvarlig).size();
             for(int i = 0; i < antalMedNavn; i++){
@@ -134,14 +218,12 @@ public class FrivilligController implements Initializable{
                     String ansPhone = Main.hashList.getPersons().get(Main.hashList.getBodHash().get(bodBox.getValue()).getAnsvarlig()).get(i).getPhonenumber();
                 }
             }
-
-            pendingVagt = dayLine+","+bodLine+","+locLine+","+timeLine+","+ansLine;
             submitVagt subVagt =new submitVagt(dayLine, bodLine,locLine,timeLine,ansLine);
             for (String tableContent : tableContents) {
 
                 if(tableContent.contains(subVagt.getDay())){
-                     vagtListErrorLabel.setText("Du kan kun have 1 vagt om dagen");
-                     return;
+                    vagtListErrorLabel.setText("Du kan kun have 1 vagt om dagen");
+                    return;
                 }
 
             }
@@ -173,40 +255,40 @@ public class FrivilligController implements Initializable{
             vagtListErrorLabel.setText("Du har allerede 5 vagter, slet en vagt for at tilføje en ny");
         }
     }
-   public void finalizeVagt(ActionEvent event){
+    public void finalizeVagt(ActionEvent event){
         if(rowCount!=5){
             vagtListErrorLabel.setText("du har ikke valgt 5 vagter");
             return;
         }
-       List<String> fileContents = new ArrayList<>();
-       FileWriter filewriter;
-       try {
-           Path path = Path.of(Main.hashList.getPathToPendingBod().toString() + "/" +
-                   bodBox.getValue().replaceAll("[^a-zA-Z0-9]", "") + ".txt");
+        List<String> fileContents = new ArrayList<>();
+        FileWriter filewriter;
+        try {
+            Path path = Path.of(Main.hashList.getPathToPendingBod().toString() + "/" +
+                    bodBox.getValue().replaceAll("[^a-zA-Z0-9]", "") + ".txt");
 
-           long count = Files.lines(path).count();
-           for (int j = 0; j < count; j++) {
-               String line = Files.readAllLines(path).get(j);
-               if (!line.trim().equals("") && !line.contains(user.getEmail())) {
-                   fileContents.add(line);
-               }
-           }
-           fileContents.addAll(tableContents);
-           filewriter = new FileWriter(path.toString(),false);
-           BufferedWriter bw = new BufferedWriter(filewriter);
-           for(String fileLine: fileContents){
-               bw.write(fileLine+System.lineSeparator());
-           }
-           bw.flush();
-           bw.close();
-           filewriter.close();
-       }catch (IOException e) {
-           throw new RuntimeException(e);
-       }
-       indsendVagt.getItems().clear();
-       clearCombo();
-       vagtListErrorLabel.setText("Dine vagter er registreret, du vil se godkendte vagter i skemaet nedenfor når de er godkendt");
-   }
+            long count = Files.lines(path).count();
+            for (int j = 0; j < count; j++) {
+                String line = Files.readAllLines(path).get(j);
+                if (!line.trim().equals("") && !line.contains(user.getEmail())) {
+                    fileContents.add(line);
+                }
+            }
+            fileContents.addAll(tableContents);
+            filewriter = new FileWriter(path.toString(),false);
+            BufferedWriter bw = new BufferedWriter(filewriter);
+            for(String fileLine: fileContents){
+                bw.write(fileLine+System.lineSeparator());
+            }
+            bw.flush();
+            bw.close();
+            filewriter.close();
+        }catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        indsendVagt.getItems().clear();
+        clearCombo();
+        vagtListErrorLabel.setText("Dine vagter er registreret, du vil se godkendte vagter i skemaet nedenfor når de er godkendt");
+    }
     public void clearCombo(){
         dayComboBox.getSelectionModel().clearSelection();
         dayComboBox.setValue(null);
@@ -295,6 +377,13 @@ public class FrivilligController implements Initializable{
         ansvarCol.setCellValueFactory(new PropertyValueFactory<>("ans"));
         //ansphoneCol.setCellValueFactory(new PropertyValueFactory<>("ansPhn"));
     }
+    private void initiateChooseVagtCols(){
+        morningCol.setCellValueFactory(new PropertyValueFactory<>("morning"));
+        frokostCol.setCellValueFactory(new PropertyValueFactory<>("lunch"));
+        eveningCol.setCellValueFactory(new PropertyValueFactory<>("evening"));
+        locationCol2.setCellValueFactory(new PropertyValueFactory<>("loc2"));
+        ansCol2.setCellValueFactory(new PropertyValueFactory<>("ans2"));
+    }
     public void displayName(String username){
         nameLabel.setText("Logged ind som: " +username);
     }
@@ -339,17 +428,24 @@ public class FrivilligController implements Initializable{
                     String ansvarlig = profil[3];
 
                     bodBox.getItems().add(name);
+                    bodBox2.getItems().add(name);
                 }
             }
             bodBox.setValue(user.getBod());
+            bodBox2.setValue(user.getBod());
             dayComboBox.getItems().removeAll((dayComboBox.getItems()));
             dayComboBox.getItems().addAll("Lørdag d. 25/6","Søndag d. 26/6","Mandag d. 27/6","Tirsdag d. 28/6","Onsdag d. 29/6",
+                    "Torsdag d. 30/6","Fredag d. 1/7","Lørdag d. 2/7");
+            dayComboBox2.getItems().removeAll((dayComboBox.getItems()));
+            dayComboBox2.getItems().addAll("Lørdag d. 25/6","Søndag d. 26/6","Mandag d. 27/6","Tirsdag d. 28/6","Onsdag d. 29/6",
                     "Torsdag d. 30/6","Fredag d. 1/7","Lørdag d. 2/7");
             vagtComboBox.getItems().removeAll(vagtComboBox.getItems());
             vagtComboBox.getItems().addAll("08:00-14:00","14:00-20:00","20:00-02:00");
             dayComboBox.setBorder(Border.stroke(Color.BLACK));;
             vagtComboBox.setBorder(Border.stroke(Color.BLACK));
             bodBox.setBorder(Border.stroke(Color.BLACK));
+            dayComboBox2.setBorder(Border.stroke(Color.BLACK));;
+            bodBox2.setBorder(Border.stroke(Color.BLACK));
         }catch(Exception e){
             e.printStackTrace();
         }
