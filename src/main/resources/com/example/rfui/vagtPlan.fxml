@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-
 
 <AnchorPane fx:id="vagtPane" prefHeight="650.0" prefWidth="889.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rfui.vagtPlanController">
    <children>
@@ -36,5 +38,30 @@
             <Font name="Arial Bold" size="13.0" />
          </font>
       </Button>
+      <AnchorPane fx:id="tablePane2" layoutX="89.0" layoutY="115.0" opacity="0.79" prefHeight="441.0" prefWidth="711.0" style="-fx-background-color: #FFFFFF;">
+         <children>
+            <ComboBox fx:id="dayComboBox" layoutX="358.0" layoutY="55.0" prefWidth="150.0" promptText="Vælg dag" style="-fx-background-color: #FFFFFF;" />
+            <TableView fx:id="vagtSkemaTableView" layoutX="18.0" layoutY="91.0" prefHeight="270.0" prefWidth="676.0">
+               <columns>
+                  <TableColumn fx:id="morningCol" prefWidth="144.0" text="08:00-14:00" />
+                  <TableColumn fx:id="frokostCol" prefWidth="156.0" text="14:00-20:00" />
+                  <TableColumn fx:id="eveningCol" prefWidth="127.0" text="20:00-02:00" />
+                  <TableColumn fx:id="friPhone" prefWidth="120.0" text="Frivillig tlf" />
+                  <TableColumn fx:id="udeblevetCheckCol" prefWidth="128.0" text="Udeblevet" />
+               </columns>
+            </TableView>
+            <Label fx:id="vagtTabelLabel" layoutX="139.0" layoutY="377.0" prefHeight="18.0" prefWidth="465.0" text="Label" textFill="#da1717">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font>
+            </Label>
+            <Button fx:id="tagVagtBtn" layoutX="617.0" layoutY="395.0" mnemonicParsing="false" style="-fx-background-color: #FFFFFF;" text="Tag vagt" textFill="#e95814" />
+            <Label fx:id="welcomeLabel" layoutX="203.0" layoutY="14.0" text="Vagtplan" textFill="#e95814">
+               <font>
+                  <Font name="Arial Bold" size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

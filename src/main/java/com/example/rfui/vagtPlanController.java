@@ -6,6 +6,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import backend.vagt;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,10 +14,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -29,7 +28,15 @@ public class vagtPlanController implements Initializable{
     @FXML private ImageView blackLogoImageView;
     @FXML private Label AnsNameLabel;
     @FXML private Label rightsLabel;
+    @FXML private Label welcomeLabel;
     @FXML private Button backBtn;
+    @FXML private ComboBox<String> dayComboBox;
+    @FXML private TableView<vagtSkema>vagtSkemaTableView;
+    @FXML private TableColumn<vagtSkema, String>morningCol;
+    @FXML private TableColumn<vagtSkema, String>frokostCol;
+    @FXML private TableColumn<vagtSkema, String>eveningCol;
+    @FXML private TableColumn<vagtSkema, String>friphoneCol;
+    @FXML private TableColumn<vagtSkema, String>udeblevetCol;
     @FXML
     private Stage stage;
     private Scene scene;
@@ -46,7 +53,35 @@ public class vagtPlanController implements Initializable{
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        initiateVagtCols();
+    }
+    public static class vagtSkema{
+        private SimpleStringProperty morning;
+        private SimpleStringProperty lunch;
+        private SimpleStringProperty evening;
+        private SimpleStringProperty friTlf;
+        private SimpleStringProperty udeblevet;
+        public vagtSkema(String morning, String lunch, String evening, String friTlf, String udeblevet){
+            this.morning=new SimpleStringProperty(morning);
+            this.lunch=new SimpleStringProperty(lunch);
+            this.evening=new SimpleStringProperty(evening);
+            this.friTlf=new SimpleStringProperty(friTlf);
+            this.udeblevet=new SimpleStringProperty(udeblevet);
+        }
+        public vagtSkema(){
+        }
+        public String getMorning(){ return morning.get();}
+        public String getLunch(){ return lunch.get();}
+        public String getEvening(){return evening.get();}
+        public String getfriTlf(){return friTlf.get();}
+        public String getUdeblevet(){ return udeblevet.get();}
+    }
+    private void initiateVagtCols(){
+        morningCol.setCellValueFactory(new PropertyValueFactory<>("morning"));
+        frokostCol.setCellValueFactory(new PropertyValueFactory<>("lunch"));
+        eveningCol.setCellValueFactory(new PropertyValueFactory<>("evening"));
+        friphoneCol.setCellValueFactory(new PropertyValueFactory<>("friTlf"));
+        udeblevetCol.setCellValueFactory(new PropertyValueFactory<>("udeblevet"));
     }
     public void displayAdminName(String username) {
         AnsNameLabel.setText("Logged ind som: " + username);
@@ -62,6 +97,7 @@ public class vagtPlanController implements Initializable{
         ansvarlig.setUser(user);
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
     }
@@ -81,6 +117,7 @@ public class vagtPlanController implements Initializable{
                 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 scene = new Scene(root);
                 stage.setScene(scene);
+                stage.setResizable(false);
                 stage.show();
 
             } catch (Exception e) {

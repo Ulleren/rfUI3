@@ -37,7 +37,7 @@
             <Image url="@orangetent.png" />
          </image>
       </ImageView>
-      <TableView fx:id="resultTableView" layoutX="64.0" layoutY="119.0" opacity="0.67" prefHeight="242.0" prefWidth="763.0">
+      <TableView fx:id="resultTableView" layoutX="64.0" layoutY="119.0" opacity="0.67" prefHeight="408.0" prefWidth="763.0">
          <columns>
             <TableColumn prefWidth="75.0" text="Frivillige til godkendelse">
                <columns>
@@ -51,18 +51,18 @@
             </TableColumn>
          </columns>
       </TableView>
-      <Button fx:id="rejectFrivilligBtn" layoutX="64.0" layoutY="373.0" mnemonicParsing="false" onAction="#rejectFrivillig" prefHeight="26.0" prefWidth="147.0" style="-fx-background-color: #ffffff;" text="Afvis vagt" textFill="#e95814">
+      <Button fx:id="rejectFrivilligBtn" layoutX="64.0" layoutY="538.0" mnemonicParsing="false" onAction="#rejectFrivillig" prefHeight="26.0" prefWidth="147.0" style="-fx-background-color: #ffffff;" text="Afvis vagt" textFill="#e95814">
          <font>
             <Font name="Arial Bold" size="13.0" />
          </font>
       </Button>
-      <Button fx:id="vagtBtn" layoutX="679.0" layoutY="598.0" mnemonicParsing="false" onAction="#vagtPlanBtn" prefHeight="26.0" prefWidth="147.0" style="-fx-background-color: #ffffff;" text="Se Vagtplan" textFill="#e95814">
+      <Button fx:id="vagtBtn" layoutX="373.0" layoutY="538.0" mnemonicParsing="false" onAction="#vagtPlanBtn" prefHeight="26.0" prefWidth="147.0" style="-fx-background-color: #ffffff;" text="Se Vagtplan" textFill="#e95814">
          <font>
             <Font name="Arial Bold" size="13.0" />
          </font>
       </Button>
       <Label layoutX="144.0" layoutY="84.0" text="Søg i ansøgere:" textFill="WHITE" />
-      <Button fx:id="godkendFrivilligBtn" layoutX="679.0" layoutY="373.0" mnemonicParsing="false" onAction="#rejectFrivillig" prefHeight="26.0" prefWidth="147.0" style="-fx-background-color: #ffffff;" text="Godkend vagt" textFill="#e95814">
+      <Button fx:id="godkendFrivilligBtn" layoutX="679.0" layoutY="538.0" mnemonicParsing="false" onAction="#rejectFrivillig" prefHeight="26.0" prefWidth="147.0" style="-fx-background-color: #ffffff;" text="Godkend vagt" textFill="#e95814">
          <font>
             <Font name="Arial Bold" size="13.0" />
          </font>

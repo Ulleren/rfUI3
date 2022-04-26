@@ -228,6 +228,7 @@ public class ansvarligController implements Initializable {
         adminstage =(Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         adminstage.setScene(scene);
+        adminstage.setResizable(false);
         adminstage.show();
     }
 
