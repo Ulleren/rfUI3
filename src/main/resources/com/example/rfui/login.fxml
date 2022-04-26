@@ -31,7 +31,7 @@
                </image>
             </ImageView>
             <TextField fx:id="usernameTextfield" layoutX="65.0" layoutY="200.0" prefHeight="26.0" prefWidth="173.0" promptText="Username" />
-            <PasswordField fx:id="passwordTextfield" layoutX="65.0" layoutY="245.0" prefHeight="26.0" prefWidth="173.0" promptText="Password" />
+            <PasswordField fx:id="passwordTextfield" layoutX="65.0" layoutY="245.0" onAction="#onEnter" prefHeight="26.0" prefWidth="173.0" promptText="Password" />
             <Button fx:id="loginBtn" layoutX="64.0" layoutY="289.0" mnemonicParsing="false" onAction="#loginButtonAction" prefHeight="26.0" prefWidth="176.0" style="-fx-background-color: #FFFFFF;" text="login" textFill="#e95814">
                <font>
                   <Font name="Arial Bold" size="13.0" />

@@ -18,27 +18,32 @@
          </font></Label>
       <Label fx:id="rightsLabel" layoutX="68.0" layoutY="49.0" text="Administrator" textFill="#e95814" />
       <Label fx:id="rightsLabel1" layoutX="68.0" layoutY="49.0" text="Bod-Ansvarlig:" textFill="WHITE" />
-      <Button fx:id="adminlogoutButton" layoutX="57.0" layoutY="93.0" mnemonicParsing="false" onAction="#anslogout" prefHeight="26.0" prefWidth="66.0" style="-fx-background-color: #e95814;" text="Log af" textFill="WHITE">
+      <Button fx:id="adminlogoutButton" layoutX="760.0" layoutY="67.0" mnemonicParsing="false" onAction="#anslogout" prefHeight="26.0" prefWidth="66.0" style="-fx-background-color: #e95814;" text="Log af" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="13.0" />
          </font>
       </Button>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="345.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="49.0" fitWidth="154.0" layoutX="721.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@rf_white.png" />
          </image>
       </ImageView>
-      <TextField fx:id="adminSearchTextField" layoutX="245.0" layoutY="123.0" onAction="#adminSearch" prefHeight="26.0" prefWidth="402.0" promptText="Indtast søgeord" style="-fx-background-color: #FFFFFF;" />
-      <TableView fx:id="resultTableView" layoutX="63.0" layoutY="164.0" prefHeight="414.0" prefWidth="763.0">
+      <TextField fx:id="adminSearchTextField" layoutX="244.0" layoutY="47.0" onAction="#adminSearch" prefHeight="26.0" prefWidth="402.0" promptText="Indtast søgeord" style="-fx-background-color: #FFFFFF;" />
+      <ImageView fitHeight="148.0" fitWidth="230.0" layoutX="324.0" layoutY="188.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@orangetent.png" />
+         </image>
+      </ImageView>
+      <TableView fx:id="resultTableView" layoutX="63.0" layoutY="93.0" opacity="0.67" prefHeight="242.0" prefWidth="763.0">
          <columns>
-            <TableColumn prefWidth="75.0" text="Frivillige i boden">
+            <TableColumn prefWidth="75.0" text="Frivillige til godkendelse">
                <columns>
-                  <TableColumn fx:id="phoneTable" prefWidth="112.0" text="Telefon" />
-                  <TableColumn fx:id="nameTable" prefWidth="142.0" text="Navn" />
+                  <TableColumn fx:id="nameTable" prefWidth="112.0" text="Navn" />
+                  <TableColumn fx:id="phoneTable" prefWidth="142.0" text="Telefon" />
                   <TableColumn fx:id="emailTable" prefWidth="96.0" text="Email" />
                   <TableColumn fx:id="addressTable" prefWidth="126.0" text="Adresse" />
-                  <TableColumn fx:id="bodTable" prefWidth="120.0" text="Bod" />
-                  <TableColumn fx:id="roleTable" prefWidth="166.0" text="Rolle" />
+                  <TableColumn fx:id="dayTable" prefWidth="120.0" text="Dag" />
+                  <TableColumn fx:id="vagtTable" prefWidth="166.0" text="Vagt" />
                </columns>
             </TableColumn>
          </columns>

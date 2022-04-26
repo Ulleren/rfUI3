@@ -71,7 +71,6 @@ public class FrivilligController implements Initializable{
         this.user = user;
         displayName(user.getName());
         displayBod(user.getBod());
-
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -95,8 +94,6 @@ public class FrivilligController implements Initializable{
         private SimpleStringProperty timeslot;
         private SimpleStringProperty ans;
         //private final SimpleStringProperty ansPhn;
-
-
         public submitVagt(String Day, String bodnam, String loc, String timeslot, String ans){
             this.Day=new SimpleStringProperty(Day);
             this.bodnam=new SimpleStringProperty(bodnam);
@@ -116,14 +113,11 @@ public class FrivilligController implements Initializable{
     }
     public void insertPendingVagt(ActionEvent event){
         String pendingVagt;
-
         vagtList.removeAll(vagtList);
-
         if(vagtComboBox.equals(null)){
             vagtListErrorLabel.setText("vælg et tidspunkt");
             return;
         }
-
         try{
             String dayLine = dayComboBox.getValue();
             String bodLine = bodBox.getValue();
@@ -131,20 +125,11 @@ public class FrivilligController implements Initializable{
             String timeLine = vagtComboBox.getValue();
             String ansLine = Main.hashList.getBodHash().get(bodBox.getValue()).getAnsvarlig();
 
-            String ansvarlig = Main.hashList.getBodHash().get(bodBox.getValue()).getAnsvarlig();
-            int antalMedNavn = Main.hashList.getPersons().get(ansvarlig).size();
-            for(int i = 0; i < antalMedNavn; i++){
-                if(Main.hashList.getPersons().get(Main.hashList.getBodHash().get(bodBox.getValue()).getAnsvarlig()).get(i).getRole().equals("Ansvarlig")){
-                    String ansPhone = Main.hashList.getPersons().get(Main.hashList.getBodHash().get(bodBox.getValue()).getAnsvarlig()).get(i).getPhonenumber();
-                }
-            }
-
 //            String ansP = Main.hashList.getPersons().get(ansLine).indexOf(ansLine;
 //            String ansPhoneL= Main.hashList.searchName(ansLine).get(Integer.parseInt(ansP)).getPhonenumber();
 
             pendingVagt = dayLine+","+bodLine+","+locLine+","+timeLine+","+ansLine;
             submitVagt subVagt =new submitVagt(dayLine, bodLine,locLine,timeLine,ansLine);
-
             for (String tableContent : tableContents) {
 
                 if(tableContent.contains(subVagt.getDay())){
@@ -178,8 +163,6 @@ public class FrivilligController implements Initializable{
         else{
             vagtListErrorLabel.setText("Du har allerede 5 vagter, slet en vagt for at tilføje en ny");
         }
-
-
     }
    public void finalizeVagt(ActionEvent event){
         if(rowCount!=5){
@@ -189,10 +172,8 @@ public class FrivilligController implements Initializable{
        List<String> fileContents = new ArrayList<>();
        FileWriter filewriter;
        try {
-
-           Path path = Path.of(Main.hashList.getPathToPendingBod().toString() + "/" +
-                   bodBox.getValue().replaceAll("[^a-zA-Z0-9]", "") + ".txt");
-
+           String filePath = new File("").getAbsolutePath();
+           Path path = Paths.get(filePath.concat("/src/main/resources/com/example/rfui/pendingVagter.txt"));
            long count = Files.lines(path).count();
            for (int j = 0; j < count; j++) {
                String line = Files.readAllLines(path).get(j);
@@ -200,11 +181,8 @@ public class FrivilligController implements Initializable{
                    fileContents.add(line);
                }
            }
-
            fileContents.addAll(tableContents);
-
-           System.out.println(tableContents);
-           filewriter = new FileWriter(path.toString(),true);
+           filewriter = new FileWriter(filePath.concat("/src/main/resources/com/example/rfui/pendingVagter.txt"),false);
            BufferedWriter bw = new BufferedWriter(filewriter);
            for(String fileLine: fileContents){
                bw.write(fileLine+System.lineSeparator());
@@ -219,7 +197,6 @@ public class FrivilligController implements Initializable{
        clearCombo();
        vagtListErrorLabel.setText("Dine vagter er registreret, du vil se godkendte vagter i skemaet nedenfor når de er godkendt");
    }
-
     public void clearCombo(){
         dayComboBox.getSelectionModel().clearSelection();
         dayComboBox.setValue(null);
@@ -250,20 +227,15 @@ public class FrivilligController implements Initializable{
             }
         }
         vagtList.removeAll(indsendVagt.getSelectionModel().getSelectedItem());
-
         indsendVagt.getItems().removeAll(indsendVagt.getSelectionModel().getSelectedItem());
         indsendVagt.getSelectionModel().clearSelection();
-
-
         vagtListErrorLabel.setText("");
         rowCount-=1;
-
-
     }
     public boolean verifyVagter(){
         boolean vagtIsValid = true;
 
-        if(vagtAfter <= 2 && vagtBefore <= 3 && dayComboBox.getValue()!=null && vagtComboBox.getValue()!=null && bodBox.getValue()!=null){
+        if(vagtAfter < 2 && vagtBefore < 3 && dayComboBox.getValue()!=null && vagtComboBox.getValue()!=null && bodBox.getValue()!=null){
             switch(dayComboBox.getValue()){
                 case "Lørdag d. 25/6" -> {vagtBefore +=1; return vagtIsValid;}
                 case "Søndag d. 26/6" -> {vagtBefore +=1; return vagtIsValid;}
@@ -292,7 +264,6 @@ public class FrivilligController implements Initializable{
                 else{
                     if(dayComboBox.getValue()==null){
                         vagtListErrorLabel.setText("der er ikke valgt en dag");
-
                     }
                     if(vagtComboBox.getValue()==null){
                         vagtListErrorLabel.setText("Der er ikke valgt et tidspunkt");
@@ -301,14 +272,10 @@ public class FrivilligController implements Initializable{
                         vagtListErrorLabel.setText("Der er ikke valgt en bod");
                     }
                 }
-
             }
             vagtIsValid=false;
         }
-
-
         return vagtIsValid;
-
     }
     private void initiateCols(){
         dayCol.setCellValueFactory(new PropertyValueFactory<>("Day"));
@@ -349,7 +316,8 @@ public class FrivilligController implements Initializable{
     }
     public void comboBox(){
         try {
-            Path path = Main.hashList.getPathToBoder();
+            String filePath = new File("").getAbsolutePath();
+            Path path = Paths.get(filePath.concat("/src/main/resources/com/example/rfui/boder.txt"));
 
             long count = Files.lines(path).count();
             for (int i = 0; i < count; i++) {

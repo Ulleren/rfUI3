@@ -29,6 +29,7 @@ public class Main extends Application {
             //ImageView rf_vector = new ImageView("2_lines_Black.png");
             primaryStage.initStyle(StageStyle.UNDECORATED);
             primaryStage.setScene(new Scene(root, 520, 400));
+            primaryStage.setResizable(false);
             primaryStage.show();
             loadPersonNames();
             loadBoder();
@@ -109,7 +110,6 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
-
     public void loadVagter() {
         try {
             Path path = hashList.getPathToVagter();
