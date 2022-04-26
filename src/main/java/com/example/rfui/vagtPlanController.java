@@ -3,6 +3,8 @@ package com.example.rfui;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ResourceBundle;
 import backend.vagt;
 
@@ -18,6 +20,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Border;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -54,6 +58,9 @@ public class vagtPlanController implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initiateVagtCols();
+        dayComboBox.getItems().removeAll((dayComboBox.getItems()));
+        dayComboBox.getItems().addAll("Lørdag d. 25/6","Søndag d. 26/6","Mandag d. 27/6","Tirsdag d. 28/6","Onsdag d. 29/6",
+                "Torsdag d. 30/6","Fredag d. 1/7","Lørdag d. 2/7");
     }
     public static class vagtSkema{
         private SimpleStringProperty morning;
@@ -93,7 +100,6 @@ public class vagtPlanController implements Initializable{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("ansvarlig.fxml"));
         root = loader.load();
         ansvarligController ansvarlig = loader.getController();
-        //ansvarlig.displayAdminName(name,"bod");
         ansvarlig.setUser(user);
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -125,4 +131,6 @@ public class vagtPlanController implements Initializable{
             }
         }
     }
+
+
 }

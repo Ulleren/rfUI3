@@ -46,8 +46,8 @@
                   <TableColumn fx:id="morningCol" prefWidth="144.0" text="08:00-14:00" />
                   <TableColumn fx:id="frokostCol" prefWidth="156.0" text="14:00-20:00" />
                   <TableColumn fx:id="eveningCol" prefWidth="127.0" text="20:00-02:00" />
-                  <TableColumn fx:id="friPhone" prefWidth="120.0" text="Frivillig tlf" />
-                  <TableColumn fx:id="udeblevetCheckCol" prefWidth="128.0" text="Udeblevet" />
+                  <TableColumn fx:id="friphoneCol" prefWidth="120.0" text="Frivillig tlf" />
+                  <TableColumn fx:id="udeblevetCol" prefWidth="128.0" text="Udeblevet" />
                </columns>
             </TableView>
             <Label fx:id="vagtTabelLabel" layoutX="139.0" layoutY="377.0" prefHeight="18.0" prefWidth="465.0" text="Label" textFill="#da1717">
