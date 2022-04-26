@@ -48,3 +48,4 @@ Ulle,23232323,u,u@u.dk,ulleren 2,Frivillig,tomandsland
 Ulleren,98989898,u,u@uu.u,uu,Frivillig,Ski-Burger
 Kebab Manden,23232323,kode,ke@bab.dk,Nørrebrogade,Ansvarlig,Kebabab
 Ke bab,34343434,kode,ke@bib.dk,dfd,Ansvarlig,Kebabistan
+test,34343434,kode,te@st.dk,hej,Ansvarlig,testeren
