@@ -44,8 +44,8 @@ public class ansvarligController implements Initializable {
     @FXML private TableColumn<results,String> phoneTable;
     @FXML private TableColumn<results,String> emailTable;
     @FXML private TableColumn<results,String> addressTable;
-    @FXML private TableColumn<results,String> bodTable;
-    @FXML private TableColumn<results, String> roleTable;
+    @FXML private TableColumn<results,String> dayTable;
+    @FXML private TableColumn<results, String> vagtTable;
     @FXML private TableView<results> resultTableView;
 
     ObservableList<results> list = FXCollections.observableArrayList();
@@ -59,9 +59,7 @@ public class ansvarligController implements Initializable {
         this.user = user;
         displayAdminName(user.getName());
         displayStandName(user.getBod());
-
     }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
 
@@ -79,32 +77,32 @@ public class ansvarligController implements Initializable {
         phoneTable.setCellValueFactory(new PropertyValueFactory<>("phn"));
         emailTable.setCellValueFactory(new PropertyValueFactory<>("mail"));
         addressTable.setCellValueFactory(new PropertyValueFactory<>("ads"));
-        bodTable.setCellValueFactory(new PropertyValueFactory<>("stand"));
-        roleTable.setCellValueFactory(new PropertyValueFactory<>("rol"));
+        dayTable.setCellValueFactory(new PropertyValueFactory<>("day"));
+        vagtTable.setCellValueFactory(new PropertyValueFactory<>("vagt"));
     }
     public static class results{
         private final SimpleStringProperty nam;
         private final SimpleStringProperty phn;
         private final SimpleStringProperty mail;
         private final SimpleStringProperty ads;
-        private final SimpleStringProperty stand;
-        private final SimpleStringProperty rol;
+        private final SimpleStringProperty day;
+        private final SimpleStringProperty vagt;
 
-        public results(String nam,String phn, String mail,String ads, String rol, String stand){
+        public results(String nam,String phn, String mail,String ads, String day, String vagt){
             this.nam = new SimpleStringProperty(nam);
             this.phn = new SimpleStringProperty(phn);
             this.mail = new SimpleStringProperty(mail);
             this.ads = new SimpleStringProperty(ads);
-            this.rol= new SimpleStringProperty(rol);
-            this.stand = new SimpleStringProperty(stand);
+            this.day= new SimpleStringProperty(day);
+            this.vagt = new SimpleStringProperty(vagt);
 
         }
         public String getNam(){ return nam.get(); }
         public String getPhn(){ return phn.get(); }
         public String getMail(){ return mail.get();}
         public String getAds(){ return ads.get();}
-        public String getRol(){ return rol.get();}
-        public String getStand(){return stand.get();}
+        public String getDay(){ return day.get();}
+        public String getVagt(){return vagt.get();}
 
     }
     public void adminSearch(){
@@ -112,27 +110,25 @@ public class ansvarligController implements Initializable {
 
 
         try {
-            Path path = Main.hashList.getPathToPersons();
-
+            Path path = Main.hashList.getPathToPending();
             long count = Files.lines(path).count();
             for (int i = 0; i < count; i++) {
                 String line = Files.readAllLines(path).get(i);
                 if (!line.trim().equals("")) {
                     String[] profil = line.split(",");
-                    String name = profil[0];
+                    String mail = profil[0];
                     String phone = profil[1];
-                    String password = profil[2];
-                    String email = profil[3];
-                    String address = profil[4];
-                    String role = profil[5];
-                    String stand = profil[6];
+                    String bod = profil[2];
+                    String day = profil[3];
+                    String vagt = profil[4];
+                    String name = Main.getHashList().getEmailHash().get(mail);
+                    String address = Main.getHashList().getEmailHash().get(mail);
 
-                    String boder=user.getBod();
-                    if (Objects.equals(stand, boder)){
-                        list.add(new results(name,phone,email,address,role,stand));
+
+                    String ansBod=user.getBod();
+                    if (Objects.equals(bod, ansBod)){
+                        list.add(new results(name,phone,mail,address,day,vagt));
                     }
-
-
                 }
             }
         }catch(Exception e){
@@ -159,10 +155,10 @@ public class ansvarligController implements Initializable {
                 else if(results.getMail().toLowerCase().contains(searchKey)){
                     return true;
                 }
-                else if(results.getAds().toLowerCase().contains(searchKey)){
+                else if(results.getDay().toLowerCase().contains(searchKey)){
                     return true;
                 }
-                else if(results.getStand().toLowerCase().contains(searchKey)){
+                else if(results.getVagt().toLowerCase().contains(searchKey)){
                     return true;
                 }
                 else{
