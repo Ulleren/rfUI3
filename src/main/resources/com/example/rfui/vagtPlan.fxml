@@ -1,67 +1,259 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="vagtPane" prefHeight="650.0" prefWidth="889.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rfui.vagtPlanController">
+<AnchorPane fx:id="vagtPane" prefHeight="970.0" prefWidth="1480.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rfui.vagtPlanController">
    <children>
-      <ImageView fx:id="bodImageView" fitHeight="650.0" fitWidth="924.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@bod.jpg" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="blackLogoImageView" fitHeight="95.0" fitWidth="97.0" layoutX="778.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="blackLogoImageView" fitHeight="74.0" fitWidth="89.0" layoutX="1403.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@2_lines_Black.png" />
          </image>
       </ImageView>
-      <Label fx:id="AnsNameLabel" layoutX="572.0" layoutY="14.0" text="Logged ind som:">
+      <Label fx:id="AnsNameLabel" layoutX="20.0" layoutY="18.0" text="Logged ind som:">
          <font>
             <Font name="Arial" size="13.0" />
          </font>
       </Label>
-      <Label fx:id="rightsLabel" layoutX="572.0" layoutY="37.0" text="Bod-Ansvarlig:" />
-      <Button fx:id="backBtn" layoutX="563.0" layoutY="61.0" mnemonicParsing="false" onAction="#backBtn" style="-fx-background-color: transparent;" text="Tilbage">
+      <Label fx:id="rightsLabel" layoutX="20.0" layoutY="43.0" text="Bod-Ansvarlig:" />
+      <Button fx:id="backBtn" layoutX="1314.0" layoutY="31.0" mnemonicParsing="false" onAction="#backBtn" style="-fx-background-color: transparent;" text="Tilbage">
          <font>
             <Font name="Arial Bold" size="13.0" />
          </font>
       </Button>
-      <Button fx:id="logout" layoutX="563.0" layoutY="85.0" mnemonicParsing="false" onAction="#anslogout" style="-fx-background-color: transparent;" text="Log af">
+      <Button fx:id="logout" layoutX="1318.0" layoutY="61.0" mnemonicParsing="false" onAction="#anslogout" style="-fx-background-color: transparent;" text="Log af">
          <font>
             <Font name="Arial Bold" size="13.0" />
          </font>
       </Button>
-      <AnchorPane fx:id="tablePane2" layoutX="89.0" layoutY="115.0" opacity="0.79" prefHeight="441.0" prefWidth="711.0" style="-fx-background-color: #FFFFFF;">
-         <children>
-            <ComboBox fx:id="dayComboBox" layoutX="358.0" layoutY="55.0" prefWidth="150.0" promptText="Vælg dag" style="-fx-background-color: #FFFFFF;" />
-            <TableView fx:id="vagtSkemaTableView" layoutX="18.0" layoutY="91.0" prefHeight="270.0" prefWidth="676.0">
-               <columns>
-                  <TableColumn fx:id="morningCol" prefWidth="144.0" text="08:00-14:00" />
-                  <TableColumn fx:id="frokostCol" prefWidth="156.0" text="14:00-20:00" />
-                  <TableColumn fx:id="eveningCol" prefWidth="127.0" text="20:00-02:00" />
-                  <TableColumn fx:id="friphoneCol" prefWidth="120.0" text="Frivillig tlf" />
-                  <TableColumn fx:id="udeblevetCol" prefWidth="128.0" text="Udeblevet" />
-               </columns>
-            </TableView>
-            <Label fx:id="vagtTabelLabel" layoutX="139.0" layoutY="377.0" prefHeight="18.0" prefWidth="465.0" text="Label" textFill="#da1717">
-               <font>
-                  <Font name="Arial" size="13.0" />
-               </font>
-            </Label>
-            <Button fx:id="tagVagtBtn" layoutX="617.0" layoutY="395.0" mnemonicParsing="false" style="-fx-background-color: #FFFFFF;" text="Tag vagt" textFill="#e95814" />
-            <Label fx:id="welcomeLabel" layoutX="203.0" layoutY="14.0" text="Vagtplan" textFill="#e95814">
-               <font>
-                  <Font name="Arial Bold" size="16.0" />
-               </font>
-            </Label>
-         </children>
-      </AnchorPane>
+      <Label layoutX="24.0" layoutY="100.0" text="LØRDAG" textFill="#e95814">
+         <font>
+            <Font name="Arial Bold" size="35.0" />
+         </font>
+      </Label>
+      <Label layoutX="206.0" layoutY="100.0" text="SØNDAG" textFill="#e95814">
+         <font>
+            <Font name="Arial Bold" size="35.0" />
+         </font>
+      </Label>
+      <Label layoutX="381.0" layoutY="100.0" text="MANDAG" textFill="#e95814">
+         <font>
+            <Font name="Arial Bold" size="35.0" />
+         </font>
+      </Label>
+      <Label layoutX="566.0" layoutY="100.0" text="TIRSDAG" textFill="#e95814">
+         <font>
+            <Font name="Arial Bold" size="35.0" />
+         </font>
+      </Label>
+      <Label layoutX="749.0" layoutY="100.0" text="ONSDAG" textFill="#e95814">
+         <font>
+            <Font name="Arial Bold" size="35.0" />
+         </font>
+      </Label>
+      <Label layoutX="931.0" layoutY="102.0" text="TORSDAG" textFill="#e95814">
+         <font>
+            <Font name="Arial Bold" size="32.0" />
+         </font>
+      </Label>
+      <Label layoutX="1120.0" layoutY="100.0" text="FREDAG" textFill="#e95814">
+         <font>
+            <Font name="Arial Bold" size="35.0" />
+         </font>
+      </Label>
+      <Label layoutX="1298.0" layoutY="98.0" text="LØRDAG" textFill="#e95814">
+         <font>
+            <Font name="Arial Bold" size="35.0" />
+         </font>
+      </Label>
+      <Label layoutX="24.0" layoutY="234.0" text="25/6" textFill="#e95814">
+         <font>
+            <Font name="Arial Bold" size="80.0" />
+         </font>
+      </Label>
+      <Label layoutX="207.0" layoutY="234.0" text="26/6" textFill="#e95814">
+         <font>
+            <Font name="Arial Bold" size="80.0" />
+         </font>
+      </Label>
+      <Label layoutX="384.0" layoutY="234.0" text="27/6" textFill="#e95814">
+         <font>
+            <Font name="Arial Bold" size="80.0" />
+         </font>
+      </Label>
+      <Label layoutX="568.0" layoutY="234.0" text="28/6" textFill="#e95814">
+         <font>
+            <Font name="Arial Bold" size="80.0" />
+         </font>
+      </Label>
+      <Label layoutX="752.0" layoutY="234.0" text="29/6" textFill="#e95814">
+         <font>
+            <Font name="Arial Bold" size="80.0" />
+         </font>
+      </Label>
+      <Label layoutX="934.0" layoutY="234.0" text="30/6" textFill="#e95814">
+         <font>
+            <Font name="Arial Bold" size="80.0" />
+         </font>
+      </Label>
+      <Label layoutX="1142.0" layoutY="234.0" text="1/7" textFill="#e95814">
+         <font>
+            <Font name="Arial Bold" size="80.0" />
+         </font>
+      </Label>
+      <Label layoutX="1311.0" layoutY="234.0" text="2/7" textFill="#e95814">
+         <font>
+            <Font name="Arial Bold" size="80.0" />
+         </font>
+      </Label>
+      <Label layoutX="1297.0" layoutY="326.0" prefHeight="32.0" prefWidth="158.0" text="08:00-14:00" textFill="#e95814">
+         <font>
+            <Font name="Arial Bold" size="28.0" />
+         </font>
+      </Label>
+      <Label layoutX="1120.0" layoutY="606.0" prefHeight="32.0" prefWidth="158.0" text="14:00-20:00" textFill="#e95814">
+         <font>
+            <Font name="Arial Bold" size="28.0" />
+         </font>
+      </Label>
+      <Label layoutX="1300.0" layoutY="606.0" prefHeight="32.0" prefWidth="158.0" text="14:00-20:00" textFill="#e95814">
+         <font>
+            <Font name="Arial Bold" size="28.0" />
+         </font>
+      </Label>
+      <Label layoutX="936.0" layoutY="606.0" prefHeight="32.0" prefWidth="158.0" text="14:00-20:00" textFill="#e95814">
+         <font>
+            <Font name="Arial Bold" size="28.0" />
+         </font>
+      </Label>
+      <Label layoutX="754.0" layoutY="606.0" prefHeight="32.0" prefWidth="158.0" text="14:00-20:00" textFill="#e95814">
+         <font>
+            <Font name="Arial Bold" size="28.0" />
+         </font>
+      </Label>
+      <Label layoutX="570.0" layoutY="606.0" prefHeight="32.0" prefWidth="158.0" text="14:00-20:00" textFill="#e95814">
+         <font>
+            <Font name="Arial Bold" size="28.0" />
+         </font>
+      </Label>
+      <Label layoutX="387.0" layoutY="606.0" prefHeight="32.0" prefWidth="158.0" text="14:00-20:00" textFill="#e95814">
+         <font>
+            <Font name="Arial Bold" size="28.0" />
+         </font>
+      </Label>
+      <Label layoutX="203.0" layoutY="606.0" prefHeight="32.0" prefWidth="158.0" text="14:00-20:00" textFill="#e95814">
+         <font>
+            <Font name="Arial Bold" size="28.0" />
+         </font>
+      </Label>
+      <Label layoutX="23.0" layoutY="606.0" prefHeight="32.0" prefWidth="158.0" text="14:00-20:00" textFill="#e95814">
+         <font>
+            <Font name="Arial Bold" size="28.0" />
+         </font>
+      </Label>
+      <Label layoutX="23.0" layoutY="894.0" prefHeight="32.0" prefWidth="158.0" text="20:00-02:00" textFill="#e95814">
+         <font>
+            <Font name="Arial Bold" size="28.0" />
+         </font>
+      </Label>
+      <Label layoutX="206.0" layoutY="894.0" prefHeight="32.0" prefWidth="156.0" text="20:00-02:00" textFill="#e95814">
+         <font>
+            <Font name="Arial Bold" size="28.0" />
+         </font>
+      </Label>
+      <Label layoutX="387.0" layoutY="894.0" prefHeight="32.0" prefWidth="156.0" text="20:00-02:00" textFill="#e95814">
+         <font>
+            <Font name="Arial Bold" size="28.0" />
+         </font>
+      </Label>
+      <Label layoutX="570.0" layoutY="894.0" prefHeight="32.0" prefWidth="154.0" text="20:00-02:00" textFill="#e95814">
+         <font>
+            <Font name="Arial Bold" size="28.0" />
+         </font>
+      </Label>
+      <Label layoutX="754.0" layoutY="894.0" prefHeight="32.0" prefWidth="158.0" text="20:00-02:00" textFill="#e95814">
+         <font>
+            <Font name="Arial Bold" size="28.0" />
+         </font>
+      </Label>
+      <Label layoutX="936.0" layoutY="894.0" prefHeight="32.0" prefWidth="156.0" text="20:00-02:00" textFill="#e95814">
+         <font>
+            <Font name="Arial Bold" size="28.0" />
+         </font>
+      </Label>
+      <Label layoutX="1120.0" layoutY="894.0" prefHeight="32.0" prefWidth="154.0" text="20:00-02:00" textFill="#e95814">
+         <font>
+            <Font name="Arial Bold" size="28.0" />
+         </font>
+      </Label>
+      <Label layoutX="1300.0" layoutY="894.0" prefHeight="32.0" prefWidth="156.0" text="20:00-02:00" textFill="#e95814">
+         <font>
+            <Font name="Arial Bold" size="28.0" />
+         </font>
+      </Label>
+      <Label layoutX="1120.0" layoutY="326.0" prefHeight="32.0" prefWidth="156.0" text="08:00-14:00" textFill="#e95814">
+         <font>
+            <Font name="Arial Bold" size="28.0" />
+         </font>
+      </Label>
+      <Label layoutX="935.0" layoutY="326.0" prefHeight="32.0" prefWidth="154.0" text="08:00-14:00" textFill="#e95814">
+         <font>
+            <Font name="Arial Bold" size="28.0" />
+         </font>
+      </Label>
+      <Label layoutX="751.0" layoutY="326.0" prefHeight="32.0" prefWidth="154.0" text="08:00-14:00" textFill="#e95814">
+         <font>
+            <Font name="Arial Bold" size="28.0" />
+         </font>
+      </Label>
+      <Label layoutX="567.0" layoutY="326.0" prefHeight="32.0" prefWidth="158.0" text="08:00-14:00" textFill="#e95814">
+         <font>
+            <Font name="Arial Bold" size="28.0" />
+         </font>
+      </Label>
+      <Label layoutX="384.0" layoutY="326.0" prefHeight="32.0" prefWidth="158.0" text="08:00-14:00" textFill="#e95814">
+         <font>
+            <Font name="Arial Bold" size="28.0" />
+         </font>
+      </Label>
+      <Label layoutX="207.0" layoutY="326.0" prefHeight="32.0" prefWidth="156.0" text="08:00-14:00" textFill="#e95814">
+         <font>
+            <Font name="Arial Bold" size="28.0" />
+         </font>
+      </Label>
+      <Label layoutX="24.0" layoutY="326.0" prefHeight="32.0" prefWidth="164.0" text="08:00-14:00" textFill="#e95814">
+         <font>
+            <Font name="Arial Bold" size="28.0" />
+         </font>
+      </Label>
+      <ListView fx:id="satMorningList" layoutX="24.0" layoutY="169.0" opacity="0.7" prefHeight="201.0" prefWidth="164.0" />
+      <ListView fx:id="sunMorningList" layoutX="203.0" layoutY="169.0" opacity="0.7" prefHeight="201.0" prefWidth="164.0" />
+      <ListView fx:id="monMorningList" layoutX="384.0" layoutY="169.0" opacity="0.7" prefHeight="201.0" prefWidth="164.0" />
+      <ListView fx:id="tueMorningList" layoutX="567.0" layoutY="169.0" opacity="0.7" prefHeight="201.0" prefWidth="164.0" />
+      <ListView fx:id="wedMorningList" layoutX="751.0" layoutY="169.0" opacity="0.7" prefHeight="201.0" prefWidth="164.0" />
+      <ListView fx:id="thursMorningList" layoutX="933.0" layoutY="169.0" opacity="0.7" prefHeight="201.0" prefWidth="164.0" />
+      <ListView fx:id="friMorningList" layoutX="1114.0" layoutY="169.0" opacity="0.7" prefHeight="201.0" prefWidth="164.0" />
+      <ListView fx:id="satMorningList2" layoutX="1297.0" layoutY="169.0" opacity="0.7" prefHeight="201.0" prefWidth="164.0" />
+      <ListView fx:id="satLunchList" layoutX="20.0" layoutY="444.0" opacity="0.7" prefHeight="201.0" prefWidth="164.0" />
+      <ListView fx:id="sunLunchList" layoutX="200.0" layoutY="444.0" opacity="0.7" prefHeight="201.0" prefWidth="164.0" />
+      <ListView fx:id="monLunchList" layoutX="384.0" layoutY="444.0" opacity="0.7" prefHeight="201.0" prefWidth="164.0" />
+      <ListView fx:id="tueLunchList" layoutX="567.0" layoutY="444.0" opacity="0.7" prefHeight="201.0" prefWidth="164.0" />
+      <ListView fx:id="wedLunchList" layoutX="751.0" layoutY="444.0" opacity="0.7" prefHeight="201.0" prefWidth="164.0" />
+      <ListView fx:id="thursLunchList" layoutX="933.0" layoutY="444.0" opacity="0.7" prefHeight="201.0" prefWidth="164.0" />
+      <ListView fx:id="friLunchList" layoutX="1117.0" layoutY="444.0" opacity="0.7" prefHeight="201.0" prefWidth="164.0" />
+      <ListView fx:id="satLunchList2" layoutX="1297.0" layoutY="444.0" opacity="0.7" prefHeight="201.0" prefWidth="164.0" />
+      <ListView fx:id="satEveningList" layoutX="18.0" layoutY="735.0" opacity="0.7" prefHeight="201.0" prefWidth="164.0" />
+      <ListView fx:id="sunEveningList" layoutX="200.0" layoutY="735.0" opacity="0.7" prefHeight="201.0" prefWidth="164.0" />
+      <ListView fx:id="monEveningList" layoutX="381.0" layoutY="735.0" opacity="0.7" prefHeight="201.0" prefWidth="164.0" />
+      <ListView fx:id="tueEveningList" layoutX="564.0" layoutY="735.0" opacity="0.7" prefHeight="201.0" prefWidth="164.0" />
+      <ListView fx:id="wedEveningList" layoutX="748.0" layoutY="735.0" opacity="0.7" prefHeight="201.0" prefWidth="164.0" />
+      <ListView fx:id="thursEveningList" layoutX="930.0" layoutY="735.0" opacity="0.7" prefHeight="201.0" prefWidth="164.0" />
+      <ListView fx:id="friEveningList" layoutX="1114.0" layoutY="735.0" opacity="0.7" prefHeight="201.0" prefWidth="164.0" />
+      <ListView fx:id="satEveningList2" layoutX="1294.0" layoutY="735.0" opacity="0.7" prefHeight="201.0" prefWidth="164.0" />
    </children>
 </AnchorPane>

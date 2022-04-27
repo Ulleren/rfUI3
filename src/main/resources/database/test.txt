@@ -31,7 +31,7 @@ Flemming Godt,33534355,kode,fg@flems.com,Hannemanns Alle 24,Frivillig,Bus-Boden
 Lasse Sam,28337788,kode,las@las.dk,Vimmelskaftet 44,Frivillig,Tuborg Orange
 Lasse Bak,28282726,kode,las@bak.dk,Posens Gade 33,Frivillig,Tuborg Orange
 Kim Hansen,38432327,kode,kh@kims.com,Nørrebrogade 100 5. mf,Frivillig,Meyers Køkken
-Kim Hasse,38436323,kode,kh@kims.com,Nørrebrogade 130 5. th,Frivillig,Meyers Køkken
+Kim Hasse,38436323,kode,kh@kims.dk,Nørrebrogade 130 5. th,Frivillig,Meyers Køkken
 Kim Jespersen,44432323,kode,kj@hule.com,Amagerbrogade 377 5. th,Frivillig,Meyers Køkken
 Ulrik,22222222,2,2@2.2,d,Admin,Kontor
 Kim Snor,44432323,kode,ks@snor.com,Amagerbrogade 377 5. th,Frivillig,Meyers Køkken
@@ -48,3 +48,6 @@ Ulle,23232323,u,u@u.dk,ulleren 2,Frivillig,tomandsland
 Ulleren,98989898,u,u@uu.u,uu,Frivillig,Ski-Burger
 Kebab Manden,23232323,kode,ke@bab.dk,Nørrebrogade,Ansvarlig,Kebabab
 Ke bab,34343434,kode,ke@bib.dk,dfd,Ansvarlig,Kebabistan
+Martin Tonser,34989723,kode,mt@martun.dk,Købmagervej 23,Frivillig,Tuborg Orange
+Jonna Jungersen,23132324,kode,jj@jungen.dk,jungeve54,Frivillig,Tuborg Orange
+Ulrik S Mohr,23435522,kode,usm@jydekrog.dk,Kertemindevej 22,Frivillig,Tuborg Orange

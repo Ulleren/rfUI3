@@ -1,10 +1,9 @@
 package com.example.rfui;
 
-import backend.Person;
 import javafx.application.Platform;
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,8 +18,6 @@ import javafx.scene.layout.Border;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-import backend.Bod;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -28,7 +25,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.*;
 
 import javafx.fxml.Initializable;
@@ -75,6 +71,7 @@ public class FrivilligController implements Initializable{
     private int vagtBefore = 0;
     private int vagtAfter=0;
     ObservableList<submitVagt> vagtList = FXCollections.observableArrayList();
+    ObservableList<chooseVagt> chooseVagtList = FXCollections.observableArrayList();
 
     ArrayList<String> tableContents = new ArrayList<>();
     private loginController.User user;
@@ -92,6 +89,8 @@ public class FrivilligController implements Initializable{
             comboBox();
             initiateCols();
             initiateChooseVagtCols();
+
+
             setVagtBtn.setBorder(Border.stroke(Color.ORANGE));
             deleteVagtBtn.setBorder(Border.stroke(Color.ORANGE));
             indsendVagtBtn.setBorder(Border.stroke(Color.ORANGE));

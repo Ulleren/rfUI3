@@ -5,9 +5,13 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import backend.vagt;
 
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -34,13 +38,30 @@ public class vagtPlanController implements Initializable{
     @FXML private Label rightsLabel;
     @FXML private Label welcomeLabel;
     @FXML private Button backBtn;
-    @FXML private ComboBox<String> dayComboBox;
-    @FXML private TableView<vagtSkema>vagtSkemaTableView;
-    @FXML private TableColumn<vagtSkema, String>morningCol;
-    @FXML private TableColumn<vagtSkema, String>frokostCol;
-    @FXML private TableColumn<vagtSkema, String>eveningCol;
-    @FXML private TableColumn<vagtSkema, String>friphoneCol;
-    @FXML private TableColumn<vagtSkema, String>udeblevetCol;
+    @FXML private ListView<String>satMorningList;
+    @FXML private ListView<String>satLunchList;
+    @FXML private ListView<String>satEveningList;
+    @FXML private ListView<String>sunMorningList;
+    @FXML private ListView<String>sunLunchList;
+    @FXML private ListView<String>sunEveningList;
+    @FXML private ListView<String>monMorningList;
+    @FXML private ListView<String>monLunchList;
+    @FXML private ListView<String>monEveningList;
+    @FXML private ListView<String>tueMorningList;
+    @FXML private ListView<String>tueLunchList;
+    @FXML private ListView<String>tueEveningList;
+    @FXML private ListView<String>wedMorningList;
+    @FXML private ListView<String>wedLunchList;
+    @FXML private ListView<String>wedEveningList;
+    @FXML private ListView<String>thursMorningList;
+    @FXML private ListView<String>thursLunchList;
+    @FXML private ListView<String>thursEveningList;
+    @FXML private ListView<String>friMorningList;
+    @FXML private ListView<String>friLunchList;
+    @FXML private ListView<String>friEveningList;
+    @FXML private ListView<String>satMorningList2;
+    @FXML private ListView<String>satLunchList2;
+    @FXML private ListView<String>satEveningList2;
     @FXML
     private Stage stage;
     private Scene scene;
@@ -55,41 +76,127 @@ public class vagtPlanController implements Initializable{
         displayAdminName(user.getName());
         displayStandName(user.getBod());
     }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        initiateVagtCols();
-        dayComboBox.getItems().removeAll((dayComboBox.getItems()));
-        dayComboBox.getItems().addAll("Lørdag d. 25/6","Søndag d. 26/6","Mandag d. 27/6","Tirsdag d. 28/6","Onsdag d. 29/6",
-                "Torsdag d. 30/6","Fredag d. 1/7","Lørdag d. 2/7");
+        Platform.runLater(() -> {
+loadLists();
+//            dayComboBox.getItems().removeAll((dayComboBox.getItems()));
+//            dayComboBox.getItems().addAll("Lørdag d. 25/6","Søndag d. 26/6","Mandag d. 27/6","Tirsdag d. 28/6","Onsdag d. 29/6",
+//                    "Torsdag d. 30/6","Fredag d. 1/7","Lørdag d. 2/7");
+
+
+//            manMorningList.getItems().addAll(manMorning);
+//            manMorningList.setBorder(Border.stroke(Color.ORANGE));
+
+        });
+
     }
-    public static class vagtSkema{
-        private SimpleStringProperty morning;
-        private SimpleStringProperty lunch;
-        private SimpleStringProperty evening;
-        private SimpleStringProperty friTlf;
-        private SimpleStringProperty udeblevet;
-        public vagtSkema(String morning, String lunch, String evening, String friTlf, String udeblevet){
-            this.morning=new SimpleStringProperty(morning);
-            this.lunch=new SimpleStringProperty(lunch);
-            this.evening=new SimpleStringProperty(evening);
-            this.friTlf=new SimpleStringProperty(friTlf);
-            this.udeblevet=new SimpleStringProperty(udeblevet);
+    public void ListGenerator(){
+
+    }
+    public void loadLists(){
+        int satMorning=0, satLunch=0,satEvening=0, sunMorning=0,sunLunch=0,sunEvening=0,monMorning=0,monLunch=0,monEvening=0,
+                tueMorning=0,tueLunch=0,tueEvening=0,wedMorning=0,wedLunch=0,wedEvening=0, thurMorning=0,thurLunch=0,thurEvening=0,
+                friMorning=0, friLunch=0,friEvening=0,satMorning2=0,satLunch2=0,satEvening2=0;
+        int getMax = Main.getHashList().getBodHash().get(user.getBod()).getAntalFrivillige();
+        int total = 0;
+        try {
+            Path path = Path.of(Main.hashList.getPathToPendingBod()+ "/"+user.getBod().replaceAll(
+                    "[^a-zA-Z0-9]", "") + ".txt");
+            long count = Files.lines(path).count();
+            for (int i = 0; i < count; i++) {
+                String line = Files.readAllLines(path).get(i);
+                if (!line.trim().equals("")) {
+                    String[] profil = line.split(",");
+                    String mail = profil[0];
+                    String phone = profil[1];
+                    String bod = profil[2];
+                    String day = profil[3];
+                    String vagt = profil[4];
+                    String name = Main.getHashList().getEmailHash().get(mail);
+                    String address = Main.getHashList().getEmailHash().get(mail);
+
+                    switch (day){
+                        case "Lørdag d. 25/6":
+                            if(satMorning!=getMax || satLunch!=getMax || satEvening!=getMax){
+                                if(vagt.equals("08:00-14:00")){ satMorningList.getItems().add(name);satMorning+=1;}
+                                else if(vagt.equals("14:00-20:00")){ satLunchList.getItems().add(name);satLunch+=1;}
+                                else{satEveningList.getItems().add(name);satEvening+=1;}
+                                total+=1;
+                                break;
+                            }
+                        case "Søndag d. 26/6":
+                            if(sunMorning!=getMax || sunLunch!=getMax || sunEvening!=getMax){
+                                if(vagt.equals("08:00-14:00")){ sunMorningList.getItems().add(name);sunMorning+=1;}
+                                else if(vagt.equals("14:00-20:00")){ sunLunchList.getItems().add(name);sunLunch+=1;}
+                                else{sunEveningList.getItems().add(name);sunEvening+=1;}
+                                total+=1;
+                                break;
+                            }
+                        case "Mandag d. 27/6":
+                            if(monMorning!=getMax || monLunch!=getMax || monEvening!=getMax){
+                                if(vagt.equals("08:00-14:00")){ monMorningList.getItems().add(name);monMorning+=1;}
+                                else if(vagt.equals("14:00-20:00")){ monLunchList.getItems().add(name);monLunch+=1;}
+                                else{monEveningList.getItems().add(name);monEvening+=1;}
+                                total+=1;
+                                break;
+                            }
+                        case "Tirsdag d. 28/6":
+                            if(tueMorning!=getMax || tueLunch!=getMax || tueEvening!=getMax){
+                                if(vagt.equals("08:00-14:00")){ tueMorningList.getItems().add(name); tueMorning+=1;}
+                                else if(vagt.equals("14:00-20:00")){ tueLunchList.getItems().add(name); tueLunch+=1;}
+                                else{tueEveningList.getItems().add(name); tueEvening+=1;}
+                                total+=1;
+                                break;
+                            }
+                        case "Onsdag d. 29/6":
+                            if(wedMorning!=getMax || wedLunch!=getMax || wedEvening!=getMax){
+                                if(vagt.equals("08:00-14:00")){ wedMorningList.getItems().add(name); wedMorning+=1;}
+                                else if(vagt.equals("14:00-20:00")){ wedLunchList.getItems().add(name); wedLunch+=1;}
+                                else{wedEveningList.getItems().add(name); wedEvening+=1;}
+                                total+=1;
+                                break;
+                            }
+                        case "Torsdag d. 30/6":
+                            if(thurMorning!=getMax || thurLunch!=getMax || thurEvening!=getMax){
+                                if(vagt.equals("08:00-14:00")){ thursMorningList.getItems().add(name); thurMorning+=1;}
+                                else if(vagt.equals("14:00-20:00")){ thursLunchList.getItems().add(name); thurLunch+=1;}
+                                else{thursEveningList.getItems().add(name); thurEvening+=1;}
+                                total+=1;
+                                break;
+                            }
+                        case "Fredag d. 1/7":
+                            if(friMorning!=getMax || friLunch!=getMax || friEvening!=getMax){
+                                if(vagt.equals("08:00-14:00")){ friMorningList.getItems().add(name); friMorning+=1;}
+                                else if(vagt.equals("14:00-20:00")){ friLunchList.getItems().add(name); friLunch+=1;}
+                                else{friEveningList.getItems().add(name); friEvening+=1;}
+                                total+=1;
+                                break;
+                            }
+                        case "Lørdag d. 2/7":
+                            if(satMorning2!=getMax || satLunch2!=getMax || satEvening2!=getMax){
+                                if(vagt.equals("08:00-14:00")){ satMorningList2.getItems().add(name); satMorning2+=1;}
+                                else if(vagt.equals("14:00-20:00")){ satLunchList2.getItems().add(name); satLunch2+=1;}
+                                else{satEveningList2.getItems().add(name); satEvening2+=1;}
+                                total+=1;
+                                break;
+                            }
+                    }
+
+
+
+                }
+
+
+            }
+
+        }catch(Exception e){
+            e.printStackTrace();
+
         }
-        public vagtSkema(){
-        }
-        public String getMorning(){ return morning.get();}
-        public String getLunch(){ return lunch.get();}
-        public String getEvening(){return evening.get();}
-        public String getfriTlf(){return friTlf.get();}
-        public String getUdeblevet(){ return udeblevet.get();}
     }
-    private void initiateVagtCols(){
-        morningCol.setCellValueFactory(new PropertyValueFactory<>("morning"));
-        frokostCol.setCellValueFactory(new PropertyValueFactory<>("lunch"));
-        eveningCol.setCellValueFactory(new PropertyValueFactory<>("evening"));
-        friphoneCol.setCellValueFactory(new PropertyValueFactory<>("friTlf"));
-        udeblevetCol.setCellValueFactory(new PropertyValueFactory<>("udeblevet"));
-    }
+
     public void displayAdminName(String username) {
         AnsNameLabel.setText("Logged ind som: " + username);
     }

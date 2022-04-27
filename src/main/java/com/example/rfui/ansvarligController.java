@@ -107,7 +107,7 @@ public class ansvarligController implements Initializable {
         list.removeAll(list);
         try {
             Path path = Path.of(Main.hashList.getPathToPendingBod()+ "/"+user.getBod().replaceAll(
-                    "[^a-zA-Z0-9]", "") + ".txt");
+                    "[^a-zA-Z0-9]", "") +"Pending"+ ".txt");
             long count = Files.lines(path).count();
             for (int i = 0; i < count; i++) {
                 String line = Files.readAllLines(path).get(i);
