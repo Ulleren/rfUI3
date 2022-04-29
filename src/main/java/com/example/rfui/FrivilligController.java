@@ -1,6 +1,8 @@
 package com.example.rfui;
 
 import backend.sceneSwitcher;
+import backend.txtFileReader;
+import backend.txtFileWriter;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -243,29 +245,14 @@ public class FrivilligController implements Initializable{
             return;
         }
         List<String> fileContents = new ArrayList<>();
-        FileWriter filewriter;
-        try {
-            Path path = Path.of(Main.hashList.getPathToPending().toString());
+        backend.txtFileReader pendingMailRead = new txtFileReader();
+        pendingMailRead.setUser(user);
+        pendingMailRead.pendingVagterReadMail(fileContents);
+        fileContents.addAll(tableContents);
+        backend.txtFileWriter pendingMailWrite = new txtFileWriter();
+        pendingMailWrite.setUser(user);
+        pendingMailWrite.pendingVagterWrite(fileContents);
 
-            long count = Files.lines(path).count();
-            for (int j = 0; j < count; j++) {
-                String line = Files.readAllLines(path).get(j);
-                if (!line.trim().equals("") && !line.contains(user.getEmail())) {
-                    fileContents.add(line);
-                }
-            }
-            fileContents.addAll(tableContents);
-            filewriter = new FileWriter(path.toString(),false);
-            BufferedWriter bw = new BufferedWriter(filewriter);
-            for(String fileLine: fileContents){
-                bw.write(fileLine+System.lineSeparator());
-            }
-            bw.flush();
-            bw.close();
-            filewriter.close();
-        }catch (IOException e) {
-            throw new RuntimeException(e);
-        }
         indsendVagt.getItems().clear();
         clearCombo();
         vagtListErrorLabel.setText("Dine vagter er registreret, du vil se godkendte vagter i skemaet nedenfor når de er godkendt");
@@ -384,40 +371,27 @@ public class FrivilligController implements Initializable{
         }
     }
     public void comboBox(){
-        try {
-            Path path = Main.hashList.getPathToBoder();
+        ArrayList<String>bodList = new ArrayList<>();
+        backend.txtFileReader bodRead = new txtFileReader();
+        bodRead.setUser(user);
+        bodRead.bodListReader(bodList);
+        bodBox.getItems().addAll(bodList);
+        bodBox2.getItems().addAll(bodList);
 
-            long count = Files.lines(path).count();
-            for (int i = 0; i < count; i++) {
-                String line = Files.readAllLines(path).get(i);
-                if (!line.trim().equals("")) {
-                    String[] profil = line.split(",");
-                    String name = profil[0];
-                    String location = profil[1];
-                    String maxFrivillig = profil[2];
-                    String ansvarlig = profil[3];
-
-                    bodBox.getItems().add(name);
-                    bodBox2.getItems().add(name);
-                }
-            }
-            bodBox.setValue(user.getBod());
-            bodBox2.setValue(user.getBod());
-            dayComboBox.getItems().removeAll((dayComboBox.getItems()));
-            dayComboBox.getItems().addAll("Lørdag d. 25/6","Søndag d. 26/6","Mandag d. 27/6","Tirsdag d. 28/6","Onsdag d. 29/6",
-                    "Torsdag d. 30/6","Fredag d. 1/7","Lørdag d. 2/7");
-            dayComboBox2.getItems().removeAll((dayComboBox.getItems()));
-            dayComboBox2.getItems().addAll("Lørdag d. 25/6","Søndag d. 26/6","Mandag d. 27/6","Tirsdag d. 28/6","Onsdag d. 29/6",
-                    "Torsdag d. 30/6","Fredag d. 1/7","Lørdag d. 2/7");
-            vagtComboBox.getItems().removeAll(vagtComboBox.getItems());
-            vagtComboBox.getItems().addAll("08:00-14:00","14:00-20:00","20:00-02:00");
-            dayComboBox.setBorder(Border.stroke(Color.BLACK));;
-            vagtComboBox.setBorder(Border.stroke(Color.BLACK));
-            bodBox.setBorder(Border.stroke(Color.BLACK));
-            dayComboBox2.setBorder(Border.stroke(Color.BLACK));;
-            bodBox2.setBorder(Border.stroke(Color.BLACK));
-        }catch(Exception e){
-            e.printStackTrace();
-        }
+        bodBox.setValue(user.getBod());
+        bodBox2.setValue(user.getBod());
+        dayComboBox.getItems().removeAll((dayComboBox.getItems()));
+        dayComboBox.getItems().addAll("Lørdag d. 25/6","Søndag d. 26/6","Mandag d. 27/6","Tirsdag d. 28/6","Onsdag d. 29/6",
+                "Torsdag d. 30/6","Fredag d. 1/7","Lørdag d. 2/7");
+        dayComboBox2.getItems().removeAll((dayComboBox.getItems()));
+        dayComboBox2.getItems().addAll("Lørdag d. 25/6","Søndag d. 26/6","Mandag d. 27/6","Tirsdag d. 28/6","Onsdag d. 29/6",
+                "Torsdag d. 30/6","Fredag d. 1/7","Lørdag d. 2/7");
+        vagtComboBox.getItems().removeAll(vagtComboBox.getItems());
+        vagtComboBox.getItems().addAll("08:00-14:00","14:00-20:00","20:00-02:00");
+        dayComboBox.setBorder(Border.stroke(Color.BLACK));;
+        vagtComboBox.setBorder(Border.stroke(Color.BLACK));
+        bodBox.setBorder(Border.stroke(Color.BLACK));
+        dayComboBox2.setBorder(Border.stroke(Color.BLACK));;
+        bodBox2.setBorder(Border.stroke(Color.BLACK));
     }
 }

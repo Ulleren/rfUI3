@@ -117,5 +117,21 @@ public class txtFileWriter {
             System.out.println("add line failed"+e);
         }
     }
+    public void pendingVagterWrite(List<String>fileContents){
+        FileWriter filewriter;
+        try {
+            Path path = Path.of(Main.getHashList().getPathToPending().toString());
+            filewriter = new FileWriter(path.toString(),false);
+            BufferedWriter bw = new BufferedWriter(filewriter);
+            for(String fileLine: fileContents){
+                bw.write(fileLine+System.lineSeparator());
+            }
+            bw.flush();
+            bw.close();
+            filewriter.close();
+        }catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 }

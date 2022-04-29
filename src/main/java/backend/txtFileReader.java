@@ -46,6 +46,21 @@ public class txtFileReader {
             e.printStackTrace();
         }
     }
+    public void pendingVagterReadMail(List<String>fileContents){
+        try {
+            Path path = Path.of(Main.getHashList().getPathToPending().toString());
+
+            long count = Files.lines(path).count();
+            for (int j = 0; j < count; j++) {
+                String line = Files.readAllLines(path).get(j);
+                if (!line.trim().equals("") && !line.contains(user.getEmail())) {
+                    fileContents.add(line);
+                }
+            }
+        }catch (IOException e){
+            throw new RuntimeException(e);
+        }
+    }
     public void personsReader(ObservableList<AdminSearchController.results>list){
         try {
             Path path = Main.getHashList().getPathToPersons();
@@ -126,4 +141,8 @@ public class txtFileReader {
             throw new RuntimeException(e);
         }
     }
+    public void checkRejectedRead(){
+
+    }
+
 }

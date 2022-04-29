@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.net.URL;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class ansvarligController implements Initializable {
@@ -96,6 +97,7 @@ public class ansvarligController implements Initializable {
         backend.txtFileReader readPending = new txtFileReader();
         readPending.setUser(user);
         readPending.pendingVagterReader(list);
+
         resultTableView.getItems().addAll(list);
         adminSearchTextField.textProperty().addListener((observable,oldValue,newValue)->{
             filteredData.setPredicate(results -> {
