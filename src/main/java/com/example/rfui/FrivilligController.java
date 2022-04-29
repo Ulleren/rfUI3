@@ -13,8 +13,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Border;
 import javafx.scene.paint.Color;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
@@ -41,10 +39,11 @@ public class FrivilligController implements Initializable{
     @FXML private TableColumn<submitVagt, String>locationCol;
     @FXML private TableColumn<submitVagt, String>timeCol;
     @FXML private TableColumn<submitVagt, String>ansvarCol;
-    @FXML private TableColumn<chooseVagt, String>morningCol;
-    @FXML private TableColumn<chooseVagt, String> frokostCol;
-    @FXML private TableColumn<chooseVagt, String> eveningCol;
-    @FXML private TableColumn<chooseVagt, String>locationCol2;
+    @FXML private TableView<chooseVagt>chooseVagtTable;
+    @FXML private TableColumn<chooseVagt, String>freeDayCol;
+    @FXML private TableColumn<chooseVagt, String> freeBodCol;
+    @FXML private TableColumn<chooseVagt, String> freeLocCol;
+    @FXML private TableColumn<chooseVagt, String>freeVagtCol;
     @FXML private TableColumn<chooseVagt, String>ansCol2;
     @FXML private ComboBox<String> bodBox2;
     @FXML private ComboBox<String> dayComboBox2;
@@ -63,8 +62,7 @@ public class FrivilligController implements Initializable{
     }
     public void setUser(loginController.User user){
         this.user = user;
-        displayName(user.getName());
-        displayBod(user.getBod());
+
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -72,7 +70,8 @@ public class FrivilligController implements Initializable{
             comboBox();
             initiateCols();
             initiateChooseVagtCols();
-
+            displayName(user.getName());
+            displayBod(user.getBod());
             setVagtBtn.setBorder(Border.stroke(Color.ORANGE));
             deleteVagtBtn.setBorder(Border.stroke(Color.ORANGE));
             indsendVagtBtn.setBorder(Border.stroke(Color.ORANGE));
@@ -83,10 +82,10 @@ public class FrivilligController implements Initializable{
             bodBox2.setBorder(Border.stroke(Color.ORANGE));
             tagVagtBtn.setBorder(Border.stroke(Color.ORANGE));
             dayComboBox2.setBorder(Border.stroke(Color.ORANGE));
-
             if(checkRejections()){
                 welcomeLabel.setText("Der er "+(5+(rowCount-5)) +" vagter der ikke er godkendt");
                 indsendVagt.getItems().addAll(vagtList);
+                vagtListErrorLabel.setText("");
             };
         });
     }
@@ -114,31 +113,39 @@ public class FrivilligController implements Initializable{
         public String getAns(){ return ans.get();}
     }
     public static class chooseVagt{
-        private SimpleStringProperty morning;
-        private SimpleStringProperty lunch;
-        private SimpleStringProperty evening;
-        private SimpleStringProperty loc2;
-        private SimpleStringProperty ans2;
-        public chooseVagt(String morning, String lunch, String evening, String loc2, String ans2){
-            this.morning=new SimpleStringProperty(morning);
-            this.lunch=new SimpleStringProperty(lunch);
-            this.evening=new SimpleStringProperty(evening);
-            this.loc2=new SimpleStringProperty(loc2);
-            this.ans2=new SimpleStringProperty(ans2);
+        private SimpleStringProperty availDay;
+        private SimpleStringProperty availBod;
+        private SimpleStringProperty availLoc;
+        private SimpleStringProperty availVagt;
+        private SimpleStringProperty availAns;
+        public chooseVagt(String availDay, String availBod, String availLoc, String availVagt, String availAns){
+            this.availDay=new SimpleStringProperty(availDay);
+            this.availBod=new SimpleStringProperty(availBod);
+            this.availLoc=new SimpleStringProperty(availLoc);
+            this.availVagt=new SimpleStringProperty(availVagt);
+            this.availAns=new SimpleStringProperty(availAns);
         }
         public chooseVagt(){
         }
-        public String getMorning(){ return morning.get();}
-        public String getLunch(){ return lunch.get();}
-        public String getEvening(){return evening.get();}
-        public String getLoc2(){return loc2.get();}
-        public String getAns2(){ return ans2.get();}
+        public String getAvailDay(){ return availDay.get();}
+        public String getAvailBod(){ return availBod.get();}
+        public String getAvailLoc(){return availLoc.get();}
+        public String getAvailVagt(){return availVagt.get();}
+        public String getAvailAns(){ return availAns.get();}
 
+    }
+    public void loadAvailable(){
+        chooseVagtList.removeAll(chooseVagtList);
+        String bodBoksValue = bodBox2.getValue();
+        backend.txtFileReader availLst = new txtFileReader();
+        availLst.setUser(user);
+        availLst.loadAvailableVagt(chooseVagtList, bodBoksValue);
+        chooseVagtTable.getItems().addAll(chooseVagtList);
     }
     public boolean checkRejections(){
         boolean rejected = false;
         try {
-            Path path = Main.hashList.getPathToCheckRejected();
+            Path path = Main.getHashList().getPathToCheckRejected();
             long count = Files.lines(path).count();
             for (int i = 0; i < count; i++) {
                 String line = Files.readAllLines(path).get(i);
@@ -149,34 +156,28 @@ public class FrivilligController implements Initializable{
                     String bod = profil[2];
                     String day = profil[3];
                     String vagt = profil[4];
-                    String loc = Main.hashList.getBodHash().get(bod).getLokation();
-                    String ansName = Main.hashList.getBodHash().get(bod).getAnsvarlig();
+                    String loc = Main.getHashList().getBodHash().get(bod).getLokation();
+                    String ansName = Main.getHashList().getBodHash().get(bod).getAnsvarlig();
 
-                    String friName=user.getEmail();
-                    if (Objects.equals(mail, friName)){
+                    String friName = user.getEmail();
+                    if (Objects.equals(mail, friName)) {
                         switch(day){
-                            case "Lørdag d. 25/6" -> {vagtBefore +=1; }
-                            case "Søndag d. 26/6" -> {vagtBefore +=1; }
-                            case "Mandag d. 27/6" -> {vagtBefore +=1; }
-                            case "Tirsdag d. 28/6" -> {vagtBefore +=1; }
-                            case "Onsdag d. 29/6" -> {vagtAfter +=1; }
-                            case "Torsdag d. 30/6" -> {vagtAfter +=1; }
-                            case "Fredag d. 1/7" -> {vagtAfter +=1; }
-                            case "Lørdag d. 2/7" -> {vagtAfter +=1; }
+                            case "Lørdag d. 25/6", "Søndag d. 26/6", "Mandag d. 27/6", "Tirsdag d. 28/6" -> {vagtBefore +=1; }
+                            case "Onsdag d. 29/6", "Torsdag d. 30/6", "Fredag d. 1/7", "Lørdag d. 2/7" -> {vagtAfter +=1; }
                         }
                         vagtList.add(new submitVagt(day,bod,loc,vagt,ansName));
                         rowCount+=1;
-                        rejected = true;
+                        rejected=true;
                     }
                 }
             }
-
-
+            return true;
         }catch(Exception e){
             e.printStackTrace();
         }
         return rejected;
     }
+
     public void insertPendingVagt(ActionEvent event){
         vagtList.removeAll(vagtList);
         if(vagtComboBox.equals(null)){
@@ -272,14 +273,8 @@ public class FrivilligController implements Initializable{
         }
         String contents = indsendVagt.getSelectionModel().getSelectedItem().getDay();
         switch(contents){
-            case "Lørdag d. 25/6" -> {vagtBefore -=1; }
-            case "Søndag d. 26/6" -> {vagtBefore -=1; }
-            case "Mandag d. 27/6" -> {vagtBefore -=1; }
-            case "Tirsdag d. 28/6" -> {vagtBefore -=1; }
-            case "Onsdag d. 29/6" -> {vagtAfter -=1; }
-            case "Torsdag d. 30/6" -> {vagtAfter -=1; }
-            case "Fredag d. 1/7" -> {vagtAfter -=1; }
-            case "Lørdag d. 2/7" -> {vagtAfter -=1; }
+            case "Lørdag d. 25/6", "Søndag d. 26/6", "Mandag d. 27/6", "Tirsdag d. 28/6" -> {vagtBefore -=1; }
+            case "Onsdag d. 29/6", "Torsdag d. 30/6", "Fredag d. 1/7", "Lørdag d. 2/7" -> {vagtAfter -=1; }
         }
         for (int i = 0; i < tableContents.size(); i++) {
             if(tableContents.get(i).contains(contents)){
@@ -297,14 +292,8 @@ public class FrivilligController implements Initializable{
 
         if(vagtAfter < 2 || vagtBefore < 3 && dayComboBox.getValue()!=null && vagtComboBox.getValue()!=null && bodBox.getValue()!=null){
             switch(dayComboBox.getValue()){
-                case "Lørdag d. 25/6" -> {vagtBefore +=1; return vagtIsValid;}
-                case "Søndag d. 26/6" -> {vagtBefore +=1; return vagtIsValid;}
-                case "Mandag d. 27/6" -> {vagtBefore +=1; return vagtIsValid;}
-                case "Tirsdag d. 28/6" -> {vagtBefore +=1; return vagtIsValid;}
-                case "Onsdag d. 29/6" -> {vagtAfter +=1; return vagtIsValid;}
-                case "Torsdag d. 30/6" -> {vagtAfter +=1; return vagtIsValid;}
-                case "Fredag d. 1/7" -> {vagtAfter +=1; return vagtIsValid;}
-                case "Lørdag d. 2/7" -> {vagtAfter +=1; return vagtIsValid;}
+                case "Lørdag d. 25/6", "Søndag d. 26/6", "Mandag d. 27/6", "Tirsdag d. 28/6" -> {vagtBefore +=1; return vagtIsValid;}
+                case "Onsdag d. 29/6", "Torsdag d. 30/6", "Fredag d. 1/7", "Lørdag d. 2/7" -> {vagtAfter +=1; return vagtIsValid;}
             }
         }
         else{
@@ -346,11 +335,11 @@ public class FrivilligController implements Initializable{
         //ansphoneCol.setCellValueFactory(new PropertyValueFactory<>("ansPhn"));
     }
     private void initiateChooseVagtCols(){
-        morningCol.setCellValueFactory(new PropertyValueFactory<>("morning"));
-        frokostCol.setCellValueFactory(new PropertyValueFactory<>("lunch"));
-        eveningCol.setCellValueFactory(new PropertyValueFactory<>("evening"));
-        locationCol2.setCellValueFactory(new PropertyValueFactory<>("loc2"));
-        ansCol2.setCellValueFactory(new PropertyValueFactory<>("ans2"));
+        freeDayCol.setCellValueFactory(new PropertyValueFactory<>("availDay"));
+        freeBodCol.setCellValueFactory(new PropertyValueFactory<>("availBod"));
+        freeLocCol.setCellValueFactory(new PropertyValueFactory<>("availLoc"));
+        freeVagtCol.setCellValueFactory(new PropertyValueFactory<>("availVagt"));
+        ansCol2.setCellValueFactory(new PropertyValueFactory<>("availAns"));
     }
     public void displayName(String username){
         nameLabel.setText("Logged ind som: " +username);
@@ -379,7 +368,7 @@ public class FrivilligController implements Initializable{
         bodBox2.getItems().addAll(bodList);
 
         bodBox.setValue(user.getBod());
-        bodBox2.setValue(user.getBod());
+
         dayComboBox.getItems().removeAll((dayComboBox.getItems()));
         dayComboBox.getItems().addAll("Lørdag d. 25/6","Søndag d. 26/6","Mandag d. 27/6","Tirsdag d. 28/6","Onsdag d. 29/6",
                 "Torsdag d. 30/6","Fredag d. 1/7","Lørdag d. 2/7");

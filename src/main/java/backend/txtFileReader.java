@@ -141,8 +141,51 @@ public class txtFileReader {
             throw new RuntimeException(e);
         }
     }
-    public void checkRejectedRead(){
+    public void loadAvailableVagt(ObservableList<FrivilligController.chooseVagt>chooseVagtList, String bodBoks2Value){
+        try {
+            Path path = Main.getHashList().getPathToAvailableVagter();
 
+
+            long count = Files.lines(path).count();
+            for (int i = 0; i < count; i++) {
+                String line = Files.readAllLines(path).get(i);
+                String[] temp = line.split("\n");
+                if (!line.trim().equals("") && line.contains(bodBoks2Value)) {
+                    String[] profil = line.split(",");
+                    String bod = profil[0];
+                    String day = profil[1];
+                    String vagt = profil[2];
+                    String loc = Main.getHashList().getBodHash().get(bod).getLokation();
+                    String ans = Main.getHashList().getBodHash().get(bod).getAnsvarlig();
+                    chooseVagtList.add(new FrivilligController.chooseVagt(day, bod, loc,vagt,ans));
+                }
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+    }
+    public void getAvailable(ArrayList<String>fileContents){
+        try {
+            Path path = Main.getHashList().getPathToAvailableVagter();
+
+            long count = Files.lines(path).count();
+            for (int i = 0; i < count; i++) {
+                String line = Files.readAllLines(path).get(i);
+                if (!line.trim().equals("")) {
+                    String[] profil = line.split(",");
+                    String bod = profil[0];
+                    String day = profil[1];
+                    String vagt = profil[2];
+
+                    String saveLine = bod+","+day+","+vagt;
+
+                    fileContents.add(saveLine);
+                }
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
 }

@@ -11,6 +11,7 @@ import java.util.*;
 
 
 import backend.sceneSwitcher;
+import backend.txtFileReader;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
@@ -245,8 +246,14 @@ public class vagtPlanController implements Initializable{
 
     }
     public void saveAvailable(){
+        ArrayList<String>fileContents = new ArrayList<>();
+        backend.txtFileReader readAvailFile = new txtFileReader();
+        readAvailFile.setUser(user);
+        readAvailFile.getAvailable(fileContents);
+        fileContents.addAll(saveAvailable);
         backend.txtFileWriter saveAvailWrite = new txtFileWriter();
-        saveAvailWrite.writeAvailable(saveAvailable);
+        saveAvailWrite.setUser(user);
+        saveAvailWrite.writeAvailable(fileContents);
     }
 
     public void displayAdminName(String username) {
