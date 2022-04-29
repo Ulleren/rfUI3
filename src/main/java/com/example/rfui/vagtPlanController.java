@@ -1,16 +1,16 @@
 package com.example.rfui;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Objects;
-import java.util.ResourceBundle;
-import backend.vagt;
+import java.util.*;
 
+
+import backend.sceneSwitcher;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
@@ -28,6 +28,7 @@ import javafx.scene.layout.Border;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import backend.txtFileWriter;
 
 public class vagtPlanController implements Initializable{
 
@@ -77,36 +78,41 @@ public class vagtPlanController implements Initializable{
         displayStandName(user.getBod());
     }
 
+    ArrayList<String>saveAvailable = new ArrayList<>();
+    List<String>notAccepted = new ArrayList<>();
+    int satMorning=0, satLunch=0,satEvening=0, sunMorning=0,sunLunch=0,sunEvening=0,monMorning=0,monLunch=0,monEvening=0,
+            tueMorning=0,tueLunch=0,tueEvening=0,wedMorning=0,wedLunch=0,wedEvening=0, thurMorning=0,thurLunch=0,thurEvening=0,
+            friMorning=0, friLunch=0,friEvening=0,satMorning2=0,satLunch2=0,satEvening2=0;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Platform.runLater(() -> {
-loadLists();
-//            dayComboBox.getItems().removeAll((dayComboBox.getItems()));
-//            dayComboBox.getItems().addAll("Lørdag d. 25/6","Søndag d. 26/6","Mandag d. 27/6","Tirsdag d. 28/6","Onsdag d. 29/6",
-//                    "Torsdag d. 30/6","Fredag d. 1/7","Lørdag d. 2/7");
-
-
-//            manMorningList.getItems().addAll(manMorning);
-//            manMorningList.setBorder(Border.stroke(Color.ORANGE));
-
-        });
+        Platform.runLater(this::loadLists);
 
     }
     public void ListGenerator(){
 
     }
     public void loadLists(){
-        int satMorning=0, satLunch=0,satEvening=0, sunMorning=0,sunLunch=0,sunEvening=0,monMorning=0,monLunch=0,monEvening=0,
-                tueMorning=0,tueLunch=0,tueEvening=0,wedMorning=0,wedLunch=0,wedEvening=0, thurMorning=0,thurLunch=0,thurEvening=0,
-                friMorning=0, friLunch=0,friEvening=0,satMorning2=0,satLunch2=0,satEvening2=0;
-        int getMax = Main.getHashList().getBodHash().get(user.getBod()).getAntalFrivillige();
-        int total = 0;
+        ArrayList<String>availList = new ArrayList<>();
+
+
         try {
             Path path = Path.of(Main.hashList.getPathToPendingBod()+ "/"+user.getBod().replaceAll(
                     "[^a-zA-Z0-9]", "") + ".txt");
+            Path availableVagt = Path.of(Main.hashList.getPathToAvailableVagter().toString());
+            Path notAccept = Path.of(Main.hashList.getPathToNotAccepted().toString());
             long count = Files.lines(path).count();
+            long availcount = Files.lines(availableVagt).count();
+            for (int j = 0; j < availcount; j++) {
+                String availLine = Files.readAllLines(availableVagt).get(j);
+                availList.add(availLine);
+            }
             for (int i = 0; i < count; i++) {
+
+
                 String line = Files.readAllLines(path).get(i);
+
+//                String noAcceptLine = Files.readAllLines(notAccept).get(i);
                 if (!line.trim().equals("")) {
                     String[] profil = line.split(",");
                     String mail = profil[0];
@@ -115,86 +121,132 @@ loadLists();
                     String day = profil[3];
                     String vagt = profil[4];
                     String name = Main.getHashList().getEmailHash().get(mail);
-                    String address = Main.getHashList().getEmailHash().get(mail);
+                    //String address = Main.getHashList().getPersons().get(name).get(i).getAddress();
 
-                    switch (day){
-                        case "Lørdag d. 25/6":
-                            if(satMorning!=getMax || satLunch!=getMax || satEvening!=getMax){
-                                if(vagt.equals("08:00-14:00")){ satMorningList.getItems().add(name);satMorning+=1;}
-                                else if(vagt.equals("14:00-20:00")){ satLunchList.getItems().add(name);satLunch+=1;}
-                                else{satEveningList.getItems().add(name);satEvening+=1;}
-                                total+=1;
-                                break;
-                            }
-                        case "Søndag d. 26/6":
-                            if(sunMorning!=getMax || sunLunch!=getMax || sunEvening!=getMax){
-                                if(vagt.equals("08:00-14:00")){ sunMorningList.getItems().add(name);sunMorning+=1;}
-                                else if(vagt.equals("14:00-20:00")){ sunLunchList.getItems().add(name);sunLunch+=1;}
-                                else{sunEveningList.getItems().add(name);sunEvening+=1;}
-                                total+=1;
-                                break;
-                            }
-                        case "Mandag d. 27/6":
-                            if(monMorning!=getMax || monLunch!=getMax || monEvening!=getMax){
-                                if(vagt.equals("08:00-14:00")){ monMorningList.getItems().add(name);monMorning+=1;}
-                                else if(vagt.equals("14:00-20:00")){ monLunchList.getItems().add(name);monLunch+=1;}
-                                else{monEveningList.getItems().add(name);monEvening+=1;}
-                                total+=1;
-                                break;
-                            }
-                        case "Tirsdag d. 28/6":
-                            if(tueMorning!=getMax || tueLunch!=getMax || tueEvening!=getMax){
-                                if(vagt.equals("08:00-14:00")){ tueMorningList.getItems().add(name); tueMorning+=1;}
-                                else if(vagt.equals("14:00-20:00")){ tueLunchList.getItems().add(name); tueLunch+=1;}
-                                else{tueEveningList.getItems().add(name); tueEvening+=1;}
-                                total+=1;
-                                break;
-                            }
-                        case "Onsdag d. 29/6":
-                            if(wedMorning!=getMax || wedLunch!=getMax || wedEvening!=getMax){
-                                if(vagt.equals("08:00-14:00")){ wedMorningList.getItems().add(name); wedMorning+=1;}
-                                else if(vagt.equals("14:00-20:00")){ wedLunchList.getItems().add(name); wedLunch+=1;}
-                                else{wedEveningList.getItems().add(name); wedEvening+=1;}
-                                total+=1;
-                                break;
-                            }
-                        case "Torsdag d. 30/6":
-                            if(thurMorning!=getMax || thurLunch!=getMax || thurEvening!=getMax){
-                                if(vagt.equals("08:00-14:00")){ thursMorningList.getItems().add(name); thurMorning+=1;}
-                                else if(vagt.equals("14:00-20:00")){ thursLunchList.getItems().add(name); thurLunch+=1;}
-                                else{thursEveningList.getItems().add(name); thurEvening+=1;}
-                                total+=1;
-                                break;
-                            }
-                        case "Fredag d. 1/7":
-                            if(friMorning!=getMax || friLunch!=getMax || friEvening!=getMax){
-                                if(vagt.equals("08:00-14:00")){ friMorningList.getItems().add(name); friMorning+=1;}
-                                else if(vagt.equals("14:00-20:00")){ friLunchList.getItems().add(name); friLunch+=1;}
-                                else{friEveningList.getItems().add(name); friEvening+=1;}
-                                total+=1;
-                                break;
-                            }
-                        case "Lørdag d. 2/7":
-                            if(satMorning2!=getMax || satLunch2!=getMax || satEvening2!=getMax){
-                                if(vagt.equals("08:00-14:00")){ satMorningList2.getItems().add(name); satMorning2+=1;}
-                                else if(vagt.equals("14:00-20:00")){ satLunchList2.getItems().add(name); satLunch2+=1;}
-                                else{satEveningList2.getItems().add(name); satEvening2+=1;}
-                                total+=1;
-                                break;
-                            }
-                    }
+
+                    insertVagtlist(day, name, vagt, mail);
 
 
 
                 }
-
-
             }
+
 
         }catch(Exception e){
             e.printStackTrace();
 
         }
+        updateAvailable();
+        saveAvailable();
+    }
+    public void insertVagtlist(String day, String name, String vagt, String mail){
+        int getMax = Main.getHashList().getBodHash().get(user.getBod()).getAntalFrivillige();
+        switch (day){
+            case "Lørdag d. 25/6":
+                if(satMorning!=getMax || satLunch!=getMax || satEvening!=getMax){
+                    if(vagt.equals("08:00-14:00")){ satMorningList.getItems().add(name);satMorning+=1;}
+                    else if(vagt.equals("14:00-20:00")){ satLunchList.getItems().add(name);satLunch+=1;}
+                    else{satEveningList.getItems().add(name);satEvening+=1;}
+                    break;
+                }
+            case "Søndag d. 26/6":
+                if(sunMorning!=getMax || sunLunch!=getMax || sunEvening!=getMax){
+                    if(vagt.equals("08:00-14:00")){ sunMorningList.getItems().add(name);sunMorning+=1;}
+                    else if(vagt.equals("14:00-20:00")){ sunLunchList.getItems().add(name);sunLunch+=1;}
+                    else{sunEveningList.getItems().add(name);sunEvening+=1;}
+                    break;
+                }
+            case "Mandag d. 27/6":
+                if(monMorning!=getMax || monLunch!=getMax || monEvening!=getMax){
+                    if(vagt.equals("08:00-14:00")){ monMorningList.getItems().add(name);monMorning+=1;}
+                    else if(vagt.equals("14:00-20:00")){ monLunchList.getItems().add(name);monLunch+=1;}
+                    else{monEveningList.getItems().add(name);monEvening+=1;}
+                    break;
+                }else{
+                    notAccepted.add(mail);
+                }
+            case "Tirsdag d. 28/6":
+                if(tueMorning!=getMax || tueLunch!=getMax || tueEvening!=getMax){
+                    if(vagt.equals("08:00-14:00")){ tueMorningList.getItems().add(name); tueMorning+=1;}
+                    else if(vagt.equals("14:00-20:00")){ tueLunchList.getItems().add(name); tueLunch+=1;}
+                    else{tueEveningList.getItems().add(name); tueEvening+=1;}
+                    break;
+                }else{
+                    notAccepted.add(mail);
+                }
+            case "Onsdag d. 29/6":
+                if(wedMorning!=getMax || wedLunch!=getMax || wedEvening!=getMax){
+                    if(vagt.equals("08:00-14:00")){ wedMorningList.getItems().add(name); wedMorning+=1;}
+                    else if(vagt.equals("14:00-20:00")){ wedLunchList.getItems().add(name); wedLunch+=1;}
+                    else{wedEveningList.getItems().add(name); wedEvening+=1;}
+                    break;
+                }
+                else{
+                    notAccepted.add(mail);
+                }
+            case "Torsdag d. 30/6":
+                if(thurMorning!=getMax || thurLunch!=getMax || thurEvening!=getMax){
+                    if(vagt.equals("08:00-14:00")){ thursMorningList.getItems().add(name); thurMorning+=1;}
+                    else if(vagt.equals("14:00-20:00")){ thursLunchList.getItems().add(name); thurLunch+=1;}
+                    else{thursEveningList.getItems().add(name); thurEvening+=1;}
+                    break;
+                }else{
+                    notAccepted.add(mail);
+                }
+            case "Fredag d. 1/7":
+                if(friMorning!=getMax || friLunch!=getMax || friEvening!=getMax){
+                    if(vagt.equals("08:00-14:00")){ friMorningList.getItems().add(name); friMorning+=1;}
+                    else if(vagt.equals("14:00-20:00")){ friLunchList.getItems().add(name); friLunch+=1;}
+                    else{friEveningList.getItems().add(name); friEvening+=1;}
+                    break;
+                }else{
+                    notAccepted.add(mail);
+                }
+            case "Lørdag d. 2/7":
+                if(satMorning2!=getMax || satLunch2!=getMax || satEvening2!=getMax){
+                    if(vagt.equals("08:00-14:00")){ satMorningList2.getItems().add(name); satMorning2+=1;}
+                    else if(vagt.equals("14:00-20:00")){ satLunchList2.getItems().add(name); satLunch2+=1;}
+                    else{satEveningList2.getItems().add(name); satEvening2+=1;}
+                    break;
+                }else{
+                    notAccepted.add(mail);
+                }
+        }
+
+    }
+    public void updateAvailable(){
+        int getMax = Main.getHashList().getBodHash().get(user.getBod()).getAntalFrivillige();
+        String saveLine = user.getBod();
+        if(satMorning<getMax){ saveAvailable.add(saveLine+",Lørdag d. 25/6,08:00-14:00"); }
+        if(satLunch<getMax){ saveAvailable.add(saveLine+",Lørdag d. 25/6,14:00-20:00");}
+        if(satEvening<getMax){ saveAvailable.add(saveLine+",Lørdag d. 25/6,20:00-02:00");}
+        if(sunMorning<getMax){ saveAvailable.add(saveLine+",Søndag d. 26/6,08:00-14:00"); }
+        if(sunLunch<getMax){ saveAvailable.add(saveLine+",Søndag d. 26/6,14:00-20:00"); }
+        if(sunEvening<getMax){ saveAvailable.add(saveLine+",Søndag d. 26/6,20:00-02:00"); }
+        if(monMorning<getMax){ saveAvailable.add(saveLine+",Mandag d. 27/6,08:00-14:00");}
+        if(monLunch<getMax){ saveAvailable.add(saveLine+",Mandag d. 27/6,08:00-14:00");}
+        if(monEvening<getMax){ saveAvailable.add(saveLine+",Mandag d. 27/6,14:00-20:00");}
+        if(tueMorning<getMax){ saveAvailable.add(saveLine+",Tirsdag d. 28/6,08:00-14:00");}
+        if(tueLunch<getMax){ saveAvailable.add(saveLine+",Tirsdag d. 28/6,14:00-20:00");}
+        if(tueEvening<getMax){ saveAvailable.add(saveLine+",Tirsdag d. 28/6,20:00-02:00");}
+        if(wedMorning<getMax){ saveAvailable.add(saveLine+",Onsdag d. 29/6,08:00-14:00");}
+        if(wedLunch<getMax){ saveAvailable.add(saveLine+",Onsdag d. 29/6,14:00-20:00");}
+        if(wedEvening<getMax){ saveAvailable.add(saveLine+",Onsdag d. 29/6,20:00-02:00");}
+        if(thurMorning<getMax){ saveAvailable.add(saveLine+",Torsdag d. 30/6,08:00-14:00");}
+        if(thurLunch<getMax){ saveAvailable.add(saveLine+",Torsdag d. 30/6,14:00-20:00");}
+        if(thurEvening<getMax){ saveAvailable.add(saveLine+",Torsdag d. 30/6,20:00-02:00");}
+        if(friMorning<getMax){ saveAvailable.add(saveLine+",Fredag d. 1/7,08:00-14:00");}
+        if(friLunch<getMax){ saveAvailable.add(saveLine+",Fredag d. 1/7,14:00-20:00");}
+        if(friEvening<getMax){ saveAvailable.add(saveLine+",Fredag d. 1/7,20:00-02:00");}
+        if(satMorning2<getMax){ saveAvailable.add(saveLine+",Lørdag d. 2/7,08:00-14:00");}
+        if(satLunch2<getMax){ saveAvailable.add(saveLine+",Lørdag d. 2/7,14:00-20:00");}
+        if(satEvening2<getMax){ saveAvailable.add(saveLine+",Lørdag d. 2/7,20:00-02:00");}
+
+
+    }
+    public void saveAvailable(){
+        backend.txtFileWriter saveAvailWrite = new txtFileWriter();
+        saveAvailWrite.writeAvailable(saveAvailable);
     }
 
     public void displayAdminName(String username) {
@@ -204,15 +256,9 @@ loadLists();
         rightsLabel.setText("Bod-Ansvarlig: "+bod);
     }
     public void backBtn(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("ansvarlig.fxml"));
-        root = loader.load();
-        ansvarligController ansvarlig = loader.getController();
-        ansvarlig.setUser(user);
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setResizable(false);
-        stage.setScene(scene);
-        stage.show();
+        backend.sceneSwitcher ansScreen = new sceneSwitcher();
+        ansScreen.setUser(user);
+        ansScreen.ansvarligScreen(event);
     }
     public void anslogout(ActionEvent event) throws IOException {
 
@@ -222,20 +268,8 @@ loadLists();
         alert.setContentText("Do you want to save before exiting?: ");
 
         if(alert.showAndWait().get()== ButtonType.OK){
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
-                Parent root = loader.load();
-                String filePath = new File("").getAbsolutePath();
-                loginController login = loader.getController();
-                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                scene = new Scene(root);
-                stage.setScene(scene);
-                stage.setResizable(false);
-                stage.show();
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            backend.sceneSwitcher login = new sceneSwitcher();
+            login.loginScreen(event);
         }
     }
 

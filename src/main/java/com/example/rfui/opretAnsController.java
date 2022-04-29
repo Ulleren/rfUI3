@@ -1,50 +1,23 @@
 package com.example.rfui;
 
-import backend.Admin;
-import backend.Ansvarlig;
-import backend.Frivillig;
-import backend.Bod;
+import backend.*;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Border;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.ResourceBundle;
-
 import static com.example.rfui.Main.hashList;
 
-
 public class opretAnsController implements Initializable {
-    @FXML private Button logoutBtn;
-    @FXML private Button backBtn;
-    @FXML private Button saveBtn;
-    @FXML private Button resetBtn;
+
     @FXML private Stage opAnsStage;
     @FXML private AnchorPane opAnsPane;
-    @FXML private ImageView imageCup;
-    @FXML private Parent root;
-    @FXML private Stage stage;
-    @FXML private Scene scene;
     @FXML private ComboBox<String> bodBox;
     @FXML private TextField nameTextfield;
     @FXML private TextField phoneTextfield;
@@ -57,31 +30,23 @@ public class opretAnsController implements Initializable {
     @FXML private Label passwordErrorLabel;
     @FXML private Label addressErrorLabel;
     @FXML private Label emailErrorLabel;
-    @FXML private Label adminnameLabel;
-    @FXML private CheckBox adminCheckbox;
-    @FXML private CheckBox frivilligCheckbox;
-    @FXML private CheckBox ansCheckbox;
     @FXML private RadioButton BodRadioBtn;
     @FXML private RadioButton friRadioBtn;
     @FXML private RadioButton adminRadioBtn;
     @FXML ToggleGroup radioGroup;
+    ArrayList<String>bodList=new ArrayList<>();
+
     private loginController.User user;
     public loginController.User getUser(){
         return user;
     }
     public void setUser(loginController.User user){
         this.user = user;
-        //displayAdminName(user.getName());
     }
     public void backBtn(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("adminScreen.fxml"));
-        root = loader.load();
-        adminScreenController adminController = loader.getController();
-        adminController.setUser(user);
-        stage =(Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        backend.sceneSwitcher admScrn = new sceneSwitcher();
+        admScrn.setUser(user);
+        admScrn.adminScreen(event);
     }
     public void clearText(ActionEvent event){
         nameTextfield.setText("");
@@ -109,12 +74,10 @@ public class opretAnsController implements Initializable {
             else{
                 saveFile(event);
             }
-
         }
     }
     private boolean textFieldIsValid(){
-        String password = passwordTextfield.getText();
-        String password2= password2Textfield.getText();
+
         boolean validTextFields = true;
 
         if(!nameTextfield.getText().matches("[aA-zZ ]+$")){
@@ -229,44 +192,15 @@ public class opretAnsController implements Initializable {
         hashList.searchName(profil[0]).get(index).setRole(profil[5]);
         hashList.searchName(profil[0]).get(index).setStand(profil[6]);
 
-
-        FileWriter filewriter;
-
-        try{
-            filewriter = new FileWriter(hashList.getPathToPersons().toString(),true);
-            BufferedWriter bw = new BufferedWriter(filewriter);
-            bw.write(line+"\n");
-            bw.flush();
-            bw.close();
-            filewriter.close();
-            System.out.println(line);
-
-
-        }catch(IOException e){
-            System.out.println("add line failed"+e);
-        }
+        backend.txtFileWriter personWrite = new txtFileWriter();
+        personWrite.setUser(user);
+        personWrite.personsWrite(line);
         if(roleCheck.equals("Frivillig")){
             String acceptTerms = emailTextfield.getText();
-            try{
-                filewriter = new FileWriter(Main.hashList.getPathToNotAccepted().toString(),true);
-                BufferedWriter bw = new BufferedWriter(filewriter);
-                bw.write(acceptTerms+"\n");
-                bw.flush();
-                bw.close();
-                filewriter.close();
-                System.out.println(acceptTerms);
-                clearText(event);
-
-
-            }catch(IOException e){
-                System.out.println("add line failed"+e);
-            }
+            backend.txtFileWriter notAcceptList = new txtFileWriter();
+            notAcceptList.setUser(user);
+            notAcceptList.writeNotAccepted(acceptTerms);
         }
-
-
-    }
-    public void displayAdminName(String username){
-        adminnameLabel.setText("Logged ind som: " +username);
     }
     public void adminlogout(ActionEvent event) throws IOException {
 
@@ -276,56 +210,29 @@ public class opretAnsController implements Initializable {
         alert.setContentText("Vil du gemme ændringerne inden: ");
 
         if(alert.showAndWait().get()== ButtonType.OK){
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
-                Parent root = loader.load();
-                String filePath = new File("").getAbsolutePath();
-                loginController login = loader.getController();
-                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            backend.sceneSwitcher login = new sceneSwitcher();
+            login.loginScreen(event);
         }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Platform.runLater(() -> {
-            bodBox.getItems().removeAll(bodBox.getItems());
             comboBox();
+            bodBox.getItems().removeAll(bodBox.getItems());
 
-            //bodBox.getItems().addAll("SNAIL 'N CHIPS","Mocktail Bar","Tuborg Orange","Meyers Køkken","Bus-Boden","Ski-Burger");
             final ToggleGroup radioGroup = new ToggleGroup();
             BodRadioBtn.setToggleGroup(radioGroup);
             BodRadioBtn.setSelected(true);
             friRadioBtn.setToggleGroup(radioGroup);
             adminRadioBtn.setToggleGroup(radioGroup);
+
         });
 
     }
     public void comboBox(){
-        try {
-            Path path = hashList.getPathToBoder();
-
-            long count = Files.lines(path).count();
-            for (int i = 0; i < count; i++) {
-                String line = Files.readAllLines(path).get(i);
-                if (!line.trim().equals("")) {
-                    String[] profil = line.split(",");
-                    String name = profil[0];
-                    String location = profil[1];
-                    String maxFrivillig = profil[2];
-                    String ansvarlig = profil[3];
-
-                    bodBox.getItems().add(profil[0]);
-                }
-            }
-        }catch(Exception e){
-            e.printStackTrace();
-        }
+        backend.txtFileReader bodRead =new txtFileReader();
+        bodRead.bodListReader(bodList);
+        bodBox.getItems().addAll(bodList);
     }
 }

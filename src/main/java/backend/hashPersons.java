@@ -25,6 +25,7 @@ public class hashPersons {
     final Path pathToPending = Paths.get(filePath.concat("/src/main/resources/database/pendingVagter.txt"));
     final Path pathToPendingBod = Paths.get(filePath.concat("/src/main/resources/database/boder"));
     final Path pathToCheckRejected = Paths.get(filePath.concat("/src/main/resources/database/rejectedVagter.txt"));
+    final Path pathToAvailableVagter = Paths.get(filePath.concat("/src/main/resources/database/availableVagter.txt"));
     public hashPersons() {
     }
 
@@ -153,6 +154,7 @@ public class hashPersons {
     public Path getPathToCheckRejected(){
         return pathToCheckRejected;
     }
+    public Path getPathToAvailableVagter(){ return pathToAvailableVagter;}
 
     public static void setFilePath(String filePath) {
         hashPersons.filePath = filePath;

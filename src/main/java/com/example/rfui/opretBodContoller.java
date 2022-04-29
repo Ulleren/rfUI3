@@ -2,40 +2,22 @@ package com.example.rfui;
 
 import backend.Ansvarlig;
 import backend.Bod;
+import backend.sceneSwitcher;
+import backend.txtFileWriter;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
-
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-
 public class opretBodContoller implements Initializable {
-    @FXML
-    private AnchorPane opretBodPane;
-    @FXML
-    private ImageView frikadillerImageView;
-    @FXML
-    private Parent root;
+
     @FXML
     private Label adminNameLabel;
-    @FXML
-    private Label rightsLabel;
-    @FXML
-    private Button backBtn;
     @FXML
     private TextField bodName;
     @FXML
@@ -55,10 +37,6 @@ public class opretBodContoller implements Initializable {
     @FXML
     private ComboBox<Integer> maxFrivilligCombo;
     @FXML
-    private Button resetBtn;
-    @FXML
-    private Button saveBodBtn;
-    @FXML
     private Label bodErrorLabel;
     @FXML
     private Label nameErrorLabel;
@@ -72,31 +50,24 @@ public class opretBodContoller implements Initializable {
     private Label locationErrorLabel;
     @FXML
     private Label mailErrorLabel;
-    private Scene scene;
-
-    Stage adminstage;
 
     private loginController.User user;
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //Bod bod = new Bod("spagetti bod", "camping", "Ulriks mor");
-        locationCombo.getItems().removeAll(locationCombo.getItems());
-        locationCombo.getItems().addAll("Festival Plads", "Camping Område", "Get-A-Place", "Silent & Clean", "Dream City", "MC Camping", "Settle 'N Share", "Special Camping", "Clean Out Loud");
-        maxFrivilligCombo.getItems().removeAll(maxFrivilligCombo.getItems());
-        maxFrivilligCombo.getItems().addAll(1, 2, 3);
+        Platform.runLater(() -> {
+            locationCombo.getItems().removeAll(locationCombo.getItems());
+            locationCombo.getItems().addAll("Festival Plads", "Camping Område", "Get-A-Place", "Silent & Clean", "Dream City", "MC Camping", "Settle 'N Share", "Special Camping", "Clean Out Loud");
+            maxFrivilligCombo.getItems().removeAll(maxFrivilligCombo.getItems());
+            maxFrivilligCombo.getItems().addAll(1, 2, 3);
+            displayAdminName(user.getName());
+        });
     }
-
     public loginController.User getUser() {
         return user;
     }
-
     public void setUser(loginController.User user) {
         this.user = user;
-
-        displayAdminName(user.getName());
     }
-
     public void saveBod(ActionEvent event) {
         String location = locationCombo.getValue();
         Integer maxFrivillige = maxFrivilligCombo.getValue();
@@ -104,37 +75,9 @@ public class opretBodContoller implements Initializable {
 
         Main.getHashList().getBodHash().put(bodName.getText(), new Bod(bodName.getText(), location, maxFrivillige, ansName.getText()));
 
-        FileWriter filewriter;
-
-        try {
-            filewriter = new FileWriter(Main.hashList.getPathToBoder().toString(), true);
-            BufferedWriter bw = new BufferedWriter(filewriter);
-            bw.write(bodSave + "\n");
-            bw.flush();
-            bw.close();
-            filewriter.close();
-            System.out.println(bodSave);
-            //clearText(event);
-
-        } catch (IOException e) {
-            System.out.println("add line failed" + e);
-        }
-        try {
-            filewriter = new FileWriter(Main.hashList.getPathToPendingBod().toString()+"/"+bodName.getText().replaceAll(
-                    "[^a-zA-Z0-9]", "")+".txt", true);
-            BufferedWriter bw = new BufferedWriter(filewriter);
-            bw.write(bodSave + "\n");
-            bw.flush();
-            bw.close();
-            filewriter.close();
-            System.out.println(bodSave);
-            //clearText(event);
-
-        } catch (IOException e) {
-            System.out.println("add line failed" + e);
-        }
+        backend.txtFileWriter saveBod = new txtFileWriter();
+        saveBod.writeBoder(bodSave);
     }
-
     public void saveAnsvarlig(ActionEvent event) {
         if (!textFieldIsValid()) {
             System.out.println("not valid");
@@ -147,7 +90,6 @@ public class opretBodContoller implements Initializable {
             }
         }
     }
-
     public void saveFile(ActionEvent event) {
         String line = ansName.getText() + "," + ansPhone.getText() + "," + ansPass1.getText() + "," + ansMail.getText() + "," + ansAddress.getText()
                 + "," + "Ansvarlig" + "," + bodName.getText();
@@ -159,24 +101,10 @@ public class opretBodContoller implements Initializable {
             Main.getHashList().getPersons().get(ansName.getText()).add(new Ansvarlig(ansName.getText(), ansPhone.getText(),
                     ansPass1.getText(), ansMail.getText(), ansAddress.getText(), Main.getHashList().getBodHash().get(bodName.getText())));
         }
-
-        FileWriter filewriter;
-
-        try {
-            filewriter = new FileWriter(Main.hashList.getPathToPersons().toString(), true);
-            BufferedWriter bw = new BufferedWriter(filewriter);
-            bw.write(line + "\n");
-            bw.flush();
-            bw.close();
-            filewriter.close();
-            System.out.println(line);
-            clearText(event);
-
-        } catch (IOException e) {
-            System.out.println("add line failed" + e);
-        }
+        backend.txtFileWriter savePers = new txtFileWriter();
+        savePers.newUser(line);
+        clearText(event);
     }
-
     public void confirmSave(ActionEvent event) {
         Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
         confirm.setTitle("Bekræft Oprettelse");
@@ -190,7 +118,6 @@ public class opretBodContoller implements Initializable {
             clearText(event);
         }
     }
-
     private boolean textFieldIsValid() {
         String password = ansPass1.getText();
         String password2 = ansPass2.getText();
@@ -204,7 +131,6 @@ public class opretBodContoller implements Initializable {
             nameErrorLabel.setText("Indtast et navn");
             validTextFields = false;
         }
-
         if (!ansPhone.getText().matches("^\\d{8}$")) {
             phoneErrorLabel.setText("Indtast gyldigt telefonnummer");
             validTextFields = false;
@@ -220,12 +146,10 @@ public class opretBodContoller implements Initializable {
             mailErrorLabel.setText("indtast en emailadresse");
             validTextFields = false;
         }
-
         if (ansAddress.getText().isBlank()) {
             addressErrorLabel.setText("Indtast en adresse");
             validTextFields = false;
         }
-
         if (!ansPass1.getText().matches(ansPass2.getText())) {
             passwordErrorLabel.setText("Kodeord er ikke ens");
             validTextFields = false;
@@ -235,7 +159,6 @@ public class opretBodContoller implements Initializable {
         }
         return validTextFields;
     }
-
     public boolean isBodNameValid() {
         boolean validBodField = true;
         if (!bodName.getText().matches("[aA-zZ ]+$")) {
@@ -251,7 +174,6 @@ public class opretBodContoller implements Initializable {
         }
         return validBodField;
     }
-
     public boolean emailExists() {
         boolean emailCheck = true;
         try {
@@ -289,16 +211,11 @@ public class opretBodContoller implements Initializable {
 
         locationCombo.getSelectionModel().clearSelection();
         locationCombo.setValue(null);
-//        nameErrorLabel.setText("");
-//        phoneErrorLabel.setText("");
-//        passwordErrorLabel.setText("");
-//        emailErrorLabel.setText("");
     }
 
     public void displayAdminName(String username) {
         adminNameLabel.setText("Logged ind som: " + username);
     }
-
     public void adminlogout(ActionEvent event) throws IOException {
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -307,30 +224,13 @@ public class opretBodContoller implements Initializable {
         alert.setContentText("Do you want to save before exiting?: ");
 
         if (alert.showAndWait().get() == ButtonType.OK) {
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
-                Parent root = loader.load();
-                String filePath = new File("").getAbsolutePath();
-                loginController login = loader.getController();
-                adminstage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                scene = new Scene(root);
-                adminstage.setScene(scene);
-                adminstage.show();
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            backend.sceneSwitcher loginScr =new sceneSwitcher();
+            loginScr.loginScreen(event);
         }
     }
-
     public void backBtn(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("adminScreen.fxml"));
-        root = loader.load();
-        adminScreenController adminController = loader.getController();
-        adminController.setUser(user);
-        adminstage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        adminstage.setScene(scene);
-        adminstage.show();
+        backend.sceneSwitcher admScr = new sceneSwitcher();
+        admScr.setUser(user);
+        admScr.adminScreen(event);
     }
 }

@@ -93,22 +93,9 @@ public class Main extends Application {
     }
 
     public void loadBoder() {
-        try {
-            String filePath = new File("").getAbsolutePath();
-            Path path = hashList.getPathToBoder();
-                    Paths.get(filePath.concat("/src/main/resources/com/example/rfui/boder.txt"));
-            long count = Files.lines(path).count();
-            for (int i = 0; i < count; i++) {
-                String line = Files.readAllLines(path).get(i);
-                String[] bod = line.split(",");
-                if (!line.trim().equals("")) {
-                    hashList.getBodHash().put(bod[0], new Bod(bod[0], bod[1], Integer.parseInt(bod[2]), bod[3]));
-                }
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        ArrayList<String>bodList = new ArrayList<>();
+        backend.txtFileReader loadbod = new txtFileReader();
+        loadbod.loadBoder();
     }
     public void loadVagter() {
         try {

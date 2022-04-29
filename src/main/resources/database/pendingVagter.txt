@@ -1,13 +1,5 @@
-jr@sp.dk,33554422,Ski-Burger,Lørdag d. 25/6,20:00-02:00
-jr@sp.dk,33554422,Ski-Burger,Torsdag d. 30/6,14:00-20:00
-jr@sp.dk,33554422,Ski-Burger,Mandag d. 27/6,20:00-02:00
-jr@sp.dk,33554422,Ski-Burger,Lørdag d. 2/7,14:00-20:00
-jr@sp.dk,33554422,Tuborg Orange,Tirsdag d. 28/6,20:00-02:00
-kk@busse.com,22131415,Ski-Burger,Søndag d. 26/6,08:00-14:00
-kk@busse.com,22131415,Ski-Burger,Mandag d. 27/6,08:00-14:00
-kk@busse.com,22131415,Ski-Burger,Tirsdag d. 28/6,14:00-20:00
-kk@busse.com,22131415,Ski-Burger,Onsdag d. 29/6,14:00-20:00
-kk@busse.com,22131415,Tuborg Orange,Torsdag d. 30/6,20:00-02:00
-varg@burzum.no,66600666,Tuborg Orange,Mandag d. 27/6,08:00-14:00
-mf@opeth.se,71726348,Tuborg Orange,Lørdag d. 2/7,14:00-20:00
-sk@jj.com,44535214,Tuborg Orange,Torsdag d. 30/6,14:00-20:00
+jr@sp.dk,33554422,Tuborg Orange,Lørdag d. 25/6,08:00-14:00
+jr@sp.dk,33554422,Tuborg Orange,Søndag d. 26/6,14:00-20:00
+jr@sp.dk,33554422,Tuborg Orange,Mandag d. 27/6,14:00-20:00
+jr@sp.dk,33554422,Tuborg Orange,Onsdag d. 29/6,14:00-20:00
+jr@sp.dk,33554422,Tuborg Orange,Torsdag d. 30/6,08:00-14:00

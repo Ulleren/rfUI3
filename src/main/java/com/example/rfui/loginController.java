@@ -1,24 +1,14 @@
 package com.example.rfui;
 
 import backend.Bod;
+import backend.sceneSwitcher;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
-import java.io.FileNotFoundException;
-
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class loginController {
     @FXML
@@ -26,42 +16,26 @@ public class loginController {
     @FXML
     public Label loginMessageLabel;
     @FXML
-    private ImageView brandingImageView;
-    @FXML
     private TextField usernameTextfield;
     @FXML
     private PasswordField passwordTextfield;
-
-    @FXML
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
-
-    @FXML
-    private ComboBox<String> bodBox;
-
     public class User {
         private String name;
         private String bod;
         private String phone;
-
         private String email;
-
         public String getBod() {
             return bod;
         }
-
         public void setBod(Bod bod) {
             this.bod = String.valueOf(bod);
         }
-
         public User(String name, String bod, String email, String phone) {
             this.name = name;
             this.bod = bod;
             this.email=email;
             this.phone=phone;
         }
-
         public User(String name, Bod bod){
 
         }
@@ -106,61 +80,35 @@ public class loginController {
                             switch (Main.getHashList().getPersons().get(name).get(i).getRole()) {
                                 case "Admin" -> {
                                     String tlf = Main.getHashList().getPersons().get(name).get(i).getPhonenumber();
+                                    String boder = Main.getHashList().getPersons().get(name).get(i).getStand();
                                     System.out.println("Admin bruger fundet");
-                                    FXMLLoader loader = new FXMLLoader(getClass().getResource("adminScreen.fxml"));
-                                    root = loader.load();
-                                    adminScreenController adminController = loader.getController();
-                                    adminController.setUser(new User(name,"Kontor",inputEmail, tlf));
-                                    stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                                    scene = new Scene(root);
-                                    stage.setScene(scene);
-                                    stage.setResizable(false);
-                                    stage.show();
+                                    backend.sceneSwitcher admScreen = new sceneSwitcher();
+                                    admScreen.setUser(new User(name, boder, inputEmail, tlf));
+                                    admScreen.adminScreen(event);
+
                                 }
                                 case "Frivillig" -> {
                                     String boder = Main.getHashList().getPersons().get(name).get(i).getStand();
                                     String tlf = Main.getHashList().getPersons().get(name).get(i).getPhonenumber();
                                     if(NotAccepted(inputEmail)){
                                         System.out.println("Frivillig not accepted");
-                                        FXMLLoader loader = new FXMLLoader(getClass().getResource("NyFrivillig.fxml"));
-                                        root = loader.load();
-                                        NyFrivilligController nyfrivillig = loader.getController();
-                                        nyfrivillig.setUser(new User(name, boder, inputEmail, tlf));
-                                        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                                        scene = new Scene(root);
-                                        stage.setScene(scene);
-                                        stage.setResizable(false);
-                                        stage.show();
+                                        backend.sceneSwitcher nyFriVagt = new sceneSwitcher();
+                                        nyFriVagt.setUser(new loginController.User(name, boder, inputEmail, tlf));
+                                        nyFriVagt.nyFrivillig(event);
                                     }
                                     else{
                                         System.out.println("Frivillig accepted");
-                                        FXMLLoader loader = new FXMLLoader(getClass().getResource("Frivillig.fxml"));
-                                        root = loader.load();
-                                        FrivilligController frivilligcont = loader.getController();
-                                        frivilligcont.setUser(new User(name, boder, inputEmail,tlf));
-                                        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                                        scene = new Scene(root);
-                                        stage.setScene(scene);
-                                        stage.setResizable(false);
-                                        stage.show();
+                                        backend.sceneSwitcher friVagt = new sceneSwitcher();
+                                        friVagt.setUser(new loginController.User(name, boder, inputEmail,tlf));
+                                        friVagt.frivilligVagt(event);
                                     }
                                 }
                                 case "Ansvarlig" -> {
                                     String tlf = Main.getHashList().getPersons().get(name).get(i).getPhonenumber();
                                     String boder = Main.getHashList().getPersons().get(name).get(i).getStand();
-                                    System.out.println("Ansvarlig bruger fundet");
-                                    FXMLLoader loader = new FXMLLoader(getClass().getResource("ansvarlig.fxml"));
-
-                                    root = loader.load();
-                                    ansvarligController ansvarlig = loader.getController();
-                                    ansvarlig.setUser(new User(name,boder, inputEmail,tlf));
-
-
-                                    stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                                    scene = new Scene(root);
-                                    stage.setScene(scene);
-                                    stage.setResizable(false);
-                                    stage.show();
+                                    backend.sceneSwitcher ansScn = new sceneSwitcher();
+                                    ansScn.setUser(new loginController.User(name,boder, inputEmail,tlf));
+                                    ansScn.ansvarligScreen(event);
                                 }
                             }
                         }

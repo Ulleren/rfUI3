@@ -1,32 +1,23 @@
 package com.example.rfui;
 
+import backend.sceneSwitcher;
 import javafx.application.Platform;
-import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Border;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
-
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
-
 import javafx.fxml.Initializable;
 
 
@@ -36,12 +27,6 @@ public class FrivilligController implements Initializable{
     private Label nameLabel;
     @FXML private Label showBodLabel;
     @FXML private Label welcomeLabel;
-    @FXML private AnchorPane friPane;
-    @FXML private AnchorPane tablePane;
-
-    @FXML private Parent root;
-    @FXML private Stage stage;
-    @FXML private Scene scene;
     @FXML private ComboBox<String> bodBox;
     @FXML private ComboBox<String> dayComboBox;
     @FXML private ComboBox<String> vagtComboBox;
@@ -54,18 +39,14 @@ public class FrivilligController implements Initializable{
     @FXML private TableColumn<submitVagt, String>locationCol;
     @FXML private TableColumn<submitVagt, String>timeCol;
     @FXML private TableColumn<submitVagt, String>ansvarCol;
-    @FXML private TableView<chooseVagt>chooseVagtTable;
     @FXML private TableColumn<chooseVagt, String>morningCol;
     @FXML private TableColumn<chooseVagt, String> frokostCol;
     @FXML private TableColumn<chooseVagt, String> eveningCol;
     @FXML private TableColumn<chooseVagt, String>locationCol2;
     @FXML private TableColumn<chooseVagt, String>ansCol2;
-
     @FXML private ComboBox<String> bodBox2;
     @FXML private ComboBox<String> dayComboBox2;
-
     @FXML private Label vagtListErrorLabel;
-    @FXML private Label vagtTabelLabel;
     @FXML private Button tagVagtBtn;
     private int rowCount = 0;
     private int vagtBefore = 0;
@@ -90,7 +71,6 @@ public class FrivilligController implements Initializable{
             initiateCols();
             initiateChooseVagtCols();
 
-
             setVagtBtn.setBorder(Border.stroke(Color.ORANGE));
             deleteVagtBtn.setBorder(Border.stroke(Color.ORANGE));
             indsendVagtBtn.setBorder(Border.stroke(Color.ORANGE));
@@ -107,7 +87,6 @@ public class FrivilligController implements Initializable{
                 indsendVagt.getItems().addAll(vagtList);
             };
         });
-
     }
     public static class submitVagt{
         private SimpleStringProperty Day;
@@ -226,33 +205,37 @@ public class FrivilligController implements Initializable{
                 }
 
             }
-            tableContents.add(user.getEmail()+","+user.getPhone()+","+subVagt.getBodnam()+","+subVagt.getDay()+","+subVagt.getTimeslot());
 
-            System.out.println(tableContents);
+
             vagtList.add(new submitVagt(dayLine,bodLine,locLine,timeLine,ansLine));
+            if(rowCount < 5){
+                if(verifyVagter()){
+                    indsendVagt.getItems().addAll(vagtList);
+                    tableContents.add(user.getEmail()+","+user.getPhone()+","+subVagt.getBodnam()+","+subVagt.getDay()+","+subVagt.getTimeslot());
 
+                    rowCount +=1;
+                    clearCombo();
+                    vagtListErrorLabel.setText("");
+                }
+                else{
+                    if(vagtBefore >=3){
+                        vagtListErrorLabel.setText("Du har allerede 3 vagter inden programstart");
+                        vagtBefore-=1;
+
+                    }
+                    if(vagtAfter >=2){
+                        vagtListErrorLabel.setText("Du har allerede 2 vagter imens programmet kører");
+                        vagtAfter-=1;
+                    }
+                }
+            }
+            else{
+                vagtListErrorLabel.setText("Du har allerede 5 vagter, slet en vagt for at tilføje en ny");
+            }
         }catch(NumberFormatException n){
             n.printStackTrace();
         }
-        if(rowCount < 5){
-            if(verifyVagter()){
-                indsendVagt.getItems().addAll(vagtList);
-                rowCount +=1;
-                clearCombo();
-                vagtListErrorLabel.setText("");
-            }
-            else{
-                if(vagtBefore >=3){
-                    vagtListErrorLabel.setText("Du har allerede 3 vagter inden programstart");
-                }
-                if(vagtAfter >=2){
-                    vagtListErrorLabel.setText("Du har allerede 2 vagter imens programmet kører");
-                }
-            }
-        }
-        else{
-            vagtListErrorLabel.setText("Du har allerede 5 vagter, slet en vagt for at tilføje en ny");
-        }
+        System.out.println(tableContents);
     }
     public void finalizeVagt(ActionEvent event){
         if(rowCount!=5){
@@ -262,8 +245,7 @@ public class FrivilligController implements Initializable{
         List<String> fileContents = new ArrayList<>();
         FileWriter filewriter;
         try {
-            Path path = Path.of(Main.hashList.getPathToPendingBod().toString() + "/" +
-                    bodBox.getValue().replaceAll("[^a-zA-Z0-9]", "") + ".txt");
+            Path path = Path.of(Main.hashList.getPathToPending().toString());
 
             long count = Files.lines(path).count();
             for (int j = 0; j < count; j++) {
@@ -326,7 +308,7 @@ public class FrivilligController implements Initializable{
     public boolean verifyVagter(){
         boolean vagtIsValid = true;
 
-        if(vagtAfter < 2 && vagtBefore < 3 && dayComboBox.getValue()!=null && vagtComboBox.getValue()!=null && bodBox.getValue()!=null){
+        if(vagtAfter < 2 || vagtBefore < 3 && dayComboBox.getValue()!=null && vagtComboBox.getValue()!=null && bodBox.getValue()!=null){
             switch(dayComboBox.getValue()){
                 case "Lørdag d. 25/6" -> {vagtBefore +=1; return vagtIsValid;}
                 case "Søndag d. 26/6" -> {vagtBefore +=1; return vagtIsValid;}
@@ -397,19 +379,8 @@ public class FrivilligController implements Initializable{
         alert.setContentText("Fortsæt?");
 
         if (alert.showAndWait().get() == ButtonType.OK) {
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
-                Parent root = loader.load();
-                String filePath = new File("").getAbsolutePath();
-                loginController login = loader.getController();
-                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            backend.sceneSwitcher logout = new sceneSwitcher();
+            logout.loginScreen(event);
         }
     }
     public void comboBox(){

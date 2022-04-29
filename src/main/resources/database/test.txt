@@ -51,3 +51,4 @@ Ke bab,34343434,kode,ke@bib.dk,dfd,Ansvarlig,Kebabistan
 Martin Tonser,34989723,kode,mt@martun.dk,Købmagervej 23,Frivillig,Tuborg Orange
 Jonna Jungersen,23132324,kode,jj@jungen.dk,jungeve54,Frivillig,Tuborg Orange
 Ulrik S Mohr,23435522,kode,usm@jydekrog.dk,Kertemindevej 22,Frivillig,Tuborg Orange
+testikel testesen,77662233,kode,tt@testy.dk,testervej 22,Ansvarlig,testboden

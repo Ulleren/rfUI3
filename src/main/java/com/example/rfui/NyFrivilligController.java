@@ -1,26 +1,16 @@
 package com.example.rfui;
 
+import backend.sceneSwitcher;
+import backend.txtFileReader;
+import backend.txtFileWriter;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Popup;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-
 import java.io.*;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -29,16 +19,7 @@ import javafx.fxml.Initializable;
 public class NyFrivilligController implements Initializable {
     @FXML private Label welcomeLabel;
     @FXML private Label showBodLabel;
-    @FXML private AnchorPane friPane;
-    @FXML private Parent root;
-    @FXML private Stage stage;
-    @FXML private Scene scene;
-    @FXML private Button logoutBtn;
-    @FXML private Button campFrivilligBtn;
-
-
-
-
+    List<String> fileContents = new ArrayList<>();
     private loginController.User user;
     public loginController.User getUser(){
         return user;
@@ -47,14 +28,10 @@ public class NyFrivilligController implements Initializable {
         this.user = user;
         displayName(user.getName());
         displayBod(user.getBod());
-
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
-
         Platform.runLater(this::PopUp);
-
-
     }
     public void PopUp(){
 
@@ -83,42 +60,18 @@ public class NyFrivilligController implements Initializable {
         }
     }
     public void AcceptSave(){
-        List<String> fileContents = new ArrayList<>();
-        FileWriter filewriter;
-        try {
-            Path path = Main.hashList.getPathToNotAccepted();
 
-            long count = Files.lines(path).count();
-            for (int j = 0; j < count; j++) {
-                String line = Files.readAllLines(path).get(j);
-                String[] temp = line.split("\n");
-                if (!temp[0].equals(user.getEmail())) {
-                    fileContents.add(temp[0]);
-                }
-            }
-            System.out.println(fileContents);
-            filewriter = new FileWriter(Main.hashList.getPathToNotAccepted().toString(),false);
-            BufferedWriter bw = new BufferedWriter(filewriter);
-            for(String fileLine: fileContents){
-                bw.write(fileLine+System.lineSeparator());
-            }
-            bw.flush();
-            bw.close();
-            filewriter.close();
-        }catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        backend.txtFileReader acceptRead = new txtFileReader();
+        acceptRead.setUser(user);
+        acceptRead.acceptTermsReader(fileContents);
+        backend.txtFileWriter acceptWrite = new txtFileWriter();
+        acceptWrite.setUser(user);
+        acceptWrite.acceptTermsWriter(fileContents);
     }
     public void campFrivillig(ActionEvent event) throws IOException {
-        System.out.println("Frivillig accepted");
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Frivillig.fxml"));
-        root = loader.load();
-        FrivilligController frivilligcont = loader.getController();
-        frivilligcont.setUser(user);
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        backend.sceneSwitcher friVagt = new sceneSwitcher();
+        friVagt.setUser(user);
+        friVagt.frivilligVagt(event);
     }
     public void displayName(String username){
         welcomeLabel.setText("VELKOMMEN " +username);
@@ -134,19 +87,8 @@ public class NyFrivilligController implements Initializable {
         alert.setContentText("Fortsæt?");
 
         if (alert.showAndWait().get() == ButtonType.OK) {
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
-                Parent root = loader.load();
-                String filePath = new File("").getAbsolutePath();
-                loginController login = loader.getController();
-                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            backend.sceneSwitcher login = new sceneSwitcher();
+            login.loginScreen(event);
         }
     }
 }

@@ -1,5 +1,8 @@
 package com.example.rfui;
 
+import backend.sceneSwitcher;
+import backend.txtFileReader;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -7,37 +10,29 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
+
 import javafx.stage.Stage;
 import javafx.fxml.Initializable;
 
-import java.io.File;
+
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
+
 import java.util.ResourceBundle;
 
 public class AdminSearchController implements Initializable {
 
-    @FXML private AnchorPane adSearchPane;
-    @FXML private Button adminlogoutButton;
-    @FXML private Button deleteRowBtn;
-    @FXML private Button backBtn;
-    @FXML private Label rightsLabel1;
+
     @FXML private Label adminnameLabel;
     @FXML private Parent root;
     @FXML Scene scene;
-    @FXML private ComboBox<String>searchChoiceBox;
     @FXML private TextField adminSearchTextField;
-    @FXML private Button adminSearchBtn;
     @FXML private TableColumn<results,String> nameTable;
     @FXML private TableColumn<results,String> phoneTable;
     @FXML private TableColumn<results,String> emailTable;
@@ -45,26 +40,18 @@ public class AdminSearchController implements Initializable {
     @FXML private TableColumn<results,String> bodTable;
     @FXML private TableColumn<results, String> roleTable;
     @FXML private TableView<results> resultTableView;
-
     ObservableList<results> list = FXCollections.observableArrayList();
-
-    Stage adminstage;
     private loginController.User user;
-    public loginController.User getUser(){
-        return user;
-    }
     public void setUser(loginController.User user){
         this.user = user;
-        displayAdminName(user.getName());
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
-//        searchChoiceBox.getItems().addAll("Navn","Telefon","Email","Bod","Bod-Ansvarlige","Frivillige","Alle");
-//        searchChoiceBox.setPromptText("Vælg kriterie");
-//        searchChoiceBox.setStyle("-fx-font: 13px \"Arial\";");
-        initiateCols();
-        adminSearch();
-
+        Platform.runLater(() -> {
+            initiateCols();
+            adminSearch();
+            displayAdminName(user.getName());
+        });
     }
     private void initiateCols(){
         nameTable.setCellValueFactory(new PropertyValueFactory<>("nam"));
@@ -101,28 +88,9 @@ public class AdminSearchController implements Initializable {
     }
     public void adminSearch(){
         list.removeAll(list);
-        try {
-            Path path = Main.hashList.getPathToPersons();
-
-            long count = Files.lines(path).count();
-            for (int i = 0; i < count; i++) {
-                String line = Files.readAllLines(path).get(i);
-                if (!line.trim().equals("")) {
-                    String[] profil = line.split(",");
-                    String name = profil[0];
-                    String phone = profil[1];
-                    String password = profil[2];
-                    String email = profil[3];
-                    String address = profil[4];
-                    String role = profil[5];
-                    String bod = profil[6];
-
-                    list.add(new results(name,phone,email,address,role,bod));
-                }
-            }
-        }catch(Exception e){
-            e.printStackTrace();
-        }
+        backend.txtFileReader readPers = new txtFileReader();
+        readPers.setUser(user);
+        readPers.personsReader(list);
         resultTableView.getItems().addAll(list);
 
         FilteredList<results>filteredData = new FilteredList<>(list, b->true);
@@ -171,33 +139,17 @@ public class AdminSearchController implements Initializable {
         alert.setContentText("Do you want to save before exiting?: ");
 
         if(alert.showAndWait().get()== ButtonType.OK){
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
-                Parent root = loader.load();
-                String filePath = new File("").getAbsolutePath();
-                loginController login = loader.getController();
-                adminstage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                scene = new Scene(root);
-                adminstage.setScene(scene);
-                adminstage.show();
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            backend.sceneSwitcher loginScr = new sceneSwitcher();
+            loginScr.loginScreen(event);
         }
     }
     public void displayAdminName(String username){
         adminnameLabel.setText("Logged ind som: " +username);
     }
     public void backBtn(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("adminScreen.fxml"));
-        root = loader.load();
-        adminScreenController adminController = loader.getController();
-        adminController.setUser(user);
-        adminstage =(Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        adminstage.setScene(scene);
-        adminstage.show();
+        backend.sceneSwitcher admScr = new sceneSwitcher();
+        admScr.setUser(user);
+        admScr.adminScreen(event);
     }
 
 
