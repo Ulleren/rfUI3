@@ -30,9 +30,11 @@ public class FrivilligController implements Initializable{
     @FXML private ComboBox<String> bodBox;
     @FXML private ComboBox<String> dayComboBox;
     @FXML private ComboBox<String> vagtComboBox;
+    @FXML private ComboBox<String>vagtComboBox2;
     @FXML private Button setVagtBtn;
     @FXML private Button deleteVagtBtn;
     @FXML private Button indsendVagtBtn;
+    @FXML private Button seVagtBtn;
     @FXML private TableView<submitVagt>indsendVagt;
     @FXML private TableColumn<submitVagt, String>dayCol;
     @FXML private TableColumn<submitVagt, String>bodCol;
@@ -135,12 +137,16 @@ public class FrivilligController implements Initializable{
 
     }
     public void loadAvailable(){
-        chooseVagtList.removeAll(chooseVagtList);
+        chooseVagtList.clear();
+        chooseVagtTable.getItems().clear();
         String bodBoksValue = bodBox2.getValue();
+        String dayBoksValue = dayComboBox2.getValue();
+        String vagtComboValue = vagtComboBox2.getValue();
         backend.txtFileReader availLst = new txtFileReader();
         availLst.setUser(user);
-        availLst.loadAvailableVagt(chooseVagtList, bodBoksValue);
+        availLst.loadAvailableVagt(chooseVagtList, bodBoksValue, dayBoksValue, vagtComboValue);
         chooseVagtTable.getItems().addAll(chooseVagtList);
+        clearChooseCombo();
     }
     public boolean checkRejections(){
         boolean rejected = false;
@@ -266,6 +272,18 @@ public class FrivilligController implements Initializable{
         vagtComboBox.setValue(null);
         vagtComboBox.setPromptText("vælg vagt");
     }
+    public void clearChooseCombo(){
+        dayComboBox2.getSelectionModel().clearSelection();
+        dayComboBox2.setValue(null);
+        dayComboBox2.setPromptText("Vælg dag");
+        bodBox2.getSelectionModel().clearSelection();
+        bodBox2.setValue(null);
+        bodBox2.setPromptText("Vælg bod");
+        vagtComboBox2.getSelectionModel().clearSelection();
+        vagtComboBox2.setValue(null);
+        vagtComboBox2.setPromptText("Vælg vagt");
+
+    }
     public void deleteVagt(ActionEvent event){
         if(indsendVagt.getSelectionModel().getSelectedItem()==null){
             vagtListErrorLabel.setText("Vælg en vagt der skal slettes");
@@ -361,6 +379,7 @@ public class FrivilligController implements Initializable{
     }
     public void comboBox(){
         ArrayList<String>bodList = new ArrayList<>();
+
         backend.txtFileReader bodRead = new txtFileReader();
         bodRead.setUser(user);
         bodRead.bodListReader(bodList);
@@ -377,6 +396,8 @@ public class FrivilligController implements Initializable{
                 "Torsdag d. 30/6","Fredag d. 1/7","Lørdag d. 2/7");
         vagtComboBox.getItems().removeAll(vagtComboBox.getItems());
         vagtComboBox.getItems().addAll("08:00-14:00","14:00-20:00","20:00-02:00");
+        vagtComboBox2.getItems().addAll("08:00-14:00","14:00-20:00","20:00-02:00");
+        vagtComboBox2.setBorder(Border.stroke(Color.ORANGE));
         dayComboBox.setBorder(Border.stroke(Color.BLACK));;
         vagtComboBox.setBorder(Border.stroke(Color.BLACK));
         bodBox.setBorder(Border.stroke(Color.BLACK));

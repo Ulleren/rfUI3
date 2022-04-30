@@ -1,6 +1,8 @@
 package backend;
 import com.example.rfui.*;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,6 +14,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class txtFileReader {
+    @FXML private Label vagtTabelLabel2;
     private loginController.User user;
     public loginController.User getUser(){
         return user;
@@ -141,30 +144,68 @@ public class txtFileReader {
             throw new RuntimeException(e);
         }
     }
-    public void loadAvailableVagt(ObservableList<FrivilligController.chooseVagt>chooseVagtList, String bodBoks2Value){
+    public void loadAvailableVagt(ObservableList<FrivilligController.chooseVagt>chooseVagtList, String bodBoks2Value,
+                                  String dayBoks2Value, String vagtComboValue){
         try {
             Path path = Main.getHashList().getPathToAvailableVagter();
-
-
             long count = Files.lines(path).count();
             for (int i = 0; i < count; i++) {
                 String line = Files.readAllLines(path).get(i);
                 String[] temp = line.split("\n");
-                if (!line.trim().equals("") && line.contains(bodBoks2Value)) {
-                    String[] profil = line.split(",");
-                    String bod = profil[0];
-                    String day = profil[1];
-                    String vagt = profil[2];
-                    String loc = Main.getHashList().getBodHash().get(bod).getLokation();
-                    String ans = Main.getHashList().getBodHash().get(bod).getAnsvarlig();
-                    chooseVagtList.add(new FrivilligController.chooseVagt(day, bod, loc,vagt,ans));
+                if(dayBoks2Value==null && vagtComboValue==null){
+                    if (!line.trim().equals("") && line.contains(bodBoks2Value)) {
+                        scanVagter(chooseVagtList, line);
+                    }
+                }
+                else if(bodBoks2Value==null && vagtComboValue==null){
+                    if (!line.trim().equals("") && line.contains(dayBoks2Value)) {
+                        scanVagter(chooseVagtList, line);
+                    }
+                }
+                else if(bodBoks2Value==null && dayBoks2Value==null){
+                    if (!line.trim().equals("") && line.contains(vagtComboValue)) {
+                        scanVagter(chooseVagtList, line);
+                    }
+                }
+                else if(dayBoks2Value==null && vagtComboValue==null && bodBoks2Value==null){
+                    vagtTabelLabel2.setText("Vælg mindst 1 mulig visning");
+                }
+                else if(vagtComboValue==null){
+                    if (!line.trim().equals("") && line.contains(bodBoks2Value) && line.contains((dayBoks2Value))) {
+                        scanVagter(chooseVagtList, line);
+                    }
+                }
+                else if(bodBoks2Value==null){
+                    if (!line.trim().equals("") && line.contains(vagtComboValue) && line.contains((dayBoks2Value))) {
+                        scanVagter(chooseVagtList, line);
+                    }
+                }
+                else if(dayBoks2Value!=null && vagtComboValue!=null && bodBoks2Value!=null){
+                    if (!line.trim().equals("") && line.contains(bodBoks2Value) && line.contains(dayBoks2Value) && line.contains(vagtComboValue)) {
+                        scanVagter(chooseVagtList, line);
+                    }
+                }
+                else{
+                    if (!line.trim().equals("") && line.contains(dayBoks2Value)) {
+                        scanVagter(chooseVagtList, line);
+                    }
                 }
             }
         }catch(Exception e){
             e.printStackTrace();
         }
-
     }
+    private void scanVagter(ObservableList<FrivilligController.chooseVagt>chooseVagtList, String line){
+        String[] profil = line.split(",");
+        String bod = profil[0];
+        String day = profil[1];
+        String vagt = profil[2];
+        String loc = Main.getHashList().getBodHash().get(bod).getLokation();
+        String ans = Main.getHashList().getBodHash().get(bod).getAnsvarlig();
+
+        chooseVagtList.add(new FrivilligController.chooseVagt(day, bod, loc,vagt,ans));
+    }
+
     public void getAvailable(ArrayList<String>fileContents){
         try {
             Path path = Main.getHashList().getPathToAvailableVagter();

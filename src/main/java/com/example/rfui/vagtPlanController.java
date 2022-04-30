@@ -1,39 +1,22 @@
 package com.example.rfui;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
-
-
 import backend.sceneSwitcher;
 import backend.txtFileReader;
 import javafx.application.Platform;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Border;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import backend.txtFileWriter;
-
 public class vagtPlanController implements Initializable{
 
-    @FXML private AnchorPane vagtPane;
+
     @FXML private ImageView bodImageView;
     @FXML private ImageView blackLogoImageView;
     @FXML private Label AnsNameLabel;
@@ -65,10 +48,6 @@ public class vagtPlanController implements Initializable{
     @FXML private ListView<String>satLunchList2;
     @FXML private ListView<String>satEveningList2;
     @FXML
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
-
     private loginController.User user;
     public loginController.User getUser(){
         return user;
