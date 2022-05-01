@@ -8,11 +8,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-
-import java.io.File;
+import javafx.stage.StageStyle;
 import java.io.IOException;
-import java.nio.file.attribute.AclFileAttributeView;
 
 public class sceneSwitcher {
     @FXML
@@ -23,6 +20,7 @@ public class sceneSwitcher {
 
     private loginController.User user;
     Stage adminstage;
+    Stage primaryStage;
     ActionEvent event;
     public loginController.User getUser(){
         return user;
@@ -32,6 +30,28 @@ public class sceneSwitcher {
     }
     public sceneSwitcher(){
 
+    }
+    public void loginScreen(Stage primaryStage){
+        try {
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource("login.fxml"));
+            Parent root = loader.load();
+            primaryStage.initStyle(StageStyle.UNDECORATED);
+            primaryStage.setScene(new Scene(root, 520, 400));
+            primaryStage.setResizable(false);
+            primaryStage.show();
+            backend.txtFileReader primaryLoader = new txtFileReader();
+            com.example.rfui.Main main  = new Main();
+            main.loadPersonNames();
+            main.loadBoder();
+            main.loadVagter();
+            primaryStage.setOnCloseRequest(event -> {
+                event.consume();
+                main.logout(stage);
+            });
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     public void opretUser(ActionEvent event)throws IOException {
         FXMLLoader loader = new FXMLLoader(adminScreenController.class.getResource("opretAns.fxml"));

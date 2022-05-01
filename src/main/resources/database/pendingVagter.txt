@@ -1,4 +1,3 @@
-jens@rw.dk,88669900,Tuborg Orange,Lørdag d. 25/6,14:00-20:00
 jens@rw.dk,88669900,Tuborg Orange,Søndag d. 26/6,14:00-20:00
 jens@rw.dk,88669900,Tuborg Orange,Tirsdag d. 28/6,20:00-02:00
 jens@rw.dk,88669900,Tuborg Orange,Onsdag d. 29/6,20:00-02:00
@@ -6,5 +5,3 @@ jens@rw.dk,88669900,Tuborg Orange,Lørdag d. 2/7,20:00-02:00
 jl@lyn.dk,45453434,Tuborg Orange,Søndag d. 26/6,14:00-20:00
 jl@lyn.dk,45453434,Tuborg Orange,Mandag d. 27/6,20:00-02:00
 jl@lyn.dk,45453434,Tuborg Orange,Tirsdag d. 28/6,20:00-02:00
-jl@lyn.dk,45453434,Tuborg Orange,Fredag d. 1/7,20:00-02:00
-jl@lyn.dk,45453434,Tuborg Orange,Lørdag d. 2/7,20:00-02:00

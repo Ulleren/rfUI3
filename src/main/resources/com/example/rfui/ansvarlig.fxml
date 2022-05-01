@@ -37,16 +37,16 @@
             <Image url="@orangetent.png" />
          </image>
       </ImageView>
-      <TableView fx:id="resultTableView" layoutX="64.0" layoutY="119.0" opacity="0.67" prefHeight="408.0" prefWidth="763.0">
+      <TableView fx:id="resultTableView" layoutX="28.0" layoutY="121.0" opacity="0.67" prefHeight="408.0" prefWidth="838.0">
          <columns>
-            <TableColumn prefWidth="75.0" text="Frivillige til godkendelse">
+            <TableColumn prefWidth="837.0" text="Frivillige til godkendelse">
                <columns>
                   <TableColumn fx:id="nameTable" prefWidth="112.0" text="Navn" />
-                  <TableColumn fx:id="phoneTable" prefWidth="142.0" text="Telefon" />
-                  <TableColumn fx:id="emailTable" prefWidth="96.0" text="Email" />
-                  <TableColumn fx:id="addressTable" prefWidth="126.0" text="Adresse" />
-                  <TableColumn fx:id="dayTable" prefWidth="120.0" text="Dag" />
-                  <TableColumn fx:id="vagtTable" prefWidth="166.0" text="Vagt" />
+                  <TableColumn fx:id="phoneTable" prefWidth="90.0" text="Telefon" />
+                  <TableColumn fx:id="emailTable" prefWidth="151.0" text="Email" />
+                  <TableColumn fx:id="dayTable" prefWidth="166.0" text="Dag" />
+                  <TableColumn fx:id="vagtTable" prefWidth="122.0" text="Vagt" />
+                  <TableColumn fx:id="conflictCol" prefWidth="196.0" text="Konflikt" />
                </columns>
             </TableColumn>
          </columns>
@@ -62,7 +62,7 @@
          </font>
       </Button>
       <Label layoutX="144.0" layoutY="84.0" text="Søg i ansøgere:" textFill="WHITE" />
-      <Button fx:id="godkendFrivilligBtn" layoutX="679.0" layoutY="538.0" mnemonicParsing="false" onAction="#rejectFrivillig" prefHeight="26.0" prefWidth="147.0" style="-fx-background-color: #ffffff;" text="Godkend vagt" textFill="#e95814">
+      <Button fx:id="godkendFrivilligBtn" layoutX="679.0" layoutY="538.0" mnemonicParsing="false" onAction="#addToVagt" prefHeight="26.0" prefWidth="147.0" style="-fx-background-color: #ffffff;" text="Godkend vagt" textFill="#e95814">
          <font>
             <Font name="Arial Bold" size="13.0" />
          </font>

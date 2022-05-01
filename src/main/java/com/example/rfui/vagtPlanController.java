@@ -34,7 +34,7 @@ public class vagtPlanController implements Initializable{
     @FXML private ListView<String>monEveningList;
     @FXML private ListView<String>tueMorningList;
     @FXML private ListView<String>tueLunchList;
-    @FXML private ListView<String>tueEveningList;
+    @FXML private ListView<String>tuesEveningList;
     @FXML private ListView<String>wedMorningList;
     @FXML private ListView<String>wedLunchList;
     @FXML private ListView<String>wedEveningList;
@@ -54,8 +54,7 @@ public class vagtPlanController implements Initializable{
     }
     public void setUser(loginController.User user){
         this.user = user;
-        displayAdminName(user.getName());
-        displayStandName(user.getBod());
+
     }
 
     ArrayList<String>saveAvailable = new ArrayList<>();
@@ -66,55 +65,32 @@ public class vagtPlanController implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Platform.runLater(this::loadLists);
+        Platform.runLater(() -> {
 
+            displayAdminName(user.getName());
+            displayStandName(user.getBod());
+            loadLists();
+        });
     }
     public void ListGenerator(){
 
     }
     public void loadLists(){
-        ArrayList<String>availList = new ArrayList<>();
-
-
-        try {
-            Path path = Path.of(Main.hashList.getPathToPendingBod()+ "/"+user.getBod().replaceAll(
-                    "[^a-zA-Z0-9]", "") + ".txt");
-            Path availableVagt = Path.of(Main.hashList.getPathToAvailableVagter().toString());
-            Path notAccept = Path.of(Main.hashList.getPathToNotAccepted().toString());
-            long count = Files.lines(path).count();
-            long availcount = Files.lines(availableVagt).count();
-            for (int j = 0; j < availcount; j++) {
-                String availLine = Files.readAllLines(availableVagt).get(j);
-                availList.add(availLine);
-            }
-            for (int i = 0; i < count; i++) {
-
-
-                String line = Files.readAllLines(path).get(i);
-
-//                String noAcceptLine = Files.readAllLines(notAccept).get(i);
-                if (!line.trim().equals("")) {
-                    String[] profil = line.split(",");
-                    String mail = profil[0];
-                    String phone = profil[1];
-                    String bod = profil[2];
-                    String day = profil[3];
-                    String vagt = profil[4];
-                    String name = Main.getHashList().getEmailHash().get(mail);
-                    //String address = Main.getHashList().getPersons().get(name).get(i).getAddress();
-
-
-                    insertVagtlist(day, name, vagt, mail);
-
-
-
-                }
-            }
-
-
-        }catch(Exception e){
-            e.printStackTrace();
-
+        ArrayList<String>fileContents = new ArrayList<>();
+        ArrayList<String>listViewList = new ArrayList<>();
+        backend.txtFileReader getAvailablevagt = new txtFileReader();
+        getAvailablevagt.setUser(user);
+        getAvailablevagt.getAvailable(fileContents);
+        backend.txtFileReader listViewRead = new txtFileReader();
+        listViewRead.setUser(user);
+        listViewRead.loadGodkendteVagter(listViewList);
+        for (String line : listViewList) {
+            String[] profil = line.split(",");
+            String day = profil[0];
+            String name = profil[1];
+            String vagt = profil[2];
+            String mail = profil[3];
+            insertVagtlist(day,name,vagt,mail);
         }
         updateAvailable();
         saveAvailable();
@@ -128,6 +104,8 @@ public class vagtPlanController implements Initializable{
                     else if(vagt.equals("14:00-20:00")){ satLunchList.getItems().add(name);satLunch+=1;}
                     else{satEveningList.getItems().add(name);satEvening+=1;}
                     break;
+                }else{
+                    notAccepted.add(mail+","+day+","+ vagt);
                 }
             case "Søndag d. 26/6":
                 if(sunMorning!=getMax || sunLunch!=getMax || sunEvening!=getMax){
@@ -135,6 +113,8 @@ public class vagtPlanController implements Initializable{
                     else if(vagt.equals("14:00-20:00")){ sunLunchList.getItems().add(name);sunLunch+=1;}
                     else{sunEveningList.getItems().add(name);sunEvening+=1;}
                     break;
+                }else{
+                    notAccepted.add(mail+","+day+","+ vagt);
                 }
             case "Mandag d. 27/6":
                 if(monMorning!=getMax || monLunch!=getMax || monEvening!=getMax){
@@ -143,16 +123,16 @@ public class vagtPlanController implements Initializable{
                     else{monEveningList.getItems().add(name);monEvening+=1;}
                     break;
                 }else{
-                    notAccepted.add(mail);
+                    notAccepted.add(mail+","+day+","+ vagt);
                 }
             case "Tirsdag d. 28/6":
                 if(tueMorning!=getMax || tueLunch!=getMax || tueEvening!=getMax){
                     if(vagt.equals("08:00-14:00")){ tueMorningList.getItems().add(name); tueMorning+=1;}
                     else if(vagt.equals("14:00-20:00")){ tueLunchList.getItems().add(name); tueLunch+=1;}
-                    else{tueEveningList.getItems().add(name); tueEvening+=1;}
+                    else{tuesEveningList.getItems().add(name); tueEvening+=1;}
                     break;
                 }else{
-                    notAccepted.add(mail);
+                    notAccepted.add(mail+","+day+","+ vagt);
                 }
             case "Onsdag d. 29/6":
                 if(wedMorning!=getMax || wedLunch!=getMax || wedEvening!=getMax){
@@ -162,7 +142,7 @@ public class vagtPlanController implements Initializable{
                     break;
                 }
                 else{
-                    notAccepted.add(mail);
+                    notAccepted.add(mail+","+day+","+ vagt);
                 }
             case "Torsdag d. 30/6":
                 if(thurMorning!=getMax || thurLunch!=getMax || thurEvening!=getMax){
@@ -171,7 +151,7 @@ public class vagtPlanController implements Initializable{
                     else{thursEveningList.getItems().add(name); thurEvening+=1;}
                     break;
                 }else{
-                    notAccepted.add(mail);
+                    notAccepted.add(mail+","+day+","+ vagt);
                 }
             case "Fredag d. 1/7":
                 if(friMorning!=getMax || friLunch!=getMax || friEvening!=getMax){
@@ -180,7 +160,7 @@ public class vagtPlanController implements Initializable{
                     else{friEveningList.getItems().add(name); friEvening+=1;}
                     break;
                 }else{
-                    notAccepted.add(mail);
+                    notAccepted.add(mail+","+day+","+ vagt);
                 }
             case "Lørdag d. 2/7":
                 if(satMorning2!=getMax || satLunch2!=getMax || satEvening2!=getMax){
@@ -189,10 +169,9 @@ public class vagtPlanController implements Initializable{
                     else{satEveningList2.getItems().add(name); satEvening2+=1;}
                     break;
                 }else{
-                    notAccepted.add(mail);
+                    notAccepted.add(mail+","+day+","+ vagt);
                 }
         }
-
     }
     public void updateAvailable(){
         int getMax = Main.getHashList().getBodHash().get(user.getBod()).getAntalFrivillige();
@@ -221,15 +200,15 @@ public class vagtPlanController implements Initializable{
         if(satMorning2<getMax){ saveAvailable.add(saveLine+",Lørdag d. 2/7,08:00-14:00");}
         if(satLunch2<getMax){ saveAvailable.add(saveLine+",Lørdag d. 2/7,14:00-20:00");}
         if(satEvening2<getMax){ saveAvailable.add(saveLine+",Lørdag d. 2/7,20:00-02:00");}
-
-
     }
     public void saveAvailable(){
         ArrayList<String>fileContents = new ArrayList<>();
         backend.txtFileReader readAvailFile = new txtFileReader();
         readAvailFile.setUser(user);
-        readAvailFile.getAvailable(fileContents);
+        readAvailFile.getAvailableSave(fileContents, user.getBod());
+        System.out.println("before "+fileContents);
         fileContents.addAll(saveAvailable);
+        System.out.println(fileContents);
         backend.txtFileWriter saveAvailWrite = new txtFileWriter();
         saveAvailWrite.setUser(user);
         saveAvailWrite.writeAvailable(fileContents);

@@ -16,6 +16,8 @@ public class hashPersons {
     HashMap<String, ArrayList<Person>> persons = new HashMap<>();
     HashMap<String, String> emailHash = new HashMap<>();
     HashMap<String, Bod> bodHash = new HashMap<>();
+    HashMap<String, ArrayList<vagt>> vagtHash = new HashMap<>();
+
 
     public static String filePath = new File("").getAbsolutePath();
     final Path pathToPersons = Paths.get(filePath.concat("/src/main/resources/database/test.txt"));
@@ -33,68 +35,7 @@ public class hashPersons {
         return pathToPendingBod;
     }
 
-    public void saveToFileOnClose() {
-        try {
-            FileWriter filewriter;
-            String filePath = new File("").getAbsolutePath();
-            filewriter = new FileWriter(filePath.concat("/src/main/resources/com/example/rfui/test.txt"), false);
-            BufferedWriter bw = new BufferedWriter(filewriter);
-            for (Map.Entry<String, ArrayList<Person>> set : persons.entrySet()) {
-                for (int i = 0; i < set.getValue().size(); i++) {
-                    String line = set.getValue().get(i).name + "," + set.getValue().get(i).phonenumber + ","
-                            + set.getValue().get(i).password + "," + set.getValue().get(i).email + ","
-                            + set.getValue().get(i).address + "," + set.getValue().get(i).role + "," + set.getValue().get(i).stand + "\n";
-                    bw.write(line);
-                }
-            }
-            bw.flush();
-            bw.close();
-            filewriter.close();
-        } catch (IOException e) {
-            System.out.println("Save person to file failed: " + e);
-        }
-        try {
-            FileWriter filewriter;
-            String filePath = new File("").getAbsolutePath();
-            filewriter = new FileWriter(filePath.concat("/src/main/resources/com/example/rfui/boder.txt"), false);
-            BufferedWriter bw = new BufferedWriter(filewriter);
-            for (Map.Entry<String, Bod> set : bodHash.entrySet()) {
-                String line = set.getValue().navn + "," + set.getValue().lokation + ","
-                        + set.getValue().antalFrivillige + "," + set.getValue().ansvarlig + "\n";
-                bw.write(line);
 
-            }
-            bw.flush();
-            bw.close();
-            filewriter.close();
-        } catch (IOException e) {
-            System.out.println("Save bod to file failed: " + e);
-        }
-        try {
-            FileWriter filewriter;
-            String filePath = new File("").getAbsolutePath();
-            filewriter = new FileWriter(filePath.concat("/src/main/resources/com/example/rfui/vagter.txt"), false);
-            BufferedWriter bw = new BufferedWriter(filewriter);
-            for (Map.Entry<String, Bod> set : bodHash.entrySet()) {
-                for (int i = 0; i < set.getValue().vagtPlan.size(); i++) {
-                    String line = set.getValue().navn;
-                    for (int u = 0; u < set.getValue().antalFrivillige; u++) {
-                        if (set.getValue().vagtPlan.get(i).frivillige.get(u) != null) {
-                            line += "," + set.getValue().vagtPlan.get(i).frivillige.get(u);
-                        } else {
-                            line += "," + "null";
-                        }
-                    }
-                    bw.write(line+"\n");
-                }
-            }
-            bw.flush();
-            bw.close();
-            filewriter.close();
-        } catch (IOException e) {
-            System.out.println("Save vagter to file failed: " + e);
-        }
-    }
 
     public HashMap<String, Bod> getBodHash() {
         return bodHash;

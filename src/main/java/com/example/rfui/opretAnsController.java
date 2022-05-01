@@ -214,7 +214,6 @@ public class opretAnsController implements Initializable {
             login.loginScreen(event);
         }
     }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Platform.runLater(() -> {
@@ -226,9 +225,7 @@ public class opretAnsController implements Initializable {
             BodRadioBtn.setSelected(true);
             friRadioBtn.setToggleGroup(radioGroup);
             adminRadioBtn.setToggleGroup(radioGroup);
-
         });
-
     }
     public void comboBox(){
         backend.txtFileReader bodRead =new txtFileReader();
