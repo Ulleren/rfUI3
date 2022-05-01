@@ -24,6 +24,8 @@ public class txtFileReader {
     }
     public txtFileReader(){
     }
+
+
     public void loadVagter(){
         try {
             Path path = Main.getHashList().getPathToVagter();
@@ -205,6 +207,42 @@ public class txtFileReader {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    public void loadVagtPlaner(){
+
+        try {
+            Path path;
+            String a[] = new String[Main.getHashList().getBodHash().size()];
+            for(int i = 0; i < a.length; i++){
+                path = Path.of(Main.getHashList().getPathToPendingBod()+ "/"+a[i].replaceAll(
+                        "[^a-zA-Z0-9]", "") + ".txt");
+                long count = Files.lines(path).count();
+                for (int j = 0; j < count; j++) {
+                    String line = Files.readAllLines(path).get(j);
+                    if (!line.trim().equals("")) {
+                        String[] profil = line.split(",");
+                        String mail = profil[0];
+                        String phone = profil[1];
+                        String bod = profil[2];
+                        String day = profil[3];
+                        String vagt = profil[4];
+                        String name = Main.getHashList().getEmailHash().get(mail);
+                        Integer length = Main.getHashList().getPersons().size();
+                        for(int k = 0; k < length; k++) {
+                            if(Main.getHashList().getPersons().get(name).get(k).email.equals(mail)){
+                                Frivillig fri = (Frivillig) Main.getHashList().getPersons().get(name).get(k);
+                                fri.getVagtPlan().add(bod+","+day+","+vagt);
+                            }
+
+                        }
+                    }
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
     public void bodListReader(ArrayList<String> bodList){
 
@@ -416,6 +454,7 @@ public class txtFileReader {
             throw new RuntimeException(e);
         }
     }
+
 
 
 }

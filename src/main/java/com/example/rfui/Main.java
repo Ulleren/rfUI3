@@ -42,6 +42,10 @@ public class Main extends Application {
         backend.txtFileReader loadVagt  = new txtFileReader();
         loadVagt.loadVagter();
     }
+    public void loadVagtplan(){
+        backend.txtFileReader loadVagtPlan  = new txtFileReader();
+        loadVagtPlan.loadVagtPlaner();
+    }
 
     public static hashPersons getHashList() {
         return hashList;

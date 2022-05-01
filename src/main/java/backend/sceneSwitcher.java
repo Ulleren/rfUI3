@@ -44,6 +44,7 @@ public class sceneSwitcher {
             main.loadPersonNames();
             main.loadBoder();
             main.loadVagter();
+            main.loadVagtplan();
             primaryStage.setOnCloseRequest(event -> {
                 event.consume();
                 main.logout(stage);

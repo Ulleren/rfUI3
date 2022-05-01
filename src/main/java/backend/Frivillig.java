@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Frivillig extends Person{
-    //vagtskema ?
     ArrayList<vagt> vagter;
+    ArrayList<String> vagtPlan;
 
     LinkedList<vagt> pendingVagter;
 
@@ -21,6 +21,7 @@ public class Frivillig extends Person{
         this.address = address;
         this.phonenumber = phonenumber;
         this.vagter = new ArrayList<>();
+        this.vagtPlan = new ArrayList<>();
     }
 
     public void setVagter(ArrayList<vagt> vagter) {
@@ -32,8 +33,17 @@ public class Frivillig extends Person{
     }
     public ArrayList<vagt> getVagter(){ return this.vagter;}
 
+    public ArrayList<String> getVagtPlan() {
+        return vagtPlan;
+    }
 
+    public LinkedList<vagt> getPendingVagter() {
+        return pendingVagter;
+    }
 
+    public Integer getAntalVagter() {
+        return antalVagter;
+    }
 }
 
 
