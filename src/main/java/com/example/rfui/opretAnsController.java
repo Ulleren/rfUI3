@@ -227,6 +227,7 @@ public class opretAnsController implements Initializable {
             adminRadioBtn.setToggleGroup(radioGroup);
         });
     }
+    // @Ulleren Lave den her.
     public void comboBox(){
         backend.txtFileReader bodRead =new txtFileReader();
         bodRead.bodListReader(bodList);

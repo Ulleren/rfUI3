@@ -189,9 +189,9 @@ public class txtFileReader {
     public void loadBoder(){
 
         try {
-            String filePath = new File("").getAbsolutePath();
+            //String filePath = new File("").getAbsolutePath();
             Path path = Main.getHashList().getPathToBoder();
-            Paths.get(filePath.concat("/src/main/resources/com/example/rfui/boder.txt"));
+            //Paths.get(filePath.concat("/src/main/resources/com/example/rfui/boder.txt"));
             long count = Files.lines(path).count();
             for (int i = 0; i < count; i++) {
                 String line = Files.readAllLines(path).get(i);
