@@ -52,3 +52,9 @@ Martin Tonser,34989723,kode,mt@martun.dk,Købmagervej 23,Frivillig,Tuborg Orange
 Jonna Jungersen,23132324,kode,jj@jungen.dk,jungeve54,Frivillig,Tuborg Orange
 Ulrik S Mohr,23435522,kode,usm@jydekrog.dk,Kertemindevej 22,Frivillig,Tuborg Orange
 testikel testesen,77662233,kode,tt@testy.dk,testervej 22,Ansvarlig,testboden
+Kenneth Korneliusen,88794613,kode,kk@lig-bussen.dk,hirtshals alle 23,Frivillig,Tuborg Orange
+Vilfred Vildersen,22134679,kode,vv@vvs.dk,Vaskemaskinevej 23,Frivillig,Tuborg Orange
+Jytte Bytte,44794613,kode,jb@byttilnyt.dk,Brugt alle 12,Frivillig,Tuborg Orange
+Rikke Schlicke,55778844,kode,rs@schlicke.dk,Tungestens Vej 22,Frivillig,Tuborg Orange
+Marianne Gnahver,88779944,kode,mg@gnaver.dk,Vejsens alle 34,Frivillig,Tuborg Orange
+Kikki Kiks,55667799,kode,kk@kiks.dk,Kikset vej 77,Frivillig,Tuborg Orange

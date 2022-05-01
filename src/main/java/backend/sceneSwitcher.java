@@ -47,7 +47,7 @@ public class sceneSwitcher {
             main.loadVagtplan();
             primaryStage.setOnCloseRequest(event -> {
                 event.consume();
-                main.logout(stage);
+                main.logout(primaryStage);
             });
 
         } catch (Exception e) {
