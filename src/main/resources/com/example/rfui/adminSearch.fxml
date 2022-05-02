@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="adSearchPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="889.0" style="-fx-background-color: #e95814;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rfui.AdminSearchController">
+<AnchorPane fx:id="adSearchPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="889.0" style="-fx-background-color: #e95814;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rfui.AdminSearchController">
    <children>
       <Label fx:id="adminnameLabel" layoutX="68.0" layoutY="24.0" text="Logged ind som:" textFill="WHITE">
          <font>
@@ -28,7 +28,7 @@
             <Image url="@rf_white.png" />
          </image>
       </ImageView>
-      <TextField fx:id="adminSearchTextField" layoutX="245.0" layoutY="123.0" onAction="#adminSearch" prefHeight="26.0" prefWidth="402.0" promptText="Indtast søgeord" style="-fx-background-color: #FFFFFF;" />
+      <TextField fx:id="adminSearchTextField" layoutX="245.0" layoutY="123.0" prefHeight="26.0" prefWidth="402.0" promptText="Indtast søgeord" style="-fx-background-color: #FFFFFF;" />
       <TableView fx:id="resultTableView" layoutX="63.0" layoutY="164.0" prefHeight="414.0" prefWidth="763.0">
         <columns>
             <TableColumn fx:id="nameTable" prefWidth="142.0" text="Navn" />
@@ -45,6 +45,11 @@
          </font>
       </Button>
       <Button fx:id="backBtn" layoutX="57.0" layoutY="67.0" mnemonicParsing="false" onAction="#backBtn" prefHeight="26.0" prefWidth="66.0" style="-fx-background-color: #e95814;" text="Tilbage" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font>
+      </Button>
+      <Button fx:id="searchButton" layoutX="731.0" layoutY="123.0" mnemonicParsing="false" onAction="#adminSearch" prefHeight="26.0" prefWidth="95.0" style="-fx-background-color: #ffffff;" text="Søg Bruger" textFill="#e95814">
          <font>
             <Font name="Arial Bold" size="13.0" />
          </font>

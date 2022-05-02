@@ -1,5 +1,7 @@
 package com.example.rfui;
 
+import com.example.rfui.Main;
+import backend.Person;
 import backend.sceneSwitcher;
 import backend.txtFileReader;
 import javafx.application.Platform;
@@ -49,7 +51,6 @@ public class AdminSearchController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle){
         Platform.runLater(() -> {
             initiateCols();
-            adminSearch();
             displayAdminName(user.getName());
         });
     }
@@ -87,8 +88,25 @@ public class AdminSearchController implements Initializable {
 
     }
     public void adminSearch(){
+
         list.removeAll(list);
-        backend.txtFileReader readPers = new txtFileReader();
+        if(Main.getHashList().getPersons().containsKey(adminSearchTextField.getText())) {
+            Person pers;
+            for (int i = 0; i < Main.getHashList().getPersons().get(adminSearchTextField.getText()).size(); i++) {
+                pers = Main.getHashList().getPersons().get(adminSearchTextField.getText()).get(i);
+                list.add(new results(pers.getName(), pers.getPhonenumber(), pers.getEmail(), pers.getAddress(), pers.getRole(), pers.getStand()));
+                }
+        }
+        nameTable.setCellValueFactory(new PropertyValueFactory<results, String>("nam"));
+        phoneTable.setCellValueFactory(new PropertyValueFactory<results, String>("phn"));
+        emailTable.setCellValueFactory(new PropertyValueFactory<results, String>("mail"));
+        addressTable.setCellValueFactory(new PropertyValueFactory<results, String>("ads"));
+        bodTable.setCellValueFactory(new PropertyValueFactory<results, String>("stand"));
+        roleTable.setCellValueFactory(new PropertyValueFactory<results, String>("rol"));
+        resultTableView.setItems(list);
+
+        /*
+       backend.txtFileReader readPers = new txtFileReader();
         readPers.setUser(user);
         readPers.personsReader(list);
         resultTableView.getItems().addAll(list);
@@ -126,6 +144,7 @@ public class AdminSearchController implements Initializable {
         SortedList<results>sortedData =new SortedList<>(filteredData);
         sortedData.comparatorProperty().bind(resultTableView.comparatorProperty());
         resultTableView.setItems(sortedData);
+        */
     }
     public void deleteUser(ActionEvent event){
         resultTableView.getItems().removeAll(resultTableView.getSelectionModel().getSelectedItem());
