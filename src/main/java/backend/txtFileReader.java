@@ -4,6 +4,7 @@ import com.example.rfui.*;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -11,22 +12,27 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class txtFileReader {
-    @FXML private Label vagtTabelLabel2;
+    @FXML
+    private Label vagtTabelLabel2;
     private loginController.User user;
-    public loginController.User getUser(){
+
+    public loginController.User getUser() {
         return user;
     }
-    public void setUser(loginController.User user){
+
+    public void setUser(loginController.User user) {
         this.user = user;
     }
-    public txtFileReader(){
+
+    public txtFileReader() {
     }
 
 
-    public void loadVagter(){
+    public void loadVagter() {
         try {
             Path path = Main.getHashList().getPathToVagter();
             long count = Files.lines(path).count();
@@ -65,7 +71,7 @@ public class txtFileReader {
         }
     }
 
-    public void loadPersons(){
+    public void loadPersons() {
         try {
             Path path = Main.getHashList().getPathToPersons();
             long count = Files.lines(path).count();
@@ -97,8 +103,9 @@ public class txtFileReader {
             e.printStackTrace();
         }
     }
-    public void pendingVagterReader(ObservableList<ansvarligController.results> list){
-        ArrayList<String>confList = new ArrayList<>();
+
+    public void pendingVagterReader(ObservableList<ansvarligController.results> list) {
+        ArrayList<String> confList = new ArrayList<>();
         try {
             Path path = Path.of(Main.getHashList().getPathToPending().toString());
             long count = Files.lines(path).count();
@@ -115,14 +122,14 @@ public class txtFileReader {
                     String ansBod = user.getBod();
                     String conf = null;
                     getAvailable(confList);
-                    String confCheck = bod+","+day+","+vagt;
-                    for (int j = 0; j <confList.size(); j++) {
-                        String confLine=confList.get(j);
-                        if(confCheck.equals(confLine)){
-                            conf="vagt ledig";
+                    String confCheck = bod + "," + day + "," + vagt;
+                    for (int j = 0; j < confList.size(); j++) {
+                        String confLine = confList.get(j);
+                        if (confCheck.equals(confLine)) {
+                            conf = "vagt ledig";
                             break;
-                        }else{
-                            conf = day+" "+vagt;
+                        } else {
+                            conf = day + " " + vagt;
                         }
                     }
 
@@ -130,13 +137,14 @@ public class txtFileReader {
                         list.add(new ansvarligController.results(name, phone, mail, day, vagt, conf));
                     }
                 }
-                
+
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    public void pendingVagterReadMail(List<String>fileContents){
+
+    public void pendingVagterReadMail(List<String> fileContents) {
         try {
             Path path = Path.of(Main.getHashList().getPathToPending().toString());
 
@@ -148,11 +156,12 @@ public class txtFileReader {
                 }
 
             }
-        }catch (IOException e){
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
-    public void pendingVagterDelete(List<String>fileContents, String rejectedLine){
+
+    public void pendingVagterDelete(List<String> fileContents, String rejectedLine) {
         try {
             Path path = Path.of(Main.getHashList().getPathToPending().toString());
             long count = Files.lines(path).count();
@@ -162,11 +171,12 @@ public class txtFileReader {
                     fileContents.add(line);
                 }
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    public void personsReader(ObservableList<AdminSearchController.results>list){
+
+    public void personsReader(ObservableList<AdminSearchController.results> list) {
         try {
             Path path = Main.getHashList().getPathToPersons();
             long count = Files.lines(path).count();
@@ -181,14 +191,15 @@ public class txtFileReader {
                     String address = profil[4];
                     String role = profil[5];
                     String bod = profil[6];
-                    list.add(new AdminSearchController.results(name,phone,email,address,role,bod));
+                    list.add(new AdminSearchController.results(name, phone, email, address, role, bod));
                 }
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    public void loadBoder(){
+
+    public void loadBoder() {
 
         try {
             //String filePath = new File("").getAbsolutePath();
@@ -201,20 +212,24 @@ public class txtFileReader {
                 if (!line.trim().equals("")) {
                     Main.getHashList().getBodHash().put(bod[0], new Bod(bod[0], bod[1], Integer.parseInt(bod[2]), bod[3]));
                 }
-
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    public void loadVagtPlaner(){
+
+    public void loadVagtPlaner() {
 
         try {
             Path path;
             String a[] = new String[Main.getHashList().getBodHash().size()];
-            for(int i = 0; i < a.length; i++){
-                path = Path.of(Main.getHashList().getPathToPendingBod()+ "/"+a[i].replaceAll(
+            int index = 0;
+            for (Map.Entry<String, Bod> mapEntry : Main.getHashList().getBodHash().entrySet()){
+                a[index++] = mapEntry.getKey();
+            }
+            for (int i = 0; i < a.length; i++) {
+                path = Path.of(Main.getHashList().getPathToPendingBod() + "/" + a[i].replaceAll(
                         "[^a-zA-Z0-9]", "") + ".txt");
                 long count = Files.lines(path).count();
                 for (int j = 0; j < count; j++) {
@@ -227,13 +242,12 @@ public class txtFileReader {
                         String day = profil[3];
                         String vagt = profil[4];
                         String name = Main.getHashList().getEmailHash().get(mail);
-                        Integer length = Main.getHashList().getPersons().size();
-                        for(int k = 0; k < length; k++) {
-                            if(Main.getHashList().getPersons().get(name).get(k).email.equals(mail)){
+                        int length = Main.getHashList().getPersons().get(name).size();
+                        for (int k = 0; k < length; k++) {
+                            if (Main.getHashList().getPersons().get(name).get(k).getEmail().equals(mail)) {
                                 Frivillig fri = (Frivillig) Main.getHashList().getPersons().get(name).get(k);
-                                fri.getVagtPlan().add(bod+","+day+","+vagt);
+                                fri.getVagtPlan().add(bod + "," + day + "," + vagt);
                             }
-
                         }
                     }
                 }
@@ -244,7 +258,8 @@ public class txtFileReader {
         }
 
     }
-    public void bodListReader(ArrayList<String> bodList){
+
+    public void bodListReader(ArrayList<String> bodList) {
 
         try {
             Path path = Main.getHashList().getPathToBoder();
@@ -262,11 +277,12 @@ public class txtFileReader {
                     bodList.add(profil[0]);
                 }
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    public void acceptTermsReader(List<String>fileContents){
+
+    public void acceptTermsReader(List<String> fileContents) {
         try {
             Path path = Main.getHashList().getPathToNotAccepted();
 
@@ -278,62 +294,57 @@ public class txtFileReader {
                     fileContents.add(temp[0]);
                 }
             }
-        }catch(IOException e){
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
-    public void loadAvailableVagt(ObservableList<FrivilligController.chooseVagt>chooseVagtList, String bodBoks2Value,
-                                  String dayBoks2Value, String vagtComboValue){
+
+    public void loadAvailableVagt(ObservableList<FrivilligController.chooseVagt> chooseVagtList, String bodBoks2Value,
+                                  String dayBoks2Value, String vagtComboValue) {
         try {
             Path path = Main.getHashList().getPathToAvailableVagter();
             long count = Files.lines(path).count();
             for (int i = 0; i < count; i++) {
                 String line = Files.readAllLines(path).get(i);
                 String[] temp = line.split("\n");
-                if(dayBoks2Value==null && vagtComboValue==null){
+                if (dayBoks2Value == null && vagtComboValue == null) {
                     if (!line.trim().equals("") && line.contains(bodBoks2Value)) {
                         scanVagter(chooseVagtList, line);
                     }
-                }
-                else if(bodBoks2Value==null && vagtComboValue==null){
+                } else if (bodBoks2Value == null && vagtComboValue == null) {
                     if (!line.trim().equals("") && line.contains(dayBoks2Value)) {
                         scanVagter(chooseVagtList, line);
                     }
-                }
-                else if(bodBoks2Value==null && dayBoks2Value==null){
+                } else if (bodBoks2Value == null && dayBoks2Value == null) {
                     if (!line.trim().equals("") && line.contains(vagtComboValue)) {
                         scanVagter(chooseVagtList, line);
                     }
-                }
-                else if(dayBoks2Value==null && vagtComboValue==null && bodBoks2Value==null){
+                } else if (dayBoks2Value == null && vagtComboValue == null && bodBoks2Value == null) {
                     vagtTabelLabel2.setText("Vælg mindst 1 mulig visning");
-                }
-                else if(vagtComboValue==null){
+                } else if (vagtComboValue == null) {
                     if (!line.trim().equals("") && line.contains(bodBoks2Value) && line.contains((dayBoks2Value))) {
                         scanVagter(chooseVagtList, line);
                     }
-                }
-                else if(bodBoks2Value==null){
+                } else if (bodBoks2Value == null) {
                     if (!line.trim().equals("") && line.contains(vagtComboValue) && line.contains((dayBoks2Value))) {
                         scanVagter(chooseVagtList, line);
                     }
-                }
-                else if(dayBoks2Value!=null && vagtComboValue!=null && bodBoks2Value!=null){
+                } else if (dayBoks2Value != null && vagtComboValue != null && bodBoks2Value != null) {
                     if (!line.trim().equals("") && line.contains(bodBoks2Value) && line.contains(dayBoks2Value) && line.contains(vagtComboValue)) {
                         scanVagter(chooseVagtList, line);
                     }
-                }
-                else{
+                } else {
                     if (!line.trim().equals("") && line.contains(dayBoks2Value)) {
                         scanVagter(chooseVagtList, line);
                     }
                 }
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    private void scanVagter(ObservableList<FrivilligController.chooseVagt>chooseVagtList, String line){
+
+    private void scanVagter(ObservableList<FrivilligController.chooseVagt> chooseVagtList, String line) {
         String[] profil = line.split(",");
         String bod = profil[0];
         String day = profil[1];
@@ -341,10 +352,10 @@ public class txtFileReader {
         String loc = Main.getHashList().getBodHash().get(bod).getLokation();
         String ans = Main.getHashList().getBodHash().get(bod).getAnsvarlig();
 
-        chooseVagtList.add(new FrivilligController.chooseVagt(day, bod, loc,vagt,ans));
+        chooseVagtList.add(new FrivilligController.chooseVagt(day, bod, loc, vagt, ans));
     }
 
-    public void getAvailable(ArrayList<String>fileContents){
+    public void getAvailable(ArrayList<String> fileContents) {
         try {
             Path path = Main.getHashList().getPathToAvailableVagter();
 
@@ -357,16 +368,17 @@ public class txtFileReader {
                     String day = profil[1];
                     String vagt = profil[2];
 
-                    String saveLine = bod+","+day+","+vagt;
+                    String saveLine = bod + "," + day + "," + vagt;
 
                     fileContents.add(saveLine);
                 }
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    public void getAvailableSave(ArrayList<String>fileContents, String bodName){
+
+    public void getAvailableSave(ArrayList<String> fileContents, String bodName) {
         try {
             Path path = Main.getHashList().getPathToAvailableVagter();
 
@@ -379,19 +391,20 @@ public class txtFileReader {
                     String day = profil[1];
                     String vagt = profil[2];
 
-                    String saveLine = bod+","+day+","+vagt;
-                    if(!bod.equals(bodName)){
+                    String saveLine = bod + "," + day + "," + vagt;
+                    if (!bod.equals(bodName)) {
                         fileContents.add(saveLine);
                     }
                 }
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    public void loadGodkendteVagter(ArrayList<String>listVievList){
+
+    public void loadGodkendteVagter(ArrayList<String> listVievList) {
         try {
-            Path path = Path.of(Main.getHashList().getPathToPendingBod()+ "/"+user.getBod().replaceAll(
+            Path path = Path.of(Main.getHashList().getPathToPendingBod() + "/" + user.getBod().replaceAll(
                     "[^a-zA-Z0-9]", "") + ".txt");
             long count = Files.lines(path).count();
             for (int i = 0; i < count; i++) {
@@ -404,17 +417,18 @@ public class txtFileReader {
                     String day = profil[3];
                     String vagt = profil[4];
                     String name = Main.getHashList().getEmailHash().get(mail);
-                    listVievList.add(day+","+name+","+vagt+","+ mail);
+                    listVievList.add(day + "," + name + "," + vagt + "," + mail);
                 }
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
 
         }
     }
-    public void loadGodkendteVagtSkema(ArrayList<String>fileContents){
+
+    public void loadGodkendteVagtSkema(ArrayList<String> fileContents) {
         try {
-            Path path = Path.of(Main.getHashList().getPathToPendingBod()+ "/"+user.getBod().replaceAll(
+            Path path = Path.of(Main.getHashList().getPathToPendingBod() + "/" + user.getBod().replaceAll(
                     "[^a-zA-Z0-9]", "") + ".txt");
             long count = Files.lines(path).count();
             for (int i = 0; i < count; i++) {
@@ -427,17 +441,18 @@ public class txtFileReader {
                     String day = profil[3];
                     String vagt = profil[4];
                     String name = Main.getHashList().getEmailHash().get(mail);
-                    fileContents.add(mail+","+phone+","+bod+","+day+","+ vagt);
+                    fileContents.add(mail + "," + phone + "," + bod + "," + day + "," + vagt);
                 }
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
 
         }
     }
-    public void rejectedRead(ArrayList<String>fileContents){
+
+    public void rejectedRead(ArrayList<String> fileContents) {
         Path path = Main.getHashList().getPathToCheckRejected();
-        try{
+        try {
             long count = Files.lines(path).count();
             for (int i = 0; i < count; i++) {
                 String line = Files.readAllLines(path).get(i);
@@ -450,11 +465,10 @@ public class txtFileReader {
                     fileContents.add(mail + "," + bod + "," + day + "," + vagt);
                 }
             }
-        }catch (IOException e) {
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
-
 
 
 }
