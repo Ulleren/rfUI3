@@ -105,46 +105,7 @@ public class AdminSearchController implements Initializable {
         roleTable.setCellValueFactory(new PropertyValueFactory<results, String>("rol"));
         resultTableView.setItems(list);
 
-        /*
-       backend.txtFileReader readPers = new txtFileReader();
-        readPers.setUser(user);
-        readPers.personsReader(list);
-        resultTableView.getItems().addAll(list);
 
-        FilteredList<results>filteredData = new FilteredList<>(list, b->true);
-        adminSearchTextField.textProperty().addListener((observable,oldValue,newValue)->{
-            filteredData.setPredicate(results -> {
-                if(newValue.isEmpty() || newValue.isBlank() || newValue == null){
-                    return true;
-                }
-                String searchKey =newValue.toLowerCase();
-                if(results.getNam().toLowerCase().contains(searchKey)){
-                    return true;
-                }
-                else if(results.getPhn().toString().contains(searchKey)){
-                    return true;
-                }
-                else if(results.getAds().toLowerCase().contains(searchKey)){
-                    return true;
-                }
-                else if(results.getMail().toLowerCase().contains(searchKey)){
-                    return true;
-                }
-                else if(results.getAds().toLowerCase().contains(searchKey)){
-                    return true;
-                }
-                else if(results.getStand().toLowerCase().contains(searchKey)){
-                    return true;
-                }
-                else{
-                    return false;
-                }
-            });
-        });
-        SortedList<results>sortedData =new SortedList<>(filteredData);
-        sortedData.comparatorProperty().bind(resultTableView.comparatorProperty());
-        resultTableView.setItems(sortedData);
-        */
     }
     public void deleteUser(ActionEvent event){
         resultTableView.getItems().removeAll(resultTableView.getSelectionModel().getSelectedItem());
