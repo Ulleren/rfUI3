@@ -12,7 +12,6 @@ public class Frivillig extends Person{
 
     Integer antalVagter = 0;
     public Frivillig(){
-
         this.vagter = new ArrayList<>();
         this.vagtPlan = new ArrayList<>();
     }

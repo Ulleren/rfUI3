@@ -245,9 +245,9 @@ public class txtFileReader {
                         int length = Main.getHashList().getPersons().get(name).size();
                         for (int k = 0; k < length; k++) {
                             if (Main.getHashList().getPersons().get(name).get(k).getEmail().equals(mail)) {
-                                Frivillig fri = (Frivillig) Main.getHashList().getPersons().get(name).get(k);
-                                fri.getVagtPlan().add(bod + "," + day + "," + vagt);
+                                ((Frivillig) Main.getHashList().getPersons().get(name).get(k)).getVagtPlan().add(bod + "," + day + "," + vagt);
                             }
+
                         }
                     }
                 }
