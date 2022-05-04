@@ -1,5 +1,3 @@
-ss@spist.dk,34768696,Ski-Burger,Søndag d. 26/6,14:00-20:00
 ss@spist.dk,34768696,Ski-Burger,Mandag d. 27/6,14:00-20:00
 ss@spist.dk,34768696,Ski-Burger,Tirsdag d. 28/6,14:00-20:00
 ss@spist.dk,34768696,Ski-Burger,Torsdag d. 30/6,20:00-02:00
-ss@spist.dk,34768696,Ski-Burger,Lørdag d. 2/7,14:00-20:00

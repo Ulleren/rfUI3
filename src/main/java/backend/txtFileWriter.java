@@ -7,6 +7,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
@@ -168,6 +169,65 @@ public class txtFileWriter {
             throw new RuntimeException(e);
         }
 
+    }
+    public void frivilligDirectSave(ArrayList<String>godkendtFileContents){
+        ArrayList<String>tempgodkendtFile = new ArrayList<>();
+        try {
+            Path path;
+            String bodNavn = null;
+            for (String bodNameScan : godkendtFileContents) {
+                if (!bodNameScan.trim().equals("")) {
+                    String[] profil = bodNameScan.split(",");
+                    String mail = profil[0];
+                    String phone = profil[1];
+                    String bod = profil[2];
+                    String day = profil[3];
+                    String vagt = profil[4];
+                    String saveLine = mail+","+phone+","+bod+","+day+","+vagt;
+
+                    bodNavn = bod;
+                    path = Path.of(Main.getHashList().getPathToPendingBod() + "/" + bodNavn.replaceAll(
+                            "[^a-zA-Z0-9]", "") + ".txt");
+
+
+                    long count = Files.lines(path).count();
+                    for (int i = 0; i < count; i++) {
+                        String line = Files.readAllLines(path).get(i);
+                        if (!line.trim().equals("")) {
+                            String[] temp = line.split(",");
+                            String tempMail = temp[0];
+                            String  tempPhone = temp[1];
+                            String tempBod = temp[2];
+                            String tempDay = temp[3];
+                            String tempVagt = temp[4];
+                            if(!line.contains(saveLine)){
+                                tempgodkendtFile.add(tempMail+","+tempPhone +","+tempBod+","+tempDay+","+tempVagt);
+                            }
+                        }
+                    }
+                    tempgodkendtFile.add(saveLine);
+                    System.out.println(tempgodkendtFile);
+                    FileWriter filewriter;
+                    long writeCcount = Files.lines(path).count();
+                    for (int j = 0; j < writeCcount; j++) {
+                        filewriter = new FileWriter(path.toString(),false);
+                        BufferedWriter bw = new BufferedWriter(filewriter);
+                        for(String fileLine: tempgodkendtFile){
+                            bw.write(fileLine+System.lineSeparator());
+                        }
+                        bw.flush();
+                        bw.close();
+                        filewriter.close();
+                    }
+
+                }
+                tempgodkendtFile.clear();
+
+
+            }
+        }catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
     public void saveToFileOnClose() {
         try {

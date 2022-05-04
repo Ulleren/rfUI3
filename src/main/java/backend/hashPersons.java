@@ -16,7 +16,6 @@ public class hashPersons {
     HashMap<String, ArrayList<Person>> persons = new HashMap<>();
     HashMap<String, String> emailHash = new HashMap<>();
     HashMap<String, Bod> bodHash = new HashMap<>();
-    HashMap<String, ArrayList<vagt>> vagtHash = new HashMap<>();
 
 
     public static String filePath = new File("").getAbsolutePath();

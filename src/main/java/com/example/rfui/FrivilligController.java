@@ -1,33 +1,38 @@
 package com.example.rfui;
 
-import backend.sceneSwitcher;
-import backend.txtFileReader;
-import backend.txtFileWriter;
+import backend.*;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableStringValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Border;
 import javafx.scene.paint.Color;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
 import javafx.fxml.Initializable;
 
+import static com.example.rfui.Main.*;
 
 
 public class FrivilligController implements Initializable{
+    @FXML private AnchorPane tablePane2;
     @FXML
     private Label nameLabel;
+    @FXML Label vagtListErrorLabel;
     @FXML private Label showBodLabel;
     @FXML private Label welcomeLabel;
+    @FXML private Label welcomeLabel2;
+    @FXML private Label notAppLabel;
+    @FXML private Label vagtTabelLabel2;
     @FXML private ComboBox<String> bodBox;
     @FXML private ComboBox<String> dayComboBox;
     @FXML private ComboBox<String> vagtComboBox;
@@ -36,6 +41,7 @@ public class FrivilligController implements Initializable{
     @FXML private Button deleteVagtBtn;
     @FXML private Button indsendVagtBtn;
     @FXML private Button seVagtBtn;
+    @FXML private Button tagVagtBtn2;
     @FXML private TableView<submitVagt>indsendVagt;
     @FXML private TableColumn<submitVagt, String>dayCol;
     @FXML private TableColumn<submitVagt, String>bodCol;
@@ -48,19 +54,27 @@ public class FrivilligController implements Initializable{
     @FXML private TableColumn<chooseVagt, String> freeLocCol;
     @FXML private TableColumn<chooseVagt, String>freeVagtCol;
     @FXML private TableColumn<chooseVagt, String>ansCol2;
+    @FXML private TableView<notApproved>notApprovedTable;
+    @FXML private TableColumn<notApproved, String> notAppBodCol;
+    @FXML private TableColumn<notApproved, String>notAppDayCol;
+    @FXML private TableColumn<notApproved, String>notAppVagtCol;
+
     @FXML private ComboBox<String> bodBox2;
     @FXML private ComboBox<String> dayComboBox2;
-    @FXML private Label vagtListErrorLabel;
     @FXML private Button tagVagtBtn;
     private int rowCount = 0;
     private int vagtBefore = 0;
     private int vagtAfter=0;
 
-    private int rejCount= 5+(rowCount-5);
+    private int rejCount= 0;
     ObservableList<submitVagt> vagtList = FXCollections.observableArrayList();
     ObservableList<chooseVagt> chooseVagtList = FXCollections.observableArrayList();
-
+    ObservableList<notApproved> notAppList = FXCollections.observableArrayList();
     ArrayList<String> tableContents = new ArrayList<>();
+    ArrayList<String> rejectContents = new ArrayList<>();
+    ArrayList<String>savePending = new ArrayList<>();
+
+
     ArrayList<String> godkendtFileContents = new ArrayList<>();
     private loginController.User user;
     public loginController.User getUser(){
@@ -76,6 +90,7 @@ public class FrivilligController implements Initializable{
             comboBox();
             initiateCols();
             initiateChooseVagtCols();
+            initiateNotAppCols();
             displayName(user.getName());
             displayBod(user.getBod());
             setVagtBtn.setBorder(Border.stroke(Color.ORANGE));
@@ -91,13 +106,28 @@ public class FrivilligController implements Initializable{
             showStatus();
         });
     }
+    public static class notApproved{
+        public SimpleStringProperty notAppBod;
+        public SimpleStringProperty notAppDay;
+        public SimpleStringProperty notAppVagt;
+        public notApproved(String notAppBod, String notAppDay, String notAppVagt){
+            this.notAppBod=new SimpleStringProperty(notAppBod);
+            this.notAppDay=new SimpleStringProperty(notAppDay);
+            this.notAppVagt=new SimpleStringProperty(notAppVagt);
+
+        }
+        public notApproved(){
+        }
+        public String getNotAppBod(){ return notAppBod.get();}
+        public String getNotAppDay(){ return notAppDay.get();}
+        public String getNotAppVagt(){ return notAppVagt.get();}
+    }
     public static class submitVagt{
         private SimpleStringProperty Day;
         private SimpleStringProperty bodnam;
         private SimpleStringProperty loc;
         private SimpleStringProperty timeslot;
         private SimpleStringProperty ans;
-        //private final SimpleStringProperty ansPhn;
         public submitVagt(String Day, String bodnam, String loc, String timeslot, String ans){
             this.Day=new SimpleStringProperty(Day);
             this.bodnam=new SimpleStringProperty(bodnam);
@@ -137,7 +167,7 @@ public class FrivilligController implements Initializable{
         public String getAvailAns(){ return availAns.get();}
 
     }
-    public void loadAvailable(){
+    public void loadAvailable() {
         chooseVagtList.clear();
         chooseVagtTable.getItems().clear();
         String bodBoksValue = bodBox2.getValue();
@@ -149,87 +179,191 @@ public class FrivilligController implements Initializable{
         chooseVagtTable.getItems().addAll(chooseVagtList);
         clearChooseCombo();
     }
+
+
     public void showStatus(){
         if(checkRejections()){
-            welcomeLabel.setText("Der er "+(5+(rowCount-5)) +" vagter der ikke er godkendt");
-            indsendVagt.getItems().addAll(vagtList);
-            vagtListErrorLabel.setText("");
-            indsendVagtBtn.setVisible(false);
-            setVagtBtn.setVisible(false);
-            bodBox.setVisible(false);
-            dayComboBox.setVisible(false);
-            vagtComboBox.setVisible(false);
-            deleteVagtBtn.setVisible(false);
+            if(!showVagter()){
+                if(5-rowCount==1){
+                    welcomeLabel.setText("Du mangler at tage "+(5-rowCount)+" vagt");
+                }
+                else {
+                    welcomeLabel.setText("Du mangler at tage "+(5-rowCount)+" vagter");
+                }
+                indsendVagt.setPlaceholder(new Label("Indsatte vagter vises her, vælges de fra listen under vil de automatisk blive godkendte"));
+                chooseVagtTable.setPlaceholder((new Label("Vælg en bod, en dag eller et tidspunkt")));
+                dayComboBox2.getSelectionModel().selectFirst();
+                if(rejCount==1){
+                    notAppLabel.setText(rejCount +" ikke godkendt vagt");
+                }
+                else if(rejCount==0){
+                    indsendVagt.getItems().addAll(vagtList);
+                    vagtList.clear();
+                }
+                else {
+                    notAppLabel.setText(rejCount +" ikke godkendte vagter");
+                }
+                vagtListErrorLabel.setText("");
+            }
+            else{
+                if(showVagter()) {
+                    welcomeLabel2.setText("Alle vagter er godkendte, se dem herunder");
+                    notApprovedTable.setPlaceholder(new Label("Du har ingen afviste vagter"));
+                    welcomeLabel.setText("Vagter under festivallen:");
+                    vagtListErrorLabel.setText("");
+                    indsendVagtBtn.setVisible(false);
+                    setVagtBtn.setVisible(false);
+                    bodBox.setVisible(false);
+                    dayComboBox.setVisible(false);
+                    vagtComboBox.setVisible(false);
+                    deleteVagtBtn.setVisible(false);
+                    bodBox2.setVisible(false);
+                    dayComboBox2.setVisible(false);
+                    vagtComboBox2.setVisible(false);
+                    setVagtBtn.setVisible(false);
+                    tagVagtBtn.setVisible(false);
+                    vagtTabelLabel2.setText("");
+                    chooseVagtTable.setVisible(false);
+                    tablePane2.setVisible(false);
+                }
+                else {
+                    dayComboBox2.getSelectionModel().selectFirst();
+                    if(5-rowCount==1){
+                        welcomeLabel.setText("Du mangler at tage "+(5-rowCount)+" vagt");
+                    }
+                    else {
+                        welcomeLabel.setText("Du mangler at tage "+(5-rowCount)+" vagter");
+                    }
+
+                }
+            }
         }
+        else{
+            if(5-rowCount==1){
+                welcomeLabel.setText("Du mangler at tage "+(5-rowCount)+" vagt");
+            }
+            else {
+                welcomeLabel.setText("Du mangler at tage "+(5-rowCount)+" vagter");
+            }
+        }
+
+    }
+    public boolean showVagter() {
+        vagtList.clear();
+        boolean approvedVagter = false;
+        int numberOfPpl = Main.getHashList().getPersons().get(user.getName()).size();
+        Frivillig pers = null;
+        for (int i = 0; i < numberOfPpl; i++) {
+            if(Main.getHashList().getPersons().get(user.getName()).get(i).getEmail().equals(user.getEmail())){
+                pers = (Frivillig) Main.getHashList().getPersons().get(user.getName()).get(i);
+            }
+        }
+        godkendtFileContents = pers.getVagtPlan();
+
+        if(rowCount==0){
+            for(String content : godkendtFileContents){
+                if(!content.trim().equals("")){
+                    String [] profil = content.split(",");
+                    String bod = profil[0];
+                    String day = profil[1];
+                    String vagt = profil[2];
+                    String loc = Main.getHashList().getBodHash().get(bod).getLokation();
+                    String ans = Main.getHashList().getBodHash().get(bod).getAnsvarlig();
+                    vagtList.add(new submitVagt(day, bod, loc, vagt, ans));
+                    countDays(day);
+                    rowCount+=1;
+
+                }
+            }
+            indsendVagt.getItems().addAll(vagtList);
+            rowCount= godkendtFileContents.size();
+        }
+
+        if(rowCount == 5){
+            approvedVagter = true;
+        }
+
+        return approvedVagter;
     }
     public void tagVagt(ActionEvent event){
+        vagtList.clear();
+        int isReject = 0;
         String newDay = chooseVagtTable.getSelectionModel().getSelectedItem().getAvailDay();
         String newBod = chooseVagtTable.getSelectionModel().getSelectedItem().getAvailBod();
-        String newLoc = chooseVagtTable.getSelectionModel().getSelectedItem().getAvailLoc();
         String newVagt = chooseVagtTable.getSelectionModel().getSelectedItem().getAvailVagt();
-        String newAns = chooseVagtTable.getSelectionModel().getSelectedItem().getAvailAns();
 
-        for (int i = 0; i < vagtList.size(); i++) {
-            if(chooseVagtTable.getSelectionModel().getSelectedItem().getAvailVagt().equals(indsendVagt.getItems().get(i).getTimeslot())
-            && chooseVagtTable.getSelectionModel().getSelectedItem().getAvailDay().equals(indsendVagt.getItems().get(i).getDay())){
-
-                indsendVagt.getSelectionModel().select(vagtList.get(i));
-                indsendVagt.getItems().remove(indsendVagt.getSelectionModel().getSelectedItem());
-                vagtList.remove(vagtList.get(i));
+        for (int i = 0; i < rejectContents.size() ; i++) {
+            if(chooseVagtTable.getSelectionModel().getSelectedItem().getAvailDay().equals(notApprovedTable.getItems().get(i).getNotAppDay())) {
+                notApprovedTable.getItems().remove(notApprovedTable.getSelectionModel().getSelectedItem());
+                notAppList.remove(notAppList.get(i));
+                isReject = 1;
             }
-            if(godkendtFileContents.get(i).contains(newDay) && godkendtFileContents.get(i).contains(newVagt)){
-                godkendtFileContents.remove(godkendtFileContents.get(i));
-                rowCount-=1;
-                //godkendtFileContents.add(user.getEmail()+","+user.getPhone()+","+newBod+","+newDay+","+ newVagt);//skal addes til godkendte
+            if(rejectContents.get(i).contains(newDay)){
+                rejectContents.remove(rejectContents.get(i));
             }
         }
-        System.out.println(godkendtFileContents);
-        backend.txtFileWriter rejectionWrite = new txtFileWriter();
-        rejectionWrite.setUser(user);
-        rejectionWrite.rejectionsWrite(godkendtFileContents);
-        godkendtFileContents.clear();
-        indsendVagt.getItems().clear();
+        if(checkDoubleVagter(newDay)){
+            godkendtFileContents.add(newBod+","+newDay+","+ newVagt);
+            countDays(newDay);
+            checkVagtAmount(newBod, newDay,newVagt);
+
+        }
+        if(rowCount==5){
+            notApprovedTable.getItems().removeAll();
+            rejectContents.clear();
+            notAppList.removeAll();
+        }
+
         vagtList.clear();
-        rowCount=0;
+        if(isReject!=0){
+            rejCount-=1;
+            backend.txtFileWriter rejectionWrite = new txtFileWriter();
+            rejectionWrite.setUser(user);
+            rejectionWrite.rejectionsWrite(rejectContents);
+
+        }
+        notApprovedTable.getItems().clear();
+        notAppList.clear();
+        rejectContents.clear();
+
+
         showStatus();
-        System.out.println(godkendtFileContents);
+
     }
     public boolean checkRejections(){
+        rejCount=0;
         boolean rejected = false;
+        rejectContents.clear();
         try {
-            Path path = Main.getHashList().getPathToCheckRejected();
+            Path path = getHashList().getPathToCheckRejected();
             long count = Files.lines(path).count();
             for (int i = 0; i < count; i++) {
                 String line = Files.readAllLines(path).get(i);
                 if (!line.trim().equals("")) {
                     String[] profil = line.split(",");
                     String mail = profil[0];
-                    String bod = profil[1];
-                    String day = profil[2];
-                    String vagt = profil[3];
-                    String loc = Main.getHashList().getBodHash().get(bod).getLokation();
-                    String ansName = Main.getHashList().getBodHash().get(bod).getAnsvarlig();
-                    godkendtFileContents.add(mail+","+bod+","+day+","+vagt);
-
+                    String phone = profil[1];
+                    String bod = profil[2];
+                    String day = profil[3];
+                    String vagt = profil[4];
                     String friName = user.getEmail();
                     if (Objects.equals(mail, friName)) {
-                        switch(day){
-                            case "Lørdag d. 25/6", "Søndag d. 26/6", "Mandag d. 27/6", "Tirsdag d. 28/6" -> {vagtBefore +=1; }
-                            case "Onsdag d. 29/6", "Torsdag d. 30/6", "Fredag d. 1/7", "Lørdag d. 2/7" -> {vagtAfter +=1; }
-                        }
-                        vagtList.add(new submitVagt(day,bod,loc,vagt,ansName));
-                        rowCount+=1;
+                        rejectContents.add(mail+","+bod+","+day+","+vagt);
                         rejected=true;
                     }
                 }
             }
-            return true;
+            if(showVagter()){
+                addToTableNotApp(rejectContents);
+            }
+            else{
+                addToTableNotApp(rejectContents);
+            };
         }catch(Exception e){
             e.printStackTrace();
         }
         return rejected;
     }
-
     public void insertPendingVagt(ActionEvent event){
         vagtList.removeAll(vagtList);
         if(vagtComboBox.equals(null)){
@@ -239,69 +373,116 @@ public class FrivilligController implements Initializable{
         try{
             String dayLine = dayComboBox.getValue();
             String bodLine = bodBox.getValue();
-            String locLine = Main.hashList.getBodHash().get(bodBox.getValue()).getLokation();
+            String locLine = hashList.getBodHash().get(bodBox.getValue()).getLokation();
             String timeLine = vagtComboBox.getValue();
-            String ansLine = Main.hashList.getBodHash().get(bodBox.getValue()).getAnsvarlig();
+            String ansLine = hashList.getBodHash().get(bodBox.getValue()).getAnsvarlig();
 
-            String ansvarlig = Main.hashList.getBodHash().get(bodBox.getValue()).getAnsvarlig();
-            int antalMedNavn = Main.hashList.getPersons().get(ansvarlig).size();
+            String ansvarlig = hashList.getBodHash().get(bodBox.getValue()).getAnsvarlig();
+            int antalMedNavn = hashList.getPersons().get(ansvarlig).size();
             for(int i = 0; i < antalMedNavn; i++){
-                if(Main.hashList.getPersons().get(Main.hashList.getBodHash().get(bodBox.getValue()).getAnsvarlig()).get(i).getRole().equals("Ansvarlig")){
-                    String ansPhone = Main.hashList.getPersons().get(Main.hashList.getBodHash().get(bodBox.getValue()).getAnsvarlig()).get(i).getPhonenumber();
+                if(hashList.getPersons().get(hashList.getBodHash().get(bodBox.getValue()).getAnsvarlig()).get(i).getRole().equals("Ansvarlig")){
+                    String ansPhone = hashList.getPersons().get(hashList.getBodHash().get(bodBox.getValue()).getAnsvarlig()).get(i).getPhonenumber();
                 }
             }
-            submitVagt subVagt =new submitVagt(dayLine, bodLine,locLine,timeLine,ansLine);
-            for (String tableContent : tableContents) {
+            verifyVagter();
+            if(checkDoubleVagter(dayLine)){
+                savePending.add(user.getEmail()+","+user.getPhone()+","+bodLine+","+dayLine+","+timeLine);
+                checkVagtAmount(bodLine, dayLine,timeLine);
+            }
 
-                if(tableContent.contains(subVagt.getDay())){
-                    vagtListErrorLabel.setText("Du kan kun have 1 vagt om dagen");
-                    return;
-                }
-            }
-            vagtList.add(new submitVagt(dayLine,bodLine,locLine,timeLine,ansLine));
-            if(rowCount < 5){
-                if(verifyVagter()){
-                    indsendVagt.getItems().addAll(vagtList);
-                    tableContents.add(user.getEmail()+","+user.getPhone()+","+subVagt.getBodnam()+","+subVagt.getDay()+","+subVagt.getTimeslot());
 
-                    rowCount +=1;
-                    clearCombo();
-                    vagtListErrorLabel.setText("");
-                }
-                else{
-                    if(vagtBefore >=3){
-                        vagtListErrorLabel.setText("Du har allerede 3 vagter inden programstart");
-                        vagtBefore-=1;
-
-                    }
-                    if(vagtAfter >=2){
-                        vagtListErrorLabel.setText("Du har allerede 2 vagter imens programmet kører");
-                        vagtAfter-=1;
-                    }
-                }
-            }
-            else{
-                vagtListErrorLabel.setText("Du har allerede 5 vagter, slet en vagt for at tilføje en ny");
-            }
         }catch(NumberFormatException n){
             n.printStackTrace();
         }
-        System.out.println(tableContents);
+    }
+    public boolean checkDoubleVagter(String day){
+        boolean doubleCheck = true;
+        for (String godkendtFileContent : godkendtFileContents) {
+            if (godkendtFileContent.contains(day)) {
+                vagtListErrorLabel.setText("Du kan kun have 1 vagt om dagen");
+
+                doubleCheck = false;
+            }
+        }
+        return doubleCheck;
+    }
+    public void checkVagtAmount(String bod, String day, String vagt){
+        String loc = Main.getHashList().getBodHash().get(bod).getLokation();
+        String ans = Main.getHashList().getBodHash().get(bod).getAnsvarlig();
+        if(rowCount < 5){
+            if(vagtBefore<=3 && vagtAfter<=2){
+                vagtList.add(new submitVagt(day,bod,loc,vagt,ans));
+                indsendVagt.getItems().addAll(vagtList);
+
+                rowCount +=1;
+                clearCombo();
+                vagtListErrorLabel.setText("");
+            }
+            else{
+                if(vagtBefore >3){
+                    vagtListErrorLabel.setText("Du har allerede 3 vagter inden programstart");
+                    vagtBefore-=1;
+
+                }
+                if(vagtAfter >2){
+                    vagtListErrorLabel.setText("Du har allerede 2 vagter imens programmet kører");
+                    vagtAfter-=1;
+
+                }
+            }
+        }
+        else{
+            vagtListErrorLabel.setText("Du har allerede 5 vagter, slet en vagt for at tilføje en ny");
+        }
     }
     public void finalizeVagt(ActionEvent event){
+        ArrayList<String>rejectRead = new ArrayList<>();
+        ArrayList<String>saveGodkendt = new ArrayList<>();
+
+
         if(rowCount!=5){
             vagtListErrorLabel.setText("du har ikke valgt 5 vagter");
             return;
+        }else{
+            notAppList.removeAll();
+            notApprovedTable.getItems().clear();
+            rejectContents.clear();
+            backend.txtFileReader rejectReadFile = new txtFileReader();
+            rejectReadFile.rejectedRead(rejectRead);
+            for(String readReject : rejectRead){
+                if(!readReject.contains(user.getEmail())){
+                    rejectContents.add(readReject);
+                }
+            }
+            backend.txtFileWriter rejectionWrite = new txtFileWriter();
+            rejectionWrite.setUser(user);
+            rejectionWrite.rejectionsWrite(rejectContents);
         }
-        List<String> fileContents = new ArrayList<>();
+
+        int numberOfPpl = Main.getHashList().getPersons().get(user.getName()).size();
+
+        Frivillig pers = null;
+        for (int i = 0; i < numberOfPpl; i++) {
+            if(Main.getHashList().getPersons().get(user.getName()).get(i).getEmail().equals(user.getEmail())){
+                pers = (Frivillig) Main.getHashList().getPersons().get(user.getName()).get(i);
+            }
+        }
+        for (String vagtPlanContent : pers.getVagtPlan()) {
+            if(godkendtFileContents.contains(vagtPlanContent)){
+                saveGodkendt.add(user.getEmail()+","+user.getPhone()+","+vagtPlanContent);
+            }
+        }
+        List<String> pendingfileContents = new ArrayList<>();
         backend.txtFileReader pendingMailRead = new txtFileReader();
         pendingMailRead.setUser(user);
-        pendingMailRead.pendingVagterReadMail(fileContents);
-        fileContents.addAll(tableContents);
+        pendingMailRead.pendingVagterReadMail(pendingfileContents);
+        pendingfileContents.addAll(savePending);
         backend.txtFileWriter pendingMailWrite = new txtFileWriter();
         pendingMailWrite.setUser(user);
-        pendingMailWrite.pendingVagterWrite(fileContents);
-
+        pendingMailWrite.pendingVagterWrite(pendingfileContents);
+        backend.txtFileWriter writeFrivilligGodkendt = new txtFileWriter();
+        writeFrivilligGodkendt.setUser(user);
+        writeFrivilligGodkendt.frivilligDirectSave(saveGodkendt);
         indsendVagt.getItems().clear();
         clearCombo();
         vagtListErrorLabel.setText("Dine vagter er registreret, du vil se godkendte vagter i skemaet nedenfor når de er godkendt");
@@ -326,16 +507,40 @@ public class FrivilligController implements Initializable{
         vagtComboBox2.setPromptText("Vælg vagt");
 
     }
+    public void countDays(String day) {
+        switch(day){
+            case "Lørdag d. 25/6", "Søndag d. 26/6", "Mandag d. 27/6", "Tirsdag d. 28/6" -> {vagtBefore +=1; }
+            case "Onsdag d. 29/6", "Torsdag d. 30/6", "Fredag d. 1/7", "Lørdag d. 2/7" -> {vagtAfter +=1; }
+        }
+    }
+    public void deCountDays(String day) {
+        switch(day){
+            case "Lørdag d. 25/6", "Søndag d. 26/6", "Mandag d. 27/6", "Tirsdag d. 28/6" -> {vagtBefore -=1; }
+            case "Onsdag d. 29/6", "Torsdag d. 30/6", "Fredag d. 1/7", "Lørdag d. 2/7" -> {vagtAfter -=1; }
+        }
+    }
+
+    public void addToTableNotApp(ArrayList<String>rejectContents){
+        for(String content : rejectContents){
+            if(!content.trim().equals("")){
+                String []profil = content.split(",");
+                String mail = profil[0];
+                String bod = profil[1];
+                String day = profil[2];
+                String vagt = profil[3];
+                notAppList.add(new notApproved(bod,day,vagt));
+                rejCount +=1;
+            }
+        }
+        notApprovedTable.getItems().addAll(notAppList);
+    }
     public void deleteVagt(ActionEvent event){
         if(indsendVagt.getSelectionModel().getSelectedItem()==null){
             vagtListErrorLabel.setText("Vælg en vagt der skal slettes");
             return;
         }
         String contents = indsendVagt.getSelectionModel().getSelectedItem().getDay();
-        switch(contents){
-            case "Lørdag d. 25/6", "Søndag d. 26/6", "Mandag d. 27/6", "Tirsdag d. 28/6" -> {vagtBefore -=1; }
-            case "Onsdag d. 29/6", "Torsdag d. 30/6", "Fredag d. 1/7", "Lørdag d. 2/7" -> {vagtAfter -=1; }
-        }
+        deCountDays(contents);
         for (int i = 0; i < tableContents.size(); i++) {
             if(tableContents.get(i).contains(contents)){
                 tableContents.remove(tableContents.get(i));
@@ -347,18 +552,16 @@ public class FrivilligController implements Initializable{
         vagtListErrorLabel.setText("");
         rowCount-=1;
     }
-    public boolean verifyVagter(){
-        boolean vagtIsValid = true;
+    public void verifyVagter(){
 
         if(vagtAfter < 2 || vagtBefore < 3 && dayComboBox.getValue()!=null && vagtComboBox.getValue()!=null && bodBox.getValue()!=null){
-            switch(dayComboBox.getValue()){
-                case "Lørdag d. 25/6", "Søndag d. 26/6", "Mandag d. 27/6", "Tirsdag d. 28/6" -> {vagtBefore +=1; return vagtIsValid;}
-                case "Onsdag d. 29/6", "Torsdag d. 30/6", "Fredag d. 1/7", "Lørdag d. 2/7" -> {vagtAfter +=1; return vagtIsValid;}
-            }
+
+            countDays(dayComboBox.getValue());
         }
         else{
             if(dayComboBox.getValue()==null && vagtComboBox.getValue()==null && bodBox.getValue()==null){
                 vagtListErrorLabel.setText("Der er ikke foretaget nogle valg");
+
             }
             else{
                 if(dayComboBox.getValue()==null && vagtComboBox.getValue()==null){
@@ -382,9 +585,7 @@ public class FrivilligController implements Initializable{
                     }
                 }
             }
-            vagtIsValid=false;
         }
-        return vagtIsValid;
     }
     private void initiateCols(){
         dayCol.setCellValueFactory(new PropertyValueFactory<>("Day"));
@@ -400,6 +601,11 @@ public class FrivilligController implements Initializable{
         freeLocCol.setCellValueFactory(new PropertyValueFactory<>("availLoc"));
         freeVagtCol.setCellValueFactory(new PropertyValueFactory<>("availVagt"));
         ansCol2.setCellValueFactory(new PropertyValueFactory<>("availAns"));
+    }
+    private void initiateNotAppCols(){
+        notAppBodCol.setCellValueFactory(new PropertyValueFactory<>("notAppBod"));
+        notAppDayCol.setCellValueFactory(new PropertyValueFactory<>("notAppDay"));
+        notAppVagtCol.setCellValueFactory(new PropertyValueFactory<>("notAppVagt"));
     }
     public void displayName(String username){
         nameLabel.setText("Logged ind som: " +username);
