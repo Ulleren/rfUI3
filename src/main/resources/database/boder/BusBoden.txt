@@ -1,2 +1,0 @@
-kim@1.dk,23232323,Bus-Boden,Tirsdag d. 28/6,14:00-20:00
-kim@sletmig.dk,22334411,Bus-Boden,Onsdag d. 29/6,08:00-14:00
