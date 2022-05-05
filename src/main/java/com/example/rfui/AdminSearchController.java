@@ -1,10 +1,7 @@
 package com.example.rfui;
 
-import backend.txtFileWriter;
+import backend.*;
 import com.example.rfui.Main;
-import backend.Person;
-import backend.sceneSwitcher;
-import backend.txtFileReader;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -27,6 +24,8 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+import java.sql.SQLOutput;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class AdminSearchController implements Initializable {
@@ -109,7 +108,42 @@ public class AdminSearchController implements Initializable {
 
     }
     public void deleteUser(ActionEvent event){
+
+        String name = resultTableView.getSelectionModel().getSelectedItem().getNam();
+        String email = resultTableView.getSelectionModel().getSelectedItem().getMail();
+
+        ArrayList<String> delVagter = new ArrayList<>();
+
+        for(Person pers: Main.getHashList().getPersons().get(name)){
+            if(pers.getEmail().equals(email)){
+                if(pers.getRole().equals("Frivillig")){
+                    //delVagter = ((Frivillig) pers).getVagtPlan();
+                    for(String delVagt: ((Frivillig)pers).getVagtPlan()){
+                        delVagter.add(email+","+pers.getPhonenumber()+","+delVagt);
+                    }
+                    System.out.println(delVagter);
+                    Main.getHashList().getPersons().get(name).remove(pers);
+                    if (Main.getHashList().getPersons().get(name).size() == 0) {
+                        Main.getHashList().getPersons().remove(pers);
+                    }
+
+                } else if(pers.getRole().equals("Admin")){
+                    Main.getHashList().getPersons().get(name).remove(pers);
+                    if (Main.getHashList().getPersons().get(name).size() == 0) {
+                        Main.getHashList().getPersons().remove(pers);
+                    }
+                }
+            }
+        }
+        System.out.println(Main.getHashList().getPersons().get(name).toString());
         resultTableView.getItems().removeAll(resultTableView.getSelectionModel().getSelectedItem());
+
+        backend.txtFileWriter personWrite = new txtFileWriter();
+        personWrite.frivilligDirectSave(delVagter);
+        personWrite.savePersonsToFile();
+
+        /*
+        Person pers = Main.getHashList().getPersons().get(resultTableView.getSelectionModel().getSelectedItem().getNam()).get()
         String deleteLine = resultTableView.getSelectionModel().getSelectedItem().getNam()+","+
                 resultTableView.getSelectionModel().getSelectedItem().getPhn()+","+
                 resultTableView.getSelectionModel().getSelectedItem().getMail()+","+
@@ -119,6 +153,7 @@ public class AdminSearchController implements Initializable {
         backend.txtFileWriter personWrite = new txtFileWriter();
         personWrite.setUser(user);
         personWrite.personsWrite(deleteLine);
+        */
     }
 
     public void adminlogout(ActionEvent event) throws IOException {

@@ -1,65 +1,63 @@
-Rasmus,20292929,kodeord,rasmus@mail.dk,vej 78,Admin,Kontor
-Ulriks Mor,29291010,kode,ulriksmor@o.dk,vejen 22,Admin,Kontor
-Bente Brednums,20201919,kode,bente@klam.dk,En vej 34,Ansvarlig,SNAIL 'N CHIPS
-Frits Villig,28384938,kode,fri@villig.dk,frivej 3,Frivillig,Bus-Boden
-Lise Flise,23122312,kode,lise@flise.com,flisen 23,Admin,Kontor
-Anders Ansvarlig,99887766,kode,ans@ans.dk,ansvarliggade 22,Ansvarlig,Mocktail Bar
-rasser,282827272,kode,ras@ras.dk,kd2,Frivillig,Tuborg Orange
-ras,22222222,kode,ras@ras.dk,vej 44,Ansvarlig,Tuborg Orange
-Morten Liderkarl,29002200,kode,ml@ml.dk,alle 44,Frivillig,Meyers Køkken
-Kasper Kussesluger,88776699,kode,kk@kk.dk,kusvej 22,Ansvarlig,Meyers Køkken
-Kuno,77668877,kode,kuno@kk.dk,reee 8,Admin,Kontor
-Hanne Hansen,22998877,kode,hh@hh.dk,kino 44,Ansvarlig,Bus-Boden
-Hippe Henning,34251223,kode,henning@mail.dk,I Hegnet 247,Frivillig,Meyers Køkken
-Jens Kidman,88669900,kode,jens@rw.dk,Bajs Alle 24,Frivillig,Bus-Boden
-Johnny Rotten,33554422,kode,jr@sp.dk,Pistol gade 12,Frivillig,Ski-Burger
+Marianne Gnahver,88779944,kode,mg@gnaver.dk,Vejsens alle 34,Frivillig,Tuborg Orange
+Vilfred Vildersen,22134679,kode,vv@vvs.dk,Vaskemaskinevej 23,Frivillig,Tuborg Orange
 Varg Vikernes,66600666,kode,varg@burzum.no,Kirkens Vej 66,Frivillig,Tuborg Orange
-Mikael Aakerfeldt,71726348,kode,mf@opeth.se,Blodbads Gaten 445,Frivillig,Meyers Køkken
-Simon Spiselig,34768696,kode,ss@spist.dk,Orgie Alle,Frivillig,Ski-Burger
-Heavy Henning,76869600,kode,hh@rw.dk,Røde Vej 77,Frivillig,Tuborg Orange
-Anders Staal,22334455,kode,as@staal.dk,Stålvejen 66,Frivillig,Tuborg Orange
 Jens Lyhn,45453434,kode,jl@lyn.dk,Lyn Alle 44,Frivillig,Meyers Køkken
-Johnny Madsen,76864353,kode,jm@bodega.dk,Bodegavej 77,Frivillig,Ski-Burger
+Lasse Sam,28337788,kode,las@las.dk,Vimmelskaftet 44,Frivillig,Tuborg Orange
+Johnny Rotten,33554422,kode,jr@sp.dk,Pistol gade 12,Frivillig,Ski-Burger
+hej,44444444,kode,4@4.4,hej,Admin,Kontor
+Simon Spiselig,34768696,kode,ss@spist.dk,Orgie Alle,Frivillig,Ski-Burger
+Jonna Jungersen,23132324,kode,jj@jungen.dk,jungeve54,Frivillig,Tuborg Orange
+Toeren,22222222,kode,to@to.dk,Oppeitoeren 2,Ansvarlig,tomandsland
+Toeren,22334455,kode,to@ento.dk,toerenanden 2,Ansvarlig,tomandsland
+Ulriks Mor,29291010,kode,ulriksmor@o.dk,vejen 22,Admin,Kontor
+Anders Ansvarlig,99887766,kode,ans@ans.dk,ansvarliggade 22,Ansvarlig,Mocktail Bar
+Kikki Kiks,55667799,kode,kk@kiks.dk,Kikset vej 77,Frivillig,Tuborg Orange
+Ulrik,22222222,2,2@2.2,d,Admin,Kontor
+Wet Villy,20992211,kode,ww@tis-is.dk,Pool alle 34,Ansvarlig,Tis-Is
+Lone Kone,30223377,kode,lk@lone.dk,Frederikssundsvej 432 st. tv,Frivillig,Ski-Burger
+ras,22222222,kode,ras@ras.dk,vej 44,Ansvarlig,Tuborg Orange
+Lise Flise,23122312,kode,lise@flise.com,flisen 23,Admin,Kontor
 Kenny Kenn,22131415,kode,kk@busse.com,Grimmes Alle 55,Frivillig,Ski-Burger
+rasser,282827272,kode,ras@ras.dk,kd2,Frivillig,Tuborg Orange
+Jytte Bytte,44794613,kode,jb@byttilnyt.dk,Brugt alle 12,Frivillig,Tuborg Orange
+Yrsa Slugher,33778811,kode,ys@slugh.dk,Bundervej 66,Ansvarlig,Diller Drik
+Morten Liderkarl,29002200,kode,ml@ml.dk,alle 44,Frivillig,Meyers Køkken
+Johnny Madsen,76864353,kode,jm@bodega.dk,Bodegavej 77,Frivillig,Ski-Burger
+Kim Hasse,38436323,kode,kh@kims.dk,Nørrebrogade 130 5. th,Frivillig,Meyers Køkken
+Rikke Schlicke,55778844,kode,rs@schlicke.dk,Tungestens Vej 22,Frivillig,Tuborg Orange
+Enemanden,11111111,kode,en@en.dk,Ingenmandsland 2,Ansvarlig,Enmandsland
+Rasmus,20292929,kodeord,rasmus@mail.dk,vej 78,Admin,Kontor
+Kim Snor,44432323,kode,ks@snor.com,Amagerbrogade 377 5. th,Frivillig,Meyers Køkken
+Bente Brednums,20201919,kode,bente@klam.dk,En vej 34,Ansvarlig,SNAIL 'N CHIPS
+Anders Staal,22334455,kode,as@staal.dk,Stålvejen 66,Frivillig,Tuborg Orange
+Einar Ensten,99889911,kode,ee@juhuu.dk,Stenvejen 23,Frivillig,SNAIL 'N CHIPS
+Dilbert Dellekaster,55664477,kode,dill@bert.dk,Dill vej 45,Ansvarlig,Frikadiller
+Ke bab,34343434,kode,ke@bib.dk,dfd,Ansvarlig,Kebabistan
+Mikael Aakerfeldt,71726348,kode,mf@opeth.se,Blodbads Gaten 445,Frivillig,Meyers Køkken
+Hippe Henning,34251223,kode,henning@mail.dk,I Hegnet 247,Frivillig,Meyers Køkken
+Ulrik S Mohr,23435522,kode,usm@jydekrog.dk,Kertemindevej 22,Frivillig,Tuborg Orange
+Ulle,23232323,u,u@u.dk,ulleren 2,Frivillig,tomandsland
+Kim Frederiksen,34252233,kode,kf@df.com,Lykkesholms Alle 22 4. tv,Frivillig,Bus-Boden
+Kim Jespersen,44432323,kode,kj@hule.com,Amagerbrogade 377 5. th,Frivillig,Meyers Køkken
+Kim Jensen,38432323,kode,kj@kims.com,Nørrebrogade 133 5. th,Frivillig,Meyers Køkken
 Simone Kimono,44535214,kode,sk@jj.com,Vesterbrogade 234 4. tv,Frivillig,Meyers Køkken
 Michaela Jensen,20119283,kode,ms@dt.dk,Frederiksberg Alle 244 3. mf,Frivillig,SNAIL 'N CHIPS
 Jens Kaspersen,22324213,kode,jk@jk.com,Vanløse Alle 33,Frivillig,Meyers Køkken
-Lone Kone,30223377,kode,lk@lone.dk,Frederikssundsvej 432 st. tv,Frivillig,Ski-Burger
-Kim Frederiksen,34252233,kode,kf@df.com,Lykkesholms Alle 22 4. tv,Frivillig,Bus-Boden
-Kim Jensen,38432323,kode,kj@kims.com,Nørrebrogade 133 5. th,Frivillig,Meyers Køkken
-Flemming Godt,33534355,kode,fg@flems.com,Hannemanns Alle 24,Frivillig,Bus-Boden
-Lasse Sam,28337788,kode,las@las.dk,Vimmelskaftet 44,Frivillig,Tuborg Orange
-Lasse Bak,28282726,kode,las@bak.dk,Posens Gade 33,Frivillig,Tuborg Orange
-Kim Hansen,38432327,kode,kh@kims.com,Nørrebrogade 100 5. mf,Frivillig,Meyers Køkken
-Kim Hasse,38436323,kode,kh@kims.dk,Nørrebrogade 130 5. th,Frivillig,Meyers Køkken
-Kim Jespersen,44432323,kode,kj@hule.com,Amagerbrogade 377 5. th,Frivillig,Meyers Køkken
-Ulrik,22222222,2,2@2.2,d,Admin,Kontor
-Kim Snor,44432323,kode,ks@snor.com,Amagerbrogade 377 5. th,Frivillig,Meyers Køkken
-Lasse Bak,28282726,kode,la@bak.dk,Posens Gade 33,Frivillig,Meyers Køkken
-hej,44444444,kode,4@4.4,hej,Admin,Kontor
-Lars Kuhle,34543423,kode,lk@testikel_te.dk,Bollernes Alle,Ansvarlig,Ski-Burger
-Wet Villy,20992211,kode,ww@tis-is.dk,Pool alle 34,Ansvarlig,Tis-Is
-Enemanden,11111111,kode,en@en.dk,Ingenmandsland 2,Ansvarlig,Enmandsland
-Toeren,22222222,kode,to@to.dk,Oppeitoeren 2,Ansvarlig,tomandsland
-Toeren,22334455,kode,to@ento.dk,toerenanden 2,Ansvarlig,Den anden slags toer
-Einar Ensten,99889911,kode,ee@juhuu.dk,Stenvejen 23,Frivillig,SNAIL 'N CHIPS
-Lars Lister,23772233,kode,ll@ll.dk,Listevej 77,Frivillig,SNAIL 'N CHIPS
-Ulle,23232323,u,u@u.dk,ulleren 2,Frivillig,tomandsland
-Ulleren,98989898,u,u@uu.u,uu,Frivillig,Ski-Burger
-Kebab Manden,23232323,kode,ke@bab.dk,Nørrebrogade,Ansvarlig,Kebabab
-Ke bab,34343434,kode,ke@bib.dk,dfd,Ansvarlig,Kebabistan
+Hanne Hansen,22998877,kode,hh@hh.dk,kino 44,Ansvarlig,Bus-Boden
+Frits Villig,28384938,kode,fri@villig.dk,frivej 3,Frivillig,Bus-Boden
+Heavy Henning,76869600,kode,hh@rw.dk,Røde Vej 77,Frivillig,Tuborg Orange
+Kuno,77668877,kode,kuno@kk.dk,reee 8,Admin,Kontor
+Jens Kidman,88669900,kode,jens@rw.dk,Bajs Alle 24,Frivillig,Bus-Boden
 Martin Tonser,34989723,kode,mt@martun.dk,Købmagervej 23,Frivillig,Tuborg Orange
-Jonna Jungersen,23132324,kode,jj@jungen.dk,jungeve54,Frivillig,Tuborg Orange
-Ulrik S Mohr,23435522,kode,usm@jydekrog.dk,Kertemindevej 22,Frivillig,Tuborg Orange
-Kenneth Korneliusen,88794613,kode,kk@lig-bussen.dk,hirtshals alle 23,Frivillig,Tuborg Orange
-Vilfred Vildersen,22134679,kode,vv@vvs.dk,Vaskemaskinevej 23,Frivillig,Tuborg Orange
-Jytte Bytte,44794613,kode,jb@byttilnyt.dk,Brugt alle 12,Frivillig,Tuborg Orange
-Rikke Schlicke,55778844,kode,rs@schlicke.dk,Tungestens Vej 22,Frivillig,Tuborg Orange
-Marianne Gnahver,88779944,kode,mg@gnaver.dk,Vejsens alle 34,Frivillig,Tuborg Orange
-Kikki Kiks,55667799,kode,kk@kiks.dk,Kikset vej 77,Frivillig,Tuborg OrangeKim Hansen,23232323,kode,kim@1.dk,lkj,Frivillig,Bus-Boden
-Kim Hansen,23232323,kode,kim@2.dk,lkj,Frivillig,Bus-Boden
-Kim Hansen,23232323,kode,kim@3.dk,lkj,Frivillig,Bus-Boden
-Kim Hansen,23232323,kode,kim@1.dk,lkj,Frivillig,Tuborg Orange
+Kasper Kussesluger,88776699,kode,kk@kk.dk,kusvej 22,Ansvarlig,Meyers Køkken
+Flemming Godt,33534355,kode,fg@flems.com,Hannemanns Alle 24,Frivillig,Bus-Boden
+Lars Kuhle,34543423,kode,lk@testikel_te.dk,Bollernes Alle,Ansvarlig,Ski-Burger
 Klaus Kludder,44335522,kode,kk@klud.dk,Kluddermors alle 34,Ansvarlig,Skyd en hippie
-Dilbert Dellekaster,55664477,kode,dill@bert.dk,Dill vej 45,Ansvarlig,Frikadiller
-Yrsa Slugher,33778811,kode,ys@slugh.dk,Bundervej 66,Ansvarlig,Diller Drik
+Kebab Manden,23232323,kode,ke@bab.dk,Nørrebrogade,Ansvarlig,Kebabab
+Ulleren,98989898,u,u@uu.u,uu,Frivillig,Ski-Burger
+Lasse Bak,28282726,kode,las@bak.dk,Posens Gade 33,Frivillig,Tuborg Orange
+Lasse Bak,28282726,kode,la@bak.dk,Posens Gade 33,Frivillig,Meyers Køkken
+Lars Lister,23772233,kode,ll@ll.dk,Listevej 77,Frivillig,SNAIL 'N CHIPS
+Kim Hansen,38432327,kode,kh@kims.com,Nørrebrogade 100 5. mf,Frivillig,Meyers Køkken
+Kim Hansen,23232323,kode,kim@1.dk,lkj,Frivillig,Tuborg Orange
+Kenneth Korneliusen,88794613,kode,kk@lig-bussen.dk,hirtshals alle 23,Frivillig,Tuborg Orange
