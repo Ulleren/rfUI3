@@ -38,10 +38,7 @@ public class Main extends Application {
         backend.txtFileReader loadbod = new txtFileReader();
         loadbod.loadBoder();
     }
-    public void loadVagter() {
-        backend.txtFileReader loadVagt  = new txtFileReader();
-        loadVagt.loadVagter();
-    }
+
     public void loadVagtplan(){
         backend.txtFileReader loadVagtPlan  = new txtFileReader();
         loadVagtPlan.loadVagtPlaner();

@@ -18,7 +18,6 @@ Lone Kone,30223377,kode,lk@lone.dk,Frederikssundsvej 432 st. tv,Frivillig,Ski-Bu
 ras,22222222,kode,ras@ras.dk,vej 44,Ansvarlig,Tuborg Orange
 Lise Flise,23122312,kode,lise@flise.com,flisen 23,Admin,Kontor
 Kenny Kenn,22131415,kode,kk@busse.com,Grimmes Alle 55,Frivillig,Ski-Burger
-rasser,282827272,kode,ras@ras.dk,kd2,Frivillig,Tuborg Orange
 Jytte Bytte,44794613,kode,jb@byttilnyt.dk,Brugt alle 12,Frivillig,Tuborg Orange
 Yrsa Slugher,33778811,kode,ys@slugh.dk,Bundervej 66,Ansvarlig,Diller Drik
 Morten Liderkarl,29002200,kode,ml@ml.dk,alle 44,Frivillig,Meyers Køkken

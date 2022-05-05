@@ -43,7 +43,6 @@ public class sceneSwitcher {
             com.example.rfui.Main main  = new Main();
             main.loadPersonNames();
             main.loadBoder();
-            main.loadVagter();
             main.loadVagtplan();
             primaryStage.setOnCloseRequest(event -> {
                 event.consume();

@@ -4,7 +4,6 @@ import com.example.rfui.Main;
 import com.example.rfui.loginController;
 
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -305,71 +304,4 @@ public class txtFileWriter {
             System.out.println("Save person to file failed: " + e);
         }
     }
-
-    public void saveToFileOnClose() {
-        try {
-            FileWriter filewriter;
-            filewriter = new FileWriter(Main.getHashList().getPathToPersons().toString(), false);
-            BufferedWriter bw = new BufferedWriter(filewriter);
-            for (Map.Entry<String, ArrayList<Person>> set : Main.getHashList().getPersons().entrySet()) {
-                for (int i = 0; i < set.getValue().size(); i++) {
-                    String line = set.getValue().get(i).name + "," + set.getValue().get(i).phonenumber + ","
-                            + set.getValue().get(i).password + "," + set.getValue().get(i).email + ","
-                            + set.getValue().get(i).address + "," + set.getValue().get(i).role + "," + set.getValue().get(i).stand + "\n";
-                    bw.write(line);
-                }
-            }
-            bw.flush();
-            bw.close();
-            filewriter.close();
-        } catch (IOException e) {
-            System.out.println("Save person to file failed: " + e);
-        }
-        try {
-            FileWriter filewriter;
-            String filePath = new File("").getAbsolutePath();
-            filewriter = new FileWriter(filePath.concat("/src/main/resources/com/example/rfui/boder.txt"), false);
-            BufferedWriter bw = new BufferedWriter(filewriter);
-            backend.hashPersons hashpers = new hashPersons();
-
-            for (Map.Entry<String, Bod> set : hashpers.getBodHash().entrySet()) {
-                String line = set.getValue().navn + "," + set.getValue().lokation + ","
-                        + set.getValue().antalFrivillige + "," + set.getValue().ansvarlig + "\n";
-                bw.write(line);
-
-            }
-            bw.flush();
-            bw.close();
-            filewriter.close();
-        } catch (IOException e) {
-            System.out.println("Save bod to file failed: " + e);
-        }
-        try {
-            FileWriter filewriter;
-            String filePath = new File("").getAbsolutePath();
-            filewriter = new FileWriter(filePath.concat("/src/main/resources/com/example/rfui/vagter.txt"), false);
-            BufferedWriter bw = new BufferedWriter(filewriter);
-            backend.hashPersons hashpers = new hashPersons();
-
-            for (Map.Entry<String, Bod> set : hashpers.getBodHash().entrySet()) {
-                for (int i = 0; i < set.getValue().vagtPlan.size(); i++) {
-                    String line = set.getValue().navn;
-                    for (int u = 0; u < set.getValue().antalFrivillige; u++) {
-                        if (set.getValue().vagtPlan.get(i).frivillige.get(u) != null) {
-                            line += "," + set.getValue().vagtPlan.get(i).frivillige.get(u);
-                        } else {
-                            line += "," + "null";
-                        }
-                    }
-                    bw.write(line+"\n");
-                }
-            }
-            bw.flush();
-            bw.close();
-            filewriter.close();
-        } catch (IOException e) {
-            System.out.println("Save vagter to file failed: " + e);
-        }
-    }
-
 }

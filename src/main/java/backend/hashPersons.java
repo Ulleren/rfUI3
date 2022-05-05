@@ -1,15 +1,13 @@
 package backend;
 
-import java.io.BufferedWriter;
+
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
-import java.util.function.BiConsumer;
+
 
 public class hashPersons {
 
@@ -56,17 +54,7 @@ public class hashPersons {
         return persons.get(key);
     }
 
-    public Bod searchBod(String key) {
-        return bodHash.get(key);
-    }
 
-    public String searchEmail(String key) {
-        return emailHash.get(key);
-    }
-
-    public void entry(String personType, String name) {
-
-    }
 
     public Path getPathToPersons() {
         return pathToPersons;

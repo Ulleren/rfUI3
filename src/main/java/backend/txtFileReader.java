@@ -5,11 +5,9 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -29,46 +27,6 @@ public class txtFileReader {
     }
 
     public txtFileReader() {
-    }
-
-
-    public void loadVagter() {
-        try {
-            Path path = Main.getHashList().getPathToVagter();
-            long count = Files.lines(path).count();
-            int maxFri;
-            for (int i = 0; i < count; i++) {
-                String line = Files.readAllLines(path).get(i);
-                String[] frivillige = line.split(",");
-                maxFri = Main.getHashList().getBodHash().get(frivillige[0]).getAntalFrivillige();
-                int antalFrivilligeBrugt = 1;
-                String ptFrivillig;
-                int antalFrivillige;
-                Frivillig person;
-                for (int j = 0; j < frivillige.length / maxFri; j++) {
-                    for (int u = 0; u < maxFri; u++) {
-                        if (!line.trim().equals("")) {
-                            ptFrivillig = frivillige[antalFrivilligeBrugt++];
-                            if (Main.getHashList().getPersons().containsKey(ptFrivillig)) {
-                                antalFrivillige = Main.getHashList().getPersons().get(ptFrivillig).size();
-                                for (int k = 0; k < antalFrivillige; k++) {
-                                    person = (Frivillig) Main.getHashList().getPersons().get(ptFrivillig).get(k);
-                                    if (person.getVagter().contains(Main.getHashList().getBodHash().get(frivillige[0]).getVagtPlan().get(j))) {
-                                        Main.getHashList().getBodHash().get(frivillige[0]).getVagtPlan().get(j).getFrivillige().add((Frivillig) Main.getHashList().getPersons().get(ptFrivillig).get(k));
-
-                                    }
-                                }
-                            } else {
-                                Main.getHashList().getBodHash().get(frivillige[0]).getVagtPlan().get(j).getFrivillige().add(null);
-
-                            }
-                        }
-                    }
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     public void loadPersons() {
