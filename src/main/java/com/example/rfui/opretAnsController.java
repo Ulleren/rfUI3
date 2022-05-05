@@ -218,7 +218,7 @@ public class opretAnsController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Platform.runLater(() -> {
             comboBox();
-            bodBox.getItems().removeAll(bodBox.getItems());
+            //bodBox.getItems().removeAll(bodBox.getItems());
 
             final ToggleGroup radioGroup = new ToggleGroup();
             BodRadioBtn.setToggleGroup(radioGroup);
@@ -227,10 +227,10 @@ public class opretAnsController implements Initializable {
             adminRadioBtn.setToggleGroup(radioGroup);
         });
     }
-    // @Ulleren Lave den her.
+
     public void comboBox(){
         backend.txtFileReader bodRead =new txtFileReader();
-        bodRead.bodListReader(bodList);
+        bodList = bodRead.bodListReader();
         bodBox.getItems().addAll(bodList);
     }
 }

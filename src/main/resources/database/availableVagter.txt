@@ -39,3 +39,27 @@ Tuborg Orange,Fredag d. 1/7,14:00-20:00
 Tuborg Orange,Fredag d. 1/7,20:00-02:00
 Tuborg Orange,Lørdag d. 2/7,08:00-14:00
 Tuborg Orange,Lørdag d. 2/7,20:00-02:00
+Ski-Burger,Lørdag d. 25/6,08:00-14:00
+Ski-Burger,Lørdag d. 25/6,14:00-20:00
+Ski-Burger,Lørdag d. 25/6,20:00-02:00
+Ski-Burger,Søndag d. 26/6,08:00-14:00
+Ski-Burger,Søndag d. 26/6,14:00-20:00
+Ski-Burger,Søndag d. 26/6,20:00-02:00
+Ski-Burger,Mandag d. 27/6,08:00-14:00
+Ski-Burger,Mandag d. 27/6,08:00-14:00
+Ski-Burger,Mandag d. 27/6,14:00-20:00
+Ski-Burger,Tirsdag d. 28/6,08:00-14:00
+Ski-Burger,Tirsdag d. 28/6,14:00-20:00
+Ski-Burger,Tirsdag d. 28/6,20:00-02:00
+Ski-Burger,Onsdag d. 29/6,08:00-14:00
+Ski-Burger,Onsdag d. 29/6,14:00-20:00
+Ski-Burger,Onsdag d. 29/6,20:00-02:00
+Ski-Burger,Torsdag d. 30/6,08:00-14:00
+Ski-Burger,Torsdag d. 30/6,14:00-20:00
+Ski-Burger,Torsdag d. 30/6,20:00-02:00
+Ski-Burger,Fredag d. 1/7,08:00-14:00
+Ski-Burger,Fredag d. 1/7,14:00-20:00
+Ski-Burger,Fredag d. 1/7,20:00-02:00
+Ski-Burger,Lørdag d. 2/7,08:00-14:00
+Ski-Burger,Lørdag d. 2/7,14:00-20:00
+Ski-Burger,Lørdag d. 2/7,20:00-02:00

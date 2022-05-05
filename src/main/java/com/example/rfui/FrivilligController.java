@@ -630,7 +630,7 @@ public class FrivilligController implements Initializable{
 
         backend.txtFileReader bodRead = new txtFileReader();
         bodRead.setUser(user);
-        bodRead.bodListReader(bodList);
+        bodList = bodRead.bodListReader();
         bodBox.getItems().addAll(bodList);
         bodBox2.getItems().addAll(bodList);
 

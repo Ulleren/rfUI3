@@ -81,8 +81,9 @@ public class txtFileReader {
                 if (!line.trim().equals("")) {
                     if (!Main.getHashList().getPersons().containsKey(profil[0])) {
                         Main.getHashList().getPersons().put(profil[0], new ArrayList<>());
-                        Main.getHashList().getEmailHash().put(profil[3], profil[0]);
+
                     }
+                    Main.getHashList().getEmailHash().put(profil[3], profil[0]);
                     switch (profil[5]) {
                         case "Admin" -> Main.getHashList().getPersons().get(profil[0]).add(new Admin());
                         case "Ansvarlig" -> Main.getHashList().getPersons().get(profil[0]).add(new Ansvarlig());
@@ -247,7 +248,6 @@ public class txtFileReader {
                             if (Main.getHashList().getPersons().get(name).get(k).getEmail().equals(mail)) {
                                 ((Frivillig) Main.getHashList().getPersons().get(name).get(k)).getVagtPlan().add(bod + "," + day + "," + vagt);
                             }
-
                         }
 
                     }
@@ -260,8 +260,8 @@ public class txtFileReader {
 
     }
 
-    public void bodListReader(ArrayList<String> bodList) {
-
+    public ArrayList<String> bodListReader() {
+        ArrayList<String> bodList = new ArrayList<>();
         try {
             Path path = Main.getHashList().getPathToBoder();
 
@@ -281,6 +281,7 @@ public class txtFileReader {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return bodList;
     }
 
     public void acceptTermsReader(List<String> fileContents) {

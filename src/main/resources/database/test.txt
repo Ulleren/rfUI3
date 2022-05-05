@@ -57,4 +57,7 @@ Vilfred Vildersen,22134679,kode,vv@vvs.dk,Vaskemaskinevej 23,Frivillig,Tuborg Or
 Jytte Bytte,44794613,kode,jb@byttilnyt.dk,Brugt alle 12,Frivillig,Tuborg Orange
 Rikke Schlicke,55778844,kode,rs@schlicke.dk,Tungestens Vej 22,Frivillig,Tuborg Orange
 Marianne Gnahver,88779944,kode,mg@gnaver.dk,Vejsens alle 34,Frivillig,Tuborg Orange
-Kikki Kiks,55667799,kode,kk@kiks.dk,Kikset vej 77,Frivillig,Tuborg Orange
+Kikki Kiks,55667799,kode,kk@kiks.dk,Kikset vej 77,Frivillig,Tuborg OrangeKim Hansen,23232323,kode,kim@1.dk,lkj,Frivillig,Bus-Boden
+Kim Hansen,23232323,kode,kim@2.dk,lkj,Frivillig,Bus-Boden
+Kim Hansen,23232323,kode,kim@3.dk,lkj,Frivillig,Bus-Boden
+Kim Hansen,23232323,kode,kim@1.dk,lkj,Frivillig,Tuborg Orange
