@@ -9,7 +9,7 @@ ras,22222222,kode,ras@ras.dk,vej 44,Ansvarlig,Tuborg Orange
 Morten Liderkarl,29002200,kode,ml@ml.dk,alle 44,Frivillig,Meyers Køkken
 Kasper Kussesluger,88776699,kode,kk@kk.dk,kusvej 22,Ansvarlig,Meyers Køkken
 Kuno,77668877,kode,kuno@kk.dk,reee 8,Admin,Kontor
-Hanne,22998877,kode,hh@hh.dk,kino 44,Ansvarlig,Bus-Boden
+Hanne Hansen,22998877,kode,hh@hh.dk,kino 44,Ansvarlig,Bus-Boden
 Hippe Henning,34251223,kode,henning@mail.dk,I Hegnet 247,Frivillig,Meyers Køkken
 Jens Kidman,88669900,kode,jens@rw.dk,Bajs Alle 24,Frivillig,Bus-Boden
 Johnny Rotten,33554422,kode,jr@sp.dk,Pistol gade 12,Frivillig,Ski-Burger
@@ -51,7 +51,6 @@ Ke bab,34343434,kode,ke@bib.dk,dfd,Ansvarlig,Kebabistan
 Martin Tonser,34989723,kode,mt@martun.dk,Købmagervej 23,Frivillig,Tuborg Orange
 Jonna Jungersen,23132324,kode,jj@jungen.dk,jungeve54,Frivillig,Tuborg Orange
 Ulrik S Mohr,23435522,kode,usm@jydekrog.dk,Kertemindevej 22,Frivillig,Tuborg Orange
-testikel testesen,77662233,kode,tt@testy.dk,testervej 22,Ansvarlig,testboden
 Kenneth Korneliusen,88794613,kode,kk@lig-bussen.dk,hirtshals alle 23,Frivillig,Tuborg Orange
 Vilfred Vildersen,22134679,kode,vv@vvs.dk,Vaskemaskinevej 23,Frivillig,Tuborg Orange
 Jytte Bytte,44794613,kode,jb@byttilnyt.dk,Brugt alle 12,Frivillig,Tuborg Orange
@@ -61,3 +60,5 @@ Kikki Kiks,55667799,kode,kk@kiks.dk,Kikset vej 77,Frivillig,Tuborg OrangeKim Han
 Kim Hansen,23232323,kode,kim@2.dk,lkj,Frivillig,Bus-Boden
 Kim Hansen,23232323,kode,kim@3.dk,lkj,Frivillig,Bus-Boden
 Kim Hansen,23232323,kode,kim@1.dk,lkj,Frivillig,Tuborg Orange
+Klaus Kludder,44335522,kode,kk@klud.dk,Kluddermors alle 34,Ansvarlig,Skyd en hippie
+Dilbert Dellekaster,55664477,kode,dill@bert.dk,Dill vej 45,Ansvarlig,Frikadiller

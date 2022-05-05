@@ -1,30 +1,3 @@
-Tis-Is,Søndag d. 26/6,20:00-02:00
-Tis-Is,Søndag d. 26/6,14:00-20:00
-Tis-Is,Søndag d. 26/6,08:00-14:00
-Kebabab,Lørdag d. 25/6,08:00-14:00
-Kebabab,Lørdag d. 25/6,14:00-20:00
-Kebabab,Lørdag d. 25/6,20:00-02:00
-Kebabab,Søndag d. 26/6,08:00-14:00
-Kebabab,Søndag d. 26/6,14:00-20:00
-Kebabab,Søndag d. 26/6,20:00-02:00
-Kebabab,Mandag d. 27/6,08:00-14:00
-Kebabab,Mandag d. 27/6,08:00-14:00
-Kebabab,Mandag d. 27/6,14:00-20:00
-Kebabab,Tirsdag d. 28/6,08:00-14:00
-Kebabab,Tirsdag d. 28/6,14:00-20:00
-Kebabab,Tirsdag d. 28/6,20:00-02:00
-Kebabab,Onsdag d. 29/6,08:00-14:00
-Kebabab,Onsdag d. 29/6,14:00-20:00
-Kebabab,Onsdag d. 29/6,20:00-02:00
-Kebabab,Torsdag d. 30/6,08:00-14:00
-Kebabab,Torsdag d. 30/6,14:00-20:00
-Kebabab,Torsdag d. 30/6,20:00-02:00
-Kebabab,Fredag d. 1/7,08:00-14:00
-Kebabab,Fredag d. 1/7,14:00-20:00
-Kebabab,Fredag d. 1/7,20:00-02:00
-Kebabab,Lørdag d. 2/7,08:00-14:00
-Kebabab,Lørdag d. 2/7,14:00-20:00
-Kebabab,Lørdag d. 2/7,20:00-02:00
 Tuborg Orange,Søndag d. 26/6,20:00-02:00
 Tuborg Orange,Mandag d. 27/6,08:00-14:00
 Tuborg Orange,Mandag d. 27/6,08:00-14:00
@@ -63,3 +36,243 @@ Ski-Burger,Fredag d. 1/7,20:00-02:00
 Ski-Burger,Lørdag d. 2/7,08:00-14:00
 Ski-Burger,Lørdag d. 2/7,14:00-20:00
 Ski-Burger,Lørdag d. 2/7,20:00-02:00
+SNAIL 'N CHIPS,Lørdag d. 25/6,08:00-14:00
+SNAIL 'N CHIPS,Lørdag d. 25/6,14:00-20:00
+SNAIL 'N CHIPS,Lørdag d. 25/6,20:00-02:00
+SNAIL 'N CHIPS,Søndag d. 26/6,08:00-14:00
+SNAIL 'N CHIPS,Søndag d. 26/6,14:00-20:00
+SNAIL 'N CHIPS,Søndag d. 26/6,20:00-02:00
+SNAIL 'N CHIPS,Mandag d. 27/6,08:00-14:00
+SNAIL 'N CHIPS,Mandag d. 27/6,08:00-14:00
+SNAIL 'N CHIPS,Mandag d. 27/6,14:00-20:00
+SNAIL 'N CHIPS,Tirsdag d. 28/6,08:00-14:00
+SNAIL 'N CHIPS,Tirsdag d. 28/6,14:00-20:00
+SNAIL 'N CHIPS,Tirsdag d. 28/6,20:00-02:00
+SNAIL 'N CHIPS,Onsdag d. 29/6,08:00-14:00
+SNAIL 'N CHIPS,Onsdag d. 29/6,14:00-20:00
+SNAIL 'N CHIPS,Onsdag d. 29/6,20:00-02:00
+SNAIL 'N CHIPS,Torsdag d. 30/6,08:00-14:00
+SNAIL 'N CHIPS,Torsdag d. 30/6,14:00-20:00
+SNAIL 'N CHIPS,Torsdag d. 30/6,20:00-02:00
+SNAIL 'N CHIPS,Fredag d. 1/7,08:00-14:00
+SNAIL 'N CHIPS,Fredag d. 1/7,14:00-20:00
+SNAIL 'N CHIPS,Fredag d. 1/7,20:00-02:00
+SNAIL 'N CHIPS,Lørdag d. 2/7,08:00-14:00
+SNAIL 'N CHIPS,Lørdag d. 2/7,14:00-20:00
+SNAIL 'N CHIPS,Lørdag d. 2/7,20:00-02:00
+Mocktail Bar,Lørdag d. 25/6,08:00-14:00
+Mocktail Bar,Lørdag d. 25/6,14:00-20:00
+Mocktail Bar,Lørdag d. 25/6,20:00-02:00
+Mocktail Bar,Søndag d. 26/6,08:00-14:00
+Mocktail Bar,Søndag d. 26/6,14:00-20:00
+Mocktail Bar,Søndag d. 26/6,20:00-02:00
+Mocktail Bar,Mandag d. 27/6,08:00-14:00
+Mocktail Bar,Mandag d. 27/6,08:00-14:00
+Mocktail Bar,Mandag d. 27/6,14:00-20:00
+Mocktail Bar,Tirsdag d. 28/6,08:00-14:00
+Mocktail Bar,Tirsdag d. 28/6,14:00-20:00
+Mocktail Bar,Tirsdag d. 28/6,20:00-02:00
+Mocktail Bar,Onsdag d. 29/6,08:00-14:00
+Mocktail Bar,Onsdag d. 29/6,14:00-20:00
+Mocktail Bar,Onsdag d. 29/6,20:00-02:00
+Mocktail Bar,Torsdag d. 30/6,08:00-14:00
+Mocktail Bar,Torsdag d. 30/6,14:00-20:00
+Mocktail Bar,Torsdag d. 30/6,20:00-02:00
+Mocktail Bar,Fredag d. 1/7,08:00-14:00
+Mocktail Bar,Fredag d. 1/7,14:00-20:00
+Mocktail Bar,Fredag d. 1/7,20:00-02:00
+Mocktail Bar,Lørdag d. 2/7,08:00-14:00
+Mocktail Bar,Lørdag d. 2/7,14:00-20:00
+Mocktail Bar,Lørdag d. 2/7,20:00-02:00
+Meyers Køkken,Lørdag d. 25/6,08:00-14:00
+Meyers Køkken,Lørdag d. 25/6,14:00-20:00
+Meyers Køkken,Lørdag d. 25/6,20:00-02:00
+Meyers Køkken,Søndag d. 26/6,08:00-14:00
+Meyers Køkken,Søndag d. 26/6,14:00-20:00
+Meyers Køkken,Søndag d. 26/6,20:00-02:00
+Meyers Køkken,Mandag d. 27/6,08:00-14:00
+Meyers Køkken,Mandag d. 27/6,08:00-14:00
+Meyers Køkken,Mandag d. 27/6,14:00-20:00
+Meyers Køkken,Tirsdag d. 28/6,08:00-14:00
+Meyers Køkken,Tirsdag d. 28/6,14:00-20:00
+Meyers Køkken,Tirsdag d. 28/6,20:00-02:00
+Meyers Køkken,Onsdag d. 29/6,08:00-14:00
+Meyers Køkken,Onsdag d. 29/6,14:00-20:00
+Meyers Køkken,Onsdag d. 29/6,20:00-02:00
+Meyers Køkken,Torsdag d. 30/6,08:00-14:00
+Meyers Køkken,Torsdag d. 30/6,14:00-20:00
+Meyers Køkken,Torsdag d. 30/6,20:00-02:00
+Meyers Køkken,Fredag d. 1/7,08:00-14:00
+Meyers Køkken,Fredag d. 1/7,14:00-20:00
+Meyers Køkken,Fredag d. 1/7,20:00-02:00
+Meyers Køkken,Lørdag d. 2/7,08:00-14:00
+Meyers Køkken,Lørdag d. 2/7,14:00-20:00
+Meyers Køkken,Lørdag d. 2/7,20:00-02:00
+Bus-Boden,Lørdag d. 25/6,08:00-14:00
+Bus-Boden,Lørdag d. 25/6,14:00-20:00
+Bus-Boden,Lørdag d. 25/6,20:00-02:00
+Bus-Boden,Søndag d. 26/6,08:00-14:00
+Bus-Boden,Søndag d. 26/6,14:00-20:00
+Bus-Boden,Søndag d. 26/6,20:00-02:00
+Bus-Boden,Mandag d. 27/6,08:00-14:00
+Bus-Boden,Mandag d. 27/6,08:00-14:00
+Bus-Boden,Mandag d. 27/6,14:00-20:00
+Bus-Boden,Tirsdag d. 28/6,08:00-14:00
+Bus-Boden,Tirsdag d. 28/6,14:00-20:00
+Bus-Boden,Tirsdag d. 28/6,20:00-02:00
+Bus-Boden,Onsdag d. 29/6,08:00-14:00
+Bus-Boden,Onsdag d. 29/6,14:00-20:00
+Bus-Boden,Onsdag d. 29/6,20:00-02:00
+Bus-Boden,Torsdag d. 30/6,08:00-14:00
+Bus-Boden,Torsdag d. 30/6,14:00-20:00
+Bus-Boden,Torsdag d. 30/6,20:00-02:00
+Bus-Boden,Fredag d. 1/7,08:00-14:00
+Bus-Boden,Fredag d. 1/7,14:00-20:00
+Bus-Boden,Fredag d. 1/7,20:00-02:00
+Bus-Boden,Lørdag d. 2/7,08:00-14:00
+Bus-Boden,Lørdag d. 2/7,14:00-20:00
+Bus-Boden,Lørdag d. 2/7,20:00-02:00
+Tis-Is,Lørdag d. 25/6,08:00-14:00
+Tis-Is,Lørdag d. 25/6,14:00-20:00
+Tis-Is,Lørdag d. 25/6,20:00-02:00
+Tis-Is,Søndag d. 26/6,08:00-14:00
+Tis-Is,Søndag d. 26/6,14:00-20:00
+Tis-Is,Søndag d. 26/6,20:00-02:00
+Tis-Is,Mandag d. 27/6,08:00-14:00
+Tis-Is,Mandag d. 27/6,08:00-14:00
+Tis-Is,Mandag d. 27/6,14:00-20:00
+Tis-Is,Tirsdag d. 28/6,08:00-14:00
+Tis-Is,Tirsdag d. 28/6,14:00-20:00
+Tis-Is,Tirsdag d. 28/6,20:00-02:00
+Tis-Is,Onsdag d. 29/6,08:00-14:00
+Tis-Is,Onsdag d. 29/6,14:00-20:00
+Tis-Is,Onsdag d. 29/6,20:00-02:00
+Tis-Is,Torsdag d. 30/6,08:00-14:00
+Tis-Is,Torsdag d. 30/6,14:00-20:00
+Tis-Is,Torsdag d. 30/6,20:00-02:00
+Tis-Is,Fredag d. 1/7,08:00-14:00
+Tis-Is,Fredag d. 1/7,14:00-20:00
+Tis-Is,Fredag d. 1/7,20:00-02:00
+Tis-Is,Lørdag d. 2/7,08:00-14:00
+Tis-Is,Lørdag d. 2/7,14:00-20:00
+Tis-Is,Lørdag d. 2/7,20:00-02:00
+Kebabab,Lørdag d. 25/6,08:00-14:00
+Kebabab,Lørdag d. 25/6,14:00-20:00
+Kebabab,Lørdag d. 25/6,20:00-02:00
+Kebabab,Søndag d. 26/6,08:00-14:00
+Kebabab,Søndag d. 26/6,14:00-20:00
+Kebabab,Søndag d. 26/6,20:00-02:00
+Kebabab,Mandag d. 27/6,08:00-14:00
+Kebabab,Mandag d. 27/6,08:00-14:00
+Kebabab,Mandag d. 27/6,14:00-20:00
+Kebabab,Tirsdag d. 28/6,08:00-14:00
+Kebabab,Tirsdag d. 28/6,14:00-20:00
+Kebabab,Tirsdag d. 28/6,20:00-02:00
+Kebabab,Onsdag d. 29/6,08:00-14:00
+Kebabab,Onsdag d. 29/6,14:00-20:00
+Kebabab,Onsdag d. 29/6,20:00-02:00
+Kebabab,Torsdag d. 30/6,08:00-14:00
+Kebabab,Torsdag d. 30/6,14:00-20:00
+Kebabab,Torsdag d. 30/6,20:00-02:00
+Kebabab,Fredag d. 1/7,08:00-14:00
+Kebabab,Fredag d. 1/7,14:00-20:00
+Kebabab,Fredag d. 1/7,20:00-02:00
+Kebabab,Lørdag d. 2/7,08:00-14:00
+Kebabab,Lørdag d. 2/7,14:00-20:00
+Kebabab,Lørdag d. 2/7,20:00-02:00
+Kebabistan,Lørdag d. 25/6,08:00-14:00
+Kebabistan,Lørdag d. 25/6,14:00-20:00
+Kebabistan,Lørdag d. 25/6,20:00-02:00
+Kebabistan,Søndag d. 26/6,08:00-14:00
+Kebabistan,Søndag d. 26/6,14:00-20:00
+Kebabistan,Søndag d. 26/6,20:00-02:00
+Kebabistan,Mandag d. 27/6,08:00-14:00
+Kebabistan,Mandag d. 27/6,08:00-14:00
+Kebabistan,Mandag d. 27/6,14:00-20:00
+Kebabistan,Tirsdag d. 28/6,08:00-14:00
+Kebabistan,Tirsdag d. 28/6,14:00-20:00
+Kebabistan,Tirsdag d. 28/6,20:00-02:00
+Kebabistan,Onsdag d. 29/6,08:00-14:00
+Kebabistan,Onsdag d. 29/6,14:00-20:00
+Kebabistan,Onsdag d. 29/6,20:00-02:00
+Kebabistan,Torsdag d. 30/6,08:00-14:00
+Kebabistan,Torsdag d. 30/6,14:00-20:00
+Kebabistan,Torsdag d. 30/6,20:00-02:00
+Kebabistan,Fredag d. 1/7,08:00-14:00
+Kebabistan,Fredag d. 1/7,14:00-20:00
+Kebabistan,Fredag d. 1/7,20:00-02:00
+Kebabistan,Lørdag d. 2/7,08:00-14:00
+Kebabistan,Lørdag d. 2/7,14:00-20:00
+Kebabistan,Lørdag d. 2/7,20:00-02:00
+Skyd en hippie,Lørdag d. 25/6,08:00-14:00
+Skyd en hippie,Lørdag d. 25/6,14:00-20:00
+Skyd en hippie,Lørdag d. 25/6,20:00-02:00
+Skyd en hippie,Søndag d. 26/6,08:00-14:00
+Skyd en hippie,Søndag d. 26/6,14:00-20:00
+Skyd en hippie,Søndag d. 26/6,20:00-02:00
+Skyd en hippie,Mandag d. 27/6,08:00-14:00
+Skyd en hippie,Mandag d. 27/6,08:00-14:00
+Skyd en hippie,Mandag d. 27/6,14:00-20:00
+Skyd en hippie,Tirsdag d. 28/6,08:00-14:00
+Skyd en hippie,Tirsdag d. 28/6,14:00-20:00
+Skyd en hippie,Tirsdag d. 28/6,20:00-02:00
+Skyd en hippie,Onsdag d. 29/6,08:00-14:00
+Skyd en hippie,Onsdag d. 29/6,14:00-20:00
+Skyd en hippie,Onsdag d. 29/6,20:00-02:00
+Skyd en hippie,Torsdag d. 30/6,08:00-14:00
+Skyd en hippie,Torsdag d. 30/6,14:00-20:00
+Skyd en hippie,Torsdag d. 30/6,20:00-02:00
+Skyd en hippie,Fredag d. 1/7,08:00-14:00
+Skyd en hippie,Fredag d. 1/7,14:00-20:00
+Skyd en hippie,Fredag d. 1/7,20:00-02:00
+Skyd en hippie,Lørdag d. 2/7,08:00-14:00
+Skyd en hippie,Lørdag d. 2/7,14:00-20:00
+Skyd en hippie,Lørdag d. 2/7,20:00-02:00
+tomandsland,Lørdag d. 25/6,08:00-14:00
+tomandsland,Lørdag d. 25/6,14:00-20:00
+tomandsland,Lørdag d. 25/6,20:00-02:00
+tomandsland,Søndag d. 26/6,08:00-14:00
+tomandsland,Søndag d. 26/6,14:00-20:00
+tomandsland,Søndag d. 26/6,20:00-02:00
+tomandsland,Mandag d. 27/6,08:00-14:00
+tomandsland,Mandag d. 27/6,08:00-14:00
+tomandsland,Mandag d. 27/6,14:00-20:00
+tomandsland,Tirsdag d. 28/6,08:00-14:00
+tomandsland,Tirsdag d. 28/6,14:00-20:00
+tomandsland,Tirsdag d. 28/6,20:00-02:00
+tomandsland,Onsdag d. 29/6,08:00-14:00
+tomandsland,Onsdag d. 29/6,14:00-20:00
+tomandsland,Onsdag d. 29/6,20:00-02:00
+tomandsland,Torsdag d. 30/6,08:00-14:00
+tomandsland,Torsdag d. 30/6,14:00-20:00
+tomandsland,Torsdag d. 30/6,20:00-02:00
+tomandsland,Fredag d. 1/7,08:00-14:00
+tomandsland,Fredag d. 1/7,14:00-20:00
+tomandsland,Fredag d. 1/7,20:00-02:00
+tomandsland,Lørdag d. 2/7,08:00-14:00
+tomandsland,Lørdag d. 2/7,14:00-20:00
+tomandsland,Lørdag d. 2/7,20:00-02:00
+Frikadiller,Lørdag d. 25/6,08:00-14:00
+Frikadiller,Lørdag d. 25/6,14:00-20:00
+Frikadiller,Lørdag d. 25/6,20:00-02:00
+Frikadiller,Søndag d. 26/6,08:00-14:00
+Frikadiller,Søndag d. 26/6,14:00-20:00
+Frikadiller,Søndag d. 26/6,20:00-02:00
+Frikadiller,Mandag d. 27/6,08:00-14:00
+Frikadiller,Mandag d. 27/6,08:00-14:00
+Frikadiller,Mandag d. 27/6,14:00-20:00
+Frikadiller,Tirsdag d. 28/6,08:00-14:00
+Frikadiller,Tirsdag d. 28/6,14:00-20:00
+Frikadiller,Tirsdag d. 28/6,20:00-02:00
+Frikadiller,Onsdag d. 29/6,08:00-14:00
+Frikadiller,Onsdag d. 29/6,14:00-20:00
+Frikadiller,Onsdag d. 29/6,20:00-02:00
+Frikadiller,Torsdag d. 30/6,08:00-14:00
+Frikadiller,Torsdag d. 30/6,14:00-20:00
+Frikadiller,Torsdag d. 30/6,20:00-02:00
+Frikadiller,Fredag d. 1/7,08:00-14:00
+Frikadiller,Fredag d. 1/7,14:00-20:00
+Frikadiller,Fredag d. 1/7,20:00-02:00
+Frikadiller,Lørdag d. 2/7,08:00-14:00
+Frikadiller,Lørdag d. 2/7,14:00-20:00
+Frikadiller,Lørdag d. 2/7,20:00-02:00
