@@ -1,5 +1,6 @@
 package com.example.rfui;
 
+import backend.txtFileWriter;
 import com.example.rfui.Main;
 import backend.Person;
 import backend.sceneSwitcher;
@@ -109,6 +110,15 @@ public class AdminSearchController implements Initializable {
     }
     public void deleteUser(ActionEvent event){
         resultTableView.getItems().removeAll(resultTableView.getSelectionModel().getSelectedItem());
+        String deleteLine = resultTableView.getSelectionModel().getSelectedItem().getNam()+","+
+                resultTableView.getSelectionModel().getSelectedItem().getPhn()+","+
+                resultTableView.getSelectionModel().getSelectedItem().getMail()+","+
+                resultTableView.getSelectionModel().getSelectedItem().getAds()+","+
+                resultTableView.getSelectionModel().getSelectedItem().getRol()+","+
+                resultTableView.getSelectionModel().getSelectedItem().getStand();
+        backend.txtFileWriter personWrite = new txtFileWriter();
+        personWrite.setUser(user);
+        personWrite.personsWrite(deleteLine);
     }
 
     public void adminlogout(ActionEvent event) throws IOException {
