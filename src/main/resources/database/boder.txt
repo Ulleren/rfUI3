@@ -1,13 +1,13 @@
 SNAIL 'N CHIPS,Festival Plads,3,Bente Brednums
 Mocktail Bar,Festival Plads,3,Anders Ansvarlig
-Tuborg Orange,Festival Plads,3,ras
+Tuborg Orange,Festival Plads,3,Rasmus Rumsterer
 Meyers Køkken,Festival Plads,3,Kasper Kussesluger
-Bus-Boden,Festival Plads,3,Hanne
+Bus-Boden,Festival Plads,3,Hanne Hansen
 Ski-Burger,Festival Plads,3,Lars Kuhle
-Frikadiller,Dream City,3,null
-Diller Drik,Silent & Clean,3,kjdsd
+Frikadiller,Dream City,3,Dillbert Dellekaster
+Diller Drik,Silent & Clean,3,Yrsa Slugher
 Skyd en hippie,MC Camping,2,Claus ErIkkeTilMaend
-Tis-Is,Clean Out Loud,3,Wet VillyEnmandsland,Settle 'N Share,1,Enemanden
+Tis-Is,Clean Out Loud,3,Wet Villy
 tomandsland,Dream City,2,Toeren
 Den anden slags toer,Camping Område,2,Toeren
 Kebabab,Get-A-Place,3,Kebab Manden

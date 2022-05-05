@@ -62,3 +62,4 @@ Kim Hansen,23232323,kode,kim@3.dk,lkj,Frivillig,Bus-Boden
 Kim Hansen,23232323,kode,kim@1.dk,lkj,Frivillig,Tuborg Orange
 Klaus Kludder,44335522,kode,kk@klud.dk,Kluddermors alle 34,Ansvarlig,Skyd en hippie
 Dilbert Dellekaster,55664477,kode,dill@bert.dk,Dill vej 45,Ansvarlig,Frikadiller
+Yrsa Slugher,33778811,kode,ys@slugh.dk,Bundervej 66,Ansvarlig,Diller Drik
