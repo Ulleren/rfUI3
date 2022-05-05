@@ -381,11 +381,13 @@ public class FrivilligController implements Initializable{
                     String ansPhone = hashList.getPersons().get(hashList.getBodHash().get(bodBox.getValue()).getAnsvarlig()).get(i).getPhonenumber();
                 }
             }
-            verifyVagter();
-            if(checkDoubleVagter(dayLine)){
-                savePending.add(user.getEmail()+","+user.getPhone()+","+bodLine+","+dayLine+","+timeLine);
-                checkVagtAmount(bodLine, dayLine,timeLine);
+            if(verifyVagter()){
+                if(checkDoubleVagter(dayLine)){
+                    savePending.add(user.getEmail()+","+user.getPhone()+","+bodLine+","+dayLine+","+timeLine);
+                    checkVagtAmount(bodLine, dayLine,timeLine);
+                }
             }
+
 
 
         }catch(NumberFormatException n){
@@ -549,11 +551,12 @@ public class FrivilligController implements Initializable{
         vagtListErrorLabel.setText("");
         rowCount-=1;
     }
-    public void verifyVagter(){
-
-        if(vagtAfter < 2 || vagtBefore < 3 && dayComboBox.getValue()!=null && vagtComboBox.getValue()!=null && bodBox.getValue()!=null){
+    public boolean verifyVagter(){
+    boolean checkCombos = false;
+        if(!dayComboBox.getSelectionModel().isEmpty() && !vagtComboBox.getSelectionModel().isEmpty() && !bodBox.getSelectionModel().isEmpty()){
 
             countDays(dayComboBox.getValue());
+            checkCombos=true;
         }
         else{
             if(dayComboBox.getValue()==null && vagtComboBox.getValue()==null && bodBox.getValue()==null){
@@ -581,8 +584,10 @@ public class FrivilligController implements Initializable{
                         vagtListErrorLabel.setText("Der er ikke valgt en bod");
                     }
                 }
+
             }
         }
+        return checkCombos;
     }
     private void initiateCols(){
         dayCol.setCellValueFactory(new PropertyValueFactory<>("Day"));
