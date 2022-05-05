@@ -114,7 +114,7 @@ public class AdminSearchController implements Initializable {
 
         ArrayList<String> delVagter = new ArrayList<>();
         backend.txtFileWriter personWrite = new txtFileWriter();
-
+        Person delUser = null;
         for(Person pers: Main.getHashList().getPersons().get(name)) {
             if (pers.getEmail().equals(email)) {
                 if (pers.getRole().equals("Frivillig")) {
@@ -122,21 +122,21 @@ public class AdminSearchController implements Initializable {
                     for (String delVagt : ((Frivillig) pers).getVagtPlan()) {
                         delVagter.add(email + "," + pers.getPhonenumber() + "," + delVagt);
                     }
-                    if (Main.getHashList().getPersons().get(name).size() == 0) {
-                        Main.getHashList().getPersons().remove(pers);
-                    }
+                    delUser = pers;
+
 
                 } else if (pers.getRole().equals("Admin")) {
-                    Main.getHashList().getPersons().get(name).remove(pers);
-                    if (Main.getHashList().getPersons().get(name).size() == 0) {
-                        Main.getHashList().getPersons().remove(pers);
-                    }
+                    delUser = pers;
+
                 }
             }
              //Main.getHashList().getPersons().get(email).remove(Person);
 
         }
-        System.out.println(Main.getHashList().getPersons().get(name));
+        Main.getHashList().getPersons().get(name).remove(delUser);
+        if(Main.getHashList().getPersons().get(name).size() == 0){
+            Main.getHashList().getPersons().get(name).remove(name);
+        }
         resultTableView.getItems().removeAll(resultTableView.getSelectionModel().getSelectedItem());
         personWrite.deleteFrivilligVagter(delVagter);
         personWrite.savePersonsToFile();

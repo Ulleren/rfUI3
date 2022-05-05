@@ -60,5 +60,4 @@ Lasse Bak,28282726,kode,la@bak.dk,Posens Gade 33,Frivillig,Meyers Køkken
 Lars Lister,23772233,kode,ll@ll.dk,Listevej 77,Frivillig,SNAIL 'N CHIPS
 Kim Hansen,38432327,kode,kh@kims.com,Nørrebrogade 100 5. mf,Frivillig,Meyers Køkken
 Kim Hansen,23232323,kode,kim@1.dk,lkj,Frivillig,Tuborg Orange
-Kim Hansen,22334411,kode,kim@sletmig.dk,sletter vej 22,Frivillig,Skyd en hippie
 Kenneth Korneliusen,88794613,kode,kk@lig-bussen.dk,hirtshals alle 23,Frivillig,Tuborg Orange
