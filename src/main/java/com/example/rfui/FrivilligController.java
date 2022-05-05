@@ -13,7 +13,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Border;
 import javafx.scene.paint.Color;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -179,8 +178,6 @@ public class FrivilligController implements Initializable{
         chooseVagtTable.getItems().addAll(chooseVagtList);
         clearChooseCombo();
     }
-
-
     public void showStatus(){
         if(checkRejections()){
             if(!showVagter()){

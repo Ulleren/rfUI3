@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import static com.example.rfui.Main.hashList;
 
@@ -195,6 +196,7 @@ public class opretAnsController implements Initializable {
         backend.txtFileWriter personWrite = new txtFileWriter();
         personWrite.setUser(user);
         personWrite.personsWrite(line);
+        List<String>notAcceptContents = new ArrayList<>();
         if(roleCheck.equals("Frivillig")){
             String acceptTerms = emailTextfield.getText();
             backend.txtFileWriter notAcceptList = new txtFileWriter();

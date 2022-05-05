@@ -29,15 +29,13 @@ public class txtFileWriter {
     public txtFileWriter(){
     }
     public void writeNotAccepted(String line){
-        List<String> fileContents = new ArrayList<>();
         FileWriter filewriter;
         try {
             Path noAccept = Path.of(Main.getHashList().getPathToNotAccepted().toString());
-            filewriter = new FileWriter(noAccept.toString(),false);
+            filewriter = new FileWriter(noAccept.toString(),true);
             BufferedWriter bw = new BufferedWriter(filewriter);
-            for(String fileLine: fileContents){
-                bw.write(fileLine+System.lineSeparator());
-            }
+            bw.write(line+System.lineSeparator());
+
             bw.flush();
             bw.close();
             filewriter.close();

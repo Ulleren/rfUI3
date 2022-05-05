@@ -471,6 +471,4 @@ public class txtFileReader {
             throw new RuntimeException(e);
         }
     }
-
-
 }
