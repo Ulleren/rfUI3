@@ -122,7 +122,7 @@ public class AdminSearchController implements Initializable {
                         delVagter.add(email+","+pers.getPhonenumber()+","+delVagt);
                     }
                     System.out.println(delVagter);
-                    Main.getHashList().getPersons().get(name).remove(pers);
+                    //Main.getHashList().getPersons().get(name).remove(pers);
                     if (Main.getHashList().getPersons().get(name).size() == 0) {
                         Main.getHashList().getPersons().remove(pers);
                     }
@@ -138,9 +138,9 @@ public class AdminSearchController implements Initializable {
         System.out.println(Main.getHashList().getPersons().get(name).toString());
         resultTableView.getItems().removeAll(resultTableView.getSelectionModel().getSelectedItem());
 
-        backend.txtFileWriter personWrite = new txtFileWriter();
-        personWrite.frivilligDirectSave(delVagter);
-        personWrite.savePersonsToFile();
+//        backend.txtFileWriter personWrite = new txtFileWriter();
+//        personWrite.frivilligDirectSave(delVagter);
+//        personWrite.savePersonsToFile();
 
         /*
         Person pers = Main.getHashList().getPersons().get(resultTableView.getSelectionModel().getSelectedItem().getNam()).get()
