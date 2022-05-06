@@ -160,10 +160,10 @@ public class opretAnsController implements Initializable {
             frivilligBod = bodBox.getValue();
         }
 
-        if(BodRadioBtn.isSelected()){
+/*        if(BodRadioBtn.isSelected()){
             roleCheck = "Ansvarlig";
-        }
-        else if(friRadioBtn.isSelected()){
+        }*/
+        if(friRadioBtn.isSelected()){
             roleCheck = "Frivillig";
         }
         else{
@@ -223,9 +223,10 @@ public class opretAnsController implements Initializable {
             //bodBox.getItems().removeAll(bodBox.getItems());
 
             final ToggleGroup radioGroup = new ToggleGroup();
-            BodRadioBtn.setToggleGroup(radioGroup);
-            BodRadioBtn.setSelected(true);
+            //BodRadioBtn.setToggleGroup(radioGroup);
+            //BodRadioBtn.setSelected(true);
             friRadioBtn.setToggleGroup(radioGroup);
+            friRadioBtn.setSelected(true);
             adminRadioBtn.setToggleGroup(radioGroup);
         });
     }
