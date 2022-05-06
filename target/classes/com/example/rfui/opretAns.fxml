@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="opAnsPane" prefHeight="650.0" prefWidth="889.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rfui.opretAnsController">
+<AnchorPane fx:id="opAnsPane" prefHeight="650.0" prefWidth="889.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rfui.opretAnsController">
    <children>
       <Button fx:id="adminlogoutButton" layoutX="403.0" layoutY="43.0" mnemonicParsing="false" onAction="#adminlogout" prefHeight="26.0" prefWidth="66.0" style="-fx-background-color: #FFFFFF;" text="Logout" textFill="#e95814">
          <font>
@@ -73,7 +73,7 @@
       <Label fx:id="phoneErrorLabel" layoutX="186.0" layoutY="193.0" prefHeight="18.0" prefWidth="181.0" textFill="#e95814" />
       <Label fx:id="passwordErrorLabel" layoutX="186.0" layoutY="406.0" prefHeight="18.0" prefWidth="181.0" textFill="#e95814" />
       <Label fx:id="pass2Label1" layoutX="99.0" layoutY="424.0" text="Rolle:" textFill="#e95814" />
-      <RadioButton fx:id="BodRadioBtn" layoutX="187.0" layoutY="424.0" mnemonicParsing="false" text="Bod-ansvarlig" textFill="#e95814">
+      <RadioButton fx:id="friRadioBtn" layoutX="186.0" layoutY="424.0" mnemonicParsing="false" text="Frivillig" textFill="#e95814">
          <font>
             <Font name="Arial" size="13.0" />
          </font>
@@ -81,12 +81,7 @@
             <ToggleGroup fx:id="radioGroup" />
          </toggleGroup>
       </RadioButton>
-      <RadioButton fx:id="friRadioBtn" layoutX="187.0" layoutY="454.0" mnemonicParsing="false" text="Frivillig" textFill="#e95814" toggleGroup="$radioGroup">
-         <font>
-            <Font name="Arial" size="13.0" />
-         </font>
-      </RadioButton>
-      <RadioButton fx:id="adminRadioBtn" layoutX="187.0" layoutY="483.0" mnemonicParsing="false" text="Administrator" textFill="#e95814" toggleGroup="$radioGroup">
+      <RadioButton fx:id="adminRadioBtn" layoutX="187.0" layoutY="453.0" mnemonicParsing="false" text="Administrator" textFill="#e95814" toggleGroup="$radioGroup">
          <font>
             <Font name="Arial" size="13.0" />
          </font>

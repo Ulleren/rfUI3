@@ -14,6 +14,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import static com.example.rfui.Main.hashList;
+
 public class opretBodContoller implements Initializable {
 
     @FXML
@@ -94,13 +96,14 @@ public class opretBodContoller implements Initializable {
         String line = ansName.getText() + "," + ansPhone.getText() + "," + ansPass1.getText() + "," + ansMail.getText() + "," + ansAddress.getText()
                 + "," + "Ansvarlig" + "," + bodName.getText();
         if (Main.getHashList().getPersons().containsKey(ansName.getText())) {
-            Main.getHashList().getPersons().get(ansName.getText()).add(new Ansvarlig(ansName.getText(), ansPhone.getText(),
-                    ansPass1.getText(), ansMail.getText(), ansAddress.getText()));
+            Main.getHashList().getPersons().get(ansName.getText()).add(new Ansvarlig(ansName.getText(),
+                    ansPhone.getText(), ansPass1.getText(), ansMail.getText(), ansAddress.getText()));
         } else{
             Main.getHashList().getPersons().put(ansName.getText(), new ArrayList<>());
-            Main.getHashList().getPersons().get(ansName.getText()).add(new Ansvarlig(ansName.getText(), ansPhone.getText(),
-                    ansPass1.getText(), ansMail.getText(), ansAddress.getText()));
+            Main.getHashList().getPersons().get(ansName.getText()).add(new Ansvarlig(ansName.getText(),
+                    ansPhone.getText(), ansPass1.getText(), ansMail.getText(), ansAddress.getText()));
         }
+        hashList.getEmailHash().put(ansMail.getText(), ansName.getText());
         backend.txtFileWriter savePers = new txtFileWriter();
         savePers.newUser(line);
         clearText(event);
