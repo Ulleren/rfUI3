@@ -95,11 +95,11 @@ public class opretBodContoller implements Initializable {
                 + "," + "Ansvarlig" + "," + bodName.getText();
         if (Main.getHashList().getPersons().containsKey(ansName.getText())) {
             Main.getHashList().getPersons().get(ansName.getText()).add(new Ansvarlig(ansName.getText(), ansPhone.getText(),
-                    ansPass1.getText(), ansMail.getText(), ansAddress.getText(), Main.getHashList().getBodHash().get(bodName.getText())));
+                    ansPass1.getText(), ansMail.getText(), ansAddress.getText()));
         } else{
             Main.getHashList().getPersons().put(ansName.getText(), new ArrayList<>());
             Main.getHashList().getPersons().get(ansName.getText()).add(new Ansvarlig(ansName.getText(), ansPhone.getText(),
-                    ansPass1.getText(), ansMail.getText(), ansAddress.getText(), Main.getHashList().getBodHash().get(bodName.getText())));
+                    ansPass1.getText(), ansMail.getText(), ansAddress.getText()));
         }
         backend.txtFileWriter savePers = new txtFileWriter();
         savePers.newUser(line);
